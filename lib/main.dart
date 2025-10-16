@@ -1,10 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:window_manager/window_manager.dart';
-import 'presentation/home/home_page.dart';
-import 'presentation/theme/app_theme.dart';
-import 'presentation/splash/splash_screen.dart';
-import 'presentation/widgets/rotating_background.dart';
+import 'package:vaxpsam/core/sizeguard.dart';
+
+import 'core/main_export.dart';
 
 void main() async {
   // تهيئة Flutter قبل أي عمليات غير متزامنة
@@ -52,7 +48,7 @@ class _VAXPSystemManagerAppState extends State<VAXPSystemManagerApp> {
     });
 
     // 👇 مستمع يمنع تصغير التطبيق تحت الحد الأدنى
-    windowManager.addListener(_SizeGuard());
+    windowManager.addListener(SizeGuard());
   }
 
   @override
@@ -62,45 +58,12 @@ class _VAXPSystemManagerAppState extends State<VAXPSystemManagerApp> {
       theme: darkTheme,
       themeMode: ThemeMode.dark,
       debugShowCheckedModeBanner: false,
-      home: RotatingBackground(
+      home: StaticBackground(
         child: AnimatedSwitcher(
           duration: const Duration(milliseconds: 600),
-          child: _showSplash ? const SplashScreen() : const HomePage(),
+          child: _showSplash ? const SplashScreen() : BuildMainApp(),
         ),
       ),
     );
-  }
-}
-
-/// 🔒 هذا الكلاس يراقب حجم النافذة ويمنع تصغيرها تحت الحد الأدنى مع دعم الاستجابة
-class _SizeGuard extends WindowListener {
-  @override
-  void onWindowResize() async {
-    const minWidth = 768.0; // حد أدنى للجوال/تابلت
-    const minHeight = 600.0;
-    const maxWidth = 1920.0; // حد أقصى للشاشات الكبيرة
-    const maxHeight = 1080.0;
-
-    final size = await windowManager.getSize();
-
-    // تصحيح الحجم إذا كان أصغر من الحد الأدنى
-    if (size.width < minWidth || size.height < minHeight) {
-      await windowManager.setSize(
-        Size(
-          size.width < minWidth ? minWidth : size.width,
-          size.height < minHeight ? minHeight : size.height,
-        ),
-      );
-    }
-
-    // تصحيح الحجم إذا كان أكبر من الحد الأقصى
-    if (size.width > maxWidth || size.height > maxHeight) {
-      await windowManager.setSize(
-        Size(
-          size.width > maxWidth ? maxWidth : size.width,
-          size.height > maxHeight ? maxHeight : size.height,
-        ),
-      );
-    }
   }
 }

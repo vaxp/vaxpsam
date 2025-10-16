@@ -13,7 +13,7 @@ class AudioEditingPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final system = ref.read(systemServiceProvider);
 
-    return RotatingBackground(
+    return StaticBackground(
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: CustomScrollView(

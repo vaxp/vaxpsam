@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:vaxpsam/presentation/widgets/rotating_background.dart';
 import '../../../infrastructure/providers.dart';
 import '../../home/widgets/section_widgets.dart';
 import '../../console/console_utils.dart';
@@ -12,8 +13,9 @@ class WirelessSecurityPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final system = ref.read(systemServiceProvider);
     
-    return Scaffold(
-      backgroundColor: macAppStoreDark,
+    return StaticBackground(
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
@@ -36,7 +38,7 @@ class WirelessSecurityPage extends ConsumerWidget {
             ),
           ),
         ],
-      ),
+      ),),
     );
   }
 

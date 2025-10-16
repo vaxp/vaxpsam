@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 // Mac App Store inspired colors
 const Color macAppStoreDark = Color.fromARGB(29, 81, 81, 82);
-const Color macAppStoreCard = Color.fromARGB(61, 126, 126, 126);
+const Color macAppStoreCard = Color.fromARGB(60, 75, 75, 75);
 const Color macAppStorePurple = Color(0xFF8E44AD);
 const Color macAppStoreBlue = Color(0xFF007AFF);
-const Color macAppStoreGray = Color(0xFF8E8E93);
-const Color macAppStoreLightGray = Color(0xFF48484A);
+const Color macAppStoreGray = Color.fromARGB(255, 255, 255, 255);
+const Color macAppStoreLightGray = Color.fromARGB(255, 49, 49, 49);
 
 final ThemeData lightTheme = ThemeData(
   colorScheme: const ColorScheme.dark(
@@ -21,9 +21,9 @@ final ThemeData lightTheme = ThemeData(
     onSecondary: Colors.white,
   ),
   useMaterial3: true,
-  scaffoldBackgroundColor: macAppStoreDark,
+  scaffoldBackgroundColor: const Color.fromARGB(29, 27, 27, 27),
   cardTheme: CardTheme(
-    color: macAppStoreCard,
+    color: const Color.fromARGB(59, 39, 39, 39),
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
     elevation: 0,
     margin: const EdgeInsets.all(8),
@@ -83,7 +83,7 @@ final ThemeData lightTheme = ThemeData(
     ),
   ),
   dialogTheme: DialogThemeData(
-    backgroundColor: macAppStoreCard,
+    backgroundColor: const Color.fromARGB(59, 31, 31, 31),
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
   ),
 );
@@ -94,7 +94,7 @@ final ThemeData darkTheme = ThemeData(
     primary: macAppStoreBlue,
     secondary: macAppStorePurple,
     surface: macAppStoreDark,
-    background: macAppStoreDark,
+    background: Color.fromARGB(29, 31, 31, 31),
     onSurface: Colors.white,
     onBackground: Colors.white,
     onPrimary: Colors.white,
@@ -103,7 +103,7 @@ final ThemeData darkTheme = ThemeData(
   useMaterial3: true,
   scaffoldBackgroundColor: macAppStoreDark,
   cardTheme: CardTheme(
-    color: macAppStoreCard,
+    color: const Color.fromARGB(59, 27, 27, 27),
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
     elevation: 0,
     margin: const EdgeInsets.all(8),
@@ -163,7 +163,7 @@ final ThemeData darkTheme = ThemeData(
     ),
   ),
   dialogTheme: DialogThemeData(
-    backgroundColor: macAppStoreCard,
+    backgroundColor: const Color.fromARGB(59, 39, 39, 39),
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
   ),
 );

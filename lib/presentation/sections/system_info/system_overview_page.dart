@@ -112,7 +112,7 @@ class _SystemOverviewPageState extends ConsumerState<SystemOverviewPage> {
 
   @override
   Widget build(BuildContext context) {
-    return RotatingBackground(
+    return StaticBackground(
       child: Scaffold(
         backgroundColor: Colors.transparent,
       appBar: AppBar(
