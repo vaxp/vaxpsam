@@ -11,7 +11,8 @@ class LivePerformancePage extends ConsumerStatefulWidget {
   const LivePerformancePage({super.key});
 
   @override
-  ConsumerState<LivePerformancePage> createState() => _LivePerformancePageState();
+  ConsumerState<LivePerformancePage> createState() =>
+      _LivePerformancePageState();
 }
 
 class _LivePerformancePageState extends ConsumerState<LivePerformancePage>
@@ -19,19 +20,19 @@ class _LivePerformancePageState extends ConsumerState<LivePerformancePage>
   Timer? _updateTimer;
   bool _isMonitoring = false;
   bool _isDisposed = false;
-  
+
   // Performance data
   double _cpuUsage = 0.0;
   double _memoryUsage = 0.0;
   double _networkUp = 0.0;
   double _networkDown = 0.0;
-  
+
   // Historical data for graphs
   List<double> _cpuHistory = [];
   List<double> _memoryHistory = [];
   List<double> _networkUpHistory = [];
   List<double> _networkDownHistory = [];
-  
+
   // Animation controllers
   late AnimationController _cpuAnimationController;
   late AnimationController _memoryAnimationController;
@@ -40,7 +41,7 @@ class _LivePerformancePageState extends ConsumerState<LivePerformancePage>
   @override
   void initState() {
     super.initState();
-    
+
     // Initialize animation controllers
     _cpuAnimationController = AnimationController(
       duration: const Duration(milliseconds: 500),
@@ -54,7 +55,7 @@ class _LivePerformancePageState extends ConsumerState<LivePerformancePage>
       duration: const Duration(milliseconds: 500),
       vsync: this,
     );
-    
+
     // Start monitoring after a short delay to ensure widget is fully initialized
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) {
@@ -75,11 +76,11 @@ class _LivePerformancePageState extends ConsumerState<LivePerformancePage>
 
   void _startMonitoring() {
     if (_isMonitoring || !mounted || _isDisposed) return;
-    
+
     setState(() {
       _isMonitoring = true;
     });
-    
+
     _updateTimer = Timer.periodic(const Duration(seconds: 2), (timer) {
       if (!mounted || _isDisposed) {
         timer.cancel();
@@ -100,20 +101,20 @@ class _LivePerformancePageState extends ConsumerState<LivePerformancePage>
 
   Future<void> _updatePerformanceData() async {
     if (!mounted || _isDisposed) return;
-    
+
     try {
       // Get CPU usage
       await _updateCpuUsage();
-      
+
       // Get memory usage
       await _updateMemoryUsage();
-      
+
       // Get network usage
       await _updateNetworkUsage();
-      
+
       // Update historical data
       _updateHistoricalData();
-      
+
       // Trigger animations
       if (mounted && !_isDisposed) {
         _cpuAnimationController.forward().then((_) {
@@ -126,7 +127,7 @@ class _LivePerformancePageState extends ConsumerState<LivePerformancePage>
           if (mounted && !_isDisposed) _networkAnimationController.reverse();
         });
       }
-      
+
       if (mounted && !_isDisposed) {
         setState(() {});
       }
@@ -137,14 +138,14 @@ class _LivePerformancePageState extends ConsumerState<LivePerformancePage>
 
   Future<void> _updateCpuUsage() async {
     if (!mounted || _isDisposed) return;
-    
+
     try {
       // Read CPU stats from /proc/stat
       final statFile = File('/proc/stat');
       if (await statFile.exists()) {
         final content = await statFile.readAsString();
         final lines = content.split('\n');
-        
+
         if (lines.isNotEmpty) {
           final cpuLine = lines[0].split(RegExp(r'\s+'));
           if (cpuLine.length >= 8) {
@@ -155,10 +156,10 @@ class _LivePerformancePageState extends ConsumerState<LivePerformancePage>
             final iowait = int.tryParse(cpuLine[5]) ?? 0;
             final irq = int.tryParse(cpuLine[6]) ?? 0;
             final softirq = int.tryParse(cpuLine[7]) ?? 0;
-            
+
             final total = user + nice + system + idle + iowait + irq + softirq;
             final idleTotal = idle + iowait;
-            
+
             if (total > 0) {
               _cpuUsage = ((total - idleTotal) / total * 100).clamp(0.0, 100.0);
             }
@@ -173,16 +174,16 @@ class _LivePerformancePageState extends ConsumerState<LivePerformancePage>
 
   Future<void> _updateMemoryUsage() async {
     if (!mounted || _isDisposed) return;
-    
+
     try {
       final memInfoFile = File('/proc/meminfo');
       if (await memInfoFile.exists()) {
         final content = await memInfoFile.readAsString();
         final lines = content.split('\n');
-        
+
         int totalMemKB = 0;
         int availableMemKB = 0;
-        
+
         for (final line in lines) {
           if (line.startsWith('MemTotal:')) {
             totalMemKB = int.tryParse(line.split(RegExp(r'\s+'))[1]) ?? 0;
@@ -190,9 +191,10 @@ class _LivePerformancePageState extends ConsumerState<LivePerformancePage>
             availableMemKB = int.tryParse(line.split(RegExp(r'\s+'))[1]) ?? 0;
           }
         }
-        
+
         if (totalMemKB > 0) {
-          _memoryUsage = ((totalMemKB - availableMemKB) / totalMemKB * 100).clamp(0.0, 100.0);
+          _memoryUsage = ((totalMemKB - availableMemKB) / totalMemKB * 100)
+              .clamp(0.0, 100.0);
         }
       }
     } catch (e) {
@@ -203,17 +205,17 @@ class _LivePerformancePageState extends ConsumerState<LivePerformancePage>
 
   Future<void> _updateNetworkUsage() async {
     if (!mounted || _isDisposed) return;
-    
+
     try {
       // Read network stats from /proc/net/dev
       final netDevFile = File('/proc/net/dev');
       if (await netDevFile.exists()) {
         final content = await netDevFile.readAsString();
         final lines = content.split('\n');
-        
+
         int totalRx = 0;
         int totalTx = 0;
-        
+
         for (final line in lines) {
           if (line.contains(':') && !line.contains('lo:')) {
             final parts = line.split(':');
@@ -228,7 +230,7 @@ class _LivePerformancePageState extends ConsumerState<LivePerformancePage>
             }
           }
         }
-        
+
         // Convert to KB/s (simplified calculation)
         _networkDown = (totalRx / 1024).clamp(0.0, 10000.0);
         _networkUp = (totalTx / 1024).clamp(0.0, 10000.0);
@@ -243,12 +245,12 @@ class _LivePerformancePageState extends ConsumerState<LivePerformancePage>
   void _updateHistoricalData() {
     // Keep only last 30 data points
     const maxHistory = 30;
-    
+
     _cpuHistory.add(_cpuUsage);
     _memoryHistory.add(_memoryUsage);
     _networkUpHistory.add(_networkUp);
     _networkDownHistory.add(_networkDown);
-    
+
     if (_cpuHistory.length > maxHistory) {
       _cpuHistory.removeAt(0);
       _memoryHistory.removeAt(0);
@@ -262,39 +264,39 @@ class _LivePerformancePageState extends ConsumerState<LivePerformancePage>
     return StaticBackground(
       child: Scaffold(
         backgroundColor: Colors.transparent,
-      appBar: AppBar(
-        title: const Text('Live Performance'),
-        backgroundColor: macAppStoreDark,
-        foregroundColor: Colors.white,
-        elevation: 0,
-        
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-        actions: [
-          IconButton(
-            icon: Icon(_isMonitoring ? Icons.pause : Icons.play_arrow),
-            onPressed: _isMonitoring ? _stopMonitoring : _startMonitoring,
-            tooltip: _isMonitoring ? 'Pause Monitoring' : 'Start Monitoring',
+        appBar: AppBar(
+          title: const Text('Live Performance'),
+          backgroundColor: macAppStoreDark,
+          foregroundColor: Colors.white,
+          elevation: 0,
+
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () => Navigator.of(context).pop(),
           ),
-        ],
-      ),
-      body: CustomScrollView(
-        slivers: [
-          SliverToBoxAdapter(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildCpuUsageCard(),
-                _buildMemoryUsageCard(),
-                _buildNetworkUsageCard(),
-                _buildPerformanceGraphs(),
-                const SizedBox(height: 20),
-              ],
+          actions: [
+            IconButton(
+              icon: Icon(_isMonitoring ? Icons.pause : Icons.play_arrow),
+              onPressed: _isMonitoring ? _stopMonitoring : _startMonitoring,
+              tooltip: _isMonitoring ? 'Pause Monitoring' : 'Start Monitoring',
             ),
-          ),
-        ],
+          ],
+        ),
+        body: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildCpuUsageCard(),
+                  _buildMemoryUsageCard(),
+                  _buildNetworkUsageCard(),
+                  _buildPerformanceGraphs(),
+                  const SizedBox(height: 20),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -309,11 +311,7 @@ class _LivePerformancePageState extends ConsumerState<LivePerformancePage>
           children: [
             Row(
               children: [
-                Icon(
-                  Icons.memory,
-                  color: macAppStoreBlue,
-                  size: 24,
-                ),
+                Icon(Icons.memory, color: macAppStoreBlue, size: 24),
                 const SizedBox(width: 12),
                 Text(
                   'CPU Usage',
@@ -327,14 +325,19 @@ class _LivePerformancePageState extends ConsumerState<LivePerformancePage>
                   animation: _cpuAnimationController,
                   builder: (context, child) {
                     return Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 6,
+                      ),
                       decoration: BoxDecoration(
                         color: _getCpuColor().withOpacity(0.2),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Text(
                         '${_cpuUsage.toStringAsFixed(1)}%',
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        style: Theme.of(
+                          context,
+                        ).textTheme.titleMedium?.copyWith(
                           color: _getCpuColor(),
                           fontWeight: FontWeight.bold,
                         ),
@@ -363,11 +366,7 @@ class _LivePerformancePageState extends ConsumerState<LivePerformancePage>
           children: [
             Row(
               children: [
-                Icon(
-                  Icons.storage,
-                  color: macAppStoreBlue,
-                  size: 24,
-                ),
+                Icon(Icons.storage, color: macAppStoreBlue, size: 24),
                 const SizedBox(width: 12),
                 Text(
                   'Memory Usage',
@@ -381,14 +380,19 @@ class _LivePerformancePageState extends ConsumerState<LivePerformancePage>
                   animation: _memoryAnimationController,
                   builder: (context, child) {
                     return Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 6,
+                      ),
                       decoration: BoxDecoration(
                         color: _getMemoryColor().withOpacity(0.2),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Text(
                         '${_memoryUsage.toStringAsFixed(1)}%',
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        style: Theme.of(
+                          context,
+                        ).textTheme.titleMedium?.copyWith(
                           color: _getMemoryColor(),
                           fontWeight: FontWeight.bold,
                         ),
@@ -417,11 +421,7 @@ class _LivePerformancePageState extends ConsumerState<LivePerformancePage>
           children: [
             Row(
               children: [
-                Icon(
-                  Icons.network_check,
-                  color: macAppStoreBlue,
-                  size: 24,
-                ),
+                Icon(Icons.network_check, color: macAppStoreBlue, size: 24),
                 const SizedBox(width: 12),
                 Text(
                   'Network Activity',
@@ -435,14 +435,19 @@ class _LivePerformancePageState extends ConsumerState<LivePerformancePage>
                   animation: _networkAnimationController,
                   builder: (context, child) {
                     return Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 6,
+                      ),
                       decoration: BoxDecoration(
                         color: macAppStoreBlue.withOpacity(0.2),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Text(
                         '${_networkDown.toStringAsFixed(1)} KB/s',
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        style: Theme.of(
+                          context,
+                        ).textTheme.titleMedium?.copyWith(
                           color: macAppStoreBlue,
                           fontWeight: FontWeight.bold,
                         ),
@@ -471,11 +476,7 @@ class _LivePerformancePageState extends ConsumerState<LivePerformancePage>
           children: [
             Row(
               children: [
-                Icon(
-                  Icons.show_chart,
-                  color: macAppStoreBlue,
-                  size: 24,
-                ),
+                Icon(Icons.show_chart, color: macAppStoreBlue, size: 24),
                 const SizedBox(width: 12),
                 Text(
                   'Performance Trends',
@@ -503,9 +504,9 @@ class _LivePerformancePageState extends ConsumerState<LivePerformancePage>
           children: [
             Text(
               'Usage',
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: macAppStoreGray,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium?.copyWith(color: macAppStoreGray),
             ),
             Text(
               '${usage.toStringAsFixed(1)}%',
@@ -535,9 +536,9 @@ class _LivePerformancePageState extends ConsumerState<LivePerformancePage>
             children: [
               Text(
                 'Download',
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: macAppStoreGray,
-                ),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyMedium?.copyWith(color: macAppStoreGray),
               ),
               Text(
                 '${_networkDown.toStringAsFixed(1)} KB/s',
@@ -555,9 +556,9 @@ class _LivePerformancePageState extends ConsumerState<LivePerformancePage>
             children: [
               Text(
                 'Upload',
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: macAppStoreGray,
-                ),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyMedium?.copyWith(color: macAppStoreGray),
               ),
               Text(
                 '${_networkUp.toStringAsFixed(1)} KB/s',
@@ -655,10 +656,11 @@ class LineGraphPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     if (data.isEmpty) return;
 
-    final paint = Paint()
-      ..color = color
-      ..strokeWidth = 2.0
-      ..style = PaintingStyle.stroke;
+    final paint =
+        Paint()
+          ..color = color
+          ..strokeWidth = 2.0
+          ..style = PaintingStyle.stroke;
 
     final path = Path();
     final stepX = size.width / (data.length - 1);
@@ -666,7 +668,7 @@ class LineGraphPainter extends CustomPainter {
     for (int i = 0; i < data.length; i++) {
       final x = i * stepX;
       final y = size.height - (data[i] / maxValue * size.height);
-      
+
       if (i == 0) {
         path.moveTo(x, y);
       } else {
@@ -698,15 +700,19 @@ class NetworkGraphPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     if (upData.isEmpty && downData.isEmpty) return;
 
-    final maxValue = [...upData, ...downData].fold(0.0, (a, b) => a > b ? a : b);
+    final maxValue = [
+      ...upData,
+      ...downData,
+    ].fold(0.0, (a, b) => a > b ? a : b);
     if (maxValue == 0) return;
 
     // Draw upload line
     if (upData.isNotEmpty) {
-      final upPaint = Paint()
-        ..color = upColor
-        ..strokeWidth = 2.0
-        ..style = PaintingStyle.stroke;
+      final upPaint =
+          Paint()
+            ..color = upColor
+            ..strokeWidth = 2.0
+            ..style = PaintingStyle.stroke;
 
       final upPath = Path();
       final stepX = size.width / (upData.length - 1);
@@ -714,7 +720,7 @@ class NetworkGraphPainter extends CustomPainter {
       for (int i = 0; i < upData.length; i++) {
         final x = i * stepX;
         final y = size.height - (upData[i] / maxValue * size.height);
-        
+
         if (i == 0) {
           upPath.moveTo(x, y);
         } else {
@@ -727,10 +733,11 @@ class NetworkGraphPainter extends CustomPainter {
 
     // Draw download line
     if (downData.isNotEmpty) {
-      final downPaint = Paint()
-        ..color = downColor
-        ..strokeWidth = 2.0
-        ..style = PaintingStyle.stroke;
+      final downPaint =
+          Paint()
+            ..color = downColor
+            ..strokeWidth = 2.0
+            ..style = PaintingStyle.stroke;
 
       final downPath = Path();
       final stepX = size.width / (downData.length - 1);
@@ -738,7 +745,7 @@ class NetworkGraphPainter extends CustomPainter {
       for (int i = 0; i < downData.length; i++) {
         final x = i * stepX;
         final y = size.height - (downData[i] / maxValue * size.height);
-        
+
         if (i == 0) {
           downPath.moveTo(x, y);
         } else {
@@ -767,20 +774,23 @@ class CombinedGraphPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final cpuPaint = Paint()
-      ..color = const Color(0xFF4CAF50)
-      ..strokeWidth = 1.5
-      ..style = PaintingStyle.stroke;
+    final cpuPaint =
+        Paint()
+          ..color = const Color(0xFF4CAF50)
+          ..strokeWidth = 1.5
+          ..style = PaintingStyle.stroke;
 
-    final memoryPaint = Paint()
-      ..color = const Color(0xFF2196F3)
-      ..strokeWidth = 1.5
-      ..style = PaintingStyle.stroke;
+    final memoryPaint =
+        Paint()
+          ..color = const Color(0xFF2196F3)
+          ..strokeWidth = 1.5
+          ..style = PaintingStyle.stroke;
 
-    final networkPaint = Paint()
-      ..color = const Color(0xFFFF9800)
-      ..strokeWidth = 1.5
-      ..style = PaintingStyle.stroke;
+    final networkPaint =
+        Paint()
+          ..color = const Color(0xFFFF9800)
+          ..strokeWidth = 1.5
+          ..style = PaintingStyle.stroke;
 
     // Draw CPU line
     if (cpuData.isNotEmpty) {
@@ -801,14 +811,20 @@ class CombinedGraphPainter extends CustomPainter {
     }
   }
 
-  void _drawLine(Canvas canvas, Size size, List<double> data, Paint paint, double maxValue) {
+  void _drawLine(
+    Canvas canvas,
+    Size size,
+    List<double> data,
+    Paint paint,
+    double maxValue,
+  ) {
     final path = Path();
     final stepX = size.width / (data.length - 1);
 
     for (int i = 0; i < data.length; i++) {
       final x = i * stepX;
       final y = size.height - (data[i] / maxValue * size.height);
-      
+
       if (i == 0) {
         path.moveTo(x, y);
       } else {

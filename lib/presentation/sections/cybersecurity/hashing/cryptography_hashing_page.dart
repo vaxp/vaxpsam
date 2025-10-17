@@ -6,7 +6,7 @@ class CryptographyHashingPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final system = ref.read(systemServiceProvider);
-    
+
     return Scaffold(
       backgroundColor: macAppStoreDark,
       body: CustomScrollView(

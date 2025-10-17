@@ -159,19 +159,21 @@ class _SystemMonitoringWidgetState extends State<SystemMonitoringWidget> {
 
   Future<void> _loadAllData() async {
     if (_isLoading) return;
-    
+
     setState(() => _isLoading = true);
-    
+
     try {
       final gpuData = await widget.getGPUData();
       final cpuData = await widget.getCPUData();
       final integratedGraphicsData = await widget.getIntegratedGraphicsData();
-      
+
       if (mounted) {
         setState(() {
           _gpuData = GPUData.fromMap(gpuData);
           _cpuData = CPUData.fromMap(cpuData);
-          _integratedGraphicsData = IntegratedGraphicsData.fromMap(integratedGraphicsData);
+          _integratedGraphicsData = IntegratedGraphicsData.fromMap(
+            integratedGraphicsData,
+          );
           _isLoading = false;
         });
       }
@@ -186,11 +188,11 @@ class _SystemMonitoringWidgetState extends State<SystemMonitoringWidget> {
 
   Future<void> _updateDataOnly() async {
     if (_isLoading) return;
-    
+
     try {
       final gpuData = await widget.getGPUData();
       final cpuData = await widget.getCPUData();
-      
+
       if (mounted) {
         setState(() {
           _gpuData = GPUData.fromMap(gpuData);
@@ -205,7 +207,7 @@ class _SystemMonitoringWidgetState extends State<SystemMonitoringWidget> {
 
   void _startMonitoring() {
     if (_isMonitoring) return;
-    
+
     setState(() => _isMonitoring = true);
     _monitoringTimer = Timer.periodic(const Duration(seconds: 3), (_) {
       if (mounted) {
@@ -269,7 +271,10 @@ class _SystemMonitoringWidgetState extends State<SystemMonitoringWidget> {
           IconButton(
             icon: Icon(
               _isMonitoring ? Icons.pause : Icons.play_arrow,
-              color: _isMonitoring ? const Color(0xFFFF6B6B) : const Color(0xFF4CAF50),
+              color:
+                  _isMonitoring
+                      ? const Color(0xFFFF6B6B)
+                      : const Color(0xFF4CAF50),
             ),
             onPressed: _isMonitoring ? _stopMonitoring : _startMonitoring,
             tooltip: _isMonitoring ? 'Stop Monitoring' : 'Start Monitoring',
@@ -319,9 +324,13 @@ class _SystemMonitoringWidgetState extends State<SystemMonitoringWidget> {
       title: 'Dedicated GPU',
       icon: Icons.memory,
       color: _getVendorColor(_gpuData?.vendor ?? 'unknown'),
-      child: _gpuData == null || _gpuData!.hasError
-          ? _buildErrorState(context, _gpuData?.error ?? 'No GPU data available')
-          : _buildGPUInfo(context),
+      child:
+          _gpuData == null || _gpuData!.hasError
+              ? _buildErrorState(
+                context,
+                _gpuData?.error ?? 'No GPU data available',
+              )
+              : _buildGPUInfo(context),
     );
   }
 
@@ -331,9 +340,13 @@ class _SystemMonitoringWidgetState extends State<SystemMonitoringWidget> {
       title: 'CPU',
       icon: Icons.speed,
       color: const Color(0xFF2196F3),
-      child: _cpuData == null || _cpuData!.hasError
-          ? _buildErrorState(context, _cpuData?.error ?? 'No CPU data available')
-          : _buildCPUInfo(context),
+      child:
+          _cpuData == null || _cpuData!.hasError
+              ? _buildErrorState(
+                context,
+                _cpuData?.error ?? 'No CPU data available',
+              )
+              : _buildCPUInfo(context),
     );
   }
 
@@ -343,9 +356,14 @@ class _SystemMonitoringWidgetState extends State<SystemMonitoringWidget> {
       title: 'Integrated Graphics',
       icon: Icons.monitor,
       color: const Color(0xFF9C27B0),
-      child: _integratedGraphicsData == null || _integratedGraphicsData!.hasError
-          ? _buildErrorState(context, _integratedGraphicsData?.error ?? 'No integrated graphics detected')
-          : _buildIntegratedGraphicsInfo(context),
+      child:
+          _integratedGraphicsData == null || _integratedGraphicsData!.hasError
+              ? _buildErrorState(
+                context,
+                _integratedGraphicsData?.error ??
+                    'No integrated graphics detected',
+              )
+              : _buildIntegratedGraphicsInfo(context),
     );
   }
 
@@ -387,7 +405,7 @@ class _SystemMonitoringWidgetState extends State<SystemMonitoringWidget> {
 
   Widget _buildGPUInfo(BuildContext context) {
     final gpu = _gpuData!;
-    
+
     return Column(
       children: [
         Row(
@@ -479,7 +497,7 @@ class _SystemMonitoringWidgetState extends State<SystemMonitoringWidget> {
 
   Widget _buildCPUInfo(BuildContext context) {
     final cpu = _cpuData!;
-    
+
     return Column(
       children: [
         Row(
@@ -491,11 +509,7 @@ class _SystemMonitoringWidgetState extends State<SystemMonitoringWidget> {
                 color: const Color.fromARGB(255, 0, 0, 0),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: const Icon(
-                Icons.speed,
-                color: Colors.white,
-                size: 20,
-              ),
+              child: const Icon(Icons.speed, color: Colors.white, size: 20),
             ),
             const SizedBox(width: 12),
             Expanded(
@@ -573,7 +587,7 @@ class _SystemMonitoringWidgetState extends State<SystemMonitoringWidget> {
 
   Widget _buildIntegratedGraphicsInfo(BuildContext context) {
     final igpu = _integratedGraphicsData!;
-    
+
     return Column(
       children: [
         Row(
@@ -585,11 +599,7 @@ class _SystemMonitoringWidgetState extends State<SystemMonitoringWidget> {
                 color: const Color(0xFF9C27B0),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: const Icon(
-                Icons.monitor,
-                color: Colors.white,
-                size: 20,
-              ),
+              child: const Icon(Icons.monitor, color: Colors.white, size: 20),
             ),
             const SizedBox(width: 12),
             Expanded(
@@ -659,42 +669,64 @@ class _SystemMonitoringWidgetState extends State<SystemMonitoringWidget> {
   }
 
   Future<void> _showInstallDialog() async {
-
-    
     final result = await showDialog<String>(
       context: context,
-      builder: (ctx) => AlertDialog(
-        title: const Text('Install Monitoring Tools'),
-        content: const Text(
-          'Choose the monitoring tools to install based on your hardware:',
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(ctx).pop(),
-            child: const Text('Cancel', style: TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
+      builder:
+          (ctx) => AlertDialog(
+            title: const Text('Install Monitoring Tools'),
+            content: const Text(
+              'Choose the monitoring tools to install based on your hardware:',
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(ctx).pop(),
+                child: const Text(
+                  'Cancel',
+                  style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () => Navigator.of(ctx).pop('nvidia'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF76B900),
+                ),
+                child: const Text(
+                  'NVIDIA',
+                  style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () => Navigator.of(ctx).pop('amd'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFFED1C24),
+                ),
+                child: const Text(
+                  'AMD',
+                  style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () => Navigator.of(ctx).pop('intel'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 0, 143, 238),
+                ),
+                child: const Text(
+                  'Intel',
+                  style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () => Navigator.of(ctx).pop('general'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 0, 255, 242),
+                ),
+                child: const Text(
+                  'General',
+                  style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
+                ),
+              ),
+            ],
           ),
-          ElevatedButton(
-            onPressed: () => Navigator.of(ctx).pop('nvidia'),
-            style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF76B900)),
-            child: const Text('NVIDIA', style: TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
-          ),
-          ElevatedButton(
-            onPressed: () => Navigator.of(ctx).pop('amd'),
-            style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFFED1C24)),
-            child: const Text('AMD', style: TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
-          ),
-          ElevatedButton(
-            onPressed: () => Navigator.of(ctx).pop('intel'),
-            style: ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(255, 0, 143, 238)),
-            child: const Text('Intel', style: TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
-          ),
-          ElevatedButton(
-            onPressed: () => Navigator.of(ctx).pop('general'),
-            style: ElevatedButton.styleFrom(backgroundColor: const Color.fromARGB(255, 0, 255, 242)),
-            child: const Text('General', style: TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
-          ),
-        ],
-      ),
     );
 
     if (result != null && mounted) {
@@ -712,7 +744,7 @@ class _SystemMonitoringWidgetState extends State<SystemMonitoringWidget> {
           widget.showConsoleStream(widget.installGeneralTools());
           break;
       }
-      
+
       // Refresh data after installation
       Timer(const Duration(seconds: 5), () {
         _loadAllData();
@@ -772,15 +804,14 @@ class OptimizedMetricItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final percentage = max > 0 ? (current / max * 100).clamp(0, 100) : 0;
-    
+
     return Column(
       children: [
         Text(
           label,
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-            color: macAppStoreGray,
-            fontSize: 10,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.bodySmall?.copyWith(color: macAppStoreGray, fontSize: 10),
         ),
         const SizedBox(height: 4),
         Text(

@@ -10,7 +10,8 @@ class HardwareDetailsPage extends ConsumerStatefulWidget {
   const HardwareDetailsPage({super.key});
 
   @override
-  ConsumerState<HardwareDetailsPage> createState() => _HardwareDetailsPageState();
+  ConsumerState<HardwareDetailsPage> createState() =>
+      _HardwareDetailsPageState();
 }
 
 class _HardwareDetailsPageState extends ConsumerState<HardwareDetailsPage> {
@@ -40,13 +41,13 @@ class _HardwareDetailsPageState extends ConsumerState<HardwareDetailsPage> {
 
       // Get CPU information
       await _loadCpuInfo(info);
-      
+
       // Get memory information
       await _loadMemoryInfo(info);
-      
+
       // Get GPU information
       await _loadGpuInfo(info);
-      
+
       // Get storage information
       await _loadStorageInfo(info);
 
@@ -72,7 +73,7 @@ class _HardwareDetailsPageState extends ConsumerState<HardwareDetailsPage> {
       if (await cpuInfoFile.exists()) {
         final content = await cpuInfoFile.readAsString();
         final lines = content.split('\n');
-        
+
         String modelName = 'Unknown';
         int cores = 0;
         int threads = 0;
@@ -81,15 +82,30 @@ class _HardwareDetailsPageState extends ConsumerState<HardwareDetailsPage> {
 
         for (final line in lines) {
           if (line.startsWith('model name')) {
-            modelName = line.split(':').length > 1 ? line.split(':')[1].trim() : 'Unknown';
+            modelName =
+                line.split(':').length > 1
+                    ? line.split(':')[1].trim()
+                    : 'Unknown';
           } else if (line.startsWith('cpu cores')) {
-            cores = int.tryParse(line.split(':').length > 1 ? line.split(':')[1].trim() : '0') ?? 0;
+            cores =
+                int.tryParse(
+                  line.split(':').length > 1 ? line.split(':')[1].trim() : '0',
+                ) ??
+                0;
           } else if (line.startsWith('siblings')) {
-            threads = int.tryParse(line.split(':').length > 1 ? line.split(':')[1].trim() : '0') ?? 0;
+            threads =
+                int.tryParse(
+                  line.split(':').length > 1 ? line.split(':')[1].trim() : '0',
+                ) ??
+                0;
           } else if (line.startsWith('Architecture')) {
-            architecture = line.split(':').length > 1 ? line.split(':')[1].trim() : 'Unknown';
+            architecture =
+                line.split(':').length > 1
+                    ? line.split(':')[1].trim()
+                    : 'Unknown';
           } else if (line.startsWith('flags')) {
-            cpuFlags = line.split(':').length > 1 ? line.split(':')[1].trim() : '';
+            cpuFlags =
+                line.split(':').length > 1 ? line.split(':')[1].trim() : '';
           }
         }
 
@@ -112,7 +128,7 @@ class _HardwareDetailsPageState extends ConsumerState<HardwareDetailsPage> {
       if (await memInfoFile.exists()) {
         final content = await memInfoFile.readAsString();
         final lines = content.split('\n');
-        
+
         int totalMemKB = 0;
         int availableMemKB = 0;
 
@@ -125,8 +141,11 @@ class _HardwareDetailsPageState extends ConsumerState<HardwareDetailsPage> {
         }
 
         final totalMemGB = (totalMemKB / 1024 / 1024).toStringAsFixed(2);
-        final availableMemGB = (availableMemKB / 1024 / 1024).toStringAsFixed(2);
-        final usedMemGB = ((totalMemKB - availableMemKB) / 1024 / 1024).toStringAsFixed(2);
+        final availableMemGB = (availableMemKB / 1024 / 1024).toStringAsFixed(
+          2,
+        );
+        final usedMemGB = ((totalMemKB - availableMemKB) / 1024 / 1024)
+            .toStringAsFixed(2);
 
         info['MEMORY'] = {
           'total': totalMemGB,
@@ -144,19 +163,20 @@ class _HardwareDetailsPageState extends ConsumerState<HardwareDetailsPage> {
   Future<void> _loadGpuInfo(Map<String, dynamic> info) async {
     try {
       final gpus = <Map<String, String>>[];
-      
+
       // Try to get GPU info from lspci
       try {
         final result = await Process.run('lspci', ['-v']);
         if (result.exitCode == 0) {
           final output = result.stdout.toString();
           final lines = output.split('\n');
-          
+
           for (int i = 0; i < lines.length; i++) {
             if (lines[i].contains('VGA') || lines[i].contains('3D')) {
-              final gpuName = lines[i].split(':').length > 2 
-                  ? lines[i].split(':')[2].trim() 
-                  : 'Unknown GPU';
+              final gpuName =
+                  lines[i].split(':').length > 2
+                      ? lines[i].split(':')[2].trim()
+                      : 'Unknown GPU';
               gpus.add({'name': gpuName, 'type': 'PCI'});
             }
           }
@@ -171,7 +191,7 @@ class _HardwareDetailsPageState extends ConsumerState<HardwareDetailsPage> {
         if (result.exitCode == 0) {
           final output = result.stdout.toString();
           final lines = output.split('\n');
-          
+
           for (final line in lines) {
             if (line.contains('display') && !line.contains('*-display')) {
               final parts = line.split(RegExp(r'\s+'));
@@ -201,15 +221,19 @@ class _HardwareDetailsPageState extends ConsumerState<HardwareDetailsPage> {
   Future<void> _loadStorageInfo(Map<String, dynamic> info) async {
     try {
       final storage = <Map<String, String>>[];
-      
+
       // Get storage info from lsblk
       try {
-        final result = await Process.run('lsblk', ['-o', 'NAME,SIZE,TYPE,MOUNTPOINT,MODEL']);
+        final result = await Process.run('lsblk', [
+          '-o',
+          'NAME,SIZE,TYPE,MOUNTPOINT,MODEL',
+        ]);
         if (result.exitCode == 0) {
           final output = result.stdout.toString();
           final lines = output.split('\n');
-          
-          for (int i = 1; i < lines.length; i++) { // Skip header
+
+          for (int i = 1; i < lines.length; i++) {
+            // Skip header
             final line = lines[i].trim();
             if (line.isNotEmpty) {
               final parts = line.split(RegExp(r'\s+'));
@@ -218,8 +242,9 @@ class _HardwareDetailsPageState extends ConsumerState<HardwareDetailsPage> {
                 final size = parts[1];
                 final type = parts[2];
                 final mountpoint = parts.length > 3 ? parts[3] : '';
-                final model = parts.length > 4 ? parts.sublist(4).join(' ') : '';
-                
+                final model =
+                    parts.length > 4 ? parts.sublist(4).join(' ') : '';
+
                 if (type == 'disk' || type == 'part') {
                   storage.add({
                     'name': name,
@@ -258,47 +283,47 @@ class _HardwareDetailsPageState extends ConsumerState<HardwareDetailsPage> {
     return StaticBackground(
       child: Scaffold(
         backgroundColor: Colors.transparent,
-      appBar: AppBar(
-        title: const Text('Hardware Details'),
-        backgroundColor: macAppStoreDark,
-        foregroundColor: Colors.white,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.refresh),
-            onPressed: _loadHardwareInfo,
-            tooltip: 'Refresh Information',
+        appBar: AppBar(
+          title: const Text('Hardware Details'),
+          backgroundColor: macAppStoreDark,
+          foregroundColor: Colors.white,
+          elevation: 0,
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () => Navigator.of(context).pop(),
           ),
-        ],
-      ),
-      body: _isLoading
-          ? const Center(
-              child: CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(macAppStoreBlue),
-              ),
-            )
-          : CustomScrollView(
-              slivers: [
-                SliverToBoxAdapter(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _buildCpuInfoCard(),
-                      _buildMemoryInfoCard(),
-                      _buildGpuInfoCard(),
-                      _buildStorageInfoCard(),
-                      const SizedBox(height: 20),
-                    ],
-                  ),
-                ),
-              ],
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.refresh),
+              onPressed: _loadHardwareInfo,
+              tooltip: 'Refresh Information',
             ),
+          ],
         ),
-      
+        body:
+            _isLoading
+                ? const Center(
+                  child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(macAppStoreBlue),
+                  ),
+                )
+                : CustomScrollView(
+                  slivers: [
+                    SliverToBoxAdapter(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _buildCpuInfoCard(),
+                          _buildMemoryInfoCard(),
+                          _buildGpuInfoCard(),
+                          _buildStorageInfoCard(),
+                          const SizedBox(height: 20),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+      ),
     );
   }
 
@@ -312,11 +337,7 @@ class _HardwareDetailsPageState extends ConsumerState<HardwareDetailsPage> {
           children: [
             Row(
               children: [
-                Icon(
-                  Icons.memory,
-                  color: macAppStoreBlue,
-                  size: 24,
-                ),
+                Icon(Icons.memory, color: macAppStoreBlue, size: 24),
                 const SizedBox(width: 12),
                 Text(
                   'Processor (CPU)',
@@ -354,11 +375,7 @@ class _HardwareDetailsPageState extends ConsumerState<HardwareDetailsPage> {
           children: [
             Row(
               children: [
-                Icon(
-                  Icons.storage,
-                  color: macAppStoreBlue,
-                  size: 24,
-                ),
+                Icon(Icons.storage, color: macAppStoreBlue, size: 24),
                 const SizedBox(width: 12),
                 Text(
                   'Memory (RAM)',
@@ -397,11 +414,7 @@ class _HardwareDetailsPageState extends ConsumerState<HardwareDetailsPage> {
           children: [
             Row(
               children: [
-                Icon(
-                  Icons.videocam,
-                  color: macAppStoreBlue,
-                  size: 24,
-                ),
+                Icon(Icons.videocam, color: macAppStoreBlue, size: 24),
                 const SizedBox(width: 12),
                 Text(
                   'Graphics (GPU)',
@@ -439,11 +452,7 @@ class _HardwareDetailsPageState extends ConsumerState<HardwareDetailsPage> {
           children: [
             Row(
               children: [
-                Icon(
-                  Icons.storage,
-                  color: macAppStoreBlue,
-                  size: 24,
-                ),
+                Icon(Icons.storage, color: macAppStoreBlue, size: 24),
                 const SizedBox(width: 12),
                 Text(
                   'Storage Devices',
@@ -457,7 +466,10 @@ class _HardwareDetailsPageState extends ConsumerState<HardwareDetailsPage> {
             const SizedBox(height: 16),
             if (storage != null && storage.isNotEmpty) ...[
               for (int i = 0; i < storage.length; i++) ...[
-                _buildInfoRow('Device ${i + 1}', storage[i]['name'] ?? 'Unknown'),
+                _buildInfoRow(
+                  'Device ${i + 1}',
+                  storage[i]['name'] ?? 'Unknown',
+                ),
                 _buildInfoRow('Size', storage[i]['size'] ?? 'Unknown'),
                 _buildInfoRow('Type', storage[i]['type'] ?? 'Unknown'),
                 if (storage[i]['mountpoint']?.isNotEmpty == true)
@@ -491,9 +503,9 @@ class _HardwareDetailsPageState extends ConsumerState<HardwareDetailsPage> {
           children: [
             Text(
               'Memory Usage',
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: macAppStoreGray,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium?.copyWith(color: macAppStoreGray),
             ),
             Text(
               '${(usagePercent * 100).toStringAsFixed(1)}%',
@@ -535,9 +547,9 @@ class _HardwareDetailsPageState extends ConsumerState<HardwareDetailsPage> {
           Expanded(
             child: Text(
               value,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Colors.white,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium?.copyWith(color: Colors.white),
             ),
           ),
         ],
@@ -564,9 +576,9 @@ class _HardwareDetailsPageState extends ConsumerState<HardwareDetailsPage> {
           Expanded(
             child: Text(
               error,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: const Color(0xFFFF6B6B),
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium?.copyWith(color: const Color(0xFFFF6B6B)),
             ),
           ),
         ],

@@ -16,28 +16,28 @@ class DesktopDeveloperPage extends ConsumerWidget {
     return StaticBackground(
       child: Scaffold(
         backgroundColor: Colors.transparent,
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            expandedHeight: 200,
-            floating: false,
-            pinned: true,
-            backgroundColor: macAppStoreDark,
-            flexibleSpace: FlexibleSpaceBar(
-              background: _buildHeroSection(context),
+        body: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              expandedHeight: 200,
+              floating: false,
+              pinned: true,
+              backgroundColor: macAppStoreDark,
+              flexibleSpace: FlexibleSpaceBar(
+                background: _buildHeroSection(context),
+              ),
             ),
-          ),
-          SliverToBoxAdapter(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildInstallAllSection(context, system),
-                _buildToolsGrid(context, system),
-                const SizedBox(height: 20),
-              ],
+            SliverToBoxAdapter(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildInstallAllSection(context, system),
+                  _buildToolsGrid(context, system),
+                  const SizedBox(height: 20),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
         ),
       ),
     );
@@ -96,10 +96,7 @@ class DesktopDeveloperPage extends ConsumerWidget {
                 const SizedBox(height: 8),
                 const Text(
                   '30 professional tools for desktop application development including GUI frameworks and build systems.',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.white70,
-                  ),
+                  style: TextStyle(fontSize: 16, color: Colors.white70),
                 ),
               ],
             ),
@@ -118,11 +115,7 @@ class DesktopDeveloperPage extends ConsumerWidget {
           children: [
             Row(
               children: [
-                Icon(
-                  Icons.download,
-                  color: macAppStoreBlue,
-                  size: 24,
-                ),
+                Icon(Icons.download, color: macAppStoreBlue, size: 24),
                 const SizedBox(width: 12),
                 Expanded(
                   child: Column(
@@ -130,7 +123,9 @@ class DesktopDeveloperPage extends ConsumerWidget {
                     children: [
                       Text(
                         'Install All Desktop Developer Tools',
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        style: Theme.of(
+                          context,
+                        ).textTheme.titleMedium?.copyWith(
                           fontWeight: FontWeight.w600,
                           color: Colors.white,
                         ),
@@ -168,36 +163,152 @@ class DesktopDeveloperPage extends ConsumerWidget {
 
   Widget _buildToolsGrid(BuildContext context, system) {
     final tools = [
-      {'name': 'GCC/G++', 'package': 'build-essential', 'description': 'Necessary package that includes gcc, g++, make, and dpkg-dev (for compiling)'},
-      {'name': 'CMake', 'package': 'cmake', 'description': 'Modern and widely used build system (for large projects)'},
-      {'name': 'Git', 'package': 'git', 'description': 'Version control system'},
-      {'name': 'Python', 'package': 'python3', 'description': 'Basic programming language (for building CLI tools or simple interfaces)'},
-      {'name': 'Python3-tk', 'package': 'python3-tk', 'description': 'Tcl/Tk library for Python (for building simple GUIs)'},
-      {'name': 'Qt5 Base Dev', 'package': 'qtbase5-dev', 'description': 'Essential Qt5 development libraries (for professional GUIs)'},
-      {'name': 'Qt Tools', 'package': 'qttools5-dev', 'description': 'Utilities for Qt5 development'},
-      {'name': 'GTK+ 3.0 Dev', 'package': 'libgtk-3-dev', 'description': 'GTK+ 3.0 development libraries (the GNOME native interface library)'},
-      {'name': 'Ctags', 'package': 'ctags', 'description': 'For creating source code indexes'},
-      {'name': 'Valgrind', 'package': 'valgrind', 'description': 'Tool for debugging memory and profile errors'},
+      {
+        'name': 'GCC/G++',
+        'package': 'build-essential',
+        'description':
+            'Necessary package that includes gcc, g++, make, and dpkg-dev (for compiling)',
+      },
+      {
+        'name': 'CMake',
+        'package': 'cmake',
+        'description':
+            'Modern and widely used build system (for large projects)',
+      },
+      {
+        'name': 'Git',
+        'package': 'git',
+        'description': 'Version control system',
+      },
+      {
+        'name': 'Python',
+        'package': 'python3',
+        'description':
+            'Basic programming language (for building CLI tools or simple interfaces)',
+      },
+      {
+        'name': 'Python3-tk',
+        'package': 'python3-tk',
+        'description': 'Tcl/Tk library for Python (for building simple GUIs)',
+      },
+      {
+        'name': 'Qt5 Base Dev',
+        'package': 'qtbase5-dev',
+        'description':
+            'Essential Qt5 development libraries (for professional GUIs)',
+      },
+      {
+        'name': 'Qt Tools',
+        'package': 'qttools5-dev',
+        'description': 'Utilities for Qt5 development',
+      },
+      {
+        'name': 'GTK+ 3.0 Dev',
+        'package': 'libgtk-3-dev',
+        'description':
+            'GTK+ 3.0 development libraries (the GNOME native interface library)',
+      },
+      {
+        'name': 'Ctags',
+        'package': 'ctags',
+        'description': 'For creating source code indexes',
+      },
+      {
+        'name': 'Valgrind',
+        'package': 'valgrind',
+        'description': 'Tool for debugging memory and profile errors',
+      },
       {'name': 'GDB', 'package': 'gdb', 'description': 'GNU Debugger'},
       {'name': 'Vim', 'package': 'vim', 'description': 'Powerful text editor'},
       {'name': 'Nano', 'package': 'nano', 'description': 'Simple text editor'},
-      {'name': 'Curl', 'package': 'curl', 'description': 'For testing connections'},
-      {'name': 'Wget', 'package': 'wget', 'description': 'For downloading content'},
-      {'name': 'OpenSSL Dev', 'package': 'libssl-dev', 'description': 'OpenSSL development libraries (for encryption and security)'},
-      {'name': 'libsqlite3-dev', 'package': 'libsqlite3-dev', 'description': 'SQLite 3 libraries (for embedded databases)'},
-      {'name': 'Autoconf', 'package': 'autoconf', 'description': 'For generating configuration scripts'},
-      {'name': 'Automake', 'package': 'automake', 'description': 'For automatically generating Makefiles'},
-      {'name': 'Libtool', 'package': 'libtool', 'description': 'Utility for managing shared libraries'},
-      {'name': 'Doxygen', 'package': 'doxygen', 'description': 'Source code documentation system'},
-      {'name': 'Java JDK', 'package': 'default-jdk', 'description': 'Java development environment (essential for tools like IntelliJ/Eclipse)'},
-      {'name': 'SWIG', 'package': 'swig', 'description': 'For linking different programming languages (such as C++ and Python)'},
-      {'name': 'libxml2-dev', 'package': 'libxml2-dev', 'description': 'XML development libraries'},
-      {'name': 'libpcre3-dev', 'package': 'libpcre3-dev', 'description': 'PCRE libraries for regular expressions'},
-      {'name': 'cmake-curses-gui', 'package': 'cmake-curses-gui', 'description': 'Graphical text interface for CMake'},
-      {'name': 'Glade', 'package': 'glade', 'description': 'GUI designer for GTK+'},
-      {'name': 'pkg-config', 'package': 'pkg-config', 'description': 'Utility for managing compiled library packages'},
-      {'name': 'RapidJson Dev', 'package': 'rapidjson-dev', 'description': 'Rapid JSON libraries for C++'},
-      {'name': 'Subversion', 'package': 'subversion', 'description': 'Alternative version control system to Git'},
+      {
+        'name': 'Curl',
+        'package': 'curl',
+        'description': 'For testing connections',
+      },
+      {
+        'name': 'Wget',
+        'package': 'wget',
+        'description': 'For downloading content',
+      },
+      {
+        'name': 'OpenSSL Dev',
+        'package': 'libssl-dev',
+        'description':
+            'OpenSSL development libraries (for encryption and security)',
+      },
+      {
+        'name': 'libsqlite3-dev',
+        'package': 'libsqlite3-dev',
+        'description': 'SQLite 3 libraries (for embedded databases)',
+      },
+      {
+        'name': 'Autoconf',
+        'package': 'autoconf',
+        'description': 'For generating configuration scripts',
+      },
+      {
+        'name': 'Automake',
+        'package': 'automake',
+        'description': 'For automatically generating Makefiles',
+      },
+      {
+        'name': 'Libtool',
+        'package': 'libtool',
+        'description': 'Utility for managing shared libraries',
+      },
+      {
+        'name': 'Doxygen',
+        'package': 'doxygen',
+        'description': 'Source code documentation system',
+      },
+      {
+        'name': 'Java JDK',
+        'package': 'default-jdk',
+        'description':
+            'Java development environment (essential for tools like IntelliJ/Eclipse)',
+      },
+      {
+        'name': 'SWIG',
+        'package': 'swig',
+        'description':
+            'For linking different programming languages (such as C++ and Python)',
+      },
+      {
+        'name': 'libxml2-dev',
+        'package': 'libxml2-dev',
+        'description': 'XML development libraries',
+      },
+      {
+        'name': 'libpcre3-dev',
+        'package': 'libpcre3-dev',
+        'description': 'PCRE libraries for regular expressions',
+      },
+      {
+        'name': 'cmake-curses-gui',
+        'package': 'cmake-curses-gui',
+        'description': 'Graphical text interface for CMake',
+      },
+      {
+        'name': 'Glade',
+        'package': 'glade',
+        'description': 'GUI designer for GTK+',
+      },
+      {
+        'name': 'pkg-config',
+        'package': 'pkg-config',
+        'description': 'Utility for managing compiled library packages',
+      },
+      {
+        'name': 'RapidJson Dev',
+        'package': 'rapidjson-dev',
+        'description': 'Rapid JSON libraries for C++',
+      },
+      {
+        'name': 'Subversion',
+        'package': 'subversion',
+        'description': 'Alternative version control system to Git',
+      },
     ];
 
     return Column(
@@ -236,7 +347,11 @@ class DesktopDeveloperPage extends ConsumerWidget {
                 ),
                 child: const Icon(Icons.desktop_windows, color: Colors.white),
               ),
-              onTap: () => showConsoleStream(context, system.installPackageByName(tool['package']!)),
+              onTap:
+                  () => showConsoleStream(
+                    context,
+                    system.installPackageByName(tool['package']!),
+                  ),
             );
           },
         ),
@@ -246,33 +361,71 @@ class DesktopDeveloperPage extends ConsumerWidget {
 
   void _installAllTools(BuildContext context, system) {
     final tools = [
-      'build-essential', 'cmake', 'git', 'python3', 'python3-tk', 'qtbase5-dev',
-      'qttools5-dev', 'libgtk-3-dev', 'ctags', 'valgrind', 'gdb', 'vim',
-      'nano', 'curl', 'wget', 'libssl-dev', 'libsqlite3-dev', 'autoconf',
-      'automake', 'libtool', 'doxygen', 'default-jdk', 'swig', 'libxml2-dev',
-      'libpcre3-dev', 'cmake-curses-gui', 'glade', 'pkg-config', 'rapidjson-dev',
-      'subversion'
+      'build-essential',
+      'cmake',
+      'git',
+      'python3',
+      'python3-tk',
+      'qtbase5-dev',
+      'qttools5-dev',
+      'libgtk-3-dev',
+      'ctags',
+      'valgrind',
+      'gdb',
+      'vim',
+      'nano',
+      'curl',
+      'wget',
+      'libssl-dev',
+      'libsqlite3-dev',
+      'autoconf',
+      'automake',
+      'libtool',
+      'doxygen',
+      'default-jdk',
+      'swig',
+      'libxml2-dev',
+      'libpcre3-dev',
+      'cmake-curses-gui',
+      'glade',
+      'pkg-config',
+      'rapidjson-dev',
+      'subversion',
     ];
 
     showDialog(
       context: context,
-      builder: (ctx) => AlertDialog(
-        title: const Text('Install All Desktop Developer Tools'),
-        content: Text('This will install ${tools.length} desktop development tools. Continue?'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(ctx).pop(),
-            child: const Text('Cancel'),
+      builder:
+          (ctx) => AlertDialog(
+            title: const Text('Install All Desktop Developer Tools'),
+            content: Text(
+              'This will install ${tools.length} desktop development tools. Continue?',
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(ctx).pop(),
+                child: const Text('Cancel'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(ctx).pop();
+                  showConsoleStream(
+                    context,
+                    system.runAsRoot([
+                      'apt',
+                      'update',
+                      '&&',
+                      'apt',
+                      'install',
+                      '-y',
+                      ...tools,
+                    ]),
+                  );
+                },
+                child: const Text('Install All'),
+              ),
+            ],
           ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.of(ctx).pop();
-              showConsoleStream(context, system.runAsRoot(['apt', 'update', '&&', 'apt', 'install', '-y', ...tools]));
-            },
-            child: const Text('Install All'),
-          ),
-        ],
-      ),
     );
   }
 }

@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'dart:ui';
 import 'package:flutter/services.dart';
 import '../../domain/command_output_line.dart';
 import '../theme/app_theme.dart';
@@ -62,7 +61,13 @@ class _ConsoleModalState extends State<ConsoleModal> {
     setState(() {
       _running = false;
       _showProgress = false;
-      _lines.add(CommandOutputLine(timestamp: DateTime.now(), text: 'Error: $err', isError: true));
+      _lines.add(
+        CommandOutputLine(
+          timestamp: DateTime.now(),
+          text: 'Error: $err',
+          isError: true,
+        ),
+      );
     });
   }
 
@@ -73,7 +78,9 @@ class _ConsoleModalState extends State<ConsoleModal> {
   }
 
   Future<void> _copyAll() async {
-    final all = _lines.map((l) => '[${l.timestamp.toIso8601String()}] ${l.text}').join('\n');
+    final all = _lines
+        .map((l) => '[${l.timestamp.toIso8601String()}] ${l.text}')
+        .join('\n');
     await Clipboard.setData(ClipboardData(text: all));
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -105,18 +112,18 @@ class _ConsoleModalState extends State<ConsoleModal> {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             decoration: BoxDecoration(
               color: macAppStoreCard,
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(12),
+              ),
               border: Border(
-                bottom: BorderSide(color: macAppStoreLightGray.withOpacity(0.2)),
+                bottom: BorderSide(
+                  color: macAppStoreLightGray,
+                ),
               ),
             ),
             child: Row(
               children: [
-                Icon(
-                  Icons.terminal,
-                  color: macAppStoreBlue,
-                  size: 20,
-                ),
+                Icon(Icons.terminal, color: macAppStoreBlue, size: 20),
                 const SizedBox(width: 8),
                 Text(
                   'Console',
@@ -127,20 +134,12 @@ class _ConsoleModalState extends State<ConsoleModal> {
                 ),
                 const Spacer(),
                 IconButton(
-                  icon: Icon(
-                    Icons.copy,
-                    color: macAppStoreGray,
-                    size: 18,
-                  ),
+                  icon: Icon(Icons.copy, color: macAppStoreGray, size: 18),
                   onPressed: _copyAll,
                   tooltip: 'Copy Output',
                 ),
                 IconButton(
-                  icon: Icon(
-                    Icons.clear,
-                    color: macAppStoreGray,
-                    size: 18,
-                  ),
+                  icon: Icon(Icons.clear, color: macAppStoreGray, size: 18),
                   onPressed: _clear,
                   tooltip: 'Clear Console',
                 ),
@@ -166,14 +165,18 @@ class _ConsoleModalState extends State<ConsoleModal> {
                     LinearProgressIndicator(
                       value: _progress > 0 ? _progress : null,
                       backgroundColor: macAppStoreLightGray,
-                      valueColor: AlwaysStoppedAnimation<Color>(macAppStoreBlue),
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        macAppStoreBlue,
+                      ),
                     ),
                   if (_running && _lines.isEmpty)
                     const Padding(
                       padding: EdgeInsets.symmetric(vertical: 16),
                       child: Center(
                         child: CircularProgressIndicator(
-                          valueColor: AlwaysStoppedAnimation<Color>(macAppStoreBlue),
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            macAppStoreBlue,
+                          ),
                         ),
                       ),
                     ),
@@ -184,70 +187,72 @@ class _ConsoleModalState extends State<ConsoleModal> {
           Expanded(
             child: Container(
               color: const Color(0xFF1A1A1A),
-              child: _lines.isEmpty && !_running
-                  ? Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.terminal,
-                            size: 48,
-                            color: macAppStoreGray,
-                          ),
-                          const SizedBox(height: 16),
-                          Text(
-                            'No output yet',
-                            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+              child:
+                  _lines.isEmpty && !_running
+                      ? Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.terminal,
+                              size: 48,
                               color: macAppStoreGray,
                             ),
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            'Run a command to see output here',
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: macAppStoreGray,
+                            const SizedBox(height: 16),
+                            Text(
+                              'No output yet',
+                              style: Theme.of(context).textTheme.bodyLarge
+                                  ?.copyWith(color: macAppStoreGray),
                             ),
-                          ),
-                        ],
+                            const SizedBox(height: 8),
+                            Text(
+                              'Run a command to see output here',
+                              style: Theme.of(context).textTheme.bodyMedium
+                                  ?.copyWith(color: macAppStoreGray),
+                            ),
+                          ],
+                        ),
+                      )
+                      : ListView.builder(
+                        padding: const EdgeInsets.all(12),
+                        itemCount: _lines.length,
+                        itemBuilder: (context, i) {
+                          final line = _lines[i];
+                          return Container(
+                            margin: const EdgeInsets.symmetric(vertical: 2),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  width: 80,
+                                  child: Text(
+                                    '[${line.timestamp.hour.toString().padLeft(2, '0')}:${line.timestamp.minute.toString().padLeft(2, '0')}:${line.timestamp.second.toString().padLeft(2, '0')}]',
+                                    style: TextStyle(
+                                      fontSize: 11,
+                                      color: macAppStoreGray,
+                                      fontFamily: 'monospace',
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                                Expanded(
+                                  child: Text(
+                                    line.text,
+                                    style: TextStyle(
+                                      color:
+                                          line.isError
+                                              ? const Color(0xFFFF6B6B)
+                                              : const Color(0xFF4ECDC4),
+                                      fontFamily: 'monospace',
+                                      fontSize: 13,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
                       ),
-                    )
-                  : ListView.builder(
-                      padding: const EdgeInsets.all(12),
-                      itemCount: _lines.length,
-                      itemBuilder: (context, i) {
-                        final line = _lines[i];
-                        return Container(
-                          margin: const EdgeInsets.symmetric(vertical: 2),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                width: 80,
-                                child: Text(
-                                  '[${line.timestamp.hour.toString().padLeft(2, '0')}:${line.timestamp.minute.toString().padLeft(2, '0')}:${line.timestamp.second.toString().padLeft(2, '0')}]',
-                                  style: TextStyle(
-                                    fontSize: 11,
-                                    color: macAppStoreGray,
-                                    fontFamily: 'monospace',
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(width: 8),
-                              Expanded(
-                                child: Text(
-                                  line.text,
-                                  style: TextStyle(
-                                    color: line.isError ? const Color(0xFFFF6B6B) : const Color(0xFF4ECDC4),
-                                    fontFamily: 'monospace',
-                                    fontSize: 13,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    ),
             ),
           ),
           // Footer
@@ -256,7 +261,7 @@ class _ConsoleModalState extends State<ConsoleModal> {
             decoration: BoxDecoration(
               color: macAppStoreCard,
               border: Border(
-                top: BorderSide(color: macAppStoreLightGray.withOpacity(0.2)),
+                top: BorderSide(color: macAppStoreLightGray),
               ),
             ),
             child: Row(
@@ -264,9 +269,9 @@ class _ConsoleModalState extends State<ConsoleModal> {
                 Expanded(
                   child: Text(
                     _running ? 'Running...' : 'Finished',
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: macAppStoreGray,
-                    ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodySmall?.copyWith(color: macAppStoreGray),
                   ),
                 ),
                 ElevatedButton(

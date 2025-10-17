@@ -5,7 +5,7 @@ class BuildHeroSection extends StatelessWidget {
   const BuildHeroSection(this.context, {super.key});
   @override
   Widget build(BuildContext context) {
-    return  Container(
+    return Container(
       height: 200,
       margin: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -57,10 +57,7 @@ class BuildHeroSection extends StatelessWidget {
                 const SizedBox(height: 8),
                 const Text(
                   '8 professional tools for cryptography, password cracking, and encryption management.',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.white70,
-                  ),
+                  style: TextStyle(fontSize: 16, color: Colors.white70),
                 ),
               ],
             ),

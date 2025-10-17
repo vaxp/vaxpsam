@@ -17,31 +17,31 @@ class MediaEntertainmentPage extends ConsumerWidget {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
-        title: const Text('Media & Entertainment'),
-        backgroundColor: macAppStoreDark,
-        foregroundColor: Colors.white,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
+          title: const Text('Media & Entertainment'),
+          backgroundColor: macAppStoreDark,
+          foregroundColor: Colors.white,
+          elevation: 0,
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
         ),
         body: CustomScrollView(
-        slivers: [
-          SliverToBoxAdapter(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildInstallAllSection(context, system),
-                _buildToolsSection(context, system),
-                const SizedBox(height: 20),
-              ],
+          slivers: [
+            SliverToBoxAdapter(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildInstallAllSection(context, system),
+                  _buildToolsSection(context, system),
+                  const SizedBox(height: 20),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
         ),
-        ),
-      );
+      ),
+    );
   }
 
   Widget _buildInstallAllSection(BuildContext context, system) {
@@ -162,10 +162,12 @@ class MediaEntertainmentPage extends ConsumerWidget {
                   color: const Color.fromARGB(255, 173, 61, 155),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Image.asset( // استخدام الأداة Image.asset
-                  t['iconAsset']?? 'assets/ides/default.png' ,  // تمرير المسار المخزن في قائمة tools
-                  width: 40, 
-                  height: 40, 
+                child: Image.asset(
+                  // استخدام الأداة Image.asset
+                  t['iconAsset'] ??
+                      'assets/ides/default.png', // تمرير المسار المخزن في قائمة tools
+                  width: 40,
+                  height: 40,
                   fit: BoxFit.contain,
                 ),
               ),

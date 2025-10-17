@@ -18,8 +18,10 @@ class Responsive {
     screenHeight = _mediaQueryData.size.height;
     blockSizeHorizontal = screenWidth / 100;
     blockSizeVertical = screenHeight / 100;
-    _safeAreaHorizontal = _mediaQueryData.padding.left + _mediaQueryData.padding.right;
-    _safeAreaVertical = _mediaQueryData.padding.top + _mediaQueryData.padding.bottom;
+    _safeAreaHorizontal =
+        _mediaQueryData.padding.left + _mediaQueryData.padding.right;
+    _safeAreaVertical =
+        _mediaQueryData.padding.top + _mediaQueryData.padding.bottom;
     safeBlockHorizontal = (screenWidth - _safeAreaHorizontal) / 100;
     safeBlockVertical = (screenHeight - _safeAreaVertical) / 100;
     textScaleFactor = _mediaQueryData.textScaleFactor;
@@ -38,7 +40,7 @@ class Responsive {
   // Responsive font size
   static double sp(double size) {
     double scaleFactor = 1.0;
-    
+
     if (screenWidth < 600) {
       // Mobile
       scaleFactor = 0.8;
@@ -55,7 +57,7 @@ class Responsive {
       // Large desktop
       scaleFactor = 1.2;
     }
-    
+
     return size * scaleFactor * (textScaleFactor > 1.0 ? 1.0 : textScaleFactor);
   }
 

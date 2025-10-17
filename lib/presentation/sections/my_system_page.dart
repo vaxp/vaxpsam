@@ -12,7 +12,7 @@ class MySystemPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final system = ref.read(systemServiceProvider);
-    
+
     return Container(
       color: macAppStoreDark,
       child: CustomScrollView(
@@ -96,10 +96,7 @@ class MySystemPage extends ConsumerWidget {
                 const SizedBox(height: 8),
                 const Text(
                   'Install packages, update system, and manage applications with ease.',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.white70,
-                  ),
+                  style: TextStyle(fontSize: 16, color: Colors.white70),
                 ),
               ],
             ),
@@ -222,7 +219,11 @@ class MySystemPage extends ConsumerWidget {
           icon: Icons.cleaning_services,
           title: 'Clean System',
           description: 'Remove unused packages and free up space',
-          onPressed: () => showConsoleStream(context, system.runAsRoot(['apt', 'autoremove', '-y'])),
+          onPressed:
+              () => showConsoleStream(
+                context,
+                system.runAsRoot(['apt', 'autoremove', '-y']),
+              ),
         ),
       ],
     );
@@ -275,20 +276,33 @@ class MySystemPage extends ConsumerWidget {
         SectionActionButton(
           icon: Icons.wine_bar,
           title: 'Install Wine',
-          description: 'Install Wine compatibility layer for Windows applications',
-          onPressed: () => showConsoleStream(context, system.installPackageByName('wine')),
+          description:
+              'Install Wine compatibility layer for Windows applications',
+          onPressed:
+              () => showConsoleStream(
+                context,
+                system.installPackageByName('wine'),
+              ),
         ),
         SectionActionButton(
           icon: Icons.apps,
           title: 'Install PlayOnLinux',
           description: 'Install PlayOnLinux frontend for Wine',
-          onPressed: () => showConsoleStream(context, system.installPackageByName('playonlinux')),
+          onPressed:
+              () => showConsoleStream(
+                context,
+                system.installPackageByName('playonlinux'),
+              ),
         ),
         SectionActionButton(
           icon: Icons.extension,
           title: 'Install Winetricks',
           description: 'Install winetricks helper for Wine configuration',
-          onPressed: () => showConsoleStream(context, system.installPackageByName('winetricks')),
+          onPressed:
+              () => showConsoleStream(
+                context,
+                system.installPackageByName('winetricks'),
+              ),
         ),
       ],
     );
@@ -322,7 +336,7 @@ class MySystemPage extends ConsumerWidget {
         );
       },
     );
-    
+
     if (pkg != null && pkg.isNotEmpty) {
       // Use the smart search functionality
       final universeEnabled = await system.isUbuntuUniverseEnabled();
@@ -336,26 +350,53 @@ class MySystemPage extends ConsumerWidget {
       // Ubuntu
       if (aptCandidate) {
         if (!universeEnabled) {
-          final ok = await _confirmEnable(context, 'Enable Ubuntu Universe?', 'Found "$pkg" in Ubuntu repositories. Enable Universe and continue?');
+          final ok = await _confirmEnable(
+            context,
+            'Enable Ubuntu Universe?',
+            'Found "$pkg" in Ubuntu repositories. Enable Universe and continue?',
+          );
           if (ok) {
             showConsoleStream(
               context,
               Stream.fromIterable([
                 ...await system.enableUbuntuUniverse().toList(),
-                ...await system.runAsRoot(['apt-get', 'update', '&&', 'apt-get', 'install', '-y', pkg]).toList(),
+                ...await system.runAsRoot([
+                  'apt-get',
+                  'update',
+                  '&&',
+                  'apt-get',
+                  'install',
+                  '-y',
+                  pkg,
+                ]).toList(),
               ]),
             );
           }
           return;
         }
-        showConsoleStream(context, system.runAsRoot(['apt-get', 'update', '&&', 'apt-get', 'install', '-y', pkg]));
+        showConsoleStream(
+          context,
+          system.runAsRoot([
+            'apt-get',
+            'update',
+            '&&',
+            'apt-get',
+            'install',
+            '-y',
+            pkg,
+          ]),
+        );
         return;
       }
 
       // Snap
       if (snapHas) {
         if (!snapAvailable) {
-          final ok = await _confirmEnable(context, 'Enable Snapd?', 'Found "$pkg" in Snap. Enable snapd and continue?');
+          final ok = await _confirmEnable(
+            context,
+            'Enable Snapd?',
+            'Found "$pkg" in Snap. Enable snapd and continue?',
+          );
           if (ok) {
             showConsoleStream(
               context,
@@ -374,20 +415,43 @@ class MySystemPage extends ConsumerWidget {
       // Flathub
       if (flatpakRef != null && flatpakRef.isNotEmpty) {
         if (!flatpakInstalled || !flathubEnabled) {
-          final ok = await _confirmEnable(context, 'Enable Flathub?', 'Found "$pkg" on Flathub. Enable Flatpak/Flathub and continue?');
+          final ok = await _confirmEnable(
+            context,
+            'Enable Flathub?',
+            'Found "$pkg" on Flathub. Enable Flatpak/Flathub and continue?',
+          );
           if (ok) {
             showConsoleStream(
               context,
               Stream.fromIterable([
-                if (!flatpakInstalled) ...await system.runAsRoot(['apt', 'update', '&&', 'apt', 'install', '-y', 'flatpak', 'gnome-software-plugin-flatpak']).toList(),
+                if (!flatpakInstalled)
+                  ...await system.runAsRoot([
+                    'apt',
+                    'update',
+                    '&&',
+                    'apt',
+                    'install',
+                    '-y',
+                    'flatpak',
+                    'gnome-software-plugin-flatpak',
+                  ]).toList(),
                 if (!flathubEnabled) ...await system.enableFlathub().toList(),
-                ...await system.runAsRoot(['flatpak', 'install', '-y', 'flathub', flatpakRef]).toList(),
+                ...await system.runAsRoot([
+                  'flatpak',
+                  'install',
+                  '-y',
+                  'flathub',
+                  flatpakRef,
+                ]).toList(),
               ]),
             );
           }
           return;
         }
-        showConsoleStream(context, system.runAsRoot(['flatpak', 'install', '-y', 'flathub', flatpakRef]));
+        showConsoleStream(
+          context,
+          system.runAsRoot(['flatpak', 'install', '-y', 'flathub', flatpakRef]),
+        );
         return;
       }
 
@@ -395,16 +459,19 @@ class MySystemPage extends ConsumerWidget {
       if (context.mounted) {
         showDialog<void>(
           context: context,
-          builder: (ctx) => AlertDialog(
-            title: const Text('Not Found'),
-            content: Text('"$pkg" was not found in Ubuntu, Snap, or Flathub.'),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(ctx).pop(),
-                child: const Text('OK'),
+          builder:
+              (ctx) => AlertDialog(
+                title: const Text('Not Found'),
+                content: Text(
+                  '"$pkg" was not found in Ubuntu, Snap, or Flathub.',
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.of(ctx).pop(),
+                    child: const Text('OK'),
+                  ),
+                ],
               ),
-            ],
-          ),
         );
       }
     }
@@ -415,29 +482,30 @@ class MySystemPage extends ConsumerWidget {
       type: FileType.custom,
       allowedExtensions: ['deb'],
     );
-    
+
     if (result != null && result.files.single.path != null) {
       final filePath = result.files.single.path!;
       final fileName = result.files.single.name;
-      
+
       final confirmed = await showDialog<bool>(
         context: context,
-        builder: (ctx) => AlertDialog(
-          title: const Text('Install .deb Package'),
-          content: Text('Install "$fileName"?'),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(ctx).pop(false),
-              child: const Text('Cancel'),
+        builder:
+            (ctx) => AlertDialog(
+              title: const Text('Install .deb Package'),
+              content: Text('Install "$fileName"?'),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.of(ctx).pop(false),
+                  child: const Text('Cancel'),
+                ),
+                ElevatedButton(
+                  onPressed: () => Navigator.of(ctx).pop(true),
+                  child: const Text('Install'),
+                ),
+              ],
             ),
-            ElevatedButton(
-              onPressed: () => Navigator.of(ctx).pop(true),
-              child: const Text('Install'),
-            ),
-          ],
-        ),
       );
-      
+
       if (confirmed == true) {
         showConsoleStream(context, system.installDebFromFile(filePath));
       }
@@ -453,9 +521,7 @@ class MySystemPage extends ConsumerWidget {
           title: const Text('Remove Package'),
           content: TextField(
             controller: controller,
-            decoration: const InputDecoration(
-              labelText: 'Package name',
-            ),
+            decoration: const InputDecoration(labelText: 'Package name'),
           ),
           actions: [
             TextButton(
@@ -470,29 +536,38 @@ class MySystemPage extends ConsumerWidget {
         );
       },
     );
-    
+
     if (pkg != null && pkg.isNotEmpty) {
-      showConsoleStream(context, system.runAsRoot(['apt', 'remove', '-y', pkg]));
+      showConsoleStream(
+        context,
+        system.runAsRoot(['apt', 'remove', '-y', pkg]),
+      );
     }
   }
 
-  Future<bool> _confirmEnable(BuildContext context, String title, String content) async {
+  Future<bool> _confirmEnable(
+    BuildContext context,
+    String title,
+    String content,
+  ) async {
     return await showDialog<bool>(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        title: Text(title),
-        content: Text(content),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(ctx).pop(false),
-            child: const Text('Cancel'),
-          ),
-          ElevatedButton(
-            onPressed: () => Navigator.of(ctx).pop(true),
-            child: const Text('Enable'),
-          ),
-        ],
-      ),
-    ) ?? false;
+          context: context,
+          builder:
+              (ctx) => AlertDialog(
+                title: Text(title),
+                content: Text(content),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.of(ctx).pop(false),
+                    child: const Text('Cancel'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () => Navigator.of(ctx).pop(true),
+                    child: const Text('Enable'),
+                  ),
+                ],
+              ),
+        ) ??
+        false;
   }
 }

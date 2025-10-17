@@ -5,5 +5,6 @@ class InstallLutrisUseCase {
   final SystemService systemService;
   InstallLutrisUseCase(this.systemService);
 
-  Stream<CommandOutputLine> call() => systemService.installPackageByName('lutris');
+  Stream<CommandOutputLine> call() =>
+      systemService.installPackageByName('lutris');
 }

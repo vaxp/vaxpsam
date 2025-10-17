@@ -16,28 +16,28 @@ class WebBackendPage extends ConsumerWidget {
     return StaticBackground(
       child: Scaffold(
         backgroundColor: Colors.transparent,
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            expandedHeight: 200,
-            floating: false,
-            pinned: true,
-            backgroundColor: macAppStoreDark,
-            flexibleSpace: FlexibleSpaceBar(
-              background: _buildHeroSection(context),
+        body: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              expandedHeight: 200,
+              floating: false,
+              pinned: true,
+              backgroundColor: macAppStoreDark,
+              flexibleSpace: FlexibleSpaceBar(
+                background: _buildHeroSection(context),
+              ),
             ),
-          ),
-          SliverToBoxAdapter(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildInstallAllSection(context, system),
-                _buildToolsGrid(context, system),
-                const SizedBox(height: 20),
-              ],
+            SliverToBoxAdapter(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildInstallAllSection(context, system),
+                  _buildToolsGrid(context, system),
+                  const SizedBox(height: 20),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
         ),
       ),
     );
@@ -96,10 +96,7 @@ class WebBackendPage extends ConsumerWidget {
                 const SizedBox(height: 8),
                 const Text(
                   '30 professional tools for backend development including Python, databases, and web servers.',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.white70,
-                  ),
+                  style: TextStyle(fontSize: 16, color: Colors.white70),
                 ),
               ],
             ),
@@ -118,11 +115,7 @@ class WebBackendPage extends ConsumerWidget {
           children: [
             Row(
               children: [
-                Icon(
-                  Icons.download,
-                  color: macAppStoreBlue,
-                  size: 24,
-                ),
+                Icon(Icons.download, color: macAppStoreBlue, size: 24),
                 const SizedBox(width: 12),
                 Expanded(
                   child: Column(
@@ -130,7 +123,9 @@ class WebBackendPage extends ConsumerWidget {
                     children: [
                       Text(
                         'Install All Backend Tools',
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        style: Theme.of(
+                          context,
+                        ).textTheme.titleMedium?.copyWith(
                           fontWeight: FontWeight.w600,
                           color: Colors.white,
                         ),
@@ -168,36 +163,145 @@ class WebBackendPage extends ConsumerWidget {
 
   Widget _buildToolsGrid(BuildContext context, system) {
     final tools = [
-      {'name': 'Python 3', 'package': 'python3', 'description': 'Popular back-end programming language (Django, Flask)'},
-      {'name': 'Pip', 'package': 'python3-pip', 'description': 'Python package manager'},
-      {'name': 'PostgreSQL Client', 'package': 'postgresql-client', 'description': 'Command-line tools for connecting to Postgres databases'},
-      {'name': 'MySQL Client', 'package': 'mysql-client', 'description': 'Command-line tools for connecting to MySQL/MariaDB databases'},
-      {'name': 'PHP CLI', 'package': 'php-cli', 'description': 'PHP command-line environment (Laravel, Symfony)'},
-      {'name': 'Ruby', 'package': 'ruby', 'description': 'Ruby on Rails: A back-end programming language'},
-      {'name': 'Rubygems', 'package': 'rubygems', 'description': 'Ruby package manager'},
+      {
+        'name': 'Python 3',
+        'package': 'python3',
+        'description': 'Popular back-end programming language (Django, Flask)',
+      },
+      {
+        'name': 'Pip',
+        'package': 'python3-pip',
+        'description': 'Python package manager',
+      },
+      {
+        'name': 'PostgreSQL Client',
+        'package': 'postgresql-client',
+        'description':
+            'Command-line tools for connecting to Postgres databases',
+      },
+      {
+        'name': 'MySQL Client',
+        'package': 'mysql-client',
+        'description':
+            'Command-line tools for connecting to MySQL/MariaDB databases',
+      },
+      {
+        'name': 'PHP CLI',
+        'package': 'php-cli',
+        'description': 'PHP command-line environment (Laravel, Symfony)',
+      },
+      {
+        'name': 'Ruby',
+        'package': 'ruby',
+        'description': 'Ruby on Rails: A back-end programming language',
+      },
+      {
+        'name': 'Rubygems',
+        'package': 'rubygems',
+        'description': 'Ruby package manager',
+      },
       {'name': 'GCC', 'package': 'gcc', 'description': 'C compiler'},
       {'name': 'G++', 'package': 'g++', 'description': 'C++ compiler'},
-      {'name': 'OpenSSL', 'package': 'openssl', 'description': 'For managing TLS/SSL certificates'},
-      {'name': 'Supervisor', 'package': 'supervisor', 'description': 'Process management system (to ensure applications remain running)'},
-      {'name': 'Redis Server', 'package': 'redis-server', 'description': 'In-memory data caching server'},
-      {'name': 'Apache2', 'package': 'apache2', 'description': 'Widely used web server'},
-      {'name': 'Nginx', 'package': 'nginx', 'description': 'Lightweight web server and reverse proxy'},
-      {'name': 'Python3-venv', 'package': 'python3-venv', 'description': 'For creating virtual Python environments'},
-      {'name': 'Uwsgi', 'package': 'uwsgi', 'description': 'Application Server for Python/Perl/PHP'},
-      {'name': 'Tmux', 'package': 'tmux', 'description': 'Terminal multiplexer for managing sessions on the server'},
-      {'name': 'Screen', 'package': 'screen', 'description': 'Alternative to Tmux for managing sessions'},
-      {'name': 'Htop', 'package': 'htop', 'description': 'Interactive process monitor (for analyzing server performance)'},
-      {'name': 'Tzdata', 'package': 'tzdata', 'description': 'Timezone data package (essential for processing times)'},
-      {'name': 'Curl', 'package': 'curl', 'description': 'For testing server connections'},
+      {
+        'name': 'OpenSSL',
+        'package': 'openssl',
+        'description': 'For managing TLS/SSL certificates',
+      },
+      {
+        'name': 'Supervisor',
+        'package': 'supervisor',
+        'description':
+            'Process management system (to ensure applications remain running)',
+      },
+      {
+        'name': 'Redis Server',
+        'package': 'redis-server',
+        'description': 'In-memory data caching server',
+      },
+      {
+        'name': 'Apache2',
+        'package': 'apache2',
+        'description': 'Widely used web server',
+      },
+      {
+        'name': 'Nginx',
+        'package': 'nginx',
+        'description': 'Lightweight web server and reverse proxy',
+      },
+      {
+        'name': 'Python3-venv',
+        'package': 'python3-venv',
+        'description': 'For creating virtual Python environments',
+      },
+      {
+        'name': 'Uwsgi',
+        'package': 'uwsgi',
+        'description': 'Application Server for Python/Perl/PHP',
+      },
+      {
+        'name': 'Tmux',
+        'package': 'tmux',
+        'description':
+            'Terminal multiplexer for managing sessions on the server',
+      },
+      {
+        'name': 'Screen',
+        'package': 'screen',
+        'description': 'Alternative to Tmux for managing sessions',
+      },
+      {
+        'name': 'Htop',
+        'package': 'htop',
+        'description':
+            'Interactive process monitor (for analyzing server performance)',
+      },
+      {
+        'name': 'Tzdata',
+        'package': 'tzdata',
+        'description': 'Timezone data package (essential for processing times)',
+      },
+      {
+        'name': 'Curl',
+        'package': 'curl',
+        'description': 'For testing server connections',
+      },
       {'name': 'Git', 'package': 'git', 'description': 'Version control'},
       {'name': 'Make', 'package': 'make', 'description': 'Build automation'},
-      {'name': 'Valgrind', 'package': 'valgrind', 'description': 'For debugging memory errors (for C/C++ code)'},
-      {'name': 'Systemd', 'package': 'systemd', 'description': 'For managing the Service Manager in Ubuntu'},
-      {'name': 'Cron', 'package': 'cron', 'description': 'For scheduling tasks'},
-      {'name': 'Locales', 'package': 'locales', 'description': 'Supports regional settings'},
-      {'name': 'Procps', 'package': 'procps', 'description': 'Process management tools'},
-      {'name': 'Netcat', 'package': 'netcat-traditional', 'description': 'For testing raw port connections'},
-      {'name': 'SSH', 'package': 'openssh-client', 'description': 'For secure connection to the server'},
+      {
+        'name': 'Valgrind',
+        'package': 'valgrind',
+        'description': 'For debugging memory errors (for C/C++ code)',
+      },
+      {
+        'name': 'Systemd',
+        'package': 'systemd',
+        'description': 'For managing the Service Manager in Ubuntu',
+      },
+      {
+        'name': 'Cron',
+        'package': 'cron',
+        'description': 'For scheduling tasks',
+      },
+      {
+        'name': 'Locales',
+        'package': 'locales',
+        'description': 'Supports regional settings',
+      },
+      {
+        'name': 'Procps',
+        'package': 'procps',
+        'description': 'Process management tools',
+      },
+      {
+        'name': 'Netcat',
+        'package': 'netcat-traditional',
+        'description': 'For testing raw port connections',
+      },
+      {
+        'name': 'SSH',
+        'package': 'openssh-client',
+        'description': 'For secure connection to the server',
+      },
     ];
 
     return Column(
@@ -236,7 +340,11 @@ class WebBackendPage extends ConsumerWidget {
                 ),
                 child: const Icon(Icons.storage, color: Colors.white),
               ),
-              onTap: () => showConsoleStream(context, system.installPackageByName(tool['package']!)),
+              onTap:
+                  () => showConsoleStream(
+                    context,
+                    system.installPackageByName(tool['package']!),
+                  ),
             );
           },
         ),
@@ -246,32 +354,71 @@ class WebBackendPage extends ConsumerWidget {
 
   void _installAllTools(BuildContext context, system) {
     final tools = [
-      'python3', 'python3-pip', 'postgresql-client', 'mysql-client', 'php-cli',
-      'ruby', 'rubygems', 'gcc', 'g++', 'openssl', 'supervisor', 'redis-server',
-      'apache2', 'nginx', 'python3-venv', 'uwsgi', 'tmux', 'screen', 'htop',
-      'tzdata', 'curl', 'git', 'make', 'valgrind', 'systemd', 'cron',
-      'locales', 'procps', 'netcat-traditional', 'openssh-client'
+      'python3',
+      'python3-pip',
+      'postgresql-client',
+      'mysql-client',
+      'php-cli',
+      'ruby',
+      'rubygems',
+      'gcc',
+      'g++',
+      'openssl',
+      'supervisor',
+      'redis-server',
+      'apache2',
+      'nginx',
+      'python3-venv',
+      'uwsgi',
+      'tmux',
+      'screen',
+      'htop',
+      'tzdata',
+      'curl',
+      'git',
+      'make',
+      'valgrind',
+      'systemd',
+      'cron',
+      'locales',
+      'procps',
+      'netcat-traditional',
+      'openssh-client',
     ];
 
     showDialog(
       context: context,
-      builder: (ctx) => AlertDialog(
-        title: const Text('Install All Backend Tools'),
-        content: Text('This will install ${tools.length} backend development tools. Continue?'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(ctx).pop(),
-            child: const Text('Cancel'),
+      builder:
+          (ctx) => AlertDialog(
+            title: const Text('Install All Backend Tools'),
+            content: Text(
+              'This will install ${tools.length} backend development tools. Continue?',
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(ctx).pop(),
+                child: const Text('Cancel'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(ctx).pop();
+                  showConsoleStream(
+                    context,
+                    system.runAsRoot([
+                      'apt',
+                      'update',
+                      '&&',
+                      'apt',
+                      'install',
+                      '-y',
+                      ...tools,
+                    ]),
+                  );
+                },
+                child: const Text('Install All'),
+              ),
+            ],
           ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.of(ctx).pop();
-              showConsoleStream(context, system.runAsRoot(['apt', 'update', '&&', 'apt', 'install', '-y', ...tools]));
-            },
-            child: const Text('Install All'),
-          ),
-        ],
-      ),
     );
   }
 }

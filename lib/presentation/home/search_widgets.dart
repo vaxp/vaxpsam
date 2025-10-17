@@ -51,11 +51,7 @@ class SearchResultsWidget extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       child: Row(
         children: [
-          Icon(
-            Icons.search,
-            color: macAppStoreBlue,
-            size: 20,
-          ),
+          Icon(Icons.search, color: macAppStoreBlue, size: 20),
           const SizedBox(width: 12),
           Expanded(
             child: Text(
@@ -109,9 +105,9 @@ class SearchResultsWidget extends StatelessWidget {
           const SizedBox(height: 8),
           Text(
             'Try searching for applications, tools, or categories',
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: macAppStoreGray,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(color: macAppStoreGray),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 16),
@@ -145,15 +141,20 @@ class SearchResultsWidget extends StatelessWidget {
       constraints: const BoxConstraints(maxHeight: 400),
       child: SingleChildScrollView(
         child: Column(
-          children: groupedResults.entries.map((entry) {
-            return _buildCategorySection(context, entry.key, entry.value);
-          }).toList(),
+          children:
+              groupedResults.entries.map((entry) {
+                return _buildCategorySection(context, entry.key, entry.value);
+              }).toList(),
         ),
       ),
     );
   }
 
-  Widget _buildCategorySection(BuildContext context, String category, List<SearchResult> categoryResults) {
+  Widget _buildCategorySection(
+    BuildContext context,
+    String category,
+    List<SearchResult> categoryResults,
+  ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -181,7 +182,7 @@ class SearchResultsWidget extends StatelessWidget {
 
   Widget _buildResultItem(BuildContext context, SearchResult result) {
     final item = result.item;
-    
+
     return Material(
       color: Colors.transparent,
       child: InkWell(
@@ -197,11 +198,7 @@ class SearchResultsWidget extends StatelessWidget {
                   color: item.color.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Icon(
-                  item.icon,
-                  color: item.color,
-                  size: 20,
-                ),
+                child: Icon(item.icon, color: item.color, size: 20),
               ),
               const SizedBox(width: 12),
               Expanded(
@@ -218,9 +215,9 @@ class SearchResultsWidget extends StatelessWidget {
                     const SizedBox(height: 2),
                     Text(
                       item.description,
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: macAppStoreGray,
-                      ),
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodySmall?.copyWith(color: macAppStoreGray),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -241,7 +238,10 @@ class SearchResultsWidget extends StatelessWidget {
               Column(
                 children: [
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 6,
+                      vertical: 2,
+                    ),
                     decoration: BoxDecoration(
                       color: macAppStoreBlue.withOpacity(0.1),
                       borderRadius: BorderRadius.circular(8),
@@ -256,11 +256,7 @@ class SearchResultsWidget extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 4),
-                  Icon(
-                    Icons.chevron_right,
-                    color: macAppStoreGray,
-                    size: 16,
-                  ),
+                  Icon(Icons.chevron_right, color: macAppStoreGray, size: 16),
                 ],
               ),
             ],
@@ -386,40 +382,49 @@ class _SearchOverlayState extends State<SearchOverlay> {
               autofocus: true,
               decoration: InputDecoration(
                 hintText: 'Search applications, tools, and categories...',
-                hintStyle: const TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+                hintStyle: const TextStyle(
+                  color: Color.fromARGB(255, 255, 255, 255),
+                ),
                 prefixIcon: const Icon(Icons.search, color: macAppStoreBlue),
-                suffixIcon: _isSearching
-                    ? const Padding(
-                        padding: EdgeInsets.all(12),
-                        child: SizedBox(
-                          width: 20,
-                          height: 20,
-                          child: CircularProgressIndicator(
-                            strokeWidth: 2,
-                            valueColor: AlwaysStoppedAnimation<Color>(macAppStoreBlue),
+                suffixIcon:
+                    _isSearching
+                        ? const Padding(
+                          padding: EdgeInsets.all(12),
+                          child: SizedBox(
+                            width: 20,
+                            height: 20,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                macAppStoreBlue,
+                              ),
+                            ),
                           ),
+                        )
+                        : IconButton(
+                          icon: const Icon(Icons.close, color: macAppStoreGray),
+                          onPressed: widget.onClose,
                         ),
-                      )
-                    : IconButton(
-                        icon: const Icon(Icons.close, color: macAppStoreGray),
-                        onPressed: widget.onClose,
-                      ),
                 border: InputBorder.none,
-                contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 12,
+                ),
               ),
               style: const TextStyle(color: Colors.white, fontSize: 16),
             ),
           ),
           // Search results
           Expanded(
-            child: _searchController.text.trim().isEmpty
-                ? _buildSearchSuggestions(context)
-                : SearchResultsWidget(
-                    results: _searchResults,
-                    query: _searchController.text.trim(),
-                    onItemTap: widget.onItemTap,
-                    onClose: widget.onClose,
-                  ),
+            child:
+                _searchController.text.trim().isEmpty
+                    ? _buildSearchSuggestions(context)
+                    : SearchResultsWidget(
+                      results: _searchResults,
+                      query: _searchController.text.trim(),
+                      onItemTap: widget.onItemTap,
+                      onClose: widget.onClose,
+                    ),
           ),
         ],
       ),
@@ -428,9 +433,22 @@ class _SearchOverlayState extends State<SearchOverlay> {
 
   Widget _buildSearchSuggestions(BuildContext context) {
     final suggestions = [
-      'Firefox', 'Steam', 'GIMP', 'VS Code', 'Git', 'Docker',
-      'KDE Plasma', 'Xfce', 'Wine', 'OBS Studio', 'Blender',
-      'Python', 'Node.js', 'Wireshark', 'htop', 'GParted'
+      'Firefox',
+      'Steam',
+      'GIMP',
+      'VS Code',
+      'Git',
+      'Docker',
+      'KDE Plasma',
+      'Xfce',
+      'Wine',
+      'OBS Studio',
+      'Blender',
+      'Python',
+      'Node.js',
+      'Wireshark',
+      'htop',
+      'GParted',
     ];
 
     return Container(
@@ -446,11 +464,7 @@ class _SearchOverlayState extends State<SearchOverlay> {
             padding: const EdgeInsets.all(16),
             child: Row(
               children: [
-                Icon(
-                  Icons.lightbulb_outline,
-                  color: macAppStoreBlue,
-                  size: 20,
-                ),
+                Icon(Icons.lightbulb_outline, color: macAppStoreBlue, size: 20),
                 const SizedBox(width: 12),
                 Text(
                   'Popular Searches',
@@ -476,30 +490,38 @@ class _SearchOverlayState extends State<SearchOverlay> {
                 Wrap(
                   spacing: 8,
                   runSpacing: 8,
-                  children: suggestions.map((suggestion) {
-                    return InkWell(
-                      onTap: () {
-                        _searchController.text = suggestion;
-                        _onSearchChanged();
-                      },
-                      borderRadius: BorderRadius.circular(16),
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                        decoration: BoxDecoration(
-                          color: macAppStoreBlue.withOpacity(0.1),
+                  children:
+                      suggestions.map((suggestion) {
+                        return InkWell(
+                          onTap: () {
+                            _searchController.text = suggestion;
+                            _onSearchChanged();
+                          },
                           borderRadius: BorderRadius.circular(16),
-                          border: Border.all(color: macAppStoreBlue.withOpacity(0.3)),
-                        ),
-                        child: Text(
-                          suggestion,
-                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: macAppStoreBlue,
-                            fontWeight: FontWeight.w500,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 6,
+                            ),
+                            decoration: BoxDecoration(
+                              color: macAppStoreBlue.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(16),
+                              border: Border.all(
+                                color: macAppStoreBlue.withOpacity(0.3),
+                              ),
+                            ),
+                            child: Text(
+                              suggestion,
+                              style: Theme.of(
+                                context,
+                              ).textTheme.bodySmall?.copyWith(
+                                color: macAppStoreBlue,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    );
-                  }).toList(),
+                        );
+                      }).toList(),
                 ),
                 const SizedBox(height: 24),
                 Text(

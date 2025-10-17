@@ -17,28 +17,28 @@ class SystemPerformancePage extends ConsumerWidget {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
-        title: const Text('System & Performance Utilities'),
-        backgroundColor: macAppStoreDark,
-        foregroundColor: Colors.white,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
+          title: const Text('System & Performance Utilities'),
+          backgroundColor: macAppStoreDark,
+          foregroundColor: Colors.white,
+          elevation: 0,
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
         ),
         body: CustomScrollView(
-        slivers: [
-          SliverToBoxAdapter(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildInstallAllSection(context, system),
-                _buildToolsSection(context, system),
-                const SizedBox(height: 20),
-              ],
+          slivers: [
+            SliverToBoxAdapter(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildInstallAllSection(context, system),
+                  _buildToolsSection(context, system),
+                  const SizedBox(height: 20),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
         ),
       ),
     );
@@ -90,8 +90,7 @@ class SystemPerformancePage extends ConsumerWidget {
             ),
           ],
         ),
-        ),
-      
+      ),
     );
   }
 

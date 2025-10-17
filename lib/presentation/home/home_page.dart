@@ -46,20 +46,19 @@
 //     SettingsPage(),
 //   ];
 
-
 //   void _toggleConsole() => setState(() => _consoleOpen = !_consoleOpen);
 //   void _toggleSearch() => setState(() => _searchOpen = !_searchOpen);
 //   void _closeSearch() => setState(() => _searchOpen = false);
 
 //   // void _onSearchItemTap(SearchableItem item) {
 //   //   _closeSearch();
-    
+
 //   //   // Navigate to the appropriate section
 //   //   final sectionIndex = _getSectionIndex(item.sectionId);
 //   //   if (sectionIndex != -1) {
 //   //     setState(() => _selectedIndex = sectionIndex);
 //   //   }
-    
+
 //   //   // If the item has a specific action, execute it
 //   //   if (item.onTap != null) {
 //   //     item.onTap!();
@@ -141,14 +140,10 @@
 //               ),
 //             ],
 //           ),
-        
+
 //         ],
 //       ),
 //     );
 //   }
-
-
-
-
 
 // }

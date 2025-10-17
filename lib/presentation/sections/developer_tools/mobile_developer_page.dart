@@ -16,28 +16,28 @@ class MobileDeveloperPage extends ConsumerWidget {
     return StaticBackground(
       child: Scaffold(
         backgroundColor: Colors.transparent,
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            expandedHeight: 200,
-            floating: false,
-            pinned: true,
-            backgroundColor: macAppStoreDark,
-            flexibleSpace: FlexibleSpaceBar(
-              background: _buildHeroSection(context),
+        body: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              expandedHeight: 200,
+              floating: false,
+              pinned: true,
+              backgroundColor: macAppStoreDark,
+              flexibleSpace: FlexibleSpaceBar(
+                background: _buildHeroSection(context),
+              ),
             ),
-          ),
-          SliverToBoxAdapter(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildInstallAllSection(context, system),
-                _buildToolsGrid(context, system),
-                const SizedBox(height: 20),
-              ],
+            SliverToBoxAdapter(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildInstallAllSection(context, system),
+                  _buildToolsGrid(context, system),
+                  const SizedBox(height: 20),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
         ),
       ),
     );
@@ -96,10 +96,7 @@ class MobileDeveloperPage extends ConsumerWidget {
                 const SizedBox(height: 8),
                 const Text(
                   '30 professional tools for Android and mobile app development including Java, ADB, and build systems.',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.white70,
-                  ),
+                  style: TextStyle(fontSize: 16, color: Colors.white70),
                 ),
               ],
             ),
@@ -118,11 +115,7 @@ class MobileDeveloperPage extends ConsumerWidget {
           children: [
             Row(
               children: [
-                Icon(
-                  Icons.download,
-                  color: macAppStoreBlue,
-                  size: 24,
-                ),
+                Icon(Icons.download, color: macAppStoreBlue, size: 24),
                 const SizedBox(width: 12),
                 Expanded(
                   child: Column(
@@ -130,7 +123,9 @@ class MobileDeveloperPage extends ConsumerWidget {
                     children: [
                       Text(
                         'Install All Mobile Developer Tools',
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        style: Theme.of(
+                          context,
+                        ).textTheme.titleMedium?.copyWith(
                           fontWeight: FontWeight.w600,
                           color: Colors.white,
                         ),
@@ -168,36 +163,141 @@ class MobileDeveloperPage extends ConsumerWidget {
 
   Widget _buildToolsGrid(BuildContext context, system) {
     final tools = [
-      {'name': 'Java JDK', 'package': 'default-jdk', 'description': 'Java development environment (essential for native Android applications)'},
-      {'name': 'Java JRE', 'package': 'default-jre', 'description': 'Java runtime environment'},
+      {
+        'name': 'Java JDK',
+        'package': 'default-jdk',
+        'description':
+            'Java development environment (essential for native Android applications)',
+      },
+      {
+        'name': 'Java JRE',
+        'package': 'default-jre',
+        'description': 'Java runtime environment',
+      },
       {'name': 'Git', 'package': 'git', 'description': 'Version control'},
-      {'name': 'Node.js', 'package': 'nodejs', 'description': 'For React Native/Ionic development'},
-      {'name': 'NPM', 'package': 'npm', 'description': 'Node.js package manager'},
-      {'name': 'Android Tools', 'package': 'android-tools-adb', 'description': 'ADB (Android Debug Bridge) tool for communicating with the device/emulator'},
-      {'name': 'Fastboot', 'package': 'android-tools-fastboot', 'description': 'Flashboot tool (for installing system images on Android devices)'},
-      {'name': 'Gradle', 'package': 'gradle', 'description': 'Java/Android application build system'},
-      {'name': 'Maven', 'package': 'maven', 'description': 'Java/Kotlin application build system'},
+      {
+        'name': 'Node.js',
+        'package': 'nodejs',
+        'description': 'For React Native/Ionic development',
+      },
+      {
+        'name': 'NPM',
+        'package': 'npm',
+        'description': 'Node.js package manager',
+      },
+      {
+        'name': 'Android Tools',
+        'package': 'android-tools-adb',
+        'description':
+            'ADB (Android Debug Bridge) tool for communicating with the device/emulator',
+      },
+      {
+        'name': 'Fastboot',
+        'package': 'android-tools-fastboot',
+        'description':
+            'Flashboot tool (for installing system images on Android devices)',
+      },
+      {
+        'name': 'Gradle',
+        'package': 'gradle',
+        'description': 'Java/Android application build system',
+      },
+      {
+        'name': 'Maven',
+        'package': 'maven',
+        'description': 'Java/Kotlin application build system',
+      },
       {'name': 'Curl', 'package': 'curl', 'description': 'For testing APIs'},
       {'name': 'Wget', 'package': 'wget', 'description': 'For downloading'},
-      {'name': 'Unzip', 'package': 'unzip', 'description': 'For unzipping the SDK and packages'},
-      {'name': 'Tar', 'package': 'tar', 'description': 'For handling file archives'},
-      {'name': 'GCC/G++', 'package': 'build-essential', 'description': 'For compiling any native code within Android applications'},
-      {'name': 'CMake', 'package': 'cmake', 'description': 'Used by the Android NDK for building native code (JNI)'},
-      {'name': 'Ninja Build', 'package': 'ninja-build', 'description': 'Rapid build system (used by Android)'},
-      {'name': 'Adb-tools', 'package': 'adb-tools', 'description': 'Additional tools for ADB'},
-      {'name': 'Valgrind', 'package': 'valgrind', 'description': 'For memory debugging (for native code)'},
-      {'name': 'Python 3', 'package': 'python3', 'description': 'For scripting and automation in the build environment'},
-      {'name': 'Pip', 'package': 'python3-pip', 'description': 'Python package manager'},
-      {'name': 'libxml2-utils', 'package': 'libxml2-utils', 'description': 'XML tools (for Android Manifest files)'},
+      {
+        'name': 'Unzip',
+        'package': 'unzip',
+        'description': 'For unzipping the SDK and packages',
+      },
+      {
+        'name': 'Tar',
+        'package': 'tar',
+        'description': 'For handling file archives',
+      },
+      {
+        'name': 'GCC/G++',
+        'package': 'build-essential',
+        'description':
+            'For compiling any native code within Android applications',
+      },
+      {
+        'name': 'CMake',
+        'package': 'cmake',
+        'description': 'Used by the Android NDK for building native code (JNI)',
+      },
+      {
+        'name': 'Ninja Build',
+        'package': 'ninja-build',
+        'description': 'Rapid build system (used by Android)',
+      },
+      {
+        'name': 'Adb-tools',
+        'package': 'adb-tools',
+        'description': 'Additional tools for ADB',
+      },
+      {
+        'name': 'Valgrind',
+        'package': 'valgrind',
+        'description': 'For memory debugging (for native code)',
+      },
+      {
+        'name': 'Python 3',
+        'package': 'python3',
+        'description': 'For scripting and automation in the build environment',
+      },
+      {
+        'name': 'Pip',
+        'package': 'python3-pip',
+        'description': 'Python package manager',
+      },
+      {
+        'name': 'libxml2-utils',
+        'package': 'libxml2-utils',
+        'description': 'XML tools (for Android Manifest files)',
+      },
       {'name': 'Vim', 'package': 'vim', 'description': 'Text editor'},
       {'name': 'Nano', 'package': 'nano', 'description': 'Text editor'},
-      {'name': 'lib32z1', 'package': 'lib32z1', 'description': '32-bit libraries (necessary for running some emulators)'},
-      {'name': 'libstdc++6', 'package': 'libstdc++6', 'description': 'Standard C++ library'},
-      {'name': 'libgl1-mesa-glx', 'package': 'libgl1-mesa-glx', 'description': 'OpenGL libraries (for emulators)'},
-      {'name': 'libtinfo5', 'package': 'libtinfo5', 'description': 'Terminal control library'},
-      {'name': 'libncurses5', 'package': 'libncurses5', 'description': 'Terminal interface library'},
-      {'name': 'libcurl4-openssl-dev', 'package': 'libcurl4-openssl-dev', 'description': 'Curl libraries for encryption'},
-      {'name': 'OpenSSL Dev', 'package': 'libssl-dev', 'description': 'OpenSSL libraries (for secure server connections)'},
+      {
+        'name': 'lib32z1',
+        'package': 'lib32z1',
+        'description':
+            '32-bit libraries (necessary for running some emulators)',
+      },
+      {
+        'name': 'libstdc++6',
+        'package': 'libstdc++6',
+        'description': 'Standard C++ library',
+      },
+      {
+        'name': 'libgl1-mesa-glx',
+        'package': 'libgl1-mesa-glx',
+        'description': 'OpenGL libraries (for emulators)',
+      },
+      {
+        'name': 'libtinfo5',
+        'package': 'libtinfo5',
+        'description': 'Terminal control library',
+      },
+      {
+        'name': 'libncurses5',
+        'package': 'libncurses5',
+        'description': 'Terminal interface library',
+      },
+      {
+        'name': 'libcurl4-openssl-dev',
+        'package': 'libcurl4-openssl-dev',
+        'description': 'Curl libraries for encryption',
+      },
+      {
+        'name': 'OpenSSL Dev',
+        'package': 'libssl-dev',
+        'description': 'OpenSSL libraries (for secure server connections)',
+      },
     ];
 
     return Column(
@@ -236,7 +336,11 @@ class MobileDeveloperPage extends ConsumerWidget {
                 ),
                 child: const Icon(Icons.phone_android, color: Colors.white),
               ),
-              onTap: () => showConsoleStream(context, system.installPackageByName(tool['package']!)),
+              onTap:
+                  () => showConsoleStream(
+                    context,
+                    system.installPackageByName(tool['package']!),
+                  ),
             );
           },
         ),
@@ -246,33 +350,71 @@ class MobileDeveloperPage extends ConsumerWidget {
 
   void _installAllTools(BuildContext context, system) {
     final tools = [
-      'default-jdk', 'default-jre', 'git', 'nodejs', 'npm', 'android-tools-adb',
-      'android-tools-fastboot', 'gradle', 'maven', 'curl', 'wget', 'unzip',
-      'tar', 'build-essential', 'cmake', 'ninja-build', 'adb-tools', 'valgrind',
-      'python3', 'python3-pip', 'libxml2-utils', 'vim', 'nano', 'lib32z1',
-      'libstdc++6', 'libgl1-mesa-glx', 'libtinfo5', 'libncurses5',
-      'libcurl4-openssl-dev', 'libssl-dev'
+      'default-jdk',
+      'default-jre',
+      'git',
+      'nodejs',
+      'npm',
+      'android-tools-adb',
+      'android-tools-fastboot',
+      'gradle',
+      'maven',
+      'curl',
+      'wget',
+      'unzip',
+      'tar',
+      'build-essential',
+      'cmake',
+      'ninja-build',
+      'adb-tools',
+      'valgrind',
+      'python3',
+      'python3-pip',
+      'libxml2-utils',
+      'vim',
+      'nano',
+      'lib32z1',
+      'libstdc++6',
+      'libgl1-mesa-glx',
+      'libtinfo5',
+      'libncurses5',
+      'libcurl4-openssl-dev',
+      'libssl-dev',
     ];
 
     showDialog(
       context: context,
-      builder: (ctx) => AlertDialog(
-        title: const Text('Install All Mobile Developer Tools'),
-        content: Text('This will install ${tools.length} mobile development tools. Continue?'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(ctx).pop(),
-            child: const Text('Cancel'),
+      builder:
+          (ctx) => AlertDialog(
+            title: const Text('Install All Mobile Developer Tools'),
+            content: Text(
+              'This will install ${tools.length} mobile development tools. Continue?',
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(ctx).pop(),
+                child: const Text('Cancel'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(ctx).pop();
+                  showConsoleStream(
+                    context,
+                    system.runAsRoot([
+                      'apt',
+                      'update',
+                      '&&',
+                      'apt',
+                      'install',
+                      '-y',
+                      ...tools,
+                    ]),
+                  );
+                },
+                child: const Text('Install All'),
+              ),
+            ],
           ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.of(ctx).pop();
-              showConsoleStream(context, system.runAsRoot(['apt', 'update', '&&', 'apt', 'install', '-y', ...tools]));
-            },
-            child: const Text('Install All'),
-          ),
-        ],
-      ),
     );
   }
 }

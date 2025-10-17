@@ -86,9 +86,10 @@ class _SystemOverviewPageState extends ConsumerState<SystemOverviewPage> {
 
       // Get desktop environment
       try {
-        final desktop = Platform.environment['XDG_CURRENT_DESKTOP'] ?? 
-                       Platform.environment['DESKTOP_SESSION'] ?? 
-                       'Unknown';
+        final desktop =
+            Platform.environment['XDG_CURRENT_DESKTOP'] ??
+            Platform.environment['DESKTOP_SESSION'] ??
+            'Unknown';
         info['DESKTOP_ENVIRONMENT'] = desktop;
       } catch (e) {
         info['DESKTOP_ERROR'] = 'Failed to get desktop environment: $e';
@@ -115,47 +116,47 @@ class _SystemOverviewPageState extends ConsumerState<SystemOverviewPage> {
     return StaticBackground(
       child: Scaffold(
         backgroundColor: Colors.transparent,
-      appBar: AppBar(
-        title: const Text('System Overview'),
-        backgroundColor: macAppStoreDark,
-        foregroundColor: Colors.white,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.refresh),
-            onPressed: _loadSystemInfo,
-            tooltip: 'Refresh Information',
+        appBar: AppBar(
+          title: const Text('System Overview'),
+          backgroundColor: macAppStoreDark,
+          foregroundColor: Colors.white,
+          elevation: 0,
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () => Navigator.of(context).pop(),
           ),
-        ],
-      ),
-      body: _isLoading
-          ? const Center(
-              child: CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(macAppStoreBlue),
-              ),
-            )
-          : CustomScrollView(
-              slivers: [
-                SliverToBoxAdapter(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _buildSystemInfoCard(),
-                      _buildKernelInfoCard(),
-                      _buildUptimeCard(),
-                      _buildDesktopInfoCard(),
-                      const SizedBox(height: 20),
-                    ],
-                  ),
-                ),
-              ],
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.refresh),
+              onPressed: _loadSystemInfo,
+              tooltip: 'Refresh Information',
             ),
+          ],
         ),
-      
+        body:
+            _isLoading
+                ? const Center(
+                  child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(macAppStoreBlue),
+                  ),
+                )
+                : CustomScrollView(
+                  slivers: [
+                    SliverToBoxAdapter(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _buildSystemInfoCard(),
+                          _buildKernelInfoCard(),
+                          _buildUptimeCard(),
+                          _buildDesktopInfoCard(),
+                          const SizedBox(height: 20),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+      ),
     );
   }
 
@@ -168,11 +169,7 @@ class _SystemOverviewPageState extends ConsumerState<SystemOverviewPage> {
           children: [
             Row(
               children: [
-                Icon(
-                  Icons.computer,
-                  color: macAppStoreBlue,
-                  size: 24,
-                ),
+                Icon(Icons.computer, color: macAppStoreBlue, size: 24),
                 const SizedBox(width: 12),
                 Text(
                   'Operating System Information',
@@ -184,10 +181,19 @@ class _SystemOverviewPageState extends ConsumerState<SystemOverviewPage> {
               ],
             ),
             const SizedBox(height: 16),
-            _buildInfoRow('Distribution', _systemInfo['PRETTY_NAME'] ?? 'Unknown'),
+            _buildInfoRow(
+              'Distribution',
+              _systemInfo['PRETTY_NAME'] ?? 'Unknown',
+            ),
             _buildInfoRow('Version', _systemInfo['VERSION_ID'] ?? 'Unknown'),
-            _buildInfoRow('Codename', _systemInfo['VERSION_CODENAME'] ?? 'Unknown'),
-            _buildInfoRow('Architecture', _systemInfo['VERSION_ID'] ?? 'Unknown'),
+            _buildInfoRow(
+              'Codename',
+              _systemInfo['VERSION_CODENAME'] ?? 'Unknown',
+            ),
+            _buildInfoRow(
+              'Architecture',
+              _systemInfo['VERSION_ID'] ?? 'Unknown',
+            ),
             if (_systemInfo.containsKey('OS_ERROR'))
               _buildErrorRow('Error', _systemInfo['OS_ERROR']!),
           ],
@@ -205,11 +211,7 @@ class _SystemOverviewPageState extends ConsumerState<SystemOverviewPage> {
           children: [
             Row(
               children: [
-                Icon(
-                  Icons.settings,
-                  color: macAppStoreBlue,
-                  size: 24,
-                ),
+                Icon(Icons.settings, color: macAppStoreBlue, size: 24),
                 const SizedBox(width: 12),
                 Text(
                   'Kernel Information',
@@ -221,7 +223,10 @@ class _SystemOverviewPageState extends ConsumerState<SystemOverviewPage> {
               ],
             ),
             const SizedBox(height: 16),
-            _buildInfoRow('Kernel Version', _systemInfo['KERNEL_VERSION'] ?? 'Unknown'),
+            _buildInfoRow(
+              'Kernel Version',
+              _systemInfo['KERNEL_VERSION'] ?? 'Unknown',
+            ),
             if (_systemInfo.containsKey('KERNEL_ERROR'))
               _buildErrorRow('Error', _systemInfo['KERNEL_ERROR']!),
           ],
@@ -239,11 +244,7 @@ class _SystemOverviewPageState extends ConsumerState<SystemOverviewPage> {
           children: [
             Row(
               children: [
-                Icon(
-                  Icons.schedule,
-                  color: macAppStoreBlue,
-                  size: 24,
-                ),
+                Icon(Icons.schedule, color: macAppStoreBlue, size: 24),
                 const SizedBox(width: 12),
                 Text(
                   'System Uptime',
@@ -273,11 +274,7 @@ class _SystemOverviewPageState extends ConsumerState<SystemOverviewPage> {
           children: [
             Row(
               children: [
-                Icon(
-                  Icons.desktop_windows,
-                  color: macAppStoreBlue,
-                  size: 24,
-                ),
+                Icon(Icons.desktop_windows, color: macAppStoreBlue, size: 24),
                 const SizedBox(width: 12),
                 Text(
                   'Desktop Environment',
@@ -289,7 +286,10 @@ class _SystemOverviewPageState extends ConsumerState<SystemOverviewPage> {
               ],
             ),
             const SizedBox(height: 16),
-            _buildInfoRow('Desktop', _systemInfo['DESKTOP_ENVIRONMENT'] ?? 'Unknown'),
+            _buildInfoRow(
+              'Desktop',
+              _systemInfo['DESKTOP_ENVIRONMENT'] ?? 'Unknown',
+            ),
             if (_systemInfo.containsKey('DESKTOP_ERROR'))
               _buildErrorRow('Error', _systemInfo['DESKTOP_ERROR']!),
           ],
@@ -317,9 +317,9 @@ class _SystemOverviewPageState extends ConsumerState<SystemOverviewPage> {
           Expanded(
             child: Text(
               value,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Colors.white,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium?.copyWith(color: Colors.white),
             ),
           ),
         ],
@@ -346,9 +346,9 @@ class _SystemOverviewPageState extends ConsumerState<SystemOverviewPage> {
           Expanded(
             child: Text(
               error,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: const Color(0xFFFF6B6B),
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium?.copyWith(color: const Color(0xFFFF6B6B)),
             ),
           ),
         ],

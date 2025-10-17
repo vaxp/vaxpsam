@@ -16,7 +16,7 @@ class DeveloperToolsPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final system = ref.read(systemServiceProvider);
-    
+
     return Container(
       color: macAppStoreDark,
       child: CustomScrollView(
@@ -97,10 +97,7 @@ class DeveloperToolsPage extends ConsumerWidget {
                 const SizedBox(height: 8),
                 const Text(
                   'Professional development tools for web development, backend services, and DevOps operations.',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.white70,
-                  ),
+                  style: TextStyle(fontSize: 16, color: Colors.white70),
                 ),
               ],
             ),
@@ -109,8 +106,6 @@ class DeveloperToolsPage extends ConsumerWidget {
       ),
     );
   }
-
-
 
   Widget _buildCategoriesGrid(BuildContext context, system) {
     return Column(
@@ -145,9 +140,10 @@ class DeveloperToolsPage extends ConsumerWidget {
                 ),
                 child: const Icon(Icons.web, color: Colors.white),
               ),
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) => const WebFrontendPage()),
-              ),
+              onTap:
+                  () => Navigator.of(context).push(
+                    MaterialPageRoute(builder: (_) => const WebFrontendPage()),
+                  ),
             ),
             AppGridCard(
               title: 'Web Back-End',
@@ -159,9 +155,10 @@ class DeveloperToolsPage extends ConsumerWidget {
                 ),
                 child: const Icon(Icons.storage, color: Colors.white),
               ),
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) => const WebBackendPage()),
-              ),
+              onTap:
+                  () => Navigator.of(context).push(
+                    MaterialPageRoute(builder: (_) => const WebBackendPage()),
+                  ),
             ),
             AppGridCard(
               title: 'DevOps / SysAdmin',
@@ -171,11 +168,17 @@ class DeveloperToolsPage extends ConsumerWidget {
                   color: const Color(0xFFFF9800),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Icon(Icons.settings_applications, color: Colors.white),
+                child: const Icon(
+                  Icons.settings_applications,
+                  color: Colors.white,
+                ),
               ),
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) => const DevOpsSysadminPage()),
-              ),
+              onTap:
+                  () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => const DevOpsSysadminPage(),
+                    ),
+                  ),
             ),
             AppGridCard(
               title: 'Mobile Developer',
@@ -187,9 +190,12 @@ class DeveloperToolsPage extends ConsumerWidget {
                 ),
                 child: const Icon(Icons.phone_android, color: Colors.white),
               ),
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) => const MobileDeveloperPage()),
-              ),
+              onTap:
+                  () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => const MobileDeveloperPage(),
+                    ),
+                  ),
             ),
             AppGridCard(
               title: 'Desktop Developer',
@@ -201,9 +207,12 @@ class DeveloperToolsPage extends ConsumerWidget {
                 ),
                 child: const Icon(Icons.desktop_windows, color: Colors.white),
               ),
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) => const DesktopDeveloperPage()),
-              ),
+              onTap:
+                  () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => const DesktopDeveloperPage(),
+                    ),
+                  ),
             ),
             AppGridCard(
               title: 'Planning & Documentation',
@@ -215,9 +224,12 @@ class DeveloperToolsPage extends ConsumerWidget {
                 ),
                 child: const Icon(Icons.description, color: Colors.white),
               ),
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) => const PlanningDocumentationPage()),
-              ),
+              onTap:
+                  () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => const PlanningDocumentationPage(),
+                    ),
+                  ),
             ),
           ],
         ),

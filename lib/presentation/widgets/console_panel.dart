@@ -20,15 +20,15 @@ class ConsolePanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      
       children: [
         Row(
-          
           children: [
-            
             IconButton(icon: const Icon(Icons.copy), onPressed: onCopy),
             IconButton(icon: const Icon(Icons.clear), onPressed: onClear),
-            IconButton(icon: Icon(isPaused ? Icons.play_arrow : Icons.pause), onPressed: onPause),
+            IconButton(
+              icon: Icon(isPaused ? Icons.play_arrow : Icons.pause),
+              onPressed: onPause,
+            ),
             const Spacer(),
             Text('Console', style: Theme.of(context).textTheme.titleMedium),
           ],
@@ -37,14 +37,14 @@ class ConsolePanel extends StatelessWidget {
         Expanded(
           child: Container(
             //Theme.of(context).colorScheme.surfaceContainerHighest,
-            color: Color( const Color.fromARGB(204, 168, 168, 168).value + 0x11000000),
+            color: Color(
+              const Color.fromARGB(204, 168, 168, 168).value + 0x11000000,
+            ),
             child: ListView.builder(
-            
               itemCount: lines.length,
               itemBuilder: (context, i) {
                 final line = lines[i];
                 return Row(
-
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
@@ -52,7 +52,6 @@ class ConsolePanel extends StatelessWidget {
                       style: TextStyle(fontSize: 12, color: Colors.grey),
                     ),
                     Expanded(
-
                       child: Text(
                         line.text,
                         style: TextStyle(

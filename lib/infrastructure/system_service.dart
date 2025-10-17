@@ -6,19 +6,22 @@ import 'package:http/http.dart' as http;
 import 'package:path/path.dart' as p;
 import '../domain/command_output_line.dart';
 
-
 class SystemService {
   /// Runs a command as root using pkexec, streaming output line-by-line.
   /// If pkexec is not available, returns a clear error message.
-  Stream<CommandOutputLine> runAsRoot(List<String> command, {Duration? timeout}) async* {
+  Stream<CommandOutputLine> runAsRoot(
+    List<String> command, {
+    Duration? timeout,
+  }) async* {
     final now = DateTime.now();
     final helper = await _detectPrivilegeHelper();
     if (helper == _PrivilegeHelper.none) {
       // Check if polkitd daemon is present to give a more accurate message.
       final polkitPresent = await _checkPolkitd();
-      final suggestion = polkitPresent
-          ? 'polkit daemon detected but pkexec (polkit utilities) is not available on this system. Install the polkit utilities package for your distro which provides pkexec, or ensure sudo is available.'
-          : 'No privilege escalation helper (pkexec or sudo) was found. Install polkit utilities (providing pkexec) or sudo.';
+      final suggestion =
+          polkitPresent
+              ? 'polkit daemon detected but pkexec (polkit utilities) is not available on this system. Install the polkit utilities package for your distro which provides pkexec, or ensure sudo is available.'
+              : 'No privilege escalation helper (pkexec or sudo) was found. Install polkit utilities (providing pkexec) or sudo.';
       yield CommandOutputLine(
         timestamp: now,
         text: suggestion,
@@ -31,32 +34,51 @@ class SystemService {
     final shellCommand = command.join(' ');
     final process = await () async {
       if (helper == _PrivilegeHelper.pkexec) {
-        return await Process.start('pkexec', ['bash', '-c', shellCommand], runInShell: false);
+        return await Process.start('pkexec', [
+          'bash',
+          '-c',
+          shellCommand,
+        ], runInShell: false);
       }
       // Fallback to sudo. Note: sudo will prompt in terminal where available.
-      return await Process.start('sudo', ['bash', '-c', shellCommand], runInShell: false);
+      return await Process.start('sudo', [
+        'bash',
+        '-c',
+        shellCommand,
+      ], runInShell: false);
     }();
     final controller = StreamController<CommandOutputLine>();
     void handleLine(String line, bool isError) {
-      controller.add(CommandOutputLine(
-        timestamp: DateTime.now(),
-        text: line,
-        isError: isError,
-      ));
+      controller.add(
+        CommandOutputLine(
+          timestamp: DateTime.now(),
+          text: line,
+          isError: isError,
+        ),
+      );
     }
-    process.stdout.transform(utf8.decoder).transform(const LineSplitter()).listen((line) {
-      handleLine(line, false);
-    });
-    process.stderr.transform(utf8.decoder).transform(const LineSplitter()).listen((line) {
-      handleLine(line, true);
-    });
+
+    process.stdout
+        .transform(utf8.decoder)
+        .transform(const LineSplitter())
+        .listen((line) {
+          handleLine(line, false);
+        });
+    process.stderr
+        .transform(utf8.decoder)
+        .transform(const LineSplitter())
+        .listen((line) {
+          handleLine(line, true);
+        });
     process.exitCode.then((code) {
-      controller.add(CommandOutputLine(
-        timestamp: DateTime.now(),
-        text: '[Process exited with code $code]',
-        isError: code != 0,
-        exitCode: code,
-      ));
+      controller.add(
+        CommandOutputLine(
+          timestamp: DateTime.now(),
+          text: '[Process exited with code $code]',
+          isError: code != 0,
+          exitCode: code,
+        ),
+      );
       controller.close();
     });
     yield* controller.stream;
@@ -64,24 +86,34 @@ class SystemService {
 
   // Install a local .deb with automatic dependency fix and retry
   Stream<CommandOutputLine> installDebFromFile(String filePath) async* {
-    yield CommandOutputLine(timestamp: DateTime.now(), text: 'Installing ' + filePath + ' ...', isError: false);
+    yield CommandOutputLine(
+      timestamp: DateTime.now(),
+      text: 'Installing $filePath ...',
+      isError: false,
+    );
     int? exitCode;
     await for (final line in runAsRoot(['dpkg', '-i', filePath])) {
       yield line;
       if (line.exitCode != null) exitCode = line.exitCode;
     }
     if (exitCode == 0) return;
-    yield CommandOutputLine(timestamp: DateTime.now(), text: 'Attempting to fix dependencies (apt-get -f install)...', isError: false);
+    yield CommandOutputLine(
+      timestamp: DateTime.now(),
+      text: 'Attempting to fix dependencies (apt-get -f install)...',
+      isError: false,
+    );
     await for (final line in runAsRoot(['apt-get', 'install', '-f', '-y'])) {
       yield line;
     }
-    yield CommandOutputLine(timestamp: DateTime.now(), text: 'Retrying dpkg install...', isError: false);
+    yield CommandOutputLine(
+      timestamp: DateTime.now(),
+      text: 'Retrying dpkg install...',
+      isError: false,
+    );
     await for (final line in runAsRoot(['dpkg', '-i', filePath])) {
       yield line;
     }
   }
-
-
 
   Future<bool> _checkPolkitd() async {
     try {
@@ -116,51 +148,94 @@ class SystemService {
   }
 
   Stream<CommandOutputLine> update() => runAsRoot(['apt-get', 'update']);
-  Stream<CommandOutputLine> upgrade() => runAsRoot(['apt-get', 'upgrade', '-y']);
-  Stream<CommandOutputLine> installPackageByName(String pkg) => runAsRoot(['apt-get', 'install', '-y', pkg]);
+  Stream<CommandOutputLine> upgrade() =>
+      runAsRoot(['apt-get', 'upgrade', '-y']);
+  Stream<CommandOutputLine> installPackageByName(String pkg) =>
+      runAsRoot(['apt-get', 'install', '-y', pkg]);
 
   // APT install with automatic dependency fix and retry
   Stream<CommandOutputLine> aptInstallWithAutofix(String packageName) async* {
     int? exitCode;
-    yield CommandOutputLine(timestamp: DateTime.now(), text: 'Running apt-get update...', isError: false);
+    yield CommandOutputLine(
+      timestamp: DateTime.now(),
+      text: 'Running apt-get update...',
+      isError: false,
+    );
     await for (final line in runAsRoot(['apt-get', 'update'])) {
       yield line;
     }
-    yield CommandOutputLine(timestamp: DateTime.now(), text: 'Installing ' + packageName + ' via APT...', isError: false);
-    await for (final line in runAsRoot(['apt-get', 'install', '-y', packageName])) {
+    yield CommandOutputLine(
+      timestamp: DateTime.now(),
+      text: 'Installing $packageName via APT...',
+      isError: false,
+    );
+    await for (final line in runAsRoot([
+      'apt-get',
+      'install',
+      '-y',
+      packageName,
+    ])) {
       yield line;
       if (line.exitCode != null) exitCode = line.exitCode;
     }
     if (exitCode == 0) return;
     // Attempt to fix broken dependencies and retry once
-    yield CommandOutputLine(timestamp: DateTime.now(), text: 'Attempting to fix dependencies (apt-get -f install)...', isError: false);
+    yield CommandOutputLine(
+      timestamp: DateTime.now(),
+      text: 'Attempting to fix dependencies (apt-get -f install)...',
+      isError: false,
+    );
     await for (final line in runAsRoot(['apt-get', 'install', '-f', '-y'])) {
       yield line;
     }
-    yield CommandOutputLine(timestamp: DateTime.now(), text: 'Retrying installation...', isError: false);
+    yield CommandOutputLine(
+      timestamp: DateTime.now(),
+      text: 'Retrying installation...',
+      isError: false,
+    );
     exitCode = null;
-    await for (final line in runAsRoot(['apt-get', 'install', '-y', packageName])) {
+    await for (final line in runAsRoot([
+      'apt-get',
+      'install',
+      '-y',
+      packageName,
+    ])) {
       yield line;
       if (line.exitCode != null) exitCode = line.exitCode;
     }
     if (exitCode == 0) return;
   }
 
-  Stream<CommandOutputLine> installDebFromUrl(String url, {String? downloadFolder}) async* {
+  Stream<CommandOutputLine> installDebFromUrl(
+    String url, {
+    String? downloadFolder,
+  }) async* {
     final folder = downloadFolder ?? '/tmp';
     final fileName = p.basename(Uri.parse(url).path);
     final filePath = p.join(folder, fileName);
-    yield CommandOutputLine(timestamp: DateTime.now(), text: 'Downloading $url...', isError: false);
+    yield CommandOutputLine(
+      timestamp: DateTime.now(),
+      text: 'Downloading $url...',
+      isError: false,
+    );
     try {
       final response = await http.get(Uri.parse(url));
       if (response.statusCode != 200) {
-        yield CommandOutputLine(timestamp: DateTime.now(), text: 'Failed to download: HTTP ${response.statusCode}', isError: true);
+        yield CommandOutputLine(
+          timestamp: DateTime.now(),
+          text: 'Failed to download: HTTP ${response.statusCode}',
+          isError: true,
+        );
         return;
       }
       final file = File(filePath);
       await file.create(recursive: true);
       await file.writeAsBytes(response.bodyBytes);
-      yield CommandOutputLine(timestamp: DateTime.now(), text: 'Downloaded to $filePath', isError: false);
+      yield CommandOutputLine(
+        timestamp: DateTime.now(),
+        text: 'Downloaded to $filePath',
+        isError: false,
+      );
 
       // Install using dpkg, then fix dependencies and retry if needed
       int? exitCode;
@@ -169,24 +244,49 @@ class SystemService {
         if (line.exitCode != null) exitCode = line.exitCode;
       }
       if (exitCode != 0) {
-        yield CommandOutputLine(timestamp: DateTime.now(), text: 'Attempting to fix dependencies (apt-get -f install)...', isError: false);
-        await for (final line in runAsRoot(['apt-get', 'install', '-f', '-y'])) {
+        yield CommandOutputLine(
+          timestamp: DateTime.now(),
+          text: 'Attempting to fix dependencies (apt-get -f install)...',
+          isError: false,
+        );
+        await for (final line in runAsRoot([
+          'apt-get',
+          'install',
+          '-f',
+          '-y',
+        ])) {
           yield line;
         }
-        yield CommandOutputLine(timestamp: DateTime.now(), text: 'Retrying dpkg install...', isError: false);
+        yield CommandOutputLine(
+          timestamp: DateTime.now(),
+          text: 'Retrying dpkg install...',
+          isError: false,
+        );
         await for (final line in runAsRoot(['dpkg', '-i', filePath])) {
           yield line;
         }
       }
       try {
         await file.delete();
-        yield CommandOutputLine(timestamp: DateTime.now(), text: 'Deleted $filePath', isError: false);
+        yield CommandOutputLine(
+          timestamp: DateTime.now(),
+          text: 'Deleted $filePath',
+          isError: false,
+        );
       } catch (_) {
         // Non-fatal if deletion fails
-        yield CommandOutputLine(timestamp: DateTime.now(), text: 'Warning: could not delete $filePath', isError: false);
+        yield CommandOutputLine(
+          timestamp: DateTime.now(),
+          text: 'Warning: could not delete $filePath',
+          isError: false,
+        );
       }
     } catch (e) {
-      yield CommandOutputLine(timestamp: DateTime.now(), text: 'Error: $e', isError: true);
+      yield CommandOutputLine(
+        timestamp: DateTime.now(),
+        text: 'Error: $e',
+        isError: true,
+      );
     }
   }
 
@@ -201,12 +301,17 @@ class SystemService {
       if (!universeEnabled) {
         yield CommandOutputLine(
           timestamp: DateTime.now(),
-          text: 'Found candidate in Ubuntu repositories, but Universe is disabled. Enable Universe to continue.',
+          text:
+              'Found candidate in Ubuntu repositories, but Universe is disabled. Enable Universe to continue.',
           isError: true,
         );
         return;
       }
-      yield CommandOutputLine(timestamp: DateTime.now(), text: 'Found in Ubuntu APT. Installing...', isError: false);
+      yield CommandOutputLine(
+        timestamp: DateTime.now(),
+        text: 'Found in Ubuntu APT. Installing...',
+        isError: false,
+      );
       await for (final line in aptInstallWithAutofix(packageName)) {
         yield line;
         if (line.exitCode != null) exitCode = line.exitCode;
@@ -221,12 +326,17 @@ class SystemService {
       if (!snapAvailable) {
         yield CommandOutputLine(
           timestamp: DateTime.now(),
-          text: 'Found in Snap, but snapd is not active. Enable snapd to continue.',
+          text:
+              'Found in Snap, but snapd is not active. Enable snapd to continue.',
           isError: true,
         );
         return;
       }
-      yield CommandOutputLine(timestamp: DateTime.now(), text: 'Found in Snap. Installing...', isError: false);
+      yield CommandOutputLine(
+        timestamp: DateTime.now(),
+        text: 'Found in Snap. Installing...',
+        isError: false,
+      );
       exitCode = null;
       await for (final line in runAsRoot(['snap', 'install', packageName])) {
         yield line;
@@ -243,14 +353,25 @@ class SystemService {
       if (!flatpakInstalled || !flathubEnabled) {
         yield CommandOutputLine(
           timestamp: DateTime.now(),
-          text: 'Found on Flathub, but Flatpak/Flathub not active. Enable them to continue.',
+          text:
+              'Found on Flathub, but Flatpak/Flathub not active. Enable them to continue.',
           isError: true,
         );
         return;
       }
-      yield CommandOutputLine(timestamp: DateTime.now(), text: 'Found on Flathub. Installing...', isError: false);
+      yield CommandOutputLine(
+        timestamp: DateTime.now(),
+        text: 'Found on Flathub. Installing...',
+        isError: false,
+      );
       exitCode = null;
-      await for (final line in runAsRoot(['flatpak', 'install', '-y', 'flathub', ref])) {
+      await for (final line in runAsRoot([
+        'flatpak',
+        'install',
+        '-y',
+        'flathub',
+        ref,
+      ])) {
         yield line;
         if (line.exitCode != null) exitCode = line.exitCode;
       }
@@ -260,41 +381,98 @@ class SystemService {
     // None succeeded or found
     yield CommandOutputLine(
       timestamp: DateTime.now(),
-      text: 'Could not find or install ' + packageName + ' in Ubuntu, Snap, or Flathub.',
+      text:
+          'Could not find or install $packageName in Ubuntu, Snap, or Flathub.',
       isError: true,
     );
   }
 
   // Enable sources
-  Stream<CommandOutputLine> enableUbuntuUniverse() => runAsRoot(['add-apt-repository', '-y', 'universe', '&&', 'apt', 'update']);
+  Stream<CommandOutputLine> enableUbuntuUniverse() => runAsRoot([
+    'add-apt-repository',
+    '-y',
+    'universe',
+    '&&',
+    'apt',
+    'update',
+  ]);
   Stream<CommandOutputLine> enableFlathub() async* {
     // First ensure flatpak is installed
     final flatpakInstalled = await _isFlatpakInstalled();
     if (!flatpakInstalled) {
-      yield CommandOutputLine(timestamp: DateTime.now(), text: 'Installing Flatpak first...', isError: false);
-      await for (final line in runAsRoot(['apt', 'update', '&&', 'apt', 'install', '-y', 'flatpak', 'gnome-software-plugin-flatpak'])) {
+      yield CommandOutputLine(
+        timestamp: DateTime.now(),
+        text: 'Installing Flatpak first...',
+        isError: false,
+      );
+      await for (final line in runAsRoot([
+        'apt',
+        'update',
+        '&&',
+        'apt',
+        'install',
+        '-y',
+        'flatpak',
+        'gnome-software-plugin-flatpak',
+      ])) {
         yield line;
       }
     }
-    
+
     // Then add flathub remote
-    yield CommandOutputLine(timestamp: DateTime.now(), text: 'Adding Flathub remote...', isError: false);
-    await for (final line in runAsRoot(['flatpak', 'remote-add', '--if-not-exists', 'flathub', 'https://flathub.org/repo/flathub.flatpakrepo'])) {
+    yield CommandOutputLine(
+      timestamp: DateTime.now(),
+      text: 'Adding Flathub remote...',
+      isError: false,
+    );
+    await for (final line in runAsRoot([
+      'flatpak',
+      'remote-add',
+      '--if-not-exists',
+      'flathub',
+      'https://flathub.org/repo/flathub.flatpakrepo',
+    ])) {
       yield line;
     }
   }
-  Stream<CommandOutputLine> enableSnapd() => runAsRoot(['apt', 'update', '&&', 'apt', 'install', '-y', 'snapd', '&&', 'systemctl', 'enable', '--now', 'snapd']);
-  
+
+  Stream<CommandOutputLine> enableSnapd() => runAsRoot([
+    'apt',
+    'update',
+    '&&',
+    'apt',
+    'install',
+    '-y',
+    'snapd',
+    '&&',
+    'systemctl',
+    'enable',
+    '--now',
+    'snapd',
+  ]);
+
   Stream<CommandOutputLine> disableFlathub() async* {
     // Check if flathub is enabled first
     final flathubEnabled = await _isFlathubEnabled();
     if (!flathubEnabled) {
-      yield CommandOutputLine(timestamp: DateTime.now(), text: 'Flathub is not enabled', isError: false);
+      yield CommandOutputLine(
+        timestamp: DateTime.now(),
+        text: 'Flathub is not enabled',
+        isError: false,
+      );
       return;
     }
-    
-    yield CommandOutputLine(timestamp: DateTime.now(), text: 'Removing Flathub remote...', isError: false);
-    await for (final line in runAsRoot(['flatpak', 'remote-delete', 'flathub'])) {
+
+    yield CommandOutputLine(
+      timestamp: DateTime.now(),
+      text: 'Removing Flathub remote...',
+      isError: false,
+    );
+    await for (final line in runAsRoot([
+      'flatpak',
+      'remote-delete',
+      'flathub',
+    ])) {
       yield line;
     }
   }
@@ -302,7 +480,12 @@ class SystemService {
   // Search helpers
   Future<bool> aptHasCandidate(String packageName) async {
     try {
-      final r = await Process.run('bash', ['-lc', 'apt-cache policy ' + _escapeShellArg(packageName) + " | awk '/Candidate:/ {print \$2}'"]);
+      final r = await Process.run('bash', [
+        '-lc',
+        'apt-cache policy ' +
+            _escapeShellArg(packageName) +
+            " | awk '/Candidate:/ {print \$2}'",
+      ]);
       final v = (r.stdout as String).toString().trim();
       return v.isNotEmpty && v != '(none)';
     } catch (_) {
@@ -314,7 +497,14 @@ class SystemService {
 
   Future<bool> snapHasPackage(String name) async {
     try {
-      final r = await Process.run('bash', ['-lc', 'snap find ' + _escapeShellArg(name) + " | awk '{print \$1}' | grep -x " + _escapeShellArg(name) + ' || true']);
+      final r = await Process.run('bash', [
+        '-lc',
+        'snap find ' +
+            _escapeShellArg(name) +
+            " | awk '{print \$1}' | grep -x " +
+            _escapeShellArg(name) +
+            ' || true',
+      ]);
       return (r.stdout as String).toString().trim().isNotEmpty;
     } catch (_) {
       return false;
@@ -331,7 +521,7 @@ class SystemService {
     try {
       final result = await Process.run('bash', [
         '-lc',
-        'grep -R "^deb .* universe" /etc/apt/sources.list /etc/apt/sources.list.d 2>/dev/null | grep -v "^#" | head -n 1'
+        'grep -R "^deb .* universe" /etc/apt/sources.list /etc/apt/sources.list.d 2>/dev/null | grep -v "^#" | head -n 1',
       ]);
       return (result.stdout as String).toString().trim().isNotEmpty;
     } catch (_) {
@@ -341,7 +531,10 @@ class SystemService {
 
   Future<bool> _isFlatpakInstalled() async {
     try {
-      final r = await Process.run('bash', ['-lc', 'command -v flatpak >/dev/null 2>&1; echo \$?']);
+      final r = await Process.run('bash', [
+        '-lc',
+        'command -v flatpak >/dev/null 2>&1; echo \$?',
+      ]);
       return (r.stdout as String).toString().trim() == '0';
     } catch (_) {
       return false;
@@ -353,9 +546,12 @@ class SystemService {
       // First check if flatpak is installed
       final flatpakInstalled = await _isFlatpakInstalled();
       if (!flatpakInstalled) return false;
-      
+
       // Check if flathub remote exists
-      final r = await Process.run('bash', ['-lc', 'flatpak remote-list 2>/dev/null | grep -q "^flathub\\s" && echo "true" || echo "false"']);
+      final r = await Process.run('bash', [
+        '-lc',
+        'flatpak remote-list 2>/dev/null | grep -q "^flathub\\s" && echo "true" || echo "false"',
+      ]);
       return (r.stdout as String).toString().trim() == 'true';
     } catch (_) {
       return false;
@@ -367,9 +563,12 @@ class SystemService {
       // First check if flathub is enabled
       final flathubEnabled = await _isFlathubEnabled();
       if (!flathubEnabled) return null;
-      
+
       // Search for the package in flathub
-      final r = await Process.run('bash', ['-lc', 'flatpak search --columns=ref ' + _escapeShellArg(query) + ' 2>/dev/null | grep -v "^Ref" | head -n 1']);
+      final r = await Process.run('bash', [
+        '-lc',
+        'flatpak search --columns=ref ${_escapeShellArg(query)} 2>/dev/null | grep -v "^Ref" | head -n 1',
+      ]);
       final ref = (r.stdout as String).toString().split('\n').first.trim();
       if (ref.isEmpty || ref == 'Ref') return null; // handle header-only output
       return ref;
@@ -380,7 +579,10 @@ class SystemService {
 
   Future<bool> _isSnapAvailable() async {
     try {
-      final r = await Process.run('bash', ['-lc', 'command -v snap >/dev/null 2>&1; echo \$?']);
+      final r = await Process.run('bash', [
+        '-lc',
+        'command -v snap >/dev/null 2>&1; echo \$?',
+      ]);
       return (r.stdout as String).toString().trim() == '0';
     } catch (_) {
       return false;
@@ -388,7 +590,7 @@ class SystemService {
   }
 
   String _escapeShellArg(String s) {
-    return "'" + s.replaceAll("'", "'\\''") + "'";
+    return "'${s.replaceAll("'", "'\\''")}'";
   }
 
   // Desktop Environment Management Methods
@@ -402,7 +604,7 @@ class SystemService {
       // Check if the main meta-package is installed
       final mainPackage = packages.first;
       final result = await Process.run('dpkg', ['-l', mainPackage]);
-      
+
       // Check if package is installed (status starts with 'ii')
       return result.stdout.toString().contains('ii  $mainPackage');
     } catch (_) {
@@ -414,9 +616,12 @@ class SystemService {
   Future<String?> getCurrentDesktopEnvironment() async {
     try {
       // Check XDG_CURRENT_DESKTOP environment variable
-      final result = await Process.run('bash', ['-c', 'echo \$XDG_CURRENT_DESKTOP']);
+      final result = await Process.run('bash', [
+        '-c',
+        'echo \$XDG_CURRENT_DESKTOP',
+      ]);
       final currentDE = result.stdout.toString().trim().toLowerCase();
-      
+
       if (currentDE.isNotEmpty && currentDE != '\$XDG_CURRENT_DESKTOP') {
         return _normalizeDesktopEnvironmentName(currentDE);
       }
@@ -431,7 +636,10 @@ class SystemService {
       final mateResult = await Process.run('pgrep', ['-f', 'mate-session']);
       if (mateResult.exitCode == 0) return 'mate';
 
-      final cinnamonResult = await Process.run('pgrep', ['-f', 'cinnamon-session']);
+      final cinnamonResult = await Process.run('pgrep', [
+        '-f',
+        'cinnamon-session',
+      ]);
       if (cinnamonResult.exitCode == 0) return 'cinnamon';
 
       return 'unknown';
@@ -441,10 +649,14 @@ class SystemService {
   }
 
   /// Installs a complete desktop environment
-  Stream<CommandOutputLine> installDesktopEnvironment(String deId, List<String> packages) async* {
+  Stream<CommandOutputLine> installDesktopEnvironment(
+    String deId,
+    List<String> packages,
+  ) async* {
     yield CommandOutputLine(
       timestamp: DateTime.now(),
-      text: 'Installing ${_getDesktopEnvironmentName(deId)} desktop environment...',
+      text:
+          'Installing ${_getDesktopEnvironmentName(deId)} desktop environment...',
       isError: false,
     );
 
@@ -454,7 +666,7 @@ class SystemService {
       text: 'Updating package lists...',
       isError: false,
     );
-    
+
     await for (final line in runAsRoot(['apt-get', 'update'])) {
       yield line;
     }
@@ -467,7 +679,12 @@ class SystemService {
       isError: false,
     );
 
-    await for (final line in runAsRoot(['apt-get', 'install', '-y', ...packages])) {
+    await for (final line in runAsRoot([
+      'apt-get',
+      'install',
+      '-y',
+      ...packages,
+    ])) {
       yield line;
     }
 
@@ -482,13 +699,14 @@ class SystemService {
   Stream<CommandOutputLine> switchDesktopEnvironment(String deId) async* {
     yield CommandOutputLine(
       timestamp: DateTime.now(),
-      text: 'Switching to ${_getDesktopEnvironmentName(deId)} desktop environment...',
+      text:
+          'Switching to ${_getDesktopEnvironmentName(deId)} desktop environment...',
       isError: false,
     );
 
     // Set the desktop environment for the current user
     final displayManager = _getDisplayManagerForDE(deId);
-    
+
     yield CommandOutputLine(
       timestamp: DateTime.now(),
       text: 'Configuring display manager: $displayManager',
@@ -496,12 +714,21 @@ class SystemService {
     );
 
     // Enable the appropriate display manager
-    await for (final line in runAsRoot(['systemctl', 'enable', displayManager])) {
+    await for (final line in runAsRoot([
+      'systemctl',
+      'enable',
+      displayManager,
+    ])) {
       yield line;
     }
 
     // Set desktop environment session
-    await for (final line in runAsRoot(['update-alternatives', '--set', 'x-session-manager', _getSessionManagerForDE(deId)])) {
+    await for (final line in runAsRoot([
+      'update-alternatives',
+      '--set',
+      'x-session-manager',
+      _getSessionManagerForDE(deId),
+    ])) {
       yield line;
     }
 
@@ -512,16 +739,25 @@ class SystemService {
     );
 
     // Reboot the system
-    await for (final line in runAsRoot(['shutdown', '-r', '+1', 'Desktop environment switch'])) {
+    await for (final line in runAsRoot([
+      'shutdown',
+      '-r',
+      '+1',
+      'Desktop environment switch',
+    ])) {
       yield line;
     }
   }
 
   /// Removes a desktop environment completely
-  Stream<CommandOutputLine> removeDesktopEnvironment(String deId, List<String> packages) async* {
+  Stream<CommandOutputLine> removeDesktopEnvironment(
+    String deId,
+    List<String> packages,
+  ) async* {
     yield CommandOutputLine(
       timestamp: DateTime.now(),
-      text: 'Removing ${_getDesktopEnvironmentName(deId)} desktop environment...',
+      text:
+          'Removing ${_getDesktopEnvironmentName(deId)} desktop environment...',
       isError: false,
     );
 
@@ -533,7 +769,13 @@ class SystemService {
       isError: false,
     );
 
-    await for (final line in runAsRoot(['apt-get', 'remove', '--purge', '-y', ...packages])) {
+    await for (final line in runAsRoot([
+      'apt-get',
+      'remove',
+      '--purge',
+      '-y',
+      ...packages,
+    ])) {
       yield line;
     }
 
@@ -566,19 +808,19 @@ class SystemService {
       case 'kde':
         return [
           // تم استبدال 'kubuntu-desktop' بـ حزم البلازما الأساسية
-          'plasma-desktop',     // سطح المكتب الأساسي
-          'plasma-workspace',   // مساحة العمل (الـ Shell)
-          'sddm',               // مدير العرض (Display Manager)
-          'dolphin',            // مدير الملفات
-          'konsole',            // الطرفية
-          'systemsettings',     // الإعدادات
+          'plasma-desktop', // سطح المكتب الأساسي
+          'plasma-workspace', // مساحة العمل (الـ Shell)
+          'sddm', // مدير العرض (Display Manager)
+          'dolphin', // مدير الملفات
+          'konsole', // الطرفية
+          'systemsettings', // الإعدادات
         ];
       case 'xfce':
         return [
           // تم استبدال 'xubuntu-desktop' بـ حزم Xfce الأساسية
           'xfce4',
-          'xfwm4',              // مدير النوافذ (Window Manager) - مهم جداً
-          'xfce4-session',      // مدير الجلسات (Session Manager) - مهم جداً
+          'xfwm4', // مدير النوافذ (Window Manager) - مهم جداً
+          'xfce4-session', // مدير الجلسات (Session Manager) - مهم جداً
           'thunar',
           'xfce4-terminal',
           'lightdm',
@@ -587,23 +829,23 @@ class SystemService {
       case 'mate':
         return [
           // تم استبدال 'ubuntu-mate-desktop' بـ حزم MATE الأساسية
-          'mate-core',          // الحزمة الأساسية للواجهة
+          'mate-core', // الحزمة الأساسية للواجهة
           'mate-session-manager', // لإدارة الجلسات
           'caja',
           'mate-terminal',
-          'lightdm',            // يفضل lightdm ليتوافق مع باقي البيئات الخفيفة
+          'lightdm', // يفضل lightdm ليتوافق مع باقي البيئات الخفيفة
           'mate-control-center',
         ];
       case 'cinnamon':
         return [
           // تم استبدال 'cinnamon-desktop-environment' بـ حزم Cinnamon الأساسية
           'cinnamon',
-          'cinnamon-session',   // مدير الجلسات
+          'cinnamon-session', // مدير الجلسات
           'nemo',
           'gnome-terminal',
-          'lightdm',            // استخدام LightDM بدلاً من MDM أو غيره للاتساق
+          'lightdm', // استخدام LightDM بدلاً من MDM أو غيره للاتساق
           'cinnamon-control-center',
-          'muffin',             // مدير النوافذ لـ Cinnamon
+          'muffin', // مدير النوافذ لـ Cinnamon
         ];
       default:
         return [];
@@ -657,7 +899,9 @@ class SystemService {
 
   String _normalizeDesktopEnvironmentName(String deName) {
     final normalized = deName.toLowerCase();
-    if (normalized.contains('kde') || normalized.contains('plasma')) return 'kde';
+    if (normalized.contains('kde') || normalized.contains('plasma')) {
+      return 'kde';
+    }
     if (normalized.contains('xfce')) return 'xfce';
     if (normalized.contains('mate')) return 'mate';
     if (normalized.contains('cinnamon')) return 'cinnamon';
@@ -669,24 +913,34 @@ class SystemService {
   /// Gets all system services
   Future<List<SystemServiceInfo>> getAllSystemServices() async {
     try {
-      final result = await Process.run('systemctl', ['list-units', '--type=service', '--no-pager']);
+      final result = await Process.run('systemctl', [
+        'list-units',
+        '--type=service',
+        '--no-pager',
+      ]);
       final lines = result.stdout.toString().split('\n');
       final services = <SystemServiceInfo>[];
 
       for (final line in lines) {
-        if (line.trim().isEmpty || line.startsWith('UNIT') || line.startsWith('●')) continue;
-        
+        if (line.trim().isEmpty ||
+            line.startsWith('UNIT') ||
+            line.startsWith('●')) {
+          continue;
+        }
+
         final parts = line.trim().split(RegExp(r'\s+'));
         if (parts.length >= 4) {
           final name = parts[0];
           final status = parts[2];
           final description = parts.sublist(3).join(' ');
-          
-          services.add(SystemServiceInfo(
-            name: name,
-            description: description,
-            status: status,
-          ));
+
+          services.add(
+            SystemServiceInfo(
+              name: name,
+              description: description,
+              status: status,
+            ),
+          );
         }
       }
 
@@ -700,14 +954,18 @@ class SystemService {
   Future<bool> isServiceRunning(String serviceName) async {
     try {
       final result = await Process.run('systemctl', ['is-active', serviceName]);
-      return result.exitCode == 0 && result.stdout.toString().trim() == 'active';
+      return result.exitCode == 0 &&
+          result.stdout.toString().trim() == 'active';
     } catch (_) {
       return false;
     }
   }
 
   /// Controls a system service (start, stop, restart, enable, disable)
-  Stream<CommandOutputLine> controlService(String serviceName, String action) async* {
+  Stream<CommandOutputLine> controlService(
+    String serviceName,
+    String action,
+  ) async* {
     yield CommandOutputLine(
       timestamp: DateTime.now(),
       text: '${action.toUpperCase()} service: $serviceName',
@@ -746,7 +1004,7 @@ class SystemService {
 
     yield CommandOutputLine(
       timestamp: DateTime.now(),
-      text: 'Service $serviceName ${action} completed',
+      text: 'Service $serviceName $action completed',
       isError: false,
     );
   }
@@ -754,7 +1012,13 @@ class SystemService {
   /// Gets logs for a specific service
   Future<String> getServiceLogs(String serviceName) async {
     try {
-      final result = await Process.run('journalctl', ['-u', serviceName, '--no-pager', '-n', '100']);
+      final result = await Process.run('journalctl', [
+        '-u',
+        serviceName,
+        '--no-pager',
+        '-n',
+        '100',
+      ]);
       return result.stdout.toString();
     } catch (_) {
       return 'Unable to retrieve logs for $serviceName';
@@ -878,7 +1142,17 @@ class SystemService {
     }
 
     // Clean old log files
-    await for (final line in runAsRoot(['find', '/var/log', '-type', 'f', '-name', '*.log', '-mtime', '+30', '-delete'])) {
+    await for (final line in runAsRoot([
+      'find',
+      '/var/log',
+      '-type',
+      'f',
+      '-name',
+      '*.log',
+      '-mtime',
+      '+30',
+      '-delete',
+    ])) {
       yield line;
     }
 
@@ -897,7 +1171,11 @@ class SystemService {
       isError: false,
     );
 
-    await for (final line in runAsRoot(['logrotate', '-f', '/etc/logrotate.conf'])) {
+    await for (final line in runAsRoot([
+      'logrotate',
+      '-f',
+      '/etc/logrotate.conf',
+    ])) {
       yield line;
     }
 
@@ -1021,7 +1299,14 @@ class SystemService {
     );
 
     // Try lspci first
-    await for (final line in runAsRoot(['lspci', '-nn', '|', 'grep', '-i', 'vga'])) {
+    await for (final line in runAsRoot([
+      'lspci',
+      '-nn',
+      '|',
+      'grep',
+      '-i',
+      'vga',
+    ])) {
       yield line;
     }
 
@@ -1068,7 +1353,11 @@ class SystemService {
 
     // Try nvidia-smi for NVIDIA GPUs
     try {
-      await for (final line in runAsRoot(['nvidia-smi', '--query-gpu=utilization.gpu,memory.used,memory.total,temperature.gpu', '--format=csv'])) {
+      await for (final line in runAsRoot([
+        'nvidia-smi',
+        '--query-gpu=utilization.gpu,memory.used,memory.total,temperature.gpu',
+        '--format=csv',
+      ])) {
         yield line;
       }
     } catch (_) {
@@ -1108,7 +1397,11 @@ class SystemService {
     );
 
     try {
-      await for (final line in runAsRoot(['nvidia-smi', '--query-gpu=memory.used,memory.total,memory.free', '--format=csv'])) {
+      await for (final line in runAsRoot([
+        'nvidia-smi',
+        '--query-gpu=memory.used,memory.total,memory.free',
+        '--format=csv',
+      ])) {
         yield line;
       }
     } catch (_) {
@@ -1135,7 +1428,11 @@ class SystemService {
     );
 
     try {
-      await for (final line in runAsRoot(['nvidia-smi', '--query-gpu=temperature.gpu', '--format=csv'])) {
+      await for (final line in runAsRoot([
+        'nvidia-smi',
+        '--query-gpu=temperature.gpu',
+        '--format=csv',
+      ])) {
         yield line;
       }
     } catch (_) {
@@ -1165,7 +1462,14 @@ class SystemService {
       yield line;
     }
 
-    await for (final line in runAsRoot(['apt', 'install', '-y', 'nvidia-driver-460', 'nvidia-smi', 'nvidia-utils-460'])) {
+    await for (final line in runAsRoot([
+      'apt',
+      'install',
+      '-y',
+      'nvidia-driver-460',
+      'nvidia-smi',
+      'nvidia-utils-460',
+    ])) {
       yield line;
     }
 
@@ -1188,7 +1492,14 @@ class SystemService {
       yield line;
     }
 
-    await for (final line in runAsRoot(['apt', 'install', '-y', 'radeontop', 'mesa-utils', 'glxinfo'])) {
+    await for (final line in runAsRoot([
+      'apt',
+      'install',
+      '-y',
+      'radeontop',
+      'mesa-utils',
+      'glxinfo',
+    ])) {
       yield line;
     }
 
@@ -1211,7 +1522,14 @@ class SystemService {
       yield line;
     }
 
-    await for (final line in runAsRoot(['apt', 'install', '-y', 'intel-gpu-tools', 'mesa-utils', 'glxinfo'])) {
+    await for (final line in runAsRoot([
+      'apt',
+      'install',
+      '-y',
+      'intel-gpu-tools',
+      'mesa-utils',
+      'glxinfo',
+    ])) {
       yield line;
     }
 
@@ -1234,7 +1552,15 @@ class SystemService {
       yield line;
     }
 
-    await for (final line in runAsRoot(['apt', 'install', '-y', 'mesa-utils', 'glxinfo', 'lspci', 'pciutils'])) {
+    await for (final line in runAsRoot([
+      'apt',
+      'install',
+      '-y',
+      'mesa-utils',
+      'glxinfo',
+      'lspci',
+      'pciutils',
+    ])) {
       yield line;
     }
 
@@ -1278,15 +1604,15 @@ class SystemService {
   /// Gets parsed GPU usage data
   Future<Map<String, dynamic>> getParsedGPUUsage() async {
     final data = <String, dynamic>{};
-    
+
     try {
       // Try NVIDIA first
       if (await isNvidiaToolsAvailable()) {
         final result = await Process.run('nvidia-smi', [
           '--query-gpu=name,utilization.gpu,memory.used,memory.total,temperature.gpu,power.draw',
-          '--format=csv,noheader,nounits'
+          '--format=csv,noheader,nounits',
         ]);
-        
+
         if (result.exitCode == 0) {
           final lines = result.stdout.toString().trim().split('\n');
           if (lines.isNotEmpty) {
@@ -1299,9 +1625,13 @@ class SystemService {
               data['memoryTotal'] = int.tryParse(parts[3].trim()) ?? 0;
               data['temperature'] = int.tryParse(parts[4].trim()) ?? 0;
               data['powerDraw'] = double.tryParse(parts[5].trim()) ?? 0.0;
-              data['memoryPercent'] = data['memoryTotal'] > 0 
-                  ? ((data['memoryUsed'] as int) / (data['memoryTotal'] as int) * 100).round()
-                  : 0;
+              data['memoryPercent'] =
+                  data['memoryTotal'] > 0
+                      ? ((data['memoryUsed'] as int) /
+                              (data['memoryTotal'] as int) *
+                              100)
+                          .round()
+                      : 0;
             }
           }
         }
@@ -1313,7 +1643,7 @@ class SystemService {
           final output = result.stdout.toString();
           data['vendor'] = 'amd';
           data['name'] = 'AMD GPU';
-          
+
           // Parse radeontop output for detailed info
           final lines = output.split('\n');
           for (final line in lines) {
@@ -1321,7 +1651,8 @@ class SystemService {
             if (line.contains('GPU') && line.contains('%')) {
               final match = RegExp(r'(\d+(?:\.\d+)?)%').firstMatch(line);
               if (match != null) {
-                data['utilization'] = double.tryParse(match.group(1)!)?.round() ?? 0;
+                data['utilization'] =
+                    double.tryParse(match.group(1)!)?.round() ?? 0;
               }
             }
             // Look for memory usage
@@ -1330,9 +1661,13 @@ class SystemService {
               if (match != null) {
                 data['memoryUsed'] = int.tryParse(match.group(1)!) ?? 0;
                 data['memoryTotal'] = int.tryParse(match.group(2)!) ?? 0;
-                data['memoryPercent'] = data['memoryTotal'] > 0 
-                    ? ((data['memoryUsed'] as int) / (data['memoryTotal'] as int) * 100).round()
-                    : 0;
+                data['memoryPercent'] =
+                    data['memoryTotal'] > 0
+                        ? ((data['memoryUsed'] as int) /
+                                (data['memoryTotal'] as int) *
+                                100)
+                            .round()
+                        : 0;
               }
             }
             // Look for temperature
@@ -1343,7 +1678,7 @@ class SystemService {
               }
             }
           }
-          
+
           data['utilization'] = data['utilization'] ?? 0;
           data['memoryUsed'] = data['memoryUsed'] ?? 0;
           data['memoryTotal'] = data['memoryTotal'] ?? 0;
@@ -1359,7 +1694,7 @@ class SystemService {
           final output = result.stdout.toString();
           data['vendor'] = 'intel';
           data['name'] = 'Intel GPU';
-          
+
           // Parse intel_gpu_top output
           final lines = output.split('\n');
           for (final line in lines) {
@@ -1367,7 +1702,8 @@ class SystemService {
             if (line.contains('Render/3D') || line.contains('GPU')) {
               final match = RegExp(r'(\d+(?:\.\d+)?)%').firstMatch(line);
               if (match != null) {
-                data['utilization'] = double.tryParse(match.group(1)!)?.round() ?? 0;
+                data['utilization'] =
+                    double.tryParse(match.group(1)!)?.round() ?? 0;
               }
             }
             // Look for memory usage
@@ -1376,9 +1712,13 @@ class SystemService {
               if (match != null) {
                 data['memoryUsed'] = int.tryParse(match.group(1)!) ?? 0;
                 data['memoryTotal'] = int.tryParse(match.group(2)!) ?? 0;
-                data['memoryPercent'] = data['memoryTotal'] > 0 
-                    ? ((data['memoryUsed'] as int) / (data['memoryTotal'] as int) * 100).round()
-                    : 0;
+                data['memoryPercent'] =
+                    data['memoryTotal'] > 0
+                        ? ((data['memoryUsed'] as int) /
+                                (data['memoryTotal'] as int) *
+                                100)
+                            .round()
+                        : 0;
               }
             }
             // Look for temperature
@@ -1389,7 +1729,7 @@ class SystemService {
               }
             }
           }
-          
+
           data['utilization'] = data['utilization'] ?? 0;
           data['memoryUsed'] = data['memoryUsed'] ?? 0;
           data['memoryTotal'] = data['memoryTotal'] ?? 0;
@@ -1420,81 +1760,101 @@ class SystemService {
       data['vendor'] = 'error';
       data['error'] = 'Error retrieving GPU data: $e';
     }
-    
+
     return data;
   }
 
   /// Gets CPU information and usage
   Future<Map<String, dynamic>> getCPUInfo() async {
     final data = <String, dynamic>{};
-    
+
     try {
       // Get CPU model
-      final cpuResult = await Process.run('bash', ['-c', 'cat /proc/cpuinfo | grep "model name" | head -1 | cut -d: -f2']);
+      final cpuResult = await Process.run('bash', [
+        '-c',
+        'cat /proc/cpuinfo | grep "model name" | head -1 | cut -d: -f2',
+      ]);
       if (cpuResult.exitCode == 0) {
         data['name'] = cpuResult.stdout.toString().trim();
       }
-      
+
       // Get CPU usage
-      final usageResult = await Process.run('bash', ['-c', 'top -bn1 | grep "Cpu(s)" | awk \'{print \$2}\' | cut -d% -f1']);
+      final usageResult = await Process.run('bash', [
+        '-c',
+        'top -bn1 | grep "Cpu(s)" | awk \'{print \$2}\' | cut -d% -f1',
+      ]);
       if (usageResult.exitCode == 0) {
-        data['usage'] = double.tryParse(usageResult.stdout.toString().trim()) ?? 0.0;
+        data['usage'] =
+            double.tryParse(usageResult.stdout.toString().trim()) ?? 0.0;
       }
-      
+
       // Get CPU temperature (if available)
-      final tempResult = await Process.run('bash', ['-c', 'cat /sys/class/thermal/thermal_zone*/temp 2>/dev/null | head -1']);
+      final tempResult = await Process.run('bash', [
+        '-c',
+        'cat /sys/class/thermal/thermal_zone*/temp 2>/dev/null | head -1',
+      ]);
       if (tempResult.exitCode == 0) {
         final temp = int.tryParse(tempResult.stdout.toString().trim());
         if (temp != null) {
-          data['temperature'] = (temp / 1000).round(); // Convert from millidegrees
+          data['temperature'] =
+              (temp / 1000).round(); // Convert from millidegrees
         }
       }
-      
+
       // Get CPU cores
       final coresResult = await Process.run('bash', ['-c', 'nproc']);
       if (coresResult.exitCode == 0) {
         data['cores'] = int.tryParse(coresResult.stdout.toString().trim()) ?? 0;
       }
-      
+
       // Get CPU frequency
-      final freqResult = await Process.run('bash', ['-c', 'cat /proc/cpuinfo | grep "cpu MHz" | head -1 | cut -d: -f2']);
+      final freqResult = await Process.run('bash', [
+        '-c',
+        'cat /proc/cpuinfo | grep "cpu MHz" | head -1 | cut -d: -f2',
+      ]);
       if (freqResult.exitCode == 0) {
-        data['frequency'] = double.tryParse(freqResult.stdout.toString().trim()) ?? 0.0;
+        data['frequency'] =
+            double.tryParse(freqResult.stdout.toString().trim()) ?? 0.0;
       }
-      
     } catch (e) {
       data['error'] = 'Error retrieving CPU data: $e';
     }
-    
+
     return data;
   }
 
   /// Gets integrated graphics information
   Future<Map<String, dynamic>> getIntegratedGraphicsInfo() async {
     final data = <String, dynamic>{};
-    
+
     try {
       // Look for integrated graphics in lspci output
-      final result = await Process.run('bash', ['-c', 'lspci | grep -i "vga\|display" | grep -i "intel\|amd"']);
+      final result = await Process.run('bash', [
+        '-c',
+        'lspci | grep -i "vga|display" | grep -i "intel|amd"',
+      ]);
       if (result.exitCode == 0) {
         final output = result.stdout.toString().trim();
         if (output.isNotEmpty) {
           data['name'] = output;
-          data['vendor'] = output.toLowerCase().contains('intel') ? 'intel' : 'amd';
+          data['vendor'] =
+              output.toLowerCase().contains('intel') ? 'intel' : 'amd';
           data['type'] = 'integrated';
         }
       }
-      
+
       // Try to get more detailed info
-      final detailedResult = await Process.run('bash', ['-c', 'lspci -v | grep -A 10 -i "vga\|display"']);
+      final detailedResult = await Process.run('bash', [
+        '-c',
+        'lspci -v | grep -A 10 -i "vga|display"',
+      ]);
       if (detailedResult.exitCode == 0) {
         data['details'] = detailedResult.stdout.toString().trim();
       }
-      
     } catch (e) {
       data['error'] = 'Error retrieving integrated graphics data: $e';
     }
-    
+
     return data;
   }
 }

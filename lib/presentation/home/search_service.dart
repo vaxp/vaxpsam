@@ -25,7 +25,9 @@ class SearchableItem {
     this.onTap,
   });
 
-  String get searchableText => '$title $description $category $packageName ${tags.join(' ')}'.toLowerCase();
+  String get searchableText =>
+      '$title $description $category $packageName ${tags.join(' ')}'
+          .toLowerCase();
 }
 
 class SearchResult {
@@ -623,8 +625,9 @@ class SearchService {
     if (query.trim().isEmpty) return [];
 
     final normalizedQuery = query.toLowerCase().trim();
-    final queryTerms = normalizedQuery.split(' ').where((term) => term.isNotEmpty).toList();
-    
+    final queryTerms =
+        normalizedQuery.split(' ').where((term) => term.isNotEmpty).toList();
+
     final results = <SearchResult>[];
 
     for (final item in _allItems) {
@@ -673,17 +676,19 @@ class SearchService {
       }
 
       if (score > 0) {
-        results.add(SearchResult(
-          item: item,
-          score: score,
-          matchedTerms: matchedTerms.toSet().toList(),
-        ));
+        results.add(
+          SearchResult(
+            item: item,
+            score: score,
+            matchedTerms: matchedTerms.toSet().toList(),
+          ),
+        );
       }
     }
 
     // Sort by score (highest first)
     results.sort((a, b) => b.score.compareTo(a.score));
-    
+
     return results;
   }
 

@@ -26,10 +26,7 @@ class IdesPage extends ConsumerWidget {
           SliverToBoxAdapter(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildGrid(context),
-                const SizedBox(height: 20),
-              ],
+              children: [_buildGrid(context), const SizedBox(height: 20)],
             ),
           ),
         ],
@@ -90,10 +87,7 @@ class IdesPage extends ConsumerWidget {
                 const SizedBox(height: 8),
                 const Text(
                   'Advanced editors via Flathub and basic editors via APT.',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.white70,
-                  ),
+                  style: TextStyle(fontSize: 16, color: Colors.white70),
                 ),
               ],
             ),
@@ -102,8 +96,6 @@ class IdesPage extends ConsumerWidget {
       ),
     );
   }
-
-
 
   Widget _buildGrid(BuildContext context) {
     return Column(
@@ -138,9 +130,12 @@ class IdesPage extends ConsumerWidget {
                 ),
                 child: const Icon(Icons.code, color: Colors.white),
               ),
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) => const AdvancedEditorsPage()),
-              ),
+              onTap:
+                  () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => const AdvancedEditorsPage(),
+                    ),
+                  ),
             ),
             AppGridCard(
               title: 'Basic Editors',
@@ -152,9 +147,10 @@ class IdesPage extends ConsumerWidget {
                 ),
                 child: const Icon(Icons.edit, color: Colors.white),
               ),
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) => const BasicEditorsPage()),
-              ),
+              onTap:
+                  () => Navigator.of(context).push(
+                    MaterialPageRoute(builder: (_) => const BasicEditorsPage()),
+                  ),
             ),
           ],
         ),
@@ -162,5 +158,3 @@ class IdesPage extends ConsumerWidget {
     );
   }
 }
-
-

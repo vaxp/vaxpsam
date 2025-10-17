@@ -6,5 +6,6 @@ class InstallDebUseCase {
   final String downloadFolder;
   InstallDebUseCase(this.systemService, {required this.downloadFolder});
 
-  Stream<CommandOutputLine> call(String url) => systemService.installDebFromUrl(url, downloadFolder: downloadFolder);
+  Stream<CommandOutputLine> call(String url) =>
+      systemService.installDebFromUrl(url, downloadFolder: downloadFolder);
 }

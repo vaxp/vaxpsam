@@ -216,7 +216,6 @@ class AudioEditingPage extends ConsumerWidget {
         'package': 'pulseaudio',
         'description': 'Virtual audio server',
         'source': 'apt',
-        
       },
       {
         'name': 'Sox',

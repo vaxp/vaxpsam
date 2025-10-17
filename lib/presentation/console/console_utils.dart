@@ -8,7 +8,13 @@ void showConsoleStream(BuildContext context, Stream<CommandOutputLine> stream) {
   // Forward the incoming stream into a controller so we can add an initial line
   final controller = StreamController<CommandOutputLine>();
   // Add a starting line to give immediate feedback
-  controller.add(CommandOutputLine(timestamp: DateTime.now(), text: 'Starting...', isError: false));
+  controller.add(
+    CommandOutputLine(
+      timestamp: DateTime.now(),
+      text: 'Starting...',
+      isError: false,
+    ),
+  );
 
   // Listen to the source stream and forward events to the controller
   final sub = stream.listen(
@@ -16,11 +22,24 @@ void showConsoleStream(BuildContext context, Stream<CommandOutputLine> stream) {
       if (!controller.isClosed) controller.add(line);
     },
     onError: (err, st) {
-      if (!controller.isClosed) controller.add(CommandOutputLine(timestamp: DateTime.now(), text: 'Error: $err', isError: true));
+      if (!controller.isClosed)
+        controller.add(
+          CommandOutputLine(
+            timestamp: DateTime.now(),
+            text: 'Error: $err',
+            isError: true,
+          ),
+        );
     },
     onDone: () async {
       if (!controller.isClosed) {
-        controller.add(CommandOutputLine(timestamp: DateTime.now(), text: '[Process finished]', isError: false));
+        controller.add(
+          CommandOutputLine(
+            timestamp: DateTime.now(),
+            text: '[Process finished]',
+            isError: false,
+          ),
+        );
         await controller.close();
       }
     },
@@ -34,10 +53,11 @@ void showConsoleStream(BuildContext context, Stream<CommandOutputLine> stream) {
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
     ),
-    builder: (ctx) => SizedBox(
-      height: MediaQuery.of(ctx).size.height * 0.6,
-      child: ConsoleModal(stream: controller.stream),
-    ),
+    builder:
+        (ctx) => SizedBox(
+          height: MediaQuery.of(ctx).size.height * 0.6,
+          child: ConsoleModal(stream: controller.stream),
+        ),
   ).whenComplete(() async {
     // Modal closed: cancel subscription and close controller if open.
     try {

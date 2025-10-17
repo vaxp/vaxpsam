@@ -4,17 +4,14 @@ import 'package:flutter/material.dart';
 class SearchBar extends StatelessWidget {
   final VoidCallback onSearchTap;
 
-  const SearchBar({
-    super.key,
-    required this.onSearchTap,
-  });
+  const SearchBar({super.key, required this.onSearchTap});
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
         final screenWidth = constraints.maxWidth;
-        
+
         // Responsive design
         if (screenWidth < 768) {
           return _buildMobileSearchBar(context);
@@ -60,7 +57,10 @@ class SearchBar extends StatelessWidget {
                 onTap: onSearchTap,
                 borderRadius: BorderRadius.circular(8),
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 8,
+                  ),
                   child: Row(
                     children: [
                       Icon(
@@ -121,7 +121,10 @@ class SearchBar extends StatelessWidget {
                 onTap: onSearchTap,
                 borderRadius: BorderRadius.circular(10),
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 10,
+                  ),
                   child: Row(
                     children: [
                       Icon(
@@ -182,7 +185,10 @@ class SearchBar extends StatelessWidget {
                 onTap: onSearchTap,
                 borderRadius: BorderRadius.circular(12),
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 12,
+                  ),
                   child: Row(
                     children: [
                       Icon(

@@ -10,10 +10,12 @@ class DesktopEnvironmentPage extends ConsumerStatefulWidget {
   const DesktopEnvironmentPage({super.key});
 
   @override
-  ConsumerState<DesktopEnvironmentPage> createState() => _DesktopEnvironmentPageState();
+  ConsumerState<DesktopEnvironmentPage> createState() =>
+      _DesktopEnvironmentPageState();
 }
 
-class _DesktopEnvironmentPageState extends ConsumerState<DesktopEnvironmentPage> {
+class _DesktopEnvironmentPageState
+    extends ConsumerState<DesktopEnvironmentPage> {
   Map<String, bool> _installedDEs = {};
   String? _currentDE;
   bool _isLoading = true;
@@ -28,19 +30,21 @@ class _DesktopEnvironmentPageState extends ConsumerState<DesktopEnvironmentPage>
 
   Future<void> _refreshDesktopEnvironmentStatus() async {
     final system = ref.read(systemServiceProvider);
-    
+
     setState(() => _isLoading = true);
-    
+
     try {
       // Check which desktop environments are installed
       final kdeInstalled = await system.isDesktopEnvironmentInstalled('kde');
       final xfceInstalled = await system.isDesktopEnvironmentInstalled('xfce');
       final mateInstalled = await system.isDesktopEnvironmentInstalled('mate');
-      final cinnamonInstalled = await system.isDesktopEnvironmentInstalled('cinnamon');
-      
+      final cinnamonInstalled = await system.isDesktopEnvironmentInstalled(
+        'cinnamon',
+      );
+
       // Get current desktop environment
       final currentDE = await system.getCurrentDesktopEnvironment();
-      
+
       if (mounted) {
         setState(() {
           _installedDEs = {
@@ -183,11 +187,7 @@ class _DesktopEnvironmentPageState extends ConsumerState<DesktopEnvironmentPage>
           children: [
             Row(
               children: [
-                Icon(
-                  Icons.desktop_windows,
-                  color: macAppStoreBlue,
-                  size: 24,
-                ),
+                Icon(Icons.desktop_windows, color: macAppStoreBlue, size: 24),
                 const SizedBox(width: 12),
                 Text(
                   'Current Desktop Environment',
@@ -229,7 +229,10 @@ class _DesktopEnvironmentPageState extends ConsumerState<DesktopEnvironmentPage>
                   ),
                   const Spacer(),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 4,
+                    ),
                     decoration: BoxDecoration(
                       color: macAppStoreBlue,
                       borderRadius: BorderRadius.circular(12),
@@ -330,22 +333,40 @@ class _DesktopEnvironmentPageState extends ConsumerState<DesktopEnvironmentPage>
           ),
         ),
         ResponsiveGrid(
-          children: desktopEnvironments.map((de) {
-            final isInstalled = _installedDEs[de['id']] ?? false;
-            final isCurrent = _currentDE == de['id'];
-            
-            return DesktopEnvironmentCard(
-              name: de['name'] as String,
-              description: de['description'] as String,
-              icon: de['icon'] as IconData,
-              color: de['color'] as Color,
-              isInstalled: isInstalled,
-              isCurrent: isCurrent,
-              onInstall: () => _installDesktopEnvironment(context, system, de['id'] as String, de['packages'] as List<String>),
-              onSwitch: () => _switchDesktopEnvironment(context, system, de['id'] as String),
-              onRemove: () => _removeDesktopEnvironment(context, system, de['id'] as String, de['packages'] as List<String>),
-            );
-          }).toList(),
+          children:
+              desktopEnvironments.map((de) {
+                final isInstalled = _installedDEs[de['id']] ?? false;
+                final isCurrent = _currentDE == de['id'];
+
+                return DesktopEnvironmentCard(
+                  name: de['name'] as String,
+                  description: de['description'] as String,
+                  icon: de['icon'] as IconData,
+                  color: de['color'] as Color,
+                  isInstalled: isInstalled,
+                  isCurrent: isCurrent,
+                  onInstall:
+                      () => _installDesktopEnvironment(
+                        context,
+                        system,
+                        de['id'] as String,
+                        de['packages'] as List<String>,
+                      ),
+                  onSwitch:
+                      () => _switchDesktopEnvironment(
+                        context,
+                        system,
+                        de['id'] as String,
+                      ),
+                  onRemove:
+                      () => _removeDesktopEnvironment(
+                        context,
+                        system,
+                        de['id'] as String,
+                        de['packages'] as List<String>,
+                      ),
+                );
+              }).toList(),
         ),
       ],
     );
@@ -366,27 +387,38 @@ class _DesktopEnvironmentPageState extends ConsumerState<DesktopEnvironmentPage>
     }
   }
 
-  Future<void> _installDesktopEnvironment(BuildContext context, system, String deId, List<String> packages) async {
+  Future<void> _installDesktopEnvironment(
+    BuildContext context,
+    system,
+    String deId,
+    List<String> packages,
+  ) async {
     final confirmed = await showDialog<bool>(
       context: context,
-      builder: (ctx) => AlertDialog(
-        title: Text('Install ${_getDEName(deId)}'),
-        content: Text('This will install the complete ${_getDEName(deId)} desktop environment. This may take several minutes. Continue?'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(ctx).pop(false),
-            child: const Text('Cancel'),
+      builder:
+          (ctx) => AlertDialog(
+            title: Text('Install ${_getDEName(deId)}'),
+            content: Text(
+              'This will install the complete ${_getDEName(deId)} desktop environment. This may take several minutes. Continue?',
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(ctx).pop(false),
+                child: const Text('Cancel'),
+              ),
+              ElevatedButton(
+                onPressed: () => Navigator.of(ctx).pop(true),
+                child: const Text('Install'),
+              ),
+            ],
           ),
-          ElevatedButton(
-            onPressed: () => Navigator.of(ctx).pop(true),
-            child: const Text('Install'),
-          ),
-        ],
-      ),
     );
 
     if (confirmed == true && context.mounted) {
-      showConsoleStream(context, system.installDesktopEnvironment(deId, packages));
+      showConsoleStream(
+        context,
+        system.installDesktopEnvironment(deId, packages),
+      );
       // Refresh status after installation
       Timer(const Duration(seconds: 5), () {
         if (mounted) _refreshDesktopEnvironmentStatus();
@@ -394,23 +426,30 @@ class _DesktopEnvironmentPageState extends ConsumerState<DesktopEnvironmentPage>
     }
   }
 
-  Future<void> _switchDesktopEnvironment(BuildContext context, system, String deId) async {
+  Future<void> _switchDesktopEnvironment(
+    BuildContext context,
+    system,
+    String deId,
+  ) async {
     final confirmed = await showDialog<bool>(
       context: context,
-      builder: (ctx) => AlertDialog(
-        title: Text('Switch to ${_getDEName(deId)}'),
-        content: const Text('This will switch to the selected desktop environment and reboot the system. Continue?'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(ctx).pop(false),
-            child: const Text('Cancel'),
+      builder:
+          (ctx) => AlertDialog(
+            title: Text('Switch to ${_getDEName(deId)}'),
+            content: const Text(
+              'This will switch to the selected desktop environment and reboot the system. Continue?',
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(ctx).pop(false),
+                child: const Text('Cancel'),
+              ),
+              ElevatedButton(
+                onPressed: () => Navigator.of(ctx).pop(true),
+                child: const Text('Switch & Reboot'),
+              ),
+            ],
           ),
-          ElevatedButton(
-            onPressed: () => Navigator.of(ctx).pop(true),
-            child: const Text('Switch & Reboot'),
-          ),
-        ],
-      ),
     );
 
     if (confirmed == true && context.mounted) {
@@ -418,28 +457,41 @@ class _DesktopEnvironmentPageState extends ConsumerState<DesktopEnvironmentPage>
     }
   }
 
-  Future<void> _removeDesktopEnvironment(BuildContext context, system, String deId, List<String> packages) async {
+  Future<void> _removeDesktopEnvironment(
+    BuildContext context,
+    system,
+    String deId,
+    List<String> packages,
+  ) async {
     final confirmed = await showDialog<bool>(
       context: context,
-      builder: (ctx) => AlertDialog(
-        title: Text('Remove ${_getDEName(deId)}'),
-        content: Text('This will completely remove the ${_getDEName(deId)} desktop environment and all its components. This action cannot be undone. Continue?'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(ctx).pop(false),
-            child: const Text('Cancel'),
+      builder:
+          (ctx) => AlertDialog(
+            title: Text('Remove ${_getDEName(deId)}'),
+            content: Text(
+              'This will completely remove the ${_getDEName(deId)} desktop environment and all its components. This action cannot be undone. Continue?',
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(ctx).pop(false),
+                child: const Text('Cancel'),
+              ),
+              ElevatedButton(
+                onPressed: () => Navigator.of(ctx).pop(true),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFFFF6B6B),
+                ),
+                child: const Text('Remove'),
+              ),
+            ],
           ),
-          ElevatedButton(
-            onPressed: () => Navigator.of(ctx).pop(true),
-            style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFFFF6B6B)),
-            child: const Text('Remove'),
-          ),
-        ],
-      ),
     );
 
     if (confirmed == true && context.mounted) {
-      showConsoleStream(context, system.removeDesktopEnvironment(deId, packages));
+      showConsoleStream(
+        context,
+        system.removeDesktopEnvironment(deId, packages),
+      );
       // Refresh status after removal
       Timer(const Duration(seconds: 5), () {
         if (mounted) _refreshDesktopEnvironmentStatus();
@@ -519,16 +571,19 @@ class DesktopEnvironmentCard extends StatelessWidget {
                     const SizedBox(height: 4),
                     Text(
                       description,
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: macAppStoreGray,
-                      ),
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodySmall?.copyWith(color: macAppStoreGray),
                     ),
                   ],
                 ),
               ),
               if (isCurrent)
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 4,
+                  ),
                   decoration: BoxDecoration(
                     color: macAppStoreBlue,
                     borderRadius: BorderRadius.circular(12),
@@ -550,10 +605,14 @@ class DesktopEnvironmentCard extends StatelessWidget {
               Expanded(
                 child: ElevatedButton.icon(
                   onPressed: onInstall,
-                  icon: Icon(isInstalled ? Icons.check : Icons.download, size: 16),
+                  icon: Icon(
+                    isInstalled ? Icons.check : Icons.download,
+                    size: 16,
+                  ),
                   label: Text(isInstalled ? 'Installed' : 'Install'),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: isInstalled ? const Color(0xFF4CAF50) : macAppStoreBlue,
+                    backgroundColor:
+                        isInstalled ? const Color(0xFF4CAF50) : macAppStoreBlue,
                     foregroundColor: Colors.white,
                     elevation: 0,
                     shape: RoundedRectangleBorder(

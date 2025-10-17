@@ -16,28 +16,28 @@ class DevOpsSysadminPage extends ConsumerWidget {
     return StaticBackground(
       child: Scaffold(
         backgroundColor: Colors.transparent,
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            expandedHeight: 200,
-            floating: false,
-            pinned: true,
-            backgroundColor: macAppStoreDark,
-            flexibleSpace: FlexibleSpaceBar(
-              background: _buildHeroSection(context),
+        body: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              expandedHeight: 200,
+              floating: false,
+              pinned: true,
+              backgroundColor: macAppStoreDark,
+              flexibleSpace: FlexibleSpaceBar(
+                background: _buildHeroSection(context),
+              ),
             ),
-          ),
-          SliverToBoxAdapter(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildInstallAllSection(context, system),
-                _buildToolsGrid(context, system),
-                const SizedBox(height: 20),
-              ],
+            SliverToBoxAdapter(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildInstallAllSection(context, system),
+                  _buildToolsGrid(context, system),
+                  const SizedBox(height: 20),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
         ),
       ),
     );
@@ -96,10 +96,7 @@ class DevOpsSysadminPage extends ConsumerWidget {
                 const SizedBox(height: 8),
                 const Text(
                   '30 professional tools for DevOps operations, containerization, and system administration.',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.white70,
-                  ),
+                  style: TextStyle(fontSize: 16, color: Colors.white70),
                 ),
               ],
             ),
@@ -118,11 +115,7 @@ class DevOpsSysadminPage extends ConsumerWidget {
           children: [
             Row(
               children: [
-                Icon(
-                  Icons.download,
-                  color: macAppStoreBlue,
-                  size: 24,
-                ),
+                Icon(Icons.download, color: macAppStoreBlue, size: 24),
                 const SizedBox(width: 12),
                 Expanded(
                   child: Column(
@@ -130,7 +123,9 @@ class DevOpsSysadminPage extends ConsumerWidget {
                     children: [
                       Text(
                         'Install All DevOps Tools',
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        style: Theme.of(
+                          context,
+                        ).textTheme.titleMedium?.copyWith(
                           fontWeight: FontWeight.w600,
                           color: Colors.white,
                         ),
@@ -168,36 +163,152 @@ class DevOpsSysadminPage extends ConsumerWidget {
 
   Widget _buildToolsGrid(BuildContext context, system) {
     final tools = [
-      {'name': 'Docker', 'package': 'docker.io', 'description': 'Basic container platform (for consistent deployments and environments)'},
-      {'name': 'Ansible', 'package': 'ansible', 'description': 'Agentless automation and configuration management tool'},
-      {'name': 'Kubectl', 'package': 'kubectl', 'description': 'Command-line client for managing Kubernetes clusters'},
-      {'name': 'Vagrant', 'package': 'vagrant', 'description': 'For building and managing portable virtual environments'},
-      {'name': 'Git', 'package': 'git', 'description': 'For version control (essential for CI/CD)'},
-      {'name': 'Rsync', 'package': 'rsync', 'description': 'For efficient file synchronization between systems'},
-      {'name': 'Make', 'package': 'make', 'description': 'To automate routine DevOps tasks'},
-      {'name': 'Python 3', 'package': 'python3', 'description': 'Basic language for writing automation scripts'},
-      {'name': 'Bash', 'package': 'bash', 'description': 'Command-line shell (basic for shell scripts)'},
-      {'name': 'SSH Server', 'package': 'openssh-server', 'description': 'To enable remote connection and management'},
-      {'name': 'TMux', 'package': 'tmux', 'description': 'To manage multiple command-line sessions'},
-      {'name': 'Screen', 'package': 'screen', 'description': 'Alternative to Tmux'},
-      {'name': 'Nginx', 'package': 'nginx', 'description': 'Acts as a load balancer and reverse proxy'},
-      {'name': 'Apache2', 'package': 'apache2', 'description': 'Web server and proxy'},
-      {'name': 'Vim', 'package': 'vim', 'description': 'To edit configuration files'},
-      {'name': 'Nano', 'package': 'nano', 'description': 'To edit configuration files'},
-      {'name': 'Htop', 'package': 'htop', 'description': 'Interactive process monitor (for analyzing server performance)'},
-      {'name': 'Lsof', 'package': 'lsof', 'description': 'To list open files and the processes using them'},
-      {'name': 'Net-tools', 'package': 'net-tools', 'description': 'Old but popular network tool (netstat)'},
-      {'name': 'Tcpdump', 'package': 'tcpdump', 'description': 'For analyzing network traffic'},
-      {'name': 'Curl', 'package': 'curl', 'description': 'For testing Endpoints'},
+      {
+        'name': 'Docker',
+        'package': 'docker.io',
+        'description':
+            'Basic container platform (for consistent deployments and environments)',
+      },
+      {
+        'name': 'Ansible',
+        'package': 'ansible',
+        'description': 'Agentless automation and configuration management tool',
+      },
+      {
+        'name': 'Kubectl',
+        'package': 'kubectl',
+        'description': 'Command-line client for managing Kubernetes clusters',
+      },
+      {
+        'name': 'Vagrant',
+        'package': 'vagrant',
+        'description':
+            'For building and managing portable virtual environments',
+      },
+      {
+        'name': 'Git',
+        'package': 'git',
+        'description': 'For version control (essential for CI/CD)',
+      },
+      {
+        'name': 'Rsync',
+        'package': 'rsync',
+        'description': 'For efficient file synchronization between systems',
+      },
+      {
+        'name': 'Make',
+        'package': 'make',
+        'description': 'To automate routine DevOps tasks',
+      },
+      {
+        'name': 'Python 3',
+        'package': 'python3',
+        'description': 'Basic language for writing automation scripts',
+      },
+      {
+        'name': 'Bash',
+        'package': 'bash',
+        'description': 'Command-line shell (basic for shell scripts)',
+      },
+      {
+        'name': 'SSH Server',
+        'package': 'openssh-server',
+        'description': 'To enable remote connection and management',
+      },
+      {
+        'name': 'TMux',
+        'package': 'tmux',
+        'description': 'To manage multiple command-line sessions',
+      },
+      {
+        'name': 'Screen',
+        'package': 'screen',
+        'description': 'Alternative to Tmux',
+      },
+      {
+        'name': 'Nginx',
+        'package': 'nginx',
+        'description': 'Acts as a load balancer and reverse proxy',
+      },
+      {
+        'name': 'Apache2',
+        'package': 'apache2',
+        'description': 'Web server and proxy',
+      },
+      {
+        'name': 'Vim',
+        'package': 'vim',
+        'description': 'To edit configuration files',
+      },
+      {
+        'name': 'Nano',
+        'package': 'nano',
+        'description': 'To edit configuration files',
+      },
+      {
+        'name': 'Htop',
+        'package': 'htop',
+        'description':
+            'Interactive process monitor (for analyzing server performance)',
+      },
+      {
+        'name': 'Lsof',
+        'package': 'lsof',
+        'description': 'To list open files and the processes using them',
+      },
+      {
+        'name': 'Net-tools',
+        'package': 'net-tools',
+        'description': 'Old but popular network tool (netstat)',
+      },
+      {
+        'name': 'Tcpdump',
+        'package': 'tcpdump',
+        'description': 'For analyzing network traffic',
+      },
+      {
+        'name': 'Curl',
+        'package': 'curl',
+        'description': 'For testing Endpoints',
+      },
       {'name': 'Wget', 'package': 'wget', 'description': 'For downloading'},
-      {'name': 'Bind9-utils', 'package': 'bind9-utils', 'description': 'For DNS inspection (dig, host)'},
-      {'name': 'Logrotate', 'package': 'logrotate', 'description': 'For managing log file rotation'},
-      {'name': 'Iftop', 'package': 'iftop', 'description': 'For monitoring real-time network usage'},
-      {'name': 'Dmesg', 'package': 'util-linux', 'description': 'For viewing kernel messages'},
+      {
+        'name': 'Bind9-utils',
+        'package': 'bind9-utils',
+        'description': 'For DNS inspection (dig, host)',
+      },
+      {
+        'name': 'Logrotate',
+        'package': 'logrotate',
+        'description': 'For managing log file rotation',
+      },
+      {
+        'name': 'Iftop',
+        'package': 'iftop',
+        'description': 'For monitoring real-time network usage',
+      },
+      {
+        'name': 'Dmesg',
+        'package': 'util-linux',
+        'description': 'For viewing kernel messages',
+      },
       {'name': 'Tar', 'package': 'tar', 'description': 'For backups'},
-      {'name': 'Unzip', 'package': 'unzip', 'description': 'For handling archives'},
-      {'name': 'Sysstat', 'package': 'sysstat', 'description': 'Advanced performance monitoring tools (iostat, mpstat)'},
-      {'name': 'Cloud-init', 'package': 'cloud-init', 'description': 'For automating the first server setup (Mission in the cloud)'},
+      {
+        'name': 'Unzip',
+        'package': 'unzip',
+        'description': 'For handling archives',
+      },
+      {
+        'name': 'Sysstat',
+        'package': 'sysstat',
+        'description': 'Advanced performance monitoring tools (iostat, mpstat)',
+      },
+      {
+        'name': 'Cloud-init',
+        'package': 'cloud-init',
+        'description':
+            'For automating the first server setup (Mission in the cloud)',
+      },
     ];
 
     return Column(
@@ -234,9 +345,16 @@ class DevOpsSysadminPage extends ConsumerWidget {
                   color: const Color(0xFFFF9800),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Icon(Icons.settings_applications, color: Colors.white),
+                child: const Icon(
+                  Icons.settings_applications,
+                  color: Colors.white,
+                ),
               ),
-              onTap: () => showConsoleStream(context, system.installPackageByName(tool['package']!)),
+              onTap:
+                  () => showConsoleStream(
+                    context,
+                    system.installPackageByName(tool['package']!),
+                  ),
             );
           },
         ),
@@ -246,32 +364,71 @@ class DevOpsSysadminPage extends ConsumerWidget {
 
   void _installAllTools(BuildContext context, system) {
     final tools = [
-      'docker.io', 'ansible', 'kubectl', 'vagrant', 'git', 'rsync', 'make',
-      'python3', 'bash', 'openssh-server', 'tmux', 'screen', 'nginx',
-      'apache2', 'vim', 'nano', 'htop', 'lsof', 'net-tools', 'tcpdump',
-      'curl', 'wget', 'bind9-utils', 'logrotate', 'iftop', 'util-linux',
-      'tar', 'unzip', 'sysstat', 'cloud-init'
+      'docker.io',
+      'ansible',
+      'kubectl',
+      'vagrant',
+      'git',
+      'rsync',
+      'make',
+      'python3',
+      'bash',
+      'openssh-server',
+      'tmux',
+      'screen',
+      'nginx',
+      'apache2',
+      'vim',
+      'nano',
+      'htop',
+      'lsof',
+      'net-tools',
+      'tcpdump',
+      'curl',
+      'wget',
+      'bind9-utils',
+      'logrotate',
+      'iftop',
+      'util-linux',
+      'tar',
+      'unzip',
+      'sysstat',
+      'cloud-init',
     ];
 
     showDialog(
       context: context,
-      builder: (ctx) => AlertDialog(
-        title: const Text('Install All DevOps Tools'),
-        content: Text('This will install ${tools.length} DevOps and system administration tools. Continue?'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(ctx).pop(),
-            child: const Text('Cancel'),
+      builder:
+          (ctx) => AlertDialog(
+            title: const Text('Install All DevOps Tools'),
+            content: Text(
+              'This will install ${tools.length} DevOps and system administration tools. Continue?',
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(ctx).pop(),
+                child: const Text('Cancel'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(ctx).pop();
+                  showConsoleStream(
+                    context,
+                    system.runAsRoot([
+                      'apt',
+                      'update',
+                      '&&',
+                      'apt',
+                      'install',
+                      '-y',
+                      ...tools,
+                    ]),
+                  );
+                },
+                child: const Text('Install All'),
+              ),
+            ],
           ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.of(ctx).pop();
-              showConsoleStream(context, system.runAsRoot(['apt', 'update', '&&', 'apt', 'install', '-y', ...tools]));
-            },
-            child: const Text('Install All'),
-          ),
-        ],
-      ),
     );
   }
 }

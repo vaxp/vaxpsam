@@ -16,7 +16,7 @@ class CybersecurityPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final system = ref.read(systemServiceProvider);
-    
+
     return Container(
       color: macAppStoreDark,
       child: CustomScrollView(
@@ -97,10 +97,7 @@ class CybersecurityPage extends ConsumerWidget {
                 const SizedBox(height: 8),
                 const Text(
                   'Professional cybersecurity tools for network analysis, malware detection, and penetration testing.',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.white70,
-                  ),
+                  style: TextStyle(fontSize: 16, color: Colors.white70),
                 ),
               ],
             ),
@@ -109,8 +106,6 @@ class CybersecurityPage extends ConsumerWidget {
       ),
     );
   }
-
-
 
   Widget _buildCategoriesGrid(BuildContext context, system) {
     return Column(
@@ -145,9 +140,12 @@ class CybersecurityPage extends ConsumerWidget {
                 ),
                 child: const Icon(Icons.network_check, color: Colors.white),
               ),
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) => const NetworkAnalysisPage()),
-              ),
+              onTap:
+                  () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => const NetworkAnalysisPage(),
+                    ),
+                  ),
             ),
             AppGridCard(
               title: 'Malware Analysis',
@@ -159,9 +157,12 @@ class CybersecurityPage extends ConsumerWidget {
                 ),
                 child: const Icon(Icons.security, color: Colors.white),
               ),
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) => const MalwareAnalysisPage()),
-              ),
+              onTap:
+                  () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => const MalwareAnalysisPage(),
+                    ),
+                  ),
             ),
             AppGridCard(
               title: 'Injection & Exploitation',
@@ -173,9 +174,12 @@ class CybersecurityPage extends ConsumerWidget {
                 ),
                 child: const Icon(Icons.bug_report, color: Colors.white),
               ),
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) => const InjectionExploitationPage()),
-              ),
+              onTap:
+                  () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => const InjectionExploitationPage(),
+                    ),
+                  ),
             ),
             AppGridCard(
               title: 'Wireless Security',
@@ -187,9 +191,12 @@ class CybersecurityPage extends ConsumerWidget {
                 ),
                 child: const Icon(Icons.wifi, color: Colors.white),
               ),
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) => const WirelessSecurityPage()),
-              ),
+              onTap:
+                  () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => const WirelessSecurityPage(),
+                    ),
+                  ),
             ),
             AppGridCard(
               title: 'Digital Forensics',
@@ -201,9 +208,12 @@ class CybersecurityPage extends ConsumerWidget {
                 ),
                 child: const Icon(Icons.search, color: Colors.white),
               ),
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) => const DigitalForensicsPage()),
-              ),
+              onTap:
+                  () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => const DigitalForensicsPage(),
+                    ),
+                  ),
             ),
             AppGridCard(
               title: 'Cryptography & Hashing',
@@ -215,9 +225,12 @@ class CybersecurityPage extends ConsumerWidget {
                 ),
                 child: const Icon(Icons.lock, color: Colors.white),
               ),
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) => const CryptographyHashingPage()),
-              ),
+              onTap:
+                  () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => const CryptographyHashingPage(),
+                    ),
+                  ),
             ),
           ],
         ),

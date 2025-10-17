@@ -12,7 +12,8 @@ class VaxpDebPage extends StatefulWidget {
   State<VaxpDebPage> createState() => _VaxpDebPageState();
 }
 
-class _VaxpDebPageState extends State<VaxpDebPage> with TickerProviderStateMixin {
+class _VaxpDebPageState extends State<VaxpDebPage>
+    with TickerProviderStateMixin {
   String? selectedProjectPath;
   String? selectedIconPath;
   bool isConverting = false;
@@ -58,7 +59,8 @@ class _VaxpDebPageState extends State<VaxpDebPage> with TickerProviderStateMixin
       if (selectedDirectory != null) {
         setState(() {
           selectedProjectPath = selectedDirectory;
-          conversionStatus = 'Project selected: ${path.basename(selectedDirectory)}';
+          conversionStatus =
+              'Project selected: ${path.basename(selectedDirectory)}';
           // Precompute Debian-safe name from the folder basename
           _debPackageName = _toDebianPackageName(
             path.basename(selectedDirectory),
@@ -70,7 +72,7 @@ class _VaxpDebPageState extends State<VaxpDebPage> with TickerProviderStateMixin
     }
   }
 
-Future<void> _selectIconFile() async {
+  Future<void> _selectIconFile() async {
     try {
       FilePickerResult? result = await FilePicker.platform.pickFiles(
         // ⚠️ قم بتغيير القيمة هنا من FileType.image إلى FileType.custom
@@ -121,12 +123,27 @@ Future<void> _selectIconFile() async {
   }
 
   String _generateDesktopEntry() {
-    final name = _nameController.text.isNotEmpty ? _nameController.text : 'Flutter App';
-    final comment = _commentController.text.isNotEmpty ? _commentController.text : 'Flutter Application';
-    final categories = _categoriesController.text.isNotEmpty ? _categoriesController.text : 'Utility;';
-    final exec = _autoExecPath.isNotEmpty ? _autoExecPath : '/usr/bin/flutter_app';
-    final debName = _debPackageName ?? (selectedProjectPath != null ? _toDebianPackageName(path.basename(selectedProjectPath!)) : 'flutter-app');
-    final icon = selectedIconPath != null ? '/usr/share/icons/hicolor/256x256/apps/$debName.png' : '/usr/share/icons/hicolor/256x256/apps/flutter_app.png';
+    final name =
+        _nameController.text.isNotEmpty ? _nameController.text : 'Flutter App';
+    final comment =
+        _commentController.text.isNotEmpty
+            ? _commentController.text
+            : 'Flutter Application';
+    final categories =
+        _categoriesController.text.isNotEmpty
+            ? _categoriesController.text
+            : 'Utility;';
+    final exec =
+        _autoExecPath.isNotEmpty ? _autoExecPath : '/usr/bin/flutter_app';
+    final debName =
+        _debPackageName ??
+        (selectedProjectPath != null
+            ? _toDebianPackageName(path.basename(selectedProjectPath!))
+            : 'flutter-app');
+    final icon =
+        selectedIconPath != null
+            ? '/usr/share/icons/hicolor/256x256/apps/$debName.png'
+            : '/usr/share/icons/hicolor/256x256/apps/flutter_app.png';
 
     return '''[Desktop Entry]
 Version=1.0
@@ -189,7 +206,8 @@ Categories=$categories
     }
 
     setState(() {
-      conversionStatus = 'Found existing build bundle, creating DEB package structure...';
+      conversionStatus =
+          'Found existing build bundle, creating DEB package structure...';
     });
 
     // Create DEB package structure with build directory reference
@@ -374,32 +392,34 @@ exec "./$originalExecName" "\$@"
   void _showErrorDialog(String message) {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Error'),
-        content: Text(message),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: const Text('OK'),
+      builder:
+          (context) => AlertDialog(
+            title: const Text('Error'),
+            content: Text(message),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text('OK'),
+              ),
+            ],
           ),
-        ],
-      ),
     );
   }
 
   void _showSuccessDialog(String projectName) {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Success!'),
-        content: Text('DEB package created successfully: $projectName.deb'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: const Text('OK'),
+      builder:
+          (context) => AlertDialog(
+            title: const Text('Success!'),
+            content: Text('DEB package created successfully: $projectName.deb'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text('OK'),
+              ),
+            ],
           ),
-        ],
-      ),
     );
   }
 
@@ -409,7 +429,6 @@ exec "./$originalExecName" "\$@"
       title: 'VAXP DEB Converter',
 
       children: [
-
         _buildProjectSelectionCard(context),
         _buildIconSelectionCard(context),
         _buildDesktopEntryCard(context),
@@ -418,72 +437,71 @@ exec "./$originalExecName" "\$@"
       ],
     );
   }
-// Widget _buildHeroSection(BuildContext context) {
-//     return Container(
-//       height: 100,
-//       margin: const EdgeInsets.all(16),
-//       decoration: BoxDecoration(
-//         gradient: const LinearGradient(
-//           begin: Alignment.topLeft,
-//           end: Alignment.bottomRight,
-//           colors: [macAppStorePurple, Color(0xFFE91E63)],
-//         ),
-//         borderRadius: BorderRadius.circular(12),
-//       ),
-//       child: Stack(
-//         children: [
-//           Positioned.fill(
-//             child: Container(
-//               decoration: BoxDecoration(
-//                 borderRadius: BorderRadius.circular(12),
-//                 gradient: const LinearGradient(
-//                   begin: Alignment.topLeft,
-//                   end: Alignment.bottomRight,
-//                   colors: [macAppStorePurple, Color(0xFFE91E63)],
-//                 ),
-//               ),
-//             ),
-//           ),
-//           Padding(
-//             padding: const EdgeInsets.all(24),
-//             child: Column(
-//               crossAxisAlignment: CrossAxisAlignment.start,
-//               mainAxisAlignment: MainAxisAlignment.center,
-//               children: [
-//                 const Text(
-//                   'DEB CONVERTER',
-//                   style: TextStyle(
-//                     fontSize: 12,
-//                     fontWeight: FontWeight.w600,
-//                     color: Colors.white70,
-//                     letterSpacing: 1.2,
-//                   ),
-//                 ),
-//                 const SizedBox(height: 8),
-//                 const Text(
-//                   'Convert Flutter Apps to DEB',
-//                   style: TextStyle(
-//                     fontSize: 28,
-//                     fontWeight: FontWeight.bold,
-//                     color: Colors.white,
-//                   ),
-//                 ),
-//                 const SizedBox(height: 8),
-//                 const Text(
-//                   'Transform your Flutter applications into distributable DEB packages.',
-//                   style: TextStyle(
-//                     fontSize: 16,
-//                     color: Colors.white70,
-//                   ),
-//                 ),
-//               ],
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-
+  // Widget _buildHeroSection(BuildContext context) {
+  //     return Container(
+  //       height: 100,
+  //       margin: const EdgeInsets.all(16),
+  //       decoration: BoxDecoration(
+  //         gradient: const LinearGradient(
+  //           begin: Alignment.topLeft,
+  //           end: Alignment.bottomRight,
+  //           colors: [macAppStorePurple, Color(0xFFE91E63)],
+  //         ),
+  //         borderRadius: BorderRadius.circular(12),
+  //       ),
+  //       child: Stack(
+  //         children: [
+  //           Positioned.fill(
+  //             child: Container(
+  //               decoration: BoxDecoration(
+  //                 borderRadius: BorderRadius.circular(12),
+  //                 gradient: const LinearGradient(
+  //                   begin: Alignment.topLeft,
+  //                   end: Alignment.bottomRight,
+  //                   colors: [macAppStorePurple, Color(0xFFE91E63)],
+  //                 ),
+  //               ),
+  //             ),
+  //           ),
+  //           Padding(
+  //             padding: const EdgeInsets.all(24),
+  //             child: Column(
+  //               crossAxisAlignment: CrossAxisAlignment.start,
+  //               mainAxisAlignment: MainAxisAlignment.center,
+  //               children: [
+  //                 const Text(
+  //                   'DEB CONVERTER',
+  //                   style: TextStyle(
+  //                     fontSize: 12,
+  //                     fontWeight: FontWeight.w600,
+  //                     color: Colors.white70,
+  //                     letterSpacing: 1.2,
+  //                   ),
+  //                 ),
+  //                 const SizedBox(height: 8),
+  //                 const Text(
+  //                   'Convert Flutter Apps to DEB',
+  //                   style: TextStyle(
+  //                     fontSize: 28,
+  //                     fontWeight: FontWeight.bold,
+  //                     color: Colors.white,
+  //                   ),
+  //                 ),
+  //                 const SizedBox(height: 8),
+  //                 const Text(
+  //                   'Transform your Flutter applications into distributable DEB packages.',
+  //                   style: TextStyle(
+  //                     fontSize: 16,
+  //                     color: Colors.white70,
+  //                   ),
+  //                 ),
+  //               ],
+  //             ),
+  //           ),
+  //         ],
+  //       ),
+  //     );
+  //   }
 
   Widget _buildProjectSelectionCard(BuildContext context) {
     return MacAppStoreCard(
@@ -492,11 +510,7 @@ exec "./$originalExecName" "\$@"
         children: [
           Row(
             children: [
-              Icon(
-                Icons.folder_outlined,
-                color: macAppStoreBlue,
-                size: 28,
-              ),
+              Icon(Icons.folder_outlined, color: macAppStoreBlue, size: 28),
               const SizedBox(width: 12),
               Text(
                 'Select Built Flutter Project',
@@ -510,9 +524,9 @@ exec "./$originalExecName" "\$@"
           const SizedBox(height: 8),
           Text(
             'Select a Flutter project that has been built with: flutter build linux --release',
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: macAppStoreGray,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(color: macAppStoreGray),
           ),
           const SizedBox(height: 16),
           if (selectedProjectPath != null) ...[
@@ -524,11 +538,7 @@ exec "./$originalExecName" "\$@"
               ),
               child: Row(
                 children: [
-                  Icon(
-                    Icons.check_circle,
-                    color: macAppStoreBlue,
-                    size: 20,
-                  ),
+                  Icon(Icons.check_circle, color: macAppStoreBlue, size: 20),
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
@@ -550,7 +560,9 @@ exec "./$originalExecName" "\$@"
               onPressed: _selectProjectFolder,
               icon: const Icon(Icons.folder_open),
               label: Text(
-                selectedProjectPath == null ? 'Select Project Folder' : 'Change Project Folder',
+                selectedProjectPath == null
+                    ? 'Select Project Folder'
+                    : 'Change Project Folder',
               ),
               style: ElevatedButton.styleFrom(
                 backgroundColor: macAppStoreBlue,
@@ -574,11 +586,7 @@ exec "./$originalExecName" "\$@"
         children: [
           Row(
             children: [
-              Icon(
-                Icons.image_outlined,
-                color: macAppStoreBlue,
-                size: 28,
-              ),
+              Icon(Icons.image_outlined, color: macAppStoreBlue, size: 28),
               const SizedBox(width: 12),
               Text(
                 'Application Icon (Optional)',
@@ -592,9 +600,9 @@ exec "./$originalExecName" "\$@"
           const SizedBox(height: 8),
           Text(
             'Select a PNG, JPG, or SVG icon for your application',
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: macAppStoreGray,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(color: macAppStoreGray),
           ),
           const SizedBox(height: 16),
           if (selectedIconPath != null) ...[
@@ -606,11 +614,7 @@ exec "./$originalExecName" "\$@"
               ),
               child: Row(
                 children: [
-                  Icon(
-                    Icons.check_circle,
-                    color: macAppStoreBlue,
-                    size: 20,
-                  ),
+                  Icon(Icons.check_circle, color: macAppStoreBlue, size: 20),
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
@@ -642,7 +646,9 @@ exec "./$originalExecName" "\$@"
               onPressed: _selectIconFile,
               icon: const Icon(Icons.image),
               label: Text(
-                selectedIconPath == null ? 'Select Icon File' : 'Change Icon File',
+                selectedIconPath == null
+                    ? 'Select Icon File'
+                    : 'Change Icon File',
               ),
               style: ElevatedButton.styleFrom(
                 backgroundColor: macAppStoreCard,
@@ -688,9 +694,9 @@ exec "./$originalExecName" "\$@"
             const SizedBox(height: 8),
             Text(
               'Configure the desktop entry for your application',
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: macAppStoreGray,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium?.copyWith(color: macAppStoreGray),
             ),
             const SizedBox(height: 20),
             TextFormField(
@@ -730,22 +736,16 @@ exec "./$originalExecName" "\$@"
               children: [
                 Text(
                   'Run in Terminal:',
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Colors.white,
-                  ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodyMedium?.copyWith(color: Colors.white),
                 ),
                 const SizedBox(width: 16),
                 DropdownButton<String>(
                   value: _selectedTerminal,
                   items: const [
-                    DropdownMenuItem(
-                      value: 'false',
-                      child: Text('No'),
-                    ),
-                    DropdownMenuItem(
-                      value: 'true',
-                      child: Text('Yes'),
-                    ),
+                    DropdownMenuItem(value: 'false', child: Text('No')),
+                    DropdownMenuItem(value: 'true', child: Text('Yes')),
                   ],
                   onChanged: (value) {
                     setState(() {
@@ -804,23 +804,24 @@ exec "./$originalExecName" "\$@"
         height: 60,
         width: double.infinity,
         child: ElevatedButton.icon(
-          onPressed: selectedProjectPath != null && !isConverting ? _convertToDeb : null,
-          icon: isConverting
-              ? const SizedBox(
-                  width: 20,
-                  height: 20,
-                  child: CircularProgressIndicator(
-                    strokeWidth: 2,
-                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                  ),
-                )
-              : const Icon(Icons.build),
+          onPressed:
+              selectedProjectPath != null && !isConverting
+                  ? _convertToDeb
+                  : null,
+          icon:
+              isConverting
+                  ? const SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                    ),
+                  )
+                  : const Icon(Icons.build),
           label: Text(
             isConverting ? 'Converting...' : 'Convert to DEB',
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
-            ),
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
           ),
           style: ElevatedButton.styleFrom(
             backgroundColor: macAppStoreBlue,
@@ -837,16 +838,14 @@ exec "./$originalExecName" "\$@"
 
   Widget _buildStatusDisplay(BuildContext context) {
     if (conversionStatus.isEmpty) return const SizedBox.shrink();
-    
+
     return Container(
       margin: const EdgeInsets.all(16),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: macAppStoreCard,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: macAppStoreLightGray.withOpacity(0.2),
-        ),
+        border: Border.all(color: macAppStoreLightGray.withOpacity(0.2)),
       ),
       child: Row(
         children: [
@@ -859,9 +858,9 @@ exec "./$originalExecName" "\$@"
           Expanded(
             child: Text(
               conversionStatus,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Colors.white,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium?.copyWith(color: Colors.white),
             ),
           ),
         ],

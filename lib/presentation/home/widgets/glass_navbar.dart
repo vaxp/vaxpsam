@@ -21,7 +21,7 @@ class GlassNavBar extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         final screenWidth = constraints.maxWidth;
-        
+
         // Responsive design
         if (screenWidth < 768) {
           return _buildMobileNavBar(context);
@@ -64,9 +64,7 @@ class GlassNavBar extends StatelessWidget {
             child: Row(
               children: [
                 // Navigation items (scrollable)
-                Expanded(
-                  child: _buildMobileNavItems(context),
-                ),
+                Expanded(child: _buildMobileNavItems(context)),
                 // Console toggle
                 _buildConsoleButton(context, isCompact: true),
               ],
@@ -107,9 +105,7 @@ class GlassNavBar extends StatelessWidget {
             child: Row(
               children: [
                 // Navigation items
-                Expanded(
-                  child: _buildTabletNavItems(context),
-                ),
+                Expanded(child: _buildTabletNavItems(context)),
                 const VerticalDivider(
                   color: Colors.white24,
                   width: 1,
@@ -155,9 +151,7 @@ class GlassNavBar extends StatelessWidget {
             child: Row(
               children: [
                 // Navigation items
-                Expanded(
-                  child: _buildDesktopNavItems(context),
-                ),
+                Expanded(child: _buildDesktopNavItems(context)),
                 const VerticalDivider(
                   color: Colors.white30,
                   width: 1,
@@ -173,7 +167,6 @@ class GlassNavBar extends StatelessWidget {
     );
   }
 
-
   Widget _buildConsoleButton(BuildContext context, {bool isCompact = false}) {
     return Container(
       margin: const EdgeInsets.all(4),
@@ -188,16 +181,16 @@ class GlassNavBar extends StatelessWidget {
               vertical: isCompact ? 4 : 6,
             ),
             decoration: BoxDecoration(
-              color: isConsoleOpen 
-                ? macAppStoreBlue.withOpacity(0.4)
-                : Colors.transparent,
+              color:
+                  isConsoleOpen
+                      ? macAppStoreBlue.withOpacity(0.4)
+                      : Colors.transparent,
               borderRadius: BorderRadius.circular(6),
             ),
             child: Icon(
               isConsoleOpen ? Icons.terminal : Icons.terminal_outlined,
-              color: isConsoleOpen 
-                ? Colors.white 
-                : Colors.white.withOpacity(0.8),
+              color:
+                  isConsoleOpen ? Colors.white : Colors.white.withOpacity(0.8),
               size: isCompact ? 14 : 16,
             ),
           ),
@@ -208,43 +201,48 @@ class GlassNavBar extends StatelessWidget {
 
   Widget _buildMobileNavItems(BuildContext context) {
     final navItems = _getNavigationItems();
-    
+
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       physics: const BouncingScrollPhysics(),
       child: Row(
-        children: navItems.map((item) => _buildMobileNavItem(context, item)).toList(),
+        children:
+            navItems.map((item) => _buildMobileNavItem(context, item)).toList(),
       ),
     );
   }
 
   Widget _buildTabletNavItems(BuildContext context) {
     final navItems = _getNavigationItems();
-    
+
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       physics: const BouncingScrollPhysics(),
       child: Row(
-        children: navItems.map((item) => _buildTabletNavItem(context, item)).toList(),
+        children:
+            navItems.map((item) => _buildTabletNavItem(context, item)).toList(),
       ),
     );
   }
 
   Widget _buildDesktopNavItems(BuildContext context) {
     final navItems = _getNavigationItems();
-    
+
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       physics: const BouncingScrollPhysics(),
       child: Row(
-        children: navItems.map((item) => _buildDesktopNavItem(context, item)).toList(),
+        children:
+            navItems
+                .map((item) => _buildDesktopNavItem(context, item))
+                .toList(),
       ),
     );
   }
 
   Widget _buildMobileNavItem(BuildContext context, NavItem item) {
     final isSelected = selectedIndex == item.index;
-    
+
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 1),
       child: Material(
@@ -255,9 +253,10 @@ class GlassNavBar extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
             decoration: BoxDecoration(
-              color: isSelected 
-                ? macAppStoreBlue.withOpacity(0.4)
-                : Colors.transparent,
+              color:
+                  isSelected
+                      ? macAppStoreBlue.withOpacity(0.4)
+                      : Colors.transparent,
               borderRadius: BorderRadius.circular(6),
             ),
             child: Row(
@@ -265,20 +264,21 @@ class GlassNavBar extends StatelessWidget {
               children: [
                 Icon(
                   item.icon,
-                  color: isSelected 
-                    ? Colors.white 
-                    : Colors.white.withOpacity(0.8),
+                  color:
+                      isSelected ? Colors.white : Colors.white.withOpacity(0.8),
                   size: 12,
                 ),
                 const SizedBox(width: 3),
                 Text(
                   item.title,
                   style: TextStyle(
-                    color: isSelected 
-                      ? Colors.white 
-                      : Colors.white.withOpacity(0.8),
+                    color:
+                        isSelected
+                            ? Colors.white
+                            : Colors.white.withOpacity(0.8),
                     fontSize: 9,
-                    fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+                    fontWeight:
+                        isSelected ? FontWeight.w600 : FontWeight.normal,
                   ),
                 ),
               ],
@@ -291,7 +291,7 @@ class GlassNavBar extends StatelessWidget {
 
   Widget _buildTabletNavItem(BuildContext context, NavItem item) {
     final isSelected = selectedIndex == item.index;
-    
+
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 2),
       child: Material(
@@ -302,9 +302,10 @@ class GlassNavBar extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
             decoration: BoxDecoration(
-              color: isSelected 
-                ? macAppStoreBlue.withOpacity(0.4)
-                : Colors.transparent,
+              color:
+                  isSelected
+                      ? macAppStoreBlue.withOpacity(0.4)
+                      : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -312,20 +313,21 @@ class GlassNavBar extends StatelessWidget {
               children: [
                 Icon(
                   item.icon,
-                  color: isSelected 
-                    ? Colors.white 
-                    : Colors.white.withOpacity(0.8),
+                  color:
+                      isSelected ? Colors.white : Colors.white.withOpacity(0.8),
                   size: 14,
                 ),
                 const SizedBox(width: 4),
                 Text(
                   item.title,
                   style: TextStyle(
-                    color: isSelected 
-                      ? Colors.white 
-                      : Colors.white.withOpacity(0.8),
+                    color:
+                        isSelected
+                            ? Colors.white
+                            : Colors.white.withOpacity(0.8),
                     fontSize: 10,
-                    fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+                    fontWeight:
+                        isSelected ? FontWeight.w600 : FontWeight.normal,
                   ),
                 ),
               ],
@@ -338,7 +340,7 @@ class GlassNavBar extends StatelessWidget {
 
   Widget _buildDesktopNavItem(BuildContext context, NavItem item) {
     final isSelected = selectedIndex == item.index;
-    
+
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 2),
       child: Material(
@@ -349,9 +351,10 @@ class GlassNavBar extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
             decoration: BoxDecoration(
-              color: isSelected 
-                ? macAppStoreBlue.withOpacity(0.4)
-                : Colors.transparent,
+              color:
+                  isSelected
+                      ? macAppStoreBlue.withOpacity(0.4)
+                      : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -359,20 +362,21 @@ class GlassNavBar extends StatelessWidget {
               children: [
                 Icon(
                   item.icon,
-                  color: isSelected 
-                    ? Colors.white 
-                    : Colors.white.withOpacity(0.8),
+                  color:
+                      isSelected ? Colors.white : Colors.white.withOpacity(0.8),
                   size: 16,
                 ),
                 const SizedBox(width: 6),
                 Text(
                   item.title,
                   style: TextStyle(
-                    color: isSelected 
-                      ? Colors.white 
-                      : Colors.white.withOpacity(0.8),
+                    color:
+                        isSelected
+                            ? Colors.white
+                            : Colors.white.withOpacity(0.8),
                     fontSize: 11,
-                    fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+                    fontWeight:
+                        isSelected ? FontWeight.w600 : FontWeight.normal,
                   ),
                 ),
               ],

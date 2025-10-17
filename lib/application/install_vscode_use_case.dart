@@ -5,7 +5,11 @@ class InstallVSCodeUseCase {
   final SystemService systemService;
   final String debUrl;
   final String downloadFolder;
-  InstallVSCodeUseCase(this.systemService, {required this.debUrl, required this.downloadFolder});
+  InstallVSCodeUseCase(
+    this.systemService, {
+    required this.debUrl,
+    required this.downloadFolder,
+  });
 
   Stream<CommandOutputLine> call() async* {
     // Try apt install code first
@@ -14,7 +18,10 @@ class InstallVSCodeUseCase {
       if (line.exitCode != null && line.exitCode == 0) return;
     }
     // Fallback to .deb download/install
-    await for (final line in systemService.installDebFromUrl(debUrl, downloadFolder: downloadFolder)) {
+    await for (final line in systemService.installDebFromUrl(
+      debUrl,
+      downloadFolder: downloadFolder,
+    )) {
       yield line;
     }
   }

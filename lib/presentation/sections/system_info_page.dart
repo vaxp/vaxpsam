@@ -15,8 +15,6 @@ class SystemInfoPage extends ConsumerStatefulWidget {
 }
 
 class _SystemInfoPageState extends ConsumerState<SystemInfoPage> {
-
-
   @override
   Widget build(BuildContext context) {
     final system = ref.read(systemServiceProvider);

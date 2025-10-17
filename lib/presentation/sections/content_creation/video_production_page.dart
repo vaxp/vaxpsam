@@ -203,8 +203,7 @@ class VideoProductionPage extends ConsumerWidget {
         'package': 'ffmpeg',
         'description': 'Command-line tool for audio and video processing',
         'source': 'apt',
-         'iconAsset': 'assets/creation/FFmpeg.png',
-        
+        'iconAsset': 'assets/creation/FFmpeg.png',
       },
       {
         'name': 'SimpleScreenRecorder',
@@ -225,7 +224,7 @@ class VideoProductionPage extends ConsumerWidget {
         'package': 'blender',
         'description': '3D animation and VFX (available within Blender)',
         'source': 'apt',
-         'iconAsset': 'assets/creation/blender.png',
+        'iconAsset': 'assets/creation/blender.png',
       },
       {
         'name': 'VLC',

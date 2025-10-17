@@ -1,4 +1,3 @@
-
 import '../advanced_debugging_export.dart';
 
 class ServiceManagementCard extends StatelessWidget {
@@ -33,14 +32,16 @@ class ServiceManagementCard extends StatelessWidget {
             width: 40,
             height: 40,
             decoration: BoxDecoration(
-              color: isRunning 
-                  ? const Color(0xFF4CAF50).withOpacity(0.1)
-                  : const Color(0xFFFF6B6B).withOpacity(0.1),
+              color:
+                  isRunning
+                      ? const Color(0xFF4CAF50).withOpacity(0.1)
+                      : const Color(0xFFFF6B6B).withOpacity(0.1),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Icon(
               isRunning ? Icons.play_circle : Icons.stop_circle,
-              color: isRunning ? const Color(0xFF4CAF50) : const Color(0xFFFF6B6B),
+              color:
+                  isRunning ? const Color(0xFF4CAF50) : const Color(0xFFFF6B6B),
               size: 20,
             ),
           ),
@@ -59,9 +60,9 @@ class ServiceManagementCard extends StatelessWidget {
                 const SizedBox(height: 2),
                 Text(
                   service.description,
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: macAppStoreGray,
-                  ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodySmall?.copyWith(color: macAppStoreGray),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -69,7 +70,10 @@ class ServiceManagementCard extends StatelessWidget {
                 Text(
                   isRunning ? 'Running' : 'Stopped',
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: isRunning ? const Color(0xFF4CAF50) : const Color(0xFFFF6B6B),
+                    color:
+                        isRunning
+                            ? const Color(0xFF4CAF50)
+                            : const Color(0xFFFF6B6B),
                     fontWeight: FontWeight.w500,
                     fontSize: 10,
                   ),
@@ -84,24 +88,39 @@ class ServiceManagementCard extends StatelessWidget {
               IconButton(
                 icon: Icon(
                   isRunning ? Icons.stop : Icons.play_arrow,
-                  color: isRunning ? const Color(0xFFFF6B6B) : const Color(0xFF4CAF50),
+                  color:
+                      isRunning
+                          ? const Color(0xFFFF6B6B)
+                          : const Color(0xFF4CAF50),
                   size: 16,
                 ),
                 onPressed: isRunning ? onStop : onStart,
                 tooltip: isRunning ? 'Stop' : 'Start',
               ),
               IconButton(
-                icon: const Icon(Icons.refresh, color: macAppStoreBlue, size: 16),
+                icon: const Icon(
+                  Icons.refresh,
+                  color: macAppStoreBlue,
+                  size: 16,
+                ),
                 onPressed: onRestart,
                 tooltip: 'Restart',
               ),
               IconButton(
-                icon: const Icon(Icons.settings, color: macAppStoreGray, size: 16),
+                icon: const Icon(
+                  Icons.settings,
+                  color: macAppStoreGray,
+                  size: 16,
+                ),
                 onPressed: onEnable,
                 tooltip: 'Enable',
               ),
               IconButton(
-                icon: const Icon(Icons.visibility, color: macAppStoreGray, size: 16),
+                icon: const Icon(
+                  Icons.visibility,
+                  color: macAppStoreGray,
+                  size: 16,
+                ),
                 onPressed: onViewLogs,
                 tooltip: 'View Logs',
               ),

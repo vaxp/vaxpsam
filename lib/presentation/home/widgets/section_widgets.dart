@@ -24,7 +24,7 @@ class ResponsiveGrid extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         final screenWidth = constraints.maxWidth;
-        
+
         // Determine grid columns based on screen width
         int crossAxisCount;
         if (screenWidth < 768) {
@@ -109,11 +109,7 @@ class SectionActionButton extends StatelessWidget {
                     color: macAppStoreBlue.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: Icon(
-                    icon,
-                    color: macAppStoreBlue,
-                    size: 24,
-                  ),
+                  child: Icon(icon, color: macAppStoreBlue, size: 24),
                 ),
                 const SizedBox(width: 16),
                 Expanded(
@@ -122,7 +118,9 @@ class SectionActionButton extends StatelessWidget {
                     children: [
                       Text(
                         title,
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        style: Theme.of(
+                          context,
+                        ).textTheme.titleMedium?.copyWith(
                           fontWeight: FontWeight.w600,
                           color: Colors.white,
                         ),
@@ -137,10 +135,7 @@ class SectionActionButton extends StatelessWidget {
                     ],
                   ),
                 ),
-                Icon(
-                  Icons.chevron_right,
-                  color: macAppStoreGray,
-                ),
+                Icon(Icons.chevron_right, color: macAppStoreGray),
               ],
             ),
           ),
@@ -188,7 +183,7 @@ class SectionScaffold extends StatelessWidget {
   final String title;
   final List<Widget> children;
   final Widget? header;
-  
+
   const SectionScaffold({
     super.key,
     required this.title,
@@ -271,9 +266,9 @@ class FeaturedCard extends StatelessWidget {
               const SizedBox(height: 8),
               Text(
                 description,
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: macAppStoreGray,
-                ),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyMedium?.copyWith(color: macAppStoreGray),
               ),
             ],
           ),
@@ -295,7 +290,7 @@ class AppGridCard extends StatelessWidget {
     required this.title,
     required this.description,
     this.icon,
-    this.onTap, 
+    this.onTap,
     this.image,
   });
 
@@ -311,11 +306,7 @@ class AppGridCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               if (icon != null) ...[
-                SizedBox(
-                  width: 48,
-                  height: 48,
-                  child: icon,
-                ),
+                SizedBox(width: 48, height: 48, child: icon),
                 const SizedBox(height: 12),
               ],
               Text(
@@ -330,9 +321,9 @@ class AppGridCard extends StatelessWidget {
               const SizedBox(height: 4),
               Text(
                 description,
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: macAppStoreGray,
-                ),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodySmall?.copyWith(color: macAppStoreGray),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),

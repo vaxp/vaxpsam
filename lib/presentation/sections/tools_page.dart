@@ -11,7 +11,7 @@ class ToolsPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final system = ref.read(systemServiceProvider);
-    
+
     return Container(
       color: macAppStoreDark,
       child: CustomScrollView(
@@ -92,10 +92,7 @@ class ToolsPage extends ConsumerWidget {
                 const SizedBox(height: 8),
                 const Text(
                   'Essential tools for developers and system administrators.',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.white70,
-                  ),
+                  style: TextStyle(fontSize: 16, color: Colors.white70),
                 ),
               ],
             ),
@@ -104,8 +101,6 @@ class ToolsPage extends ConsumerWidget {
       ),
     );
   }
-
-  
 
   Widget _buildToolsGrid(BuildContext context, system) {
     return Column(
@@ -140,7 +135,11 @@ class ToolsPage extends ConsumerWidget {
                 ),
                 child: const Icon(Icons.account_tree, color: Colors.white),
               ),
-              onTap: () => showConsoleStream(context, system.installPackageByName('git')),
+              onTap:
+                  () => showConsoleStream(
+                    context,
+                    system.installPackageByName('git'),
+                  ),
             ),
             AppGridCard(
               title: 'VS Code',
@@ -153,7 +152,8 @@ class ToolsPage extends ConsumerWidget {
                 child: const Icon(Icons.code, color: Colors.white),
               ),
               onTap: () {
-                const debUrl = 'https://update.code.visualstudio.com/latest/linux-deb-x64/stable';
+                const debUrl =
+                    'https://update.code.visualstudio.com/latest/linux-deb-x64/stable';
                 showConsoleStream(context, system.installDebFromUrl(debUrl));
               },
             ),
@@ -167,7 +167,11 @@ class ToolsPage extends ConsumerWidget {
                 ),
                 child: const Icon(Icons.folder, color: Colors.white),
               ),
-              onTap: () => showConsoleStream(context, system.installPackageByName('filezilla')),
+              onTap:
+                  () => showConsoleStream(
+                    context,
+                    system.installPackageByName('filezilla'),
+                  ),
             ),
             AppGridCard(
               title: 'GParted',
@@ -179,7 +183,11 @@ class ToolsPage extends ConsumerWidget {
                 ),
                 child: const Icon(Icons.storage, color: Colors.white),
               ),
-              onTap: () => showConsoleStream(context, system.installPackageByName('gparted')),
+              onTap:
+                  () => showConsoleStream(
+                    context,
+                    system.installPackageByName('gparted'),
+                  ),
             ),
           ],
         ),

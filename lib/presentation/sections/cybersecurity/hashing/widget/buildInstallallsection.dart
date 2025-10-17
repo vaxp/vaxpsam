@@ -1,4 +1,3 @@
-
 import '../hashing_export.dart';
 
 class BuildInstallAllSection extends StatelessWidget {
@@ -8,7 +7,7 @@ class BuildInstallAllSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   return Container(
+    return Container(
       margin: const EdgeInsets.all(16),
       child: MacAppStoreCard(
         child: Column(
@@ -16,11 +15,7 @@ class BuildInstallAllSection extends StatelessWidget {
           children: [
             Row(
               children: [
-                Icon(
-                  Icons.download,
-                  color: macAppStoreBlue,
-                  size: 24,
-                ),
+                Icon(Icons.download, color: macAppStoreBlue, size: 24),
                 const SizedBox(width: 12),
                 Expanded(
                   child: Column(
@@ -28,7 +23,9 @@ class BuildInstallAllSection extends StatelessWidget {
                     children: [
                       Text(
                         'Install All Cryptography Tools',
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        style: Theme.of(
+                          context,
+                        ).textTheme.titleMedium?.copyWith(
                           fontWeight: FontWeight.w600,
                           color: Colors.white,
                         ),
@@ -63,5 +60,4 @@ class BuildInstallAllSection extends StatelessWidget {
       ),
     );
   }
-
 }

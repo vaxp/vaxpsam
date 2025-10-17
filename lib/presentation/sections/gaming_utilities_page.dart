@@ -13,7 +13,7 @@ class GamingUtilitiesPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final system = ref.read(systemServiceProvider);
-    
+
     return Container(
       color: macAppStoreDark,
       child: CustomScrollView(
@@ -94,10 +94,7 @@ class GamingUtilitiesPage extends ConsumerWidget {
                 const SizedBox(height: 8),
                 const Text(
                   'Essential gaming tools, media players, and system utilities for the ultimate gaming experience.',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.white70,
-                  ),
+                  style: TextStyle(fontSize: 16, color: Colors.white70),
                 ),
               ],
             ),
@@ -140,9 +137,10 @@ class GamingUtilitiesPage extends ConsumerWidget {
                 ),
                 child: const Icon(Icons.videogame_asset, color: Colors.white),
               ),
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) => const GameRunnersPage()),
-              ),
+              onTap:
+                  () => Navigator.of(context).push(
+                    MaterialPageRoute(builder: (_) => const GameRunnersPage()),
+                  ),
             ),
             AppGridCard(
               title: 'Media & Entertainment',
@@ -152,11 +150,17 @@ class GamingUtilitiesPage extends ConsumerWidget {
                   color: const Color(0xFFE91E63),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Icon(Icons.play_circle_filled, color: Colors.white),
+                child: const Icon(
+                  Icons.play_circle_filled,
+                  color: Colors.white,
+                ),
               ),
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) => const MediaEntertainmentPage()),
-              ),
+              onTap:
+                  () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => const MediaEntertainmentPage(),
+                    ),
+                  ),
             ),
             AppGridCard(
               title: 'System & Performance',
@@ -168,9 +172,12 @@ class GamingUtilitiesPage extends ConsumerWidget {
                 ),
                 child: const Icon(Icons.speed, color: Colors.white),
               ),
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) => const SystemPerformancePage()),
-              ),
+              onTap:
+                  () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => const SystemPerformancePage(),
+                    ),
+                  ),
             ),
           ],
         ),

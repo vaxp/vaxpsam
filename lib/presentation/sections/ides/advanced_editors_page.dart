@@ -16,27 +16,27 @@ class AdvancedEditorsPage extends ConsumerWidget {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            expandedHeight: 200,
-            floating: false,
-            pinned: true,
-            backgroundColor: macAppStoreDark,
-            flexibleSpace: FlexibleSpaceBar(
-              background: _buildHeroSection(context),
+          slivers: [
+            SliverAppBar(
+              expandedHeight: 200,
+              floating: false,
+              pinned: true,
+              backgroundColor: macAppStoreDark,
+              flexibleSpace: FlexibleSpaceBar(
+                background: _buildHeroSection(context),
+              ),
             ),
-          ),
-          SliverToBoxAdapter(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildInstallAllSection(context, system),
-                _buildToolsGrid(context, system),
-                const SizedBox(height: 20),
-              ],
+            SliverToBoxAdapter(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildInstallAllSection(context, system),
+                  _buildToolsGrid(context, system),
+                  const SizedBox(height: 20),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
         ),
       ),
     );
@@ -95,10 +95,7 @@ class AdvancedEditorsPage extends ConsumerWidget {
                 const SizedBox(height: 8),
                 const Text(
                   'Popular IDEs and editors installed via Flatpak. Ensure Flathub is enabled.',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.white70,
-                  ),
+                  style: TextStyle(fontSize: 16, color: Colors.white70),
                 ),
               ],
             ),
@@ -130,7 +127,9 @@ class AdvancedEditorsPage extends ConsumerWidget {
                   const SizedBox(height: 4),
                   Text(
                     'Installs all listed IDEs via Flatpak from Flathub',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: macAppStoreGray),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyMedium?.copyWith(color: macAppStoreGray),
                   ),
                 ],
               ),
@@ -143,7 +142,9 @@ class AdvancedEditorsPage extends ConsumerWidget {
                 backgroundColor: macAppStoreBlue,
                 foregroundColor: Colors.white,
                 elevation: 0,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
               ),
             ),
           ],
@@ -154,16 +155,66 @@ class AdvancedEditorsPage extends ConsumerWidget {
 
   Widget _buildToolsGrid(BuildContext context, system) {
     final tools = [
-      {'name': 'Visual Studio Code', 'ref': 'com.visualstudio.code', 'desc': 'Popular editor with rich extensions','iconAsset': 'assets/ides/vscode.png'},
-      {'name': 'Code::Blocks', 'ref': 'org.codeblocks.codeblocks', 'desc': 'Open-source IDE for C/C++','iconAsset': 'assets/ides/code_bloc.png' },
-      {'name': 'Gedit', 'ref': 'org.gnome.gedit', 'desc': 'Lightweight GNOME text editor','iconAsset': 'assets/ides/gedit.jpg' },
-      {'name': 'Sublime Text', 'ref': 'com.sublimetext.three', 'desc': 'Fast and efficient editor','iconAsset': 'assets/ides/sublime.png'},
-      {'name': 'Eclipse', 'ref': 'org.eclipse.Platform', 'desc': 'Comprehensive IDE, especially for Java','iconAsset': 'assets/ides/Eclipse.png'},
-      {'name': 'Android Studio', 'ref': 'com.google.AndroidStudio', 'desc': 'Official Android development IDE','iconAsset': 'assets/ides/android_studio.png'},
-      {'name': 'NetBeans', 'ref': 'org.apache.netbeans', 'desc': 'Open-source IDE for Java, PHP, and C++','iconAsset': 'assets/ides/netbeans.png'},
-      {'name': 'IntelliJ IDEA', 'ref': 'com.jetbrains.IntelliJ-IDEA-Community', 'desc': 'Professional IDE for Java/Kotlin','iconAsset': 'assets/ides/IntelliJ_IDEA.png'},
-      {'name': 'Atom', 'ref': 'io.atom.Atom', 'desc': 'Customizable open-source editor' ,'iconAsset': 'assets/ides/Atom.png'},
-      {'name': 'KDevelop', 'ref': 'org.kde.kdevelop', 'desc': 'Advanced IDE, great for KDE/C++' ,'iconAsset': 'assets/ides/kdevelop.png'},
+      {
+        'name': 'Visual Studio Code',
+        'ref': 'com.visualstudio.code',
+        'desc': 'Popular editor with rich extensions',
+        'iconAsset': 'assets/ides/vscode.png',
+      },
+      {
+        'name': 'Code::Blocks',
+        'ref': 'org.codeblocks.codeblocks',
+        'desc': 'Open-source IDE for C/C++',
+        'iconAsset': 'assets/ides/code_bloc.png',
+      },
+      {
+        'name': 'Gedit',
+        'ref': 'org.gnome.gedit',
+        'desc': 'Lightweight GNOME text editor',
+        'iconAsset': 'assets/ides/gedit.jpg',
+      },
+      {
+        'name': 'Sublime Text',
+        'ref': 'com.sublimetext.three',
+        'desc': 'Fast and efficient editor',
+        'iconAsset': 'assets/ides/sublime.png',
+      },
+      {
+        'name': 'Eclipse',
+        'ref': 'org.eclipse.Platform',
+        'desc': 'Comprehensive IDE, especially for Java',
+        'iconAsset': 'assets/ides/Eclipse.png',
+      },
+      {
+        'name': 'Android Studio',
+        'ref': 'com.google.AndroidStudio',
+        'desc': 'Official Android development IDE',
+        'iconAsset': 'assets/ides/android_studio.png',
+      },
+      {
+        'name': 'NetBeans',
+        'ref': 'org.apache.netbeans',
+        'desc': 'Open-source IDE for Java, PHP, and C++',
+        'iconAsset': 'assets/ides/netbeans.png',
+      },
+      {
+        'name': 'IntelliJ IDEA',
+        'ref': 'com.jetbrains.IntelliJ-IDEA-Community',
+        'desc': 'Professional IDE for Java/Kotlin',
+        'iconAsset': 'assets/ides/IntelliJ_IDEA.png',
+      },
+      {
+        'name': 'Atom',
+        'ref': 'io.atom.Atom',
+        'desc': 'Customizable open-source editor',
+        'iconAsset': 'assets/ides/Atom.png',
+      },
+      {
+        'name': 'KDevelop',
+        'ref': 'org.kde.kdevelop',
+        'desc': 'Advanced IDE, great for KDE/C++',
+        'iconAsset': 'assets/ides/kdevelop.png',
+      },
     ];
 
     return Column(
@@ -192,25 +243,42 @@ class AdvancedEditorsPage extends ConsumerWidget {
           itemCount: tools.length,
           itemBuilder: (context, i) {
             final t = tools[i];
-            final assetPath = t['iconAsset']?? 'assets/ides/default.png' ; 
+            final assetPath = t['iconAsset'] ?? 'assets/ides/default.png';
 
             return AppGridCard(
               title: t['name']!,
               description: t['desc']!,
-              image: Image.asset(assetPath, width: 40, height: 40, fit: BoxFit.contain),
+              image: Image.asset(
+                assetPath,
+                width: 40,
+                height: 40,
+                fit: BoxFit.contain,
+              ),
               icon: Container(
                 decoration: BoxDecoration(
                   color: const Color.fromARGB(255, 55, 57, 71),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Image.asset( // استخدام الأداة Image.asset
-                  t['iconAsset']?? 'assets/ides/default.png' ,  // تمرير المسار المخزن في قائمة tools
-                  width: 40, 
-                  height: 40, 
+                child: Image.asset(
+                  // استخدام الأداة Image.asset
+                  t['iconAsset'] ??
+                      'assets/ides/default.png', // تمرير المسار المخزن في قائمة tools
+                  width: 40,
+                  height: 40,
                   fit: BoxFit.contain,
                 ),
               ),
-              onTap: () => showConsoleStream(context, system.runAsRoot(['flatpak', 'install', '-y', 'flathub', t['ref']!])),
+              onTap:
+                  () => showConsoleStream(
+                    context,
+                    system.runAsRoot([
+                      'flatpak',
+                      'install',
+                      '-y',
+                      'flathub',
+                      t['ref']!,
+                    ]),
+                  ),
             );
           },
         ),
@@ -233,27 +301,33 @@ class AdvancedEditorsPage extends ConsumerWidget {
     ];
     showDialog(
       context: context,
-      builder: (ctx) => AlertDialog(
-        title: const Text('Install All Advanced Editors'),
-        content: Text('This will install ${refs.length} editors via Flatpak. Continue?'),
-        actions: [
-          TextButton(onPressed: () => Navigator.of(ctx).pop(), child: const Text('Cancel')),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.of(ctx).pop();
-              showConsoleStream(
-                context,
-                system.runAsRoot(['bash', '-lc',
-                  'for r in "${refs.join('" "')}"; do flatpak install -y flathub "\$r"; done'
-                ]),
-              );
-            },
-            child: const Text('Install All'),
+      builder:
+          (ctx) => AlertDialog(
+            title: const Text('Install All Advanced Editors'),
+            content: Text(
+              'This will install ${refs.length} editors via Flatpak. Continue?',
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(ctx).pop(),
+                child: const Text('Cancel'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(ctx).pop();
+                  showConsoleStream(
+                    context,
+                    system.runAsRoot([
+                      'bash',
+                      '-lc',
+                      'for r in "${refs.join('" "')}"; do flatpak install -y flathub "\$r"; done',
+                    ]),
+                  );
+                },
+                child: const Text('Install All'),
+              ),
+            ],
           ),
-        ],
-      ),
     );
   }
 }
-
-

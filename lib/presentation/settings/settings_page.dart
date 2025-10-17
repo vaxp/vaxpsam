@@ -64,9 +64,8 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     final system = ref.read(systemServiceProvider);
-    
-    return Scaffold(
 
+    return Scaffold(
       backgroundColor: const Color.fromARGB(38, 34, 34, 34),
       appBar: AppBar(
         title: const Text('Settings'),
@@ -114,104 +113,188 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                   const SizedBox(height: 8),
                   const Text(
                     'Configure package repositories and system services.',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.white70,
-                    ),
+                    style: TextStyle(fontSize: 16, color: Colors.white70),
                   ),
                 ],
               ),
             ),
             const SizedBox(height: 24),
-            
+
             // Snapd Section
             _buildSettingsSection(
               context,
               title: 'Snapd',
-              status: _snapAvailable == null ? 'Checking...' : (_snapAvailable! ? 'Enabled' : 'Disabled'),
+              status:
+                  _snapAvailable == null
+                      ? 'Checking...'
+                      : (_snapAvailable! ? 'Enabled' : 'Disabled'),
               description: 'Manage snapd service (required for snaps)',
-              onAdd: () => _showAndRefresh(
-                system.runAsRoot([
-                  'apt', 'update', '&&',
-                  'apt', 'install', '-y', 'snapd', '&&',
-                  'systemctl', 'enable', '--now', 'snapd', '&&',
-                  "test", "-L", "/snap", "||", "ln", "-s", "/var/lib/snapd/snap", "/snap"
-                ]),
-              ),
-              onRemove: () => _showAndRefresh(
-                system.runAsRoot([
-                  'apt', 'remove', '--purge', '-y', 'snapd', '&&',
-                  'apt', 'autoremove', '-y', '&&',
-                  'rm', '-f', '/snap'
-                ]),
-              ),
+              onAdd:
+                  () => _showAndRefresh(
+                    system.runAsRoot([
+                      'apt',
+                      'update',
+                      '&&',
+                      'apt',
+                      'install',
+                      '-y',
+                      'snapd',
+                      '&&',
+                      'systemctl',
+                      'enable',
+                      '--now',
+                      'snapd',
+                      '&&',
+                      "test",
+                      "-L",
+                      "/snap",
+                      "||",
+                      "ln",
+                      "-s",
+                      "/var/lib/snapd/snap",
+                      "/snap",
+                    ]),
+                  ),
+              onRemove:
+                  () => _showAndRefresh(
+                    system.runAsRoot([
+                      'apt',
+                      'remove',
+                      '--purge',
+                      '-y',
+                      'snapd',
+                      '&&',
+                      'apt',
+                      'autoremove',
+                      '-y',
+                      '&&',
+                      'rm',
+                      '-f',
+                      '/snap',
+                    ]),
+                  ),
             ),
-            
+
             const SizedBox(height: 16),
-            
+
             // Snap Store Section
             _buildSettingsSection(
               context,
               title: 'Snap Store',
-              status: _snapAvailable == null ? 'Checking...' : (_snapAvailable! ? 'Available' : 'Snapd missing'),
+              status:
+                  _snapAvailable == null
+                      ? 'Checking...'
+                      : (_snapAvailable! ? 'Available' : 'Snapd missing'),
               description: 'Install/remove Snap Store (requires snapd)',
-              onAdd: () => _showAndRefresh(
-                system.runAsRoot([
-                  'systemctl', 'start', 'snapd', '||', 'true', '&&',
-                  'snap', 'install', 'snap-store'
-                ]),
-              ),
-              onRemove: () => _showAndRefresh(
-                system.runAsRoot(['snap', 'remove', 'snap-store']),
-              ),
+              onAdd:
+                  () => _showAndRefresh(
+                    system.runAsRoot([
+                      'systemctl',
+                      'start',
+                      'snapd',
+                      '||',
+                      'true',
+                      '&&',
+                      'snap',
+                      'install',
+                      'snap-store',
+                    ]),
+                  ),
+              onRemove:
+                  () => _showAndRefresh(
+                    system.runAsRoot(['snap', 'remove', 'snap-store']),
+                  ),
             ),
-            
+
             const SizedBox(height: 16),
-            
+
             // Flatpak Section
             _buildSettingsSection(
               context,
               title: 'Flatpak',
-              status: _flatpakInstalled == null ? 'Checking...' : (_flatpakInstalled! ? 'Installed' : 'Not installed'),
+              status:
+                  _flatpakInstalled == null
+                      ? 'Checking...'
+                      : (_flatpakInstalled! ? 'Installed' : 'Not installed'),
               description: 'Install/remove Flatpak runtime support',
-              onAdd: () => _showAndRefresh(
-                system.runAsRoot(['apt', 'update', '&&', 'apt', 'install', '-y', 'flatpak', 'gnome-software-plugin-flatpak']),
-              ),
-              onRemove: () => _showAndRefresh(
-                system.runAsRoot(['apt', 'remove', '-y', 'flatpak', 'gnome-software-plugin-flatpak', '&&', 'apt', 'autoremove', '-y']),
-              ),
+              onAdd:
+                  () => _showAndRefresh(
+                    system.runAsRoot([
+                      'apt',
+                      'update',
+                      '&&',
+                      'apt',
+                      'install',
+                      '-y',
+                      'flatpak',
+                      'gnome-software-plugin-flatpak',
+                    ]),
+                  ),
+              onRemove:
+                  () => _showAndRefresh(
+                    system.runAsRoot([
+                      'apt',
+                      'remove',
+                      '-y',
+                      'flatpak',
+                      'gnome-software-plugin-flatpak',
+                      '&&',
+                      'apt',
+                      'autoremove',
+                      '-y',
+                    ]),
+                  ),
             ),
-            
+
             const SizedBox(height: 16),
-            
+
             // Flathub Section
             _buildSettingsSection(
               context,
               title: 'Flathub',
-              status: _flathubEnabled == null ? 'Checking...' : (_flathubEnabled! ? 'Enabled' : 'Disabled'),
+              status:
+                  _flathubEnabled == null
+                      ? 'Checking...'
+                      : (_flathubEnabled! ? 'Enabled' : 'Disabled'),
               description: 'Add/remove Flathub repository for Flatpak apps',
-              onAdd: () => _showAndRefresh(
-                system.enableFlathub(),
-              ),
-              onRemove: () => _showAndRefresh(
-                system.disableFlathub(),
-              ),
+              onAdd: () => _showAndRefresh(system.enableFlathub()),
+              onRemove: () => _showAndRefresh(system.disableFlathub()),
             ),
-            
+
             const SizedBox(height: 16),
-            
+
             // Ubuntu Universe Section
             _buildSettingsSection(
               context,
               title: 'Ubuntu Universe',
-              status: _universeEnabled == null ? 'Checking...' : (_universeEnabled! ? 'Enabled' : 'Disabled'),
+              status:
+                  _universeEnabled == null
+                      ? 'Checking...'
+                      : (_universeEnabled! ? 'Enabled' : 'Disabled'),
               description: 'Enable/disable the Ubuntu Universe repository',
-              onAdd: () => _showAndRefresh(
-                system.runAsRoot(['add-apt-repository', '-y', 'universe', '&&', 'apt', 'update']),
-              ),
-              onRemove: () => _showAndRefresh(
-                system.runAsRoot(['add-apt-repository', '-r', '-y', 'universe', '&&', 'apt', 'update']),
-              ),
+              onAdd:
+                  () => _showAndRefresh(
+                    system.runAsRoot([
+                      'add-apt-repository',
+                      '-y',
+                      'universe',
+                      '&&',
+                      'apt',
+                      'update',
+                    ]),
+                  ),
+              onRemove:
+                  () => _showAndRefresh(
+                    system.runAsRoot([
+                      'add-apt-repository',
+                      '-r',
+                      '-y',
+                      'universe',
+                      '&&',
+                      'apt',
+                      'update',
+                    ]),
+                  ),
             ),
           ],
         ),
@@ -248,18 +331,21 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                     Text(
                       status,
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: status.contains('Enabled') || status.contains('Available') || status.contains('Installed')
-                            ? const Color(0xFF4CAF50)
-                            : macAppStoreGray,
+                        color:
+                            status.contains('Enabled') ||
+                                    status.contains('Available') ||
+                                    status.contains('Installed')
+                                ? const Color(0xFF4CAF50)
+                                : macAppStoreGray,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
                     const SizedBox(height: 8),
                     Text(
                       description,
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: macAppStoreGray,
-                      ),
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodyMedium?.copyWith(color: macAppStoreGray),
                     ),
                   ],
                 ),
