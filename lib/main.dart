@@ -3,23 +3,19 @@ import 'package:vaxpsam/core/sizeguard.dart';
 import 'core/main_export.dart';
 
 void main() async {
-  // تهيئة Flutter قبل أي عمليات غير متزامنة
   WidgetsFlutterBinding.ensureInitialized();
 
-  // تهيئة window_manager
   await windowManager.ensureInitialized();
-  // إعداد خصائص النافذة المحسنة للاستجابة
   const windowOptions = WindowOptions(
-    size: Size(1200, 800), // حجم افتراضي أكبر للديسكتوب
-    minimumSize: Size(768, 600), // حد أدنى للجوال/تابلت
-    maximumSize: Size(1920, 1080), // حد أقصى للشاشات الكبيرة
+    size: Size(1200, 800), 
+    minimumSize: Size(768, 600), 
+    maximumSize: Size(1920, 1080), 
     center: true,
     title: "VAXP System Manager",
     titleBarStyle: TitleBarStyle.normal,
     windowButtonVisibility: true,
   );
 
-  // تجهيز النافذة قبل العرض
   windowManager.waitUntilReadyToShow(windowOptions, () async {
     await windowManager.show();
     await windowManager.focus();
@@ -42,12 +38,10 @@ class _VAXPSystemManagerAppState extends State<VAXPSystemManagerApp> {
   void initState() {
     super.initState();
 
-    // مؤقت شاشة البداية
     Future.delayed(const Duration(seconds: 2), () {
       if (mounted) setState(() => _showSplash = false);
     });
 
-    // 👇 مستمع يمنع تصغير التطبيق تحت الحد الأدنى
     windowManager.addListener(SizeGuard());
   }
 

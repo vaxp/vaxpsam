@@ -33,7 +33,7 @@ class _BuildMainAppState extends State<BuildMainApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(31, 66, 66, 66),
+      backgroundColor: const Color.fromARGB(31, 8, 8, 8),
       body: Stack(
         children: [
           // Main content with navigation

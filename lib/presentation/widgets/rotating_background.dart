@@ -7,7 +7,7 @@ class StaticBackground extends StatelessWidget {
   const StaticBackground({super.key, required this.child, this.images});
 
   List<String> get _backgroundImages {
-    return images ?? ['assets/images/background1.jpg'];
+    return images ?? ['assets/images/background5.jpg'];
   }
 
   @override
