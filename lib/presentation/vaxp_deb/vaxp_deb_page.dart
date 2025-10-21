@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:path/path.dart' as path;
 import 'dart:io';
-import 'home/widgets/section_widgets.dart';
-import '../core/theme/app_theme.dart';
+import '../home/widgets/section_widgets.dart';
+import '../../core/theme/app_theme.dart';
 
 class VaxpDebPage extends StatefulWidget {
   const VaxpDebPage({super.key});
@@ -75,7 +75,6 @@ class _VaxpDebPageState extends State<VaxpDebPage>
   Future<void> _selectIconFile() async {
     try {
       FilePickerResult? result = await FilePicker.platform.pickFiles(
-        // ⚠️ قم بتغيير القيمة هنا من FileType.image إلى FileType.custom
         type: FileType.custom,
         dialogTitle: 'Select Application Icon',
         allowedExtensions: ['png', 'jpg', 'jpeg', 'svg'],
@@ -430,78 +429,14 @@ exec "./$originalExecName" "\$@"
 
       children: [
         _buildProjectSelectionCard(context),
-        _buildIconSelectionCard(context),
+        buildIconSelectionCard(context),
         _buildDesktopEntryCard(context),
         _buildConvertButton(context),
         _buildStatusDisplay(context),
       ],
     );
   }
-  // Widget _buildHeroSection(BuildContext context) {
-  //     return Container(
-  //       height: 100,
-  //       margin: const EdgeInsets.all(16),
-  //       decoration: BoxDecoration(
-  //         gradient: const LinearGradient(
-  //           begin: Alignment.topLeft,
-  //           end: Alignment.bottomRight,
-  //           colors: [macAppStorePurple, Color(0xFFE91E63)],
-  //         ),
-  //         borderRadius: BorderRadius.circular(12),
-  //       ),
-  //       child: Stack(
-  //         children: [
-  //           Positioned.fill(
-  //             child: Container(
-  //               decoration: BoxDecoration(
-  //                 borderRadius: BorderRadius.circular(12),
-  //                 gradient: const LinearGradient(
-  //                   begin: Alignment.topLeft,
-  //                   end: Alignment.bottomRight,
-  //                   colors: [macAppStorePurple, Color(0xFFE91E63)],
-  //                 ),
-  //               ),
-  //             ),
-  //           ),
-  //           Padding(
-  //             padding: const EdgeInsets.all(24),
-  //             child: Column(
-  //               crossAxisAlignment: CrossAxisAlignment.start,
-  //               mainAxisAlignment: MainAxisAlignment.center,
-  //               children: [
-  //                 const Text(
-  //                   'DEB CONVERTER',
-  //                   style: TextStyle(
-  //                     fontSize: 12,
-  //                     fontWeight: FontWeight.w600,
-  //                     color: Colors.white70,
-  //                     letterSpacing: 1.2,
-  //                   ),
-  //                 ),
-  //                 const SizedBox(height: 8),
-  //                 const Text(
-  //                   'Convert Flutter Apps to DEB',
-  //                   style: TextStyle(
-  //                     fontSize: 28,
-  //                     fontWeight: FontWeight.bold,
-  //                     color: Colors.white,
-  //                   ),
-  //                 ),
-  //                 const SizedBox(height: 8),
-  //                 const Text(
-  //                   'Transform your Flutter applications into distributable DEB packages.',
-  //                   style: TextStyle(
-  //                     fontSize: 16,
-  //                     color: Colors.white70,
-  //                   ),
-  //                 ),
-  //               ],
-  //             ),
-  //           ),
-  //         ],
-  //       ),
-  //     );
-  //   }
+  
 
   Widget _buildProjectSelectionCard(BuildContext context) {
     return MacAppStoreCard(
@@ -579,7 +514,7 @@ exec "./$originalExecName" "\$@"
     );
   }
 
-  Widget _buildIconSelectionCard(BuildContext context) {
+  Widget buildIconSelectionCard(BuildContext context) {
     return MacAppStoreCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
