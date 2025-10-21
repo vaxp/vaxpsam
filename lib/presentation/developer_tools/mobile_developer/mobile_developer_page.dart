@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../infrastructure/providers.dart';
-import '../home/widgets/section_widgets.dart';
-import '../console/console_utils.dart';
-import '../theme/app_theme.dart';
-import '../widgets/rotating_background.dart';
+import '../../../infrastructure/providers.dart';
+import '../../home/widgets/section_widgets.dart';
+import '../../console/console_utils.dart';
+import '../../../core/theme/app_theme.dart';
+import '../../../core/widgets/rotating_background.dart';
 
-class DevOpsSysadminPage extends ConsumerWidget {
-  const DevOpsSysadminPage({super.key});
+class MobileDeveloperPage extends ConsumerWidget {
+  const MobileDeveloperPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -51,7 +51,7 @@ class DevOpsSysadminPage extends ConsumerWidget {
         gradient: const LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [Color(0xFFFF9800), Color(0xFFFFB74D)],
+          colors: [Color(0xFF9C27B0), Color(0xFFBA68C8)],
         ),
         borderRadius: BorderRadius.circular(12),
       ),
@@ -64,7 +64,7 @@ class DevOpsSysadminPage extends ConsumerWidget {
                 gradient: const LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
-                  colors: [Color(0xFFFF9800), Color(0xFFFFB74D)],
+                  colors: [Color(0xFF9C27B0), Color(0xFFBA68C8)],
                 ),
               ),
             ),
@@ -76,7 +76,7 @@ class DevOpsSysadminPage extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
-                  'DEVOPS / SYSADMIN',
+                  'MOBILE DEVELOPER',
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
@@ -86,7 +86,7 @@ class DevOpsSysadminPage extends ConsumerWidget {
                 ),
                 const SizedBox(height: 8),
                 const Text(
-                  'DevOps & System Administration',
+                  'Mobile Development Tools',
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
@@ -95,7 +95,7 @@ class DevOpsSysadminPage extends ConsumerWidget {
                 ),
                 const SizedBox(height: 8),
                 const Text(
-                  '30 professional tools for DevOps operations, containerization, and system administration.',
+                  '30 professional tools for Android and mobile app development including Java, ADB, and build systems.',
                   style: TextStyle(fontSize: 16, color: Colors.white70),
                 ),
               ],
@@ -122,7 +122,7 @@ class DevOpsSysadminPage extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Install All DevOps Tools',
+                        'Install All Mobile Developer Tools',
                         style: Theme.of(
                           context,
                         ).textTheme.titleMedium?.copyWith(
@@ -132,7 +132,7 @@ class DevOpsSysadminPage extends ConsumerWidget {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        'Install all 30 DevOps and system administration tools at once',
+                        'Install all 30 mobile development tools at once',
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: macAppStoreGray,
                         ),
@@ -164,150 +164,139 @@ class DevOpsSysadminPage extends ConsumerWidget {
   Widget _buildToolsGrid(BuildContext context, system) {
     final tools = [
       {
-        'name': 'Docker',
-        'package': 'docker.io',
+        'name': 'Java JDK',
+        'package': 'default-jdk',
         'description':
-            'Basic container platform (for consistent deployments and environments)',
+            'Java development environment (essential for native Android applications)',
       },
       {
-        'name': 'Ansible',
-        'package': 'ansible',
-        'description': 'Agentless automation and configuration management tool',
+        'name': 'Java JRE',
+        'package': 'default-jre',
+        'description': 'Java runtime environment',
+      },
+      {'name': 'Git', 'package': 'git', 'description': 'Version control'},
+      {
+        'name': 'Node.js',
+        'package': 'nodejs',
+        'description': 'For React Native/Ionic development',
       },
       {
-        'name': 'Kubectl',
-        'package': 'kubectl',
-        'description': 'Command-line client for managing Kubernetes clusters',
+        'name': 'NPM',
+        'package': 'npm',
+        'description': 'Node.js package manager',
       },
       {
-        'name': 'Vagrant',
-        'package': 'vagrant',
+        'name': 'Android Tools',
+        'package': 'android-tools-adb',
         'description':
-            'For building and managing portable virtual environments',
+            'ADB (Android Debug Bridge) tool for communicating with the device/emulator',
       },
       {
-        'name': 'Git',
-        'package': 'git',
-        'description': 'For version control (essential for CI/CD)',
+        'name': 'Fastboot',
+        'package': 'android-tools-fastboot',
+        'description':
+            'Flashboot tool (for installing system images on Android devices)',
       },
       {
-        'name': 'Rsync',
-        'package': 'rsync',
-        'description': 'For efficient file synchronization between systems',
+        'name': 'Gradle',
+        'package': 'gradle',
+        'description': 'Java/Android application build system',
       },
       {
-        'name': 'Make',
-        'package': 'make',
-        'description': 'To automate routine DevOps tasks',
+        'name': 'Maven',
+        'package': 'maven',
+        'description': 'Java/Kotlin application build system',
+      },
+      {'name': 'Curl', 'package': 'curl', 'description': 'For testing APIs'},
+      {'name': 'Wget', 'package': 'wget', 'description': 'For downloading'},
+      {
+        'name': 'Unzip',
+        'package': 'unzip',
+        'description': 'For unzipping the SDK and packages',
+      },
+      {
+        'name': 'Tar',
+        'package': 'tar',
+        'description': 'For handling file archives',
+      },
+      {
+        'name': 'GCC/G++',
+        'package': 'build-essential',
+        'description':
+            'For compiling any native code within Android applications',
+      },
+      {
+        'name': 'CMake',
+        'package': 'cmake',
+        'description': 'Used by the Android NDK for building native code (JNI)',
+      },
+      {
+        'name': 'Ninja Build',
+        'package': 'ninja-build',
+        'description': 'Rapid build system (used by Android)',
+      },
+      {
+        'name': 'Adb-tools',
+        'package': 'adb-tools',
+        'description': 'Additional tools for ADB',
+      },
+      {
+        'name': 'Valgrind',
+        'package': 'valgrind',
+        'description': 'For memory debugging (for native code)',
       },
       {
         'name': 'Python 3',
         'package': 'python3',
-        'description': 'Basic language for writing automation scripts',
+        'description': 'For scripting and automation in the build environment',
       },
       {
-        'name': 'Bash',
-        'package': 'bash',
-        'description': 'Command-line shell (basic for shell scripts)',
+        'name': 'Pip',
+        'package': 'python3-pip',
+        'description': 'Python package manager',
       },
       {
-        'name': 'SSH Server',
-        'package': 'openssh-server',
-        'description': 'To enable remote connection and management',
+        'name': 'libxml2-utils',
+        'package': 'libxml2-utils',
+        'description': 'XML tools (for Android Manifest files)',
       },
+      {'name': 'Vim', 'package': 'vim', 'description': 'Text editor'},
+      {'name': 'Nano', 'package': 'nano', 'description': 'Text editor'},
       {
-        'name': 'TMux',
-        'package': 'tmux',
-        'description': 'To manage multiple command-line sessions',
-      },
-      {
-        'name': 'Screen',
-        'package': 'screen',
-        'description': 'Alternative to Tmux',
-      },
-      {
-        'name': 'Nginx',
-        'package': 'nginx',
-        'description': 'Acts as a load balancer and reverse proxy',
-      },
-      {
-        'name': 'Apache2',
-        'package': 'apache2',
-        'description': 'Web server and proxy',
-      },
-      {
-        'name': 'Vim',
-        'package': 'vim',
-        'description': 'To edit configuration files',
-      },
-      {
-        'name': 'Nano',
-        'package': 'nano',
-        'description': 'To edit configuration files',
-      },
-      {
-        'name': 'Htop',
-        'package': 'htop',
+        'name': 'lib32z1',
+        'package': 'lib32z1',
         'description':
-            'Interactive process monitor (for analyzing server performance)',
+            '32-bit libraries (necessary for running some emulators)',
       },
       {
-        'name': 'Lsof',
-        'package': 'lsof',
-        'description': 'To list open files and the processes using them',
+        'name': 'libstdc++6',
+        'package': 'libstdc++6',
+        'description': 'Standard C++ library',
       },
       {
-        'name': 'Net-tools',
-        'package': 'net-tools',
-        'description': 'Old but popular network tool (netstat)',
+        'name': 'libgl1-mesa-glx',
+        'package': 'libgl1-mesa-glx',
+        'description': 'OpenGL libraries (for emulators)',
       },
       {
-        'name': 'Tcpdump',
-        'package': 'tcpdump',
-        'description': 'For analyzing network traffic',
+        'name': 'libtinfo5',
+        'package': 'libtinfo5',
+        'description': 'Terminal control library',
       },
       {
-        'name': 'Curl',
-        'package': 'curl',
-        'description': 'For testing Endpoints',
-      },
-      {'name': 'Wget', 'package': 'wget', 'description': 'For downloading'},
-      {
-        'name': 'Bind9-utils',
-        'package': 'bind9-utils',
-        'description': 'For DNS inspection (dig, host)',
+        'name': 'libncurses5',
+        'package': 'libncurses5',
+        'description': 'Terminal interface library',
       },
       {
-        'name': 'Logrotate',
-        'package': 'logrotate',
-        'description': 'For managing log file rotation',
+        'name': 'libcurl4-openssl-dev',
+        'package': 'libcurl4-openssl-dev',
+        'description': 'Curl libraries for encryption',
       },
       {
-        'name': 'Iftop',
-        'package': 'iftop',
-        'description': 'For monitoring real-time network usage',
-      },
-      {
-        'name': 'Dmesg',
-        'package': 'util-linux',
-        'description': 'For viewing kernel messages',
-      },
-      {'name': 'Tar', 'package': 'tar', 'description': 'For backups'},
-      {
-        'name': 'Unzip',
-        'package': 'unzip',
-        'description': 'For handling archives',
-      },
-      {
-        'name': 'Sysstat',
-        'package': 'sysstat',
-        'description': 'Advanced performance monitoring tools (iostat, mpstat)',
-      },
-      {
-        'name': 'Cloud-init',
-        'package': 'cloud-init',
-        'description':
-            'For automating the first server setup (Mission in the cloud)',
+        'name': 'OpenSSL Dev',
+        'package': 'libssl-dev',
+        'description': 'OpenSSL libraries (for secure server connections)',
       },
     ];
 
@@ -317,7 +306,7 @@ class DevOpsSysadminPage extends ConsumerWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: Text(
-            'DevOps & System Administration Tools',
+            'Mobile Development Tools',
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
               color: Colors.white,
@@ -342,13 +331,10 @@ class DevOpsSysadminPage extends ConsumerWidget {
               description: tool['description']!,
               icon: Container(
                 decoration: BoxDecoration(
-                  color: const Color(0xFFFF9800),
+                  color: const Color(0xFF9C27B0),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Icon(
-                  Icons.settings_applications,
-                  color: Colors.white,
-                ),
+                child: const Icon(Icons.phone_android, color: Colors.white),
               ),
               onTap:
                   () => showConsoleStream(
@@ -364,45 +350,45 @@ class DevOpsSysadminPage extends ConsumerWidget {
 
   void _installAllTools(BuildContext context, system) {
     final tools = [
-      'docker.io',
-      'ansible',
-      'kubectl',
-      'vagrant',
+      'default-jdk',
+      'default-jre',
       'git',
-      'rsync',
-      'make',
-      'python3',
-      'bash',
-      'openssh-server',
-      'tmux',
-      'screen',
-      'nginx',
-      'apache2',
-      'vim',
-      'nano',
-      'htop',
-      'lsof',
-      'net-tools',
-      'tcpdump',
+      'nodejs',
+      'npm',
+      'android-tools-adb',
+      'android-tools-fastboot',
+      'gradle',
+      'maven',
       'curl',
       'wget',
-      'bind9-utils',
-      'logrotate',
-      'iftop',
-      'util-linux',
-      'tar',
       'unzip',
-      'sysstat',
-      'cloud-init',
+      'tar',
+      'build-essential',
+      'cmake',
+      'ninja-build',
+      'adb-tools',
+      'valgrind',
+      'python3',
+      'python3-pip',
+      'libxml2-utils',
+      'vim',
+      'nano',
+      'lib32z1',
+      'libstdc++6',
+      'libgl1-mesa-glx',
+      'libtinfo5',
+      'libncurses5',
+      'libcurl4-openssl-dev',
+      'libssl-dev',
     ];
 
     showDialog(
       context: context,
       builder:
           (ctx) => AlertDialog(
-            title: const Text('Install All DevOps Tools'),
+            title: const Text('Install All Mobile Developer Tools'),
             content: Text(
-              'This will install ${tools.length} DevOps and system administration tools. Continue?',
+              'This will install ${tools.length} mobile development tools. Continue?',
             ),
             actions: [
               TextButton(

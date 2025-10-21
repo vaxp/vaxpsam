@@ -1,8 +1,8 @@
 // lib/advanced_editors/advanced_editors_page.dart (نظيف ومُنظم)
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:vaxpsam/presentation/theme/app_theme.dart';
-import 'package:vaxpsam/presentation/widgets/rotating_background.dart';
+import 'package:vaxpsam/core/theme/app_theme.dart';
+import 'package:vaxpsam/core/widgets/rotating_background.dart';
 // استيراد الويدجيتات الجديدة
 import 'widgets/advanced_hero_section.dart';
 import 'widgets/install_all_advanced_card.dart';

@@ -7,4 +7,4 @@ export 'package:vaxpsam/presentation/cybersecurity/hashing/widget/installAllTool
 export '../../../infrastructure/providers.dart';
 export '../../home/widgets/section_widgets.dart';
 export '../../console/console_utils.dart';
-export '../../theme/app_theme.dart';
+export '../../../core/theme/app_theme.dart';

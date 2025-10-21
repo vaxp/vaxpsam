@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vaxpsam/presentation/home/widgets/section_widgets.dart';
-import 'package:vaxpsam/presentation/theme/app_theme.dart';
-import 'package:vaxpsam/presentation/widgets/rotating_background.dart';
+import 'package:vaxpsam/core/theme/app_theme.dart';
+import 'package:vaxpsam/core/widgets/rotating_background.dart';
 
 
 class SystemOverviewPage extends ConsumerStatefulWidget {

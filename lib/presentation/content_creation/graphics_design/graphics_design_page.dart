@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../infrastructure/providers.dart';
-import '../home/widgets/section_widgets.dart';
-import '../console/console_utils.dart';
-import '../theme/app_theme.dart';
-import '../widgets/rotating_background.dart';
+import '../../../infrastructure/providers.dart';
+import '../../home/widgets/section_widgets.dart';
+import '../../console/console_utils.dart';
+import '../../../core/theme/app_theme.dart';
+import '../../../core/widgets/rotating_background.dart';
 
-class WebBackendPage extends ConsumerWidget {
-  const WebBackendPage({super.key});
+class GraphicsDesignPage extends ConsumerWidget {
+  const GraphicsDesignPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -22,7 +22,7 @@ class WebBackendPage extends ConsumerWidget {
               expandedHeight: 200,
               floating: false,
               pinned: true,
-              backgroundColor: macAppStoreDark,
+              backgroundColor: Colors.transparent,
               flexibleSpace: FlexibleSpaceBar(
                 background: _buildHeroSection(context),
               ),
@@ -51,7 +51,7 @@ class WebBackendPage extends ConsumerWidget {
         gradient: const LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [Color(0xFF2196F3), Color(0xFF64B5F6)],
+          colors: [Color(0xFF4CAF50), Color(0xFF66BB6A)],
         ),
         borderRadius: BorderRadius.circular(12),
       ),
@@ -64,7 +64,7 @@ class WebBackendPage extends ConsumerWidget {
                 gradient: const LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
-                  colors: [Color(0xFF2196F3), Color(0xFF64B5F6)],
+                  colors: [Color(0xFF4CAF50), Color(0xFF66BB6A)],
                 ),
               ),
             ),
@@ -76,7 +76,7 @@ class WebBackendPage extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
-                  'WEB BACK-END',
+                  'GRAPHICS & DESIGN',
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
@@ -86,7 +86,7 @@ class WebBackendPage extends ConsumerWidget {
                 ),
                 const SizedBox(height: 8),
                 const Text(
-                  'Backend Development Tools',
+                  'Graphics & Design Tools',
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
@@ -95,7 +95,7 @@ class WebBackendPage extends ConsumerWidget {
                 ),
                 const SizedBox(height: 8),
                 const Text(
-                  '30 professional tools for backend development including Python, databases, and web servers.',
+                  'Professional graphics and design tools for image editing, vector graphics, and 3D modeling.',
                   style: TextStyle(fontSize: 16, color: Colors.white70),
                 ),
               ],
@@ -122,7 +122,7 @@ class WebBackendPage extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Install All Backend Tools',
+                        'Install All Graphics & Design Tools',
                         style: Theme.of(
                           context,
                         ).textTheme.titleMedium?.copyWith(
@@ -132,7 +132,7 @@ class WebBackendPage extends ConsumerWidget {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        'Install all 30 backend development tools at once',
+                        'Install all 10 graphics and design tools at once',
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: macAppStoreGray,
                         ),
@@ -164,143 +164,76 @@ class WebBackendPage extends ConsumerWidget {
   Widget _buildToolsGrid(BuildContext context, system) {
     final tools = [
       {
-        'name': 'Python 3',
-        'package': 'python3',
-        'description': 'Popular back-end programming language (Django, Flask)',
-      },
-      {
-        'name': 'Pip',
-        'package': 'python3-pip',
-        'description': 'Python package manager',
-      },
-      {
-        'name': 'PostgreSQL Client',
-        'package': 'postgresql-client',
+        'name': 'GIMP',
+        'package': 'gimp',
         'description':
-            'Command-line tools for connecting to Postgres databases',
+            'Professional raster image editor (alternative to Photoshop)',
+        'source': 'apt',
+        'iconAsset': 'assets/creation/gimp.png',
       },
       {
-        'name': 'MySQL Client',
-        'package': 'mysql-client',
+        'name': 'Inkscape',
+        'package': 'inkscape',
         'description':
-            'Command-line tools for connecting to MySQL/MariaDB databases',
+            'Professional vector graphics editor (alternative to Illustrator)',
+        'source': 'apt',
+        'iconAsset': 'assets/creation/inkscape.png',
       },
       {
-        'name': 'PHP CLI',
-        'package': 'php-cli',
-        'description': 'PHP command-line environment (Laravel, Symfony)',
+        'name': 'Krita',
+        'package': 'org.kde.krita',
+        'description': 'Digital painting and raster graphics program',
+        'source': 'flatpak',
+        'iconAsset': 'assets/creation/krita.png',
       },
       {
-        'name': 'Ruby',
-        'package': 'ruby',
-        'description': 'Ruby on Rails: A back-end programming language',
+        'name': 'Blender',
+        'package': 'blender',
+        'description': '3D design, animation, and modeling program',
+        'source': 'apt',
+        'iconAsset': 'assets/creation/blender.png',
       },
       {
-        'name': 'Rubygems',
-        'package': 'rubygems',
-        'description': 'Ruby package manager',
-      },
-      {'name': 'GCC', 'package': 'gcc', 'description': 'C compiler'},
-      {'name': 'G++', 'package': 'g++', 'description': 'C++ compiler'},
-      {
-        'name': 'OpenSSL',
-        'package': 'openssl',
-        'description': 'For managing TLS/SSL certificates',
-      },
-      {
-        'name': 'Supervisor',
-        'package': 'supervisor',
+        'name': 'Scribus',
+        'package': 'scribus',
         'description':
-            'Process management system (to ensure applications remain running)',
+            'Desktop publishing program (for brochures and magazines)',
+        'source': 'apt',
+        'iconAsset': 'assets/creation/scribus.png',
       },
       {
-        'name': 'Redis Server',
-        'package': 'redis-server',
-        'description': 'In-memory data caching server',
+        'name': 'Shotwell',
+        'package': 'shotwell',
+        'description': 'Simple image manager and basic editor',
+        'source': 'apt',
+        'iconAsset': 'assets/creation/shotwell.png',
       },
       {
-        'name': 'Apache2',
-        'package': 'apache2',
-        'description': 'Widely used web server',
+        'name': 'Geeqie',
+        'package': 'geeqie',
+        'description': 'Fast and advanced image viewer',
+        'source': 'apt',
       },
       {
-        'name': 'Nginx',
-        'package': 'nginx',
-        'description': 'Lightweight web server and reverse proxy',
+        'name': 'ImageMagick',
+        'package': 'imagemagick',
+        'description': 'Powerful command-line image processing toolkit',
+        'source': 'apt',
+        'iconAsset': 'assets/creation/Imagemagick.png',
       },
       {
-        'name': 'Python3-venv',
-        'package': 'python3-venv',
-        'description': 'For creating virtual Python environments',
+        'name': 'Darktable',
+        'package': 'org.darktable.Darktable',
+        'description': 'RAW image processing software (Lightroom alternative)',
+        'source': 'flatpak',
+        'iconAsset': 'assets/creation/darktable.png',
       },
       {
-        'name': 'Uwsgi',
-        'package': 'uwsgi',
-        'description': 'Application Server for Python/Perl/PHP',
-      },
-      {
-        'name': 'Tmux',
-        'package': 'tmux',
-        'description':
-            'Terminal multiplexer for managing sessions on the server',
-      },
-      {
-        'name': 'Screen',
-        'package': 'screen',
-        'description': 'Alternative to Tmux for managing sessions',
-      },
-      {
-        'name': 'Htop',
-        'package': 'htop',
-        'description':
-            'Interactive process monitor (for analyzing server performance)',
-      },
-      {
-        'name': 'Tzdata',
-        'package': 'tzdata',
-        'description': 'Timezone data package (essential for processing times)',
-      },
-      {
-        'name': 'Curl',
-        'package': 'curl',
-        'description': 'For testing server connections',
-      },
-      {'name': 'Git', 'package': 'git', 'description': 'Version control'},
-      {'name': 'Make', 'package': 'make', 'description': 'Build automation'},
-      {
-        'name': 'Valgrind',
-        'package': 'valgrind',
-        'description': 'For debugging memory errors (for C/C++ code)',
-      },
-      {
-        'name': 'Systemd',
-        'package': 'systemd',
-        'description': 'For managing the Service Manager in Ubuntu',
-      },
-      {
-        'name': 'Cron',
-        'package': 'cron',
-        'description': 'For scheduling tasks',
-      },
-      {
-        'name': 'Locales',
-        'package': 'locales',
-        'description': 'Supports regional settings',
-      },
-      {
-        'name': 'Procps',
-        'package': 'procps',
-        'description': 'Process management tools',
-      },
-      {
-        'name': 'Netcat',
-        'package': 'netcat-traditional',
-        'description': 'For testing raw port connections',
-      },
-      {
-        'name': 'SSH',
-        'package': 'openssh-client',
-        'description': 'For secure connection to the server',
+        'name': 'Hugin',
+        'package': 'hugin',
+        'description': 'Panoramic image creation tool',
+        'source': 'apt',
+        'iconAsset': 'assets/creation/hugin.png',
       },
     ];
 
@@ -310,7 +243,7 @@ class WebBackendPage extends ConsumerWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: Text(
-            'Backend Development Tools',
+            'Graphics & Design Tools',
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
               color: Colors.white,
@@ -335,16 +268,18 @@ class WebBackendPage extends ConsumerWidget {
               description: tool['description']!,
               icon: Container(
                 decoration: BoxDecoration(
-                  color: const Color(0xFF2196F3),
+                  color: const Color.fromARGB(54, 55, 57, 71),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Icon(Icons.storage, color: Colors.white),
+                child: Image.asset(
+                  tool['iconAsset'] ??
+                      'assets/ides/default.png', // تمرير المسار المخزن في قائمة tools
+                  width: 40,
+                  height: 40,
+                  fit: BoxFit.contain,
+                ),
               ),
-              onTap:
-                  () => showConsoleStream(
-                    context,
-                    system.installPackageByName(tool['package']!),
-                  ),
+              onTap: () => _installTool(context, system, tool),
             );
           },
         ),
@@ -352,47 +287,45 @@ class WebBackendPage extends ConsumerWidget {
     );
   }
 
+  void _installTool(BuildContext context, system, tool) {
+    if (tool['source'] == 'flatpak') {
+      showConsoleStream(
+        context,
+        system.runAsRoot(
+          [
+            'flatpak',
+            'install',
+            '-y',
+            'flathub',
+            tool['package']!,
+          ].cast<String>(),
+        ),
+      );
+    } else {
+      showConsoleStream(context, system.installPackageByName(tool['package']!));
+    }
+  }
+
   void _installAllTools(BuildContext context, system) {
-    final tools = [
-      'python3',
-      'python3-pip',
-      'postgresql-client',
-      'mysql-client',
-      'php-cli',
-      'ruby',
-      'rubygems',
-      'gcc',
-      'g++',
-      'openssl',
-      'supervisor',
-      'redis-server',
-      'apache2',
-      'nginx',
-      'python3-venv',
-      'uwsgi',
-      'tmux',
-      'screen',
-      'htop',
-      'tzdata',
-      'curl',
-      'git',
-      'make',
-      'valgrind',
-      'systemd',
-      'cron',
-      'locales',
-      'procps',
-      'netcat-traditional',
-      'openssh-client',
+    final aptTools = [
+      'gimp',
+      'inkscape',
+      'blender',
+      'scribus',
+      'shotwell',
+      'geeqie',
+      'imagemagick',
+      'hugin',
     ];
+    final flatpakTools = ['org.kde.krita', 'org.darktable.Darktable'];
 
     showDialog(
       context: context,
       builder:
           (ctx) => AlertDialog(
-            title: const Text('Install All Backend Tools'),
+            title: const Text('Install All Graphics & Design Tools'),
             content: Text(
-              'This will install ${tools.length} backend development tools. Continue?',
+              'This will install ${aptTools.length + flatpakTools.length} graphics and design tools. Continue?',
             ),
             actions: [
               TextButton(
@@ -404,15 +337,14 @@ class WebBackendPage extends ConsumerWidget {
                   Navigator.of(ctx).pop();
                   showConsoleStream(
                     context,
-                    system.runAsRoot([
-                      'apt',
-                      'update',
-                      '&&',
-                      'apt',
-                      'install',
-                      '-y',
-                      ...tools,
-                    ]),
+                    system.runAsRoot(
+                      [
+                        'bash',
+                        '-c',
+                        'apt update && apt install -y ${aptTools.join(' ')} && '
+                            'for p in ${flatpakTools.join(' ')}; do flatpak install -y flathub "\$p"; done',
+                      ].cast<String>(),
+                    ),
                   );
                 },
                 child: const Text('Install All'),

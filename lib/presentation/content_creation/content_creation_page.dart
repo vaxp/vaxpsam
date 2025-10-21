@@ -1,49 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../infrastructure/providers.dart';
-import 'home/widgets/section_widgets.dart';
-import 'theme/app_theme.dart';
-import 'system_info/system_overview/system_overview_page.dart';
-import 'system_info/hardware_details_page.dart';
-import 'system_info/live_performance_page.dart';
+import '../../infrastructure/providers.dart';
+import '../home/widgets/section_widgets.dart';
+import '../../core/theme/app_theme.dart';
+import 'graphics_design/graphics_design_page.dart';
+import 'video_production/video_production_page.dart';
+import 'audio_editing/audio_editing_page.dart';
 
-class SystemInfoPage extends ConsumerStatefulWidget {
-  const SystemInfoPage({super.key});
+class ContentCreationPage extends ConsumerWidget {
+  const ContentCreationPage({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _SystemInfoPageState();
-}
-
-class _SystemInfoPageState extends ConsumerState<SystemInfoPage> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final system = ref.read(systemServiceProvider);
 
     return Container(
       color: macAppStoreDark,
-      child: Stack(
-        children: [
-          CustomScrollView(
-            slivers: [
-              SliverAppBar(
-                expandedHeight: 200,
-                floating: false,
-                pinned: true,
-                backgroundColor: macAppStoreDark,
-                flexibleSpace: FlexibleSpaceBar(
-                  background: _buildHeroSection(context),
-                ),
-              ),
-              SliverToBoxAdapter(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _buildQuickStats(context, system),
-                    const SizedBox(height: 20),
-                  ],
-                ),
-              ),
-            ],
+      child: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            expandedHeight: 200,
+            floating: false,
+            pinned: true,
+            backgroundColor: macAppStoreDark,
+            flexibleSpace: FlexibleSpaceBar(
+              background: _buildHeroSection(context),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildCategoriesGrid(context, system),
+                const SizedBox(height: 20),
+              ],
+            ),
           ),
         ],
       ),
@@ -58,7 +49,7 @@ class _SystemInfoPageState extends ConsumerState<SystemInfoPage> {
         gradient: const LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [Color(0xFF1976D2), Color(0xFF42A5F5)],
+          colors: [Color(0xFFE91E63), Color(0xFFF06292)],
         ),
         borderRadius: BorderRadius.circular(12),
       ),
@@ -71,7 +62,7 @@ class _SystemInfoPageState extends ConsumerState<SystemInfoPage> {
                 gradient: const LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
-                  colors: [Color(0xFF1976D2), Color(0xFF42A5F5)],
+                  colors: [Color(0xFFE91E63), Color(0xFFF06292)],
                 ),
               ),
             ),
@@ -83,7 +74,7 @@ class _SystemInfoPageState extends ConsumerState<SystemInfoPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
-                  'SYSTEM INFORMATION',
+                  'CONTENT CREATION',
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
@@ -93,7 +84,7 @@ class _SystemInfoPageState extends ConsumerState<SystemInfoPage> {
                 ),
                 const SizedBox(height: 8),
                 const Text(
-                  'Monitor & Analyze',
+                  'Creative Tools',
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
@@ -102,7 +93,7 @@ class _SystemInfoPageState extends ConsumerState<SystemInfoPage> {
                 ),
                 const SizedBox(height: 8),
                 const Text(
-                  'Comprehensive system monitoring and hardware analysis dashboard.',
+                  'Professional tools for graphics, video production, and audio editing.',
                   style: TextStyle(fontSize: 16, color: Colors.white70),
                 ),
               ],
@@ -113,14 +104,14 @@ class _SystemInfoPageState extends ConsumerState<SystemInfoPage> {
     );
   }
 
-  Widget _buildQuickStats(BuildContext context, dynamic system) {
+  Widget _buildCategoriesGrid(BuildContext context, system) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: Text(
-            'Quick System Stats',
+            'All Categories',
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
               color: Colors.white,
@@ -131,60 +122,58 @@ class _SystemInfoPageState extends ConsumerState<SystemInfoPage> {
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           crossAxisCount: 3,
-          childAspectRatio: 1.5,
+          childAspectRatio: 1.2,
           mainAxisSpacing: 16,
           crossAxisSpacing: 16,
           padding: const EdgeInsets.symmetric(horizontal: 16),
           children: [
             AppGridCard(
-              title: 'System Overview',
-              description: 'Static system information',
+              title: 'Graphics & Design',
+              description: '10 graphics and design tools',
               icon: Container(
                 decoration: BoxDecoration(
                   color: const Color(0xFF4CAF50),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Icon(Icons.info_outline, color: Colors.white),
+                child: const Icon(Icons.palette, color: Colors.white),
               ),
               onTap:
                   () => Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (_) => const SystemOverviewPage(),
+                      builder: (_) => const GraphicsDesignPage(),
                     ),
                   ),
             ),
             AppGridCard(
-              title: 'Hardware Details',
-              description: 'Component specifications',
+              title: 'Video Production',
+              description: '10 video production tools',
               icon: Container(
                 decoration: BoxDecoration(
                   color: const Color(0xFF2196F3),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Icon(Icons.memory, color: Colors.white),
+                child: const Icon(Icons.videocam, color: Colors.white),
               ),
               onTap:
                   () => Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (_) => const HardwareDetailsPage(),
+                      builder: (_) => const VideoProductionPage(),
                     ),
                   ),
             ),
             AppGridCard(
-              title: 'Live Performance',
-              description: 'Real-time monitoring',
+              title: 'Audio Editing & Podcasting',
+              description: '10 audio editing tools',
               icon: Container(
                 decoration: BoxDecoration(
                   color: const Color(0xFFFF9800),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Icon(Icons.speed, color: Colors.white),
+                child: const Icon(Icons.music_note, color: Colors.white),
               ),
               onTap:
                   () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (_) => const LivePerformancePage(),
-                    ),
+                    MaterialPageRoute(builder: (_) => const AudioEditingPage()),
                   ),
             ),
           ],

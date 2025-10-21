@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:vaxpsam/presentation/widgets/rotating_background.dart';
-import '../../infrastructure/providers.dart';
-import '../home/widgets/section_widgets.dart';
-import '../console/console_utils.dart';
-import '../theme/app_theme.dart';
+import '../../../infrastructure/providers.dart';
+import '../../home/widgets/section_widgets.dart';
+import '../../console/console_utils.dart';
+import '../../../core/theme/app_theme.dart';
+import '../../../core/widgets/rotating_background.dart';
 
-class DigitalForensicsPage extends ConsumerWidget {
-  const DigitalForensicsPage({super.key});
+class VideoProductionPage extends ConsumerWidget {
+  const VideoProductionPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -22,7 +22,7 @@ class DigitalForensicsPage extends ConsumerWidget {
               expandedHeight: 200,
               floating: false,
               pinned: true,
-              backgroundColor: macAppStoreDark,
+              backgroundColor: Colors.transparent,
               flexibleSpace: FlexibleSpaceBar(
                 background: _buildHeroSection(context),
               ),
@@ -51,7 +51,7 @@ class DigitalForensicsPage extends ConsumerWidget {
         gradient: const LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [Color(0xFF00695C), Color(0xFF4DB6AC)],
+          colors: [Color(0xFF2196F3), Color(0xFF64B5F6)],
         ),
         borderRadius: BorderRadius.circular(12),
       ),
@@ -64,7 +64,7 @@ class DigitalForensicsPage extends ConsumerWidget {
                 gradient: const LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
-                  colors: [Color(0xFF00695C), Color(0xFF4DB6AC)],
+                  colors: [Color(0xFF2196F3), Color(0xFF64B5F6)],
                 ),
               ),
             ),
@@ -76,7 +76,7 @@ class DigitalForensicsPage extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
-                  'DIGITAL FORENSICS',
+                  'VIDEO PRODUCTION',
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
@@ -86,7 +86,7 @@ class DigitalForensicsPage extends ConsumerWidget {
                 ),
                 const SizedBox(height: 8),
                 const Text(
-                  'Forensic Investigation Tools',
+                  'Video Production Tools',
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
@@ -95,7 +95,7 @@ class DigitalForensicsPage extends ConsumerWidget {
                 ),
                 const SizedBox(height: 8),
                 const Text(
-                  '13 professional tools for digital forensics, file recovery, and evidence analysis.',
+                  'Professional video editing and production tools for content creators.',
                   style: TextStyle(fontSize: 16, color: Colors.white70),
                 ),
               ],
@@ -122,7 +122,7 @@ class DigitalForensicsPage extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Install All Digital Forensics Tools',
+                        'Install All Video Production Tools',
                         style: Theme.of(
                           context,
                         ).textTheme.titleMedium?.copyWith(
@@ -132,7 +132,7 @@ class DigitalForensicsPage extends ConsumerWidget {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        'Install all 13 digital forensics tools at once',
+                        'Install all 10 video production tools at once',
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: macAppStoreGray,
                         ),
@@ -164,72 +164,74 @@ class DigitalForensicsPage extends ConsumerWidget {
   Widget _buildToolsGrid(BuildContext context, system) {
     final tools = [
       {
-        'name': 'The Sleuth Kit (TSK)',
-        'package': 'sleuthkit',
-        'description': 'Toolkit for forensic investigation of file systems',
+        'name': 'Kdenlive',
+        'package': 'kdenlive',
+        'description': 'Professional non-linear video editor',
+        'source': 'apt',
+        'iconAsset': 'assets/creation/kdenlive.png',
       },
       {
-        'name': 'Foremost',
-        'package': 'foremost',
-        'description': 'File recovery tool using signature analysis (Carving)',
+        'name': 'OpenShot',
+        'package': 'org.openshot.OpenShot',
+        'description': 'Simple video editor for beginners',
+        'source': 'flatpak',
+        'iconAsset': 'assets/creation/openshot.png',
       },
       {
-        'name': 'TestDisk',
-        'package': 'testdisk',
-        'description': 'Tool for recovering lost hard drive partitions',
+        'name': 'Pitivi',
+        'package': 'org.pitivi.Pitivi',
+        'description': 'GNOME-based video editor',
+        'source': 'flatpak',
+        'iconAsset': 'assets/creation/Pitivi.png',
       },
       {
-        'name': 'PhotoRec',
-        'package': 'testdisk',
-        'description': 'File recovery tool (included with TestDisk)',
+        'name': 'Shotcut',
+        'package': 'org.shotcut.Shotcut',
+        'description': 'Cross-platform video editor',
+        'source': 'flatpak',
+        'iconAsset': 'assets/creation/Shotcut.png',
       },
       {
-        'name': 'Autopsy',
-        'package': 'autopsy',
-        'description':
-            'Graphical interface to Sleuth Kit for comprehensive analysis',
+        'name': 'OBS Studio',
+        'package': 'com.obsproject.Studio',
+        'description': 'Live recording and streaming software',
+        'source': 'flatpak',
+        'iconAsset': 'assets/creation/OBS.png',
       },
       {
-        'name': 'Dd/ddrescue',
-        'package': 'coreutils',
-        'description': 'Disk imaging tools',
+        'name': 'FFmpeg',
+        'package': 'ffmpeg',
+        'description': 'Command-line tool for audio and video processing',
+        'source': 'apt',
+        'iconAsset': 'assets/creation/FFmpeg.png',
       },
       {
-        'name': 'Chkrootkit',
-        'package': 'chkrootkit',
-        'description': 'System scanning tool for rootkits',
+        'name': 'SimpleScreenRecorder',
+        'package': 'simplescreenrecorder',
+        'description': 'Simple and effective screen recording tool',
+        'source': 'apt',
+        'iconAsset': 'assets/creation/simplescreenrecorder.png',
       },
       {
-        'name': 'Rkhunter',
-        'package': 'rkhunter',
-        'description': 'Tool for detecting rootkits and malware',
+        'name': 'HandBrake',
+        'package': 'fr.handbrake.ghb',
+        'description': 'Powerful video format converter',
+        'source': 'flatpak',
+        'iconAsset': 'assets/creation/handbrake.png',
       },
       {
-        'name': 'Exiftool',
-        'package': 'libimage-exiftool-perl',
-        'description':
-            'Reads, writes, and modifies metadata for images and files',
+        'name': 'Blender',
+        'package': 'blender',
+        'description': '3D animation and VFX (available within Blender)',
+        'source': 'apt',
+        'iconAsset': 'assets/creation/blender.png',
       },
       {
-        'name': 'Scalpel',
-        'package': 'scalpel',
-        'description': 'Fast file recovery tool based on Carving',
-      },
-      {
-        'name': 'Hashdeep',
-        'package': 'hashdeep',
-        'description':
-            'Hash calculator for several types of hashes (useful for verifying evidence)',
-      },
-      {
-        'name': 'Plaso',
-        'package': 'plaso',
-        'description': 'Tool for timeline analysis',
-      },
-      {
-        'name': 'Readstat',
-        'package': 'readstat',
-        'description': 'Tool for reading statistical files (data analysis)',
+        'name': 'VLC',
+        'package': 'vlc',
+        'description': 'Versatile media player for testing',
+        'source': 'apt',
+        'iconAsset': 'assets/creation/vlc.png',
       },
     ];
 
@@ -239,7 +241,7 @@ class DigitalForensicsPage extends ConsumerWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: Text(
-            'Digital Forensics Tools',
+            'Video Production Tools',
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
               color: Colors.white,
@@ -264,16 +266,18 @@ class DigitalForensicsPage extends ConsumerWidget {
               description: tool['description']!,
               icon: Container(
                 decoration: BoxDecoration(
-                  color: const Color(0xFF00695C),
+                  color: const Color.fromARGB(255, 55, 57, 71),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Icon(Icons.search, color: Colors.white),
+                child: Image.asset(
+                  tool['iconAsset'] ??
+                      'assets/ides/default.png', // تمرير المسار المخزن في قائمة tools
+                  width: 40,
+                  height: 40,
+                  fit: BoxFit.contain,
+                ),
               ),
-              onTap:
-                  () => showConsoleStream(
-                    context,
-                    system.installPackageByName(tool['package']!),
-                  ),
+              onTap: () => _installTool(context, system, tool),
             );
           },
         ),
@@ -281,29 +285,48 @@ class DigitalForensicsPage extends ConsumerWidget {
     );
   }
 
+  void _installTool(BuildContext context, system, tool) {
+    if (tool['source'] == 'flatpak') {
+      showConsoleStream(
+        context,
+        system.runAsRoot(
+          [
+            'flatpak',
+            'install',
+            '-y',
+            'flathub',
+            tool['package']!,
+          ].cast<String>(),
+        ),
+      );
+    } else {
+      showConsoleStream(context, system.installPackageByName(tool['package']!));
+    }
+  }
+
   void _installAllTools(BuildContext context, system) {
-    final tools = [
-      'sleuthkit',
-      'foremost',
-      'testdisk',
-      'autopsy',
-      'coreutils',
-      'chkrootkit',
-      'rkhunter',
-      'libimage-exiftool-perl',
-      'scalpel',
-      'hashdeep',
-      'plaso',
-      'readstat',
+    final aptTools = [
+      'kdenlive',
+      'ffmpeg',
+      'simplescreenrecorder',
+      'blender',
+      'vlc',
+    ];
+    final flatpakTools = [
+      'org.openshot.OpenShot',
+      'org.pitivi.Pitivi',
+      'org.shotcut.Shotcut',
+      'com.obsproject.Studio',
+      'fr.handbrake.ghb',
     ];
 
     showDialog(
       context: context,
       builder:
           (ctx) => AlertDialog(
-            title: const Text('Install All Digital Forensics Tools'),
+            title: const Text('Install All Video Production Tools'),
             content: Text(
-              'This will install ${tools.length} digital forensics tools. Continue?',
+              'This will install ${aptTools.length + flatpakTools.length} video production tools. Continue?',
             ),
             actions: [
               TextButton(
@@ -315,15 +338,14 @@ class DigitalForensicsPage extends ConsumerWidget {
                   Navigator.of(ctx).pop();
                   showConsoleStream(
                     context,
-                    system.runAsRoot([
-                      'apt',
-                      'update',
-                      '&&',
-                      'apt',
-                      'install',
-                      '-y',
-                      ...tools,
-                    ]),
+                    system.runAsRoot(
+                      [
+                        'bash',
+                        '-c',
+                        'apt update && apt install -y ${aptTools.join(' ')} && '
+                            'for p in ${flatpakTools.join(' ')}; do flatpak install -y flathub "\$p"; done',
+                      ].cast<String>(),
+                    ),
                   );
                 },
                 child: const Text('Install All'),

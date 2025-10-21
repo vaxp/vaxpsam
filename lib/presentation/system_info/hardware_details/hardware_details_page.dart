@@ -2,9 +2,9 @@ import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../home/widgets/section_widgets.dart';
-import '../theme/app_theme.dart';
-import '../widgets/rotating_background.dart';
+import '../../home/widgets/section_widgets.dart';
+import '../../../core/theme/app_theme.dart';
+import '../../../core/widgets/rotating_background.dart';
 
 class HardwareDetailsPage extends ConsumerStatefulWidget {
   const HardwareDetailsPage({super.key});

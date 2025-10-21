@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../home/widgets/section_widgets.dart';
-import '../theme/app_theme.dart';
+import '../../core/theme/app_theme.dart';
 import 'advanced_editors/advanced_editors_page.dart';
 import 'basic_editors/basic_editors_page.dart';
 

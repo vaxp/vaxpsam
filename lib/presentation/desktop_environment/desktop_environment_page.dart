@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../infrastructure/providers.dart';
 import '../home/widgets/section_widgets.dart';
 import '../console/console_utils.dart';
-import '../theme/app_theme.dart';
+import '../../core/theme/app_theme.dart';
 import 'dart:async';
 
 class DesktopEnvironmentPage extends ConsumerStatefulWidget {

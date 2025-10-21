@@ -1,6 +1,6 @@
 // lib/data/advanced_editors_data.dart
 
-import '../models/advanced_tool.dart';
+import '../domain/advanced_tool.dart';
 
 class AdvancedEditorsData {
   // قائمة المراجع الكاملة لـ Flatpak لتسهيل وظيفة "تثبيت الكل"

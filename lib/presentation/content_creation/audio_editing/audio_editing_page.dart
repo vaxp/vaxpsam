@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:vaxpsam/presentation/widgets/rotating_background.dart';
-import '../../infrastructure/providers.dart';
-import '../home/widgets/section_widgets.dart';
-import '../console/console_utils.dart';
-import '../theme/app_theme.dart';
+import '../../../infrastructure/providers.dart';
+import '../../home/widgets/section_widgets.dart';
+import '../../console/console_utils.dart';
+import '../../../core/theme/app_theme.dart';
+import '../../../core/widgets/rotating_background.dart';
 
-class InjectionExploitationPage extends ConsumerWidget {
-  const InjectionExploitationPage({super.key});
+class AudioEditingPage extends ConsumerWidget {
+  const AudioEditingPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -22,7 +22,7 @@ class InjectionExploitationPage extends ConsumerWidget {
               expandedHeight: 200,
               floating: false,
               pinned: true,
-              backgroundColor: macAppStoreDark,
+              backgroundColor: Colors.transparent,
               flexibleSpace: FlexibleSpaceBar(
                 background: _buildHeroSection(context),
               ),
@@ -76,7 +76,7 @@ class InjectionExploitationPage extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
-                  'INJECTION & EXPLOITATION',
+                  'AUDIO EDITING & PODCASTING',
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
@@ -86,7 +86,7 @@ class InjectionExploitationPage extends ConsumerWidget {
                 ),
                 const SizedBox(height: 8),
                 const Text(
-                  'Penetration Testing Tools',
+                  'Audio Editing & Podcasting Tools',
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
@@ -95,7 +95,7 @@ class InjectionExploitationPage extends ConsumerWidget {
                 ),
                 const SizedBox(height: 8),
                 const Text(
-                  '16 professional tools for web application testing, password cracking, and exploitation.',
+                  'Professional audio editing and podcasting tools for content creators.',
                   style: TextStyle(fontSize: 16, color: Colors.white70),
                 ),
               ],
@@ -122,7 +122,7 @@ class InjectionExploitationPage extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Install All Exploitation Tools',
+                        'Install All Audio Editing Tools',
                         style: Theme.of(
                           context,
                         ).textTheme.titleMedium?.copyWith(
@@ -132,7 +132,7 @@ class InjectionExploitationPage extends ConsumerWidget {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        'Install all 16 injection & exploitation tools at once',
+                        'Install all 10 audio editing and podcasting tools at once',
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: macAppStoreGray,
                         ),
@@ -164,87 +164,70 @@ class InjectionExploitationPage extends ConsumerWidget {
   Widget _buildToolsGrid(BuildContext context, system) {
     final tools = [
       {
-        'name': 'sqlmap',
-        'package': 'sqlmap',
-        'description': 'Automates SQL injection and detects vulnerabilities',
+        'name': 'Audacity',
+        'package': 'audacity',
+        'description': 'Multi-track audio editor (essential for podcasting)',
+        'source': 'apt',
+        'iconAsset': 'assets/creation/audacity.png',
       },
       {
-        'name': 'Dirb',
-        'package': 'dirb',
-        'description': 'Scans for hidden files and directories on the web',
+        'name': 'Ardour',
+        'package': 'org.ardour.Ardour',
+        'description': 'Professional digital audio workstation (DAW)',
+        'source': 'flatpak',
+        'iconAsset': 'assets/creation/Ardour.png',
       },
       {
-        'name': 'Nikto',
-        'package': 'nikto',
-        'description': 'Scans for known vulnerabilities in web servers',
+        'name': 'LMMS',
+        'package': 'lmms',
+        'description': 'Digital audio workstation for music production',
+        'source': 'apt',
       },
       {
-        'name': 'Gobuster',
-        'package': 'gobuster',
-        'description':
-            'Fast bruteforcing tool for directory and subdirectory names',
+        'name': 'Hydrogen',
+        'package': 'hydrogen',
+        'description': 'Drum Machine for creating beats',
+        'source': 'apt',
+        'iconAsset': 'assets/creation/hydrogen.png',
       },
       {
-        'name': 'John the Ripper',
-        'package': 'john',
-        'description': 'Powerful password cracking tool',
+        'name': 'Jack Audio Connection Kit',
+        'package': 'jackd2',
+        'description': 'Professional audio connection server',
+        'source': 'apt',
+        'iconAsset': 'assets/creation/jack-mixer.png',
       },
       {
-        'name': 'OpenSSL',
-        'package': 'openssl',
-        'description':
-            'Working with SSL/TLS certificates and testing encryption',
+        'name': 'VLC',
+        'package': 'vlc',
+        'description': 'Versatile media player (for testing)',
+        'source': 'apt',
+        'iconAsset': 'assets/creation/vlc.png',
       },
       {
-        'name': 'Searchsploit',
-        'package': 'exploitdb',
-        'description': 'Search for exploits in the Exploit-DB database',
+        'name': 'LAME',
+        'package': 'lame',
+        'description': 'MP3 encoding library',
+        'source': 'apt',
+        'iconAsset': 'assets/creation/lmms.png',
       },
       {
-        'name': 'Wget',
-        'package': 'wget',
-        'description': 'Download web pages (useful for crawling)',
+        'name': 'PulseAudio',
+        'package': 'pulseaudio',
+        'description': 'Virtual audio server',
+        'source': 'apt',
       },
       {
-        'name': 'Curl',
-        'package': 'curl',
-        'description': 'Connect to web servers and test APIs',
+        'name': 'Sox',
+        'package': 'sox',
+        'description': 'Command-line audio processing (Sound Exchange)',
+        'source': 'apt',
       },
       {
-        'name': 'Dnsenum',
-        'package': 'dnsenum',
-        'description': 'Collect comprehensive DNS information',
-      },
-      {
-        'name': 'Sublist3r',
-        'package': 'sublist3r',
-        'description': 'Subdomain enumeration',
-      },
-      {
-        'name': 'WhatWeb',
-        'package': 'whatweb',
-        'description': 'Identify website technologies (CMS, libraries, etc.)',
-      },
-      {
-        'name': 'Medusa',
-        'package': 'medusa',
-        'description':
-            'Fast login guesser for various services (SSH, FTP, etc.)',
-      },
-      {
-        'name': 'Hydra',
-        'package': 'hydra',
-        'description': 'Parallel protocol login guesser',
-      },
-      {
-        'name': 'Ffuf',
-        'package': 'ffuf',
-        'description': 'Fast and flexible web fuzzing tool',
-      },
-      {
-        'name': 'Cewl',
-        'package': 'cewl',
-        'description': 'Create custom password lists from a website',
+        'name': 'Atraci',
+        'package': 'atraci',
+        'description': 'Music player and search',
+        'source': 'apt',
       },
     ];
 
@@ -254,7 +237,7 @@ class InjectionExploitationPage extends ConsumerWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: Text(
-            'Injection & Exploitation Tools',
+            'Audio Editing & Podcasting Tools',
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
               color: Colors.white,
@@ -279,16 +262,18 @@ class InjectionExploitationPage extends ConsumerWidget {
               description: tool['description']!,
               icon: Container(
                 decoration: BoxDecoration(
-                  color: const Color(0xFFFF9800),
+                  color: const Color.fromARGB(255, 55, 57, 71),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Icon(Icons.bug_report, color: Colors.white),
+                child: Image.asset(
+                  tool['iconAsset'] ??
+                      'assets/ides/default.png', // تمرير المسار المخزن في قائمة tools
+                  width: 40,
+                  height: 40,
+                  fit: BoxFit.contain,
+                ),
               ),
-              onTap:
-                  () => showConsoleStream(
-                    context,
-                    system.installPackageByName(tool['package']!),
-                  ),
+              onTap: () => _installTool(context, system, tool),
             );
           },
         ),
@@ -296,33 +281,46 @@ class InjectionExploitationPage extends ConsumerWidget {
     );
   }
 
+  void _installTool(BuildContext context, system, tool) {
+    if (tool['source'] == 'flatpak') {
+      showConsoleStream(
+        context,
+        system.runAsRoot(
+          [
+            'flatpak',
+            'install',
+            '-y',
+            'flathub',
+            tool['package']!,
+          ].cast<String>(),
+        ),
+      );
+    } else {
+      showConsoleStream(context, system.installPackageByName(tool['package']!));
+    }
+  }
+
   void _installAllTools(BuildContext context, system) {
-    final tools = [
-      'sqlmap',
-      'dirb',
-      'nikto',
-      'gobuster',
-      'john',
-      'openssl',
-      'exploitdb',
-      'wget',
-      'curl',
-      'dnsenum',
-      'sublist3r',
-      'whatweb',
-      'medusa',
-      'hydra',
-      'ffuf',
-      'cewl',
+    final aptTools = [
+      'audacity',
+      'lmms',
+      'hydrogen',
+      'jackd2',
+      'vlc',
+      'lame',
+      'pulseaudio',
+      'sox',
+      'atraci',
     ];
+    final flatpakTools = ['org.ardour.Ardour'];
 
     showDialog(
       context: context,
       builder:
           (ctx) => AlertDialog(
-            title: const Text('Install All Exploitation Tools'),
+            title: const Text('Install All Audio Editing Tools'),
             content: Text(
-              'This will install ${tools.length} injection & exploitation tools. Continue?',
+              'This will install ${aptTools.length + flatpakTools.length} audio editing tools. Continue?',
             ),
             actions: [
               TextButton(
@@ -334,15 +332,14 @@ class InjectionExploitationPage extends ConsumerWidget {
                   Navigator.of(ctx).pop();
                   showConsoleStream(
                     context,
-                    system.runAsRoot([
-                      'apt',
-                      'update',
-                      '&&',
-                      'apt',
-                      'install',
-                      '-y',
-                      ...tools,
-                    ]),
+                    system.runAsRoot(
+                      [
+                        'bash',
+                        '-c',
+                        'apt update && apt install -y ${aptTools.join(' ')} && '
+                            'for p in ${flatpakTools.join(' ')}; do flatpak install -y flathub "\$p"; done',
+                      ].cast<String>(),
+                    ),
                   );
                 },
                 child: const Text('Install All'),

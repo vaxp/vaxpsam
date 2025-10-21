@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../infrastructure/providers.dart';
-import '../home/widgets/section_widgets.dart';
-import '../console/console_utils.dart';
-import '../theme/app_theme.dart';
-import '../widgets/rotating_background.dart';
+import 'package:vaxpsam/core/widgets/rotating_background.dart';
+import '../../../infrastructure/providers.dart';
+import '../../home/widgets/section_widgets.dart';
+import '../../console/console_utils.dart';
+import '../../../core/theme/app_theme.dart';
 
-class GraphicsDesignPage extends ConsumerWidget {
-  const GraphicsDesignPage({super.key});
+class NetworkAnalysisPage extends ConsumerWidget {
+  const NetworkAnalysisPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -22,7 +22,7 @@ class GraphicsDesignPage extends ConsumerWidget {
               expandedHeight: 200,
               floating: false,
               pinned: true,
-              backgroundColor: Colors.transparent,
+              backgroundColor: macAppStoreDark,
               flexibleSpace: FlexibleSpaceBar(
                 background: _buildHeroSection(context),
               ),
@@ -51,7 +51,7 @@ class GraphicsDesignPage extends ConsumerWidget {
         gradient: const LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [Color(0xFF4CAF50), Color(0xFF66BB6A)],
+          colors: [Color(0xFF1976D2), Color(0xFF42A5F5)],
         ),
         borderRadius: BorderRadius.circular(12),
       ),
@@ -64,7 +64,7 @@ class GraphicsDesignPage extends ConsumerWidget {
                 gradient: const LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
-                  colors: [Color(0xFF4CAF50), Color(0xFF66BB6A)],
+                  colors: [Color(0xFF1976D2), Color(0xFF42A5F5)],
                 ),
               ),
             ),
@@ -76,7 +76,7 @@ class GraphicsDesignPage extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
-                  'GRAPHICS & DESIGN',
+                  'NETWORK ANALYSIS',
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
@@ -86,7 +86,7 @@ class GraphicsDesignPage extends ConsumerWidget {
                 ),
                 const SizedBox(height: 8),
                 const Text(
-                  'Graphics & Design Tools',
+                  'Network Security Tools',
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
@@ -95,7 +95,7 @@ class GraphicsDesignPage extends ConsumerWidget {
                 ),
                 const SizedBox(height: 8),
                 const Text(
-                  'Professional graphics and design tools for image editing, vector graphics, and 3D modeling.',
+                  '30 professional tools for network scanning, monitoring, and analysis.',
                   style: TextStyle(fontSize: 16, color: Colors.white70),
                 ),
               ],
@@ -122,7 +122,7 @@ class GraphicsDesignPage extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Install All Graphics & Design Tools',
+                        'Install All Network Tools',
                         style: Theme.of(
                           context,
                         ).textTheme.titleMedium?.copyWith(
@@ -132,7 +132,7 @@ class GraphicsDesignPage extends ConsumerWidget {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        'Install all 10 graphics and design tools at once',
+                        'Install all 30 network analysis tools at once',
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: macAppStoreGray,
                         ),
@@ -164,76 +164,154 @@ class GraphicsDesignPage extends ConsumerWidget {
   Widget _buildToolsGrid(BuildContext context, system) {
     final tools = [
       {
-        'name': 'GIMP',
-        'package': 'gimp',
-        'description':
-            'Professional raster image editor (alternative to Photoshop)',
-        'source': 'apt',
-        'iconAsset': 'assets/creation/gimp.png',
+        'name': 'Nmap',
+        'package': 'nmap',
+        'description': 'Scans ports and networks and discovers services',
       },
       {
-        'name': 'Inkscape',
-        'package': 'inkscape',
-        'description':
-            'Professional vector graphics editor (alternative to Illustrator)',
-        'source': 'apt',
-        'iconAsset': 'assets/creation/inkscape.png',
+        'name': 'Wireshark',
+        'package': 'wireshark',
+        'description': 'Graphical packet analyzer',
       },
       {
-        'name': 'Krita',
-        'package': 'org.kde.krita',
-        'description': 'Digital painting and raster graphics program',
-        'source': 'flatpak',
-        'iconAsset': 'assets/creation/krita.png',
+        'name': 'tcpdump',
+        'package': 'tcpdump',
+        'description': 'Captures command-line packets',
       },
       {
-        'name': 'Blender',
-        'package': 'blender',
-        'description': '3D design, animation, and modeling program',
-        'source': 'apt',
-        'iconAsset': 'assets/creation/blender.png',
+        'name': 'Masscan',
+        'package': 'masscan',
+        'description': 'Ultra-fast port scanning',
       },
       {
-        'name': 'Scribus',
-        'package': 'scribus',
-        'description':
-            'Desktop publishing program (for brochures and magazines)',
-        'source': 'apt',
-        'iconAsset': 'assets/creation/scribus.png',
+        'name': 'Netcat',
+        'package': 'netcat-traditional',
+        'description': 'Swiss Army knife for networks',
       },
       {
-        'name': 'Shotwell',
-        'package': 'shotwell',
-        'description': 'Simple image manager and basic editor',
-        'source': 'apt',
-        'iconAsset': 'assets/creation/shotwell.png',
+        'name': 'Hping3',
+        'package': 'hping3',
+        'description': 'Advanced packet crafter',
       },
       {
-        'name': 'Geeqie',
-        'package': 'geeqie',
-        'description': 'Fast and advanced image viewer',
-        'source': 'apt',
+        'name': 'Iptraf-ng',
+        'package': 'iptraf-ng',
+        'description': 'Network traffic monitor',
       },
       {
-        'name': 'ImageMagick',
-        'package': 'imagemagick',
-        'description': 'Powerful command-line image processing toolkit',
-        'source': 'apt',
-        'iconAsset': 'assets/creation/Imagemagick.png',
+        'name': 'Tcpflow',
+        'package': 'tcpflow',
+        'description': 'Reconstructs TCP flows',
       },
       {
-        'name': 'Darktable',
-        'package': 'org.darktable.Darktable',
-        'description': 'RAW image processing software (Lightroom alternative)',
-        'source': 'flatpak',
-        'iconAsset': 'assets/creation/darktable.png',
+        'name': 'Dnsutils',
+        'package': 'dnsutils',
+        'description': 'DNS query tools (dig, host)',
       },
       {
-        'name': 'Hugin',
-        'package': 'hugin',
-        'description': 'Panoramic image creation tool',
-        'source': 'apt',
-        'iconAsset': 'assets/creation/hugin.png',
+        'name': 'Dnsmap',
+        'package': 'dnsmap',
+        'description': 'Subdomain brute-forcing discovery',
+      },
+      {
+        'name': 'Fierce',
+        'package': 'fierce',
+        'description': 'Comprehensive DNS scanning tool',
+      },
+      {
+        'name': 'Mtr',
+        'package': 'mtr',
+        'description': 'Combination of Ping and Traceroute',
+      },
+      {
+        'name': 'Traceroute',
+        'package': 'traceroute',
+        'description': 'Trace the path of IP packets',
+      },
+      {
+        'name': 'Arpwatch',
+        'package': 'arpwatch',
+        'description': 'Monitor ARP activity on the network',
+      },
+      {
+        'name': 'Etherape',
+        'package': 'etherape',
+        'description': 'Graphical display of network activity',
+      },
+      {
+        'name': 'Netdiscover',
+        'package': 'netdiscover',
+        'description': 'Discover active devices on networks',
+      },
+      {
+        'name': 'OpenSSH Client',
+        'package': 'openssh-client',
+        'description': 'Secure SSH client',
+      },
+      {
+        'name': 'Telnet',
+        'package': 'telnet',
+        'description': 'Simple port telnet connection',
+      },
+      {
+        'name': 'Nslookup',
+        'package': 'dnsutils',
+        'description': 'Query DNS records',
+      },
+      {
+        'name': 'Ping',
+        'package': 'iputils-ping',
+        'description': 'Basic connectivity testing',
+      },
+      {
+        'name': 'Route',
+        'package': 'net-tools',
+        'description': 'View and modify routing tables',
+      },
+      {
+        'name': 'Ifconfig',
+        'package': 'net-tools',
+        'description': 'Displays and configures network interfaces',
+      },
+      {
+        'name': 'Proxychains',
+        'package': 'proxychains4',
+        'description': 'Force programs to run through a proxy',
+      },
+      {
+        'name': 'Aircrack-ng',
+        'package': 'aircrack-ng',
+        'description': 'Suite of tools for pentesting wireless networks',
+      },
+      {
+        'name': 'Tshark',
+        'package': 'tshark',
+        'description': 'Command-line version of Wireshark',
+      },
+      {
+        'name': 'Tcpreplay',
+        'package': 'tcpreplay',
+        'description': 'Replays pcap files',
+      },
+      {
+        'name': 'Dsniff',
+        'package': 'dsniff',
+        'description': 'Intercepts and analyzes network passwords',
+      },
+      {
+        'name': 'Ngrep',
+        'package': 'ngrep',
+        'description': 'Searches for patterns in network packets',
+      },
+      {
+        'name': 'Tcpxtract',
+        'package': 'tcpxtract',
+        'description': 'Extracts files from network traffic',
+      },
+      {
+        'name': 'Ettercap',
+        'package': 'ettercap-text-only',
+        'description': 'Intercepts man-in-the-middle attacks',
       },
     ];
 
@@ -243,7 +321,7 @@ class GraphicsDesignPage extends ConsumerWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: Text(
-            'Graphics & Design Tools',
+            'Network Analysis Tools',
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
               color: Colors.white,
@@ -268,18 +346,16 @@ class GraphicsDesignPage extends ConsumerWidget {
               description: tool['description']!,
               icon: Container(
                 decoration: BoxDecoration(
-                  color: const Color.fromARGB(54, 55, 57, 71),
+                  color: const Color(0xFF1976D2),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Image.asset(
-                  tool['iconAsset'] ??
-                      'assets/ides/default.png', // تمرير المسار المخزن في قائمة tools
-                  width: 40,
-                  height: 40,
-                  fit: BoxFit.contain,
-                ),
+                child: const Icon(Icons.network_check, color: Colors.white),
               ),
-              onTap: () => _installTool(context, system, tool),
+              onTap:
+                  () => showConsoleStream(
+                    context,
+                    system.installPackageByName(tool['package']!),
+                  ),
             );
           },
         ),
@@ -287,45 +363,45 @@ class GraphicsDesignPage extends ConsumerWidget {
     );
   }
 
-  void _installTool(BuildContext context, system, tool) {
-    if (tool['source'] == 'flatpak') {
-      showConsoleStream(
-        context,
-        system.runAsRoot(
-          [
-            'flatpak',
-            'install',
-            '-y',
-            'flathub',
-            tool['package']!,
-          ].cast<String>(),
-        ),
-      );
-    } else {
-      showConsoleStream(context, system.installPackageByName(tool['package']!));
-    }
-  }
-
   void _installAllTools(BuildContext context, system) {
-    final aptTools = [
-      'gimp',
-      'inkscape',
-      'blender',
-      'scribus',
-      'shotwell',
-      'geeqie',
-      'imagemagick',
-      'hugin',
+    final tools = [
+      'nmap',
+      'wireshark',
+      'tcpdump',
+      'masscan',
+      'netcat-traditional',
+      'hping3',
+      'iptraf-ng',
+      'tcpflow',
+      'dnsutils',
+      'dnsmap',
+      'fierce',
+      'mtr',
+      'traceroute',
+      'arpwatch',
+      'etherape',
+      'netdiscover',
+      'openssh-client',
+      'telnet',
+      'iputils-ping',
+      'net-tools',
+      'proxychains4',
+      'aircrack-ng',
+      'tshark',
+      'tcpreplay',
+      'dsniff',
+      'ngrep',
+      'tcpxtract',
+      'ettercap-text-only',
     ];
-    final flatpakTools = ['org.kde.krita', 'org.darktable.Darktable'];
 
     showDialog(
       context: context,
       builder:
           (ctx) => AlertDialog(
-            title: const Text('Install All Graphics & Design Tools'),
+            title: const Text('Install All Network Tools'),
             content: Text(
-              'This will install ${aptTools.length + flatpakTools.length} graphics and design tools. Continue?',
+              'This will install ${tools.length} network analysis tools. Continue?',
             ),
             actions: [
               TextButton(
@@ -337,14 +413,15 @@ class GraphicsDesignPage extends ConsumerWidget {
                   Navigator.of(ctx).pop();
                   showConsoleStream(
                     context,
-                    system.runAsRoot(
-                      [
-                        'bash',
-                        '-c',
-                        'apt update && apt install -y ${aptTools.join(' ')} && '
-                            'for p in ${flatpakTools.join(' ')}; do flatpak install -y flathub "\$p"; done',
-                      ].cast<String>(),
-                    ),
+                    system.runAsRoot([
+                      'apt',
+                      'update',
+                      '&&',
+                      'apt',
+                      'install',
+                      '-y',
+                      ...tools,
+                    ]),
                   );
                 },
                 child: const Text('Install All'),

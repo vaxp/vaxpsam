@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../domain/command_output_line.dart';
-import '../theme/app_theme.dart';
+import '../../core/theme/app_theme.dart';
 
 class ConsolePanel extends StatelessWidget {
   final List<CommandOutputLine> lines;

@@ -3,7 +3,7 @@ export 'package:flutter_riverpod/flutter_riverpod.dart';
 export 'package:vaxpsam/presentation/gaming_utilities/widget/buildHeroSection.dart';
 export '../../infrastructure/providers.dart';
 export '../home/widgets/section_widgets.dart';
-export '../theme/app_theme.dart';
+export '../../core/theme/app_theme.dart';
 export 'game_runners/game_runners_page.dart';
 export 'media_entertainment/media_entertainment_page.dart';
 export 'system_performance/system_performance_page.dart';

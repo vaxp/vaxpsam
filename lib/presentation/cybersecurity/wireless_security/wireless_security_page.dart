@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:vaxpsam/presentation/widgets/rotating_background.dart';
-import '../../infrastructure/providers.dart';
-import '../home/widgets/section_widgets.dart';
-import '../console/console_utils.dart';
-import '../theme/app_theme.dart';
+import 'package:vaxpsam/core/widgets/rotating_background.dart';
+import '../../../infrastructure/providers.dart';
+import '../../home/widgets/section_widgets.dart';
+import '../../console/console_utils.dart';
+import '../../../core/theme/app_theme.dart';
 
-class NetworkAnalysisPage extends ConsumerWidget {
-  const NetworkAnalysisPage({super.key});
+class WirelessSecurityPage extends ConsumerWidget {
+  const WirelessSecurityPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -51,7 +51,7 @@ class NetworkAnalysisPage extends ConsumerWidget {
         gradient: const LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [Color(0xFF1976D2), Color(0xFF42A5F5)],
+          colors: [Color(0xFF7B1FA2), Color(0xFF9C27B0)],
         ),
         borderRadius: BorderRadius.circular(12),
       ),
@@ -64,7 +64,7 @@ class NetworkAnalysisPage extends ConsumerWidget {
                 gradient: const LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
-                  colors: [Color(0xFF1976D2), Color(0xFF42A5F5)],
+                  colors: [Color(0xFF7B1FA2), Color(0xFF9C27B0)],
                 ),
               ),
             ),
@@ -76,7 +76,7 @@ class NetworkAnalysisPage extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
-                  'NETWORK ANALYSIS',
+                  'WIRELESS SECURITY',
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
@@ -86,7 +86,7 @@ class NetworkAnalysisPage extends ConsumerWidget {
                 ),
                 const SizedBox(height: 8),
                 const Text(
-                  'Network Security Tools',
+                  'Wi-Fi & Bluetooth Security',
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
@@ -95,7 +95,7 @@ class NetworkAnalysisPage extends ConsumerWidget {
                 ),
                 const SizedBox(height: 8),
                 const Text(
-                  '30 professional tools for network scanning, monitoring, and analysis.',
+                  '13 professional tools for wireless network security assessment and penetration testing.',
                   style: TextStyle(fontSize: 16, color: Colors.white70),
                 ),
               ],
@@ -122,7 +122,7 @@ class NetworkAnalysisPage extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Install All Network Tools',
+                        'Install All Wireless Security Tools',
                         style: Theme.of(
                           context,
                         ).textTheme.titleMedium?.copyWith(
@@ -132,7 +132,7 @@ class NetworkAnalysisPage extends ConsumerWidget {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        'Install all 30 network analysis tools at once',
+                        'Install all 13 wireless security tools at once',
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: macAppStoreGray,
                         ),
@@ -164,154 +164,73 @@ class NetworkAnalysisPage extends ConsumerWidget {
   Widget _buildToolsGrid(BuildContext context, system) {
     final tools = [
       {
-        'name': 'Nmap',
-        'package': 'nmap',
-        'description': 'Scans ports and networks and discovers services',
-      },
-      {
-        'name': 'Wireshark',
-        'package': 'wireshark',
-        'description': 'Graphical packet analyzer',
-      },
-      {
-        'name': 'tcpdump',
-        'package': 'tcpdump',
-        'description': 'Captures command-line packets',
-      },
-      {
-        'name': 'Masscan',
-        'package': 'masscan',
-        'description': 'Ultra-fast port scanning',
-      },
-      {
-        'name': 'Netcat',
-        'package': 'netcat-traditional',
-        'description': 'Swiss Army knife for networks',
-      },
-      {
-        'name': 'Hping3',
-        'package': 'hping3',
-        'description': 'Advanced packet crafter',
-      },
-      {
-        'name': 'Iptraf-ng',
-        'package': 'iptraf-ng',
-        'description': 'Network traffic monitor',
-      },
-      {
-        'name': 'Tcpflow',
-        'package': 'tcpflow',
-        'description': 'Reconstructs TCP flows',
-      },
-      {
-        'name': 'Dnsutils',
-        'package': 'dnsutils',
-        'description': 'DNS query tools (dig, host)',
-      },
-      {
-        'name': 'Dnsmap',
-        'package': 'dnsmap',
-        'description': 'Subdomain brute-forcing discovery',
-      },
-      {
-        'name': 'Fierce',
-        'package': 'fierce',
-        'description': 'Comprehensive DNS scanning tool',
-      },
-      {
-        'name': 'Mtr',
-        'package': 'mtr',
-        'description': 'Combination of Ping and Traceroute',
-      },
-      {
-        'name': 'Traceroute',
-        'package': 'traceroute',
-        'description': 'Trace the path of IP packets',
-      },
-      {
-        'name': 'Arpwatch',
-        'package': 'arpwatch',
-        'description': 'Monitor ARP activity on the network',
-      },
-      {
-        'name': 'Etherape',
-        'package': 'etherape',
-        'description': 'Graphical display of network activity',
-      },
-      {
-        'name': 'Netdiscover',
-        'package': 'netdiscover',
-        'description': 'Discover active devices on networks',
-      },
-      {
-        'name': 'OpenSSH Client',
-        'package': 'openssh-client',
-        'description': 'Secure SSH client',
-      },
-      {
-        'name': 'Telnet',
-        'package': 'telnet',
-        'description': 'Simple port telnet connection',
-      },
-      {
-        'name': 'Nslookup',
-        'package': 'dnsutils',
-        'description': 'Query DNS records',
-      },
-      {
-        'name': 'Ping',
-        'package': 'iputils-ping',
-        'description': 'Basic connectivity testing',
-      },
-      {
-        'name': 'Route',
-        'package': 'net-tools',
-        'description': 'View and modify routing tables',
-      },
-      {
-        'name': 'Ifconfig',
-        'package': 'net-tools',
-        'description': 'Displays and configures network interfaces',
-      },
-      {
-        'name': 'Proxychains',
-        'package': 'proxychains4',
-        'description': 'Force programs to run through a proxy',
-      },
-      {
         'name': 'Aircrack-ng',
         'package': 'aircrack-ng',
-        'description': 'Suite of tools for pentesting wireless networks',
+        'description': 'Toolkit for assessing 802.11 (Wi-Fi) security',
       },
       {
-        'name': 'Tshark',
-        'package': 'tshark',
-        'description': 'Command-line version of Wireshark',
+        'name': 'Reaver',
+        'package': 'reaver',
+        'description': 'PIN guessing tool for the WPS protocol',
       },
       {
-        'name': 'Tcpreplay',
-        'package': 'tcpreplay',
-        'description': 'Replays pcap files',
+        'name': 'Pixiewps',
+        'package': 'pixiewps',
+        'description': 'Offline PIN bruteforce attack tool for WPS',
       },
       {
-        'name': 'Dsniff',
-        'package': 'dsniff',
-        'description': 'Intercepts and analyzes network passwords',
+        'name': 'Kismet',
+        'package': 'kismet',
+        'description':
+            'Intrusion detection system (IDS) and scanner for 802.11 and Bluetooth networks',
       },
       {
-        'name': 'Ngrep',
-        'package': 'ngrep',
-        'description': 'Searches for patterns in network packets',
+        'name': 'Hcxdumptool',
+        'package': 'hcxdumptool',
+        'description': 'Handshake packet capture tool for WPA/WPA2',
       },
       {
-        'name': 'Tcpxtract',
-        'package': 'tcpxtract',
-        'description': 'Extracts files from network traffic',
+        'name': 'MDK3',
+        'package': 'mdk3',
+        'description': 'Advanced Wi-Fi penetration testing tool (DoS attacks)',
       },
       {
-        'name': 'Ettercap',
-        'package': 'ettercap-text-only',
-        'description': 'Intercepts man-in-the-middle attacks',
+        'name': 'Macchanger',
+        'package': 'macchanger',
+        'description':
+            'Tool for changing the MAC address of network interfaces',
+      },
+      {
+        'name': 'Bluetop',
+        'package': 'bluetop',
+        'description':
+            'Graphical Bluetooth monitor (helps with device discovery)',
+      },
+      {
+        'name': 'Hcxtools',
+        'package': 'hcxtools',
+        'description': 'Utility for converting hash formats to WPA/WPA2',
+      },
+      {
+        'name': 'Bluez',
+        'package': 'bluez',
+        'description':
+            'Official Bluetooth package for Linux (required for running Bluetooth tools)',
+      },
+      {
+        'name': 'Iwevent',
+        'package': 'wireless-tools',
+        'description': 'Displays events generated by the wireless interface',
+      },
+      {
+        'name': 'Iwconfig',
+        'package': 'wireless-tools',
+        'description': 'Configures wireless interfaces',
+      },
+      {
+        'name': 'Iwlist',
+        'package': 'wireless-tools',
+        'description': 'Scans the list of access points',
       },
     ];
 
@@ -321,7 +240,7 @@ class NetworkAnalysisPage extends ConsumerWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: Text(
-            'Network Analysis Tools',
+            'Wireless Security Tools',
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
               color: Colors.white,
@@ -346,10 +265,10 @@ class NetworkAnalysisPage extends ConsumerWidget {
               description: tool['description']!,
               icon: Container(
                 decoration: BoxDecoration(
-                  color: const Color(0xFF1976D2),
+                  color: const Color(0xFF7B1FA2),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Icon(Icons.network_check, color: Colors.white),
+                child: const Icon(Icons.wifi, color: Colors.white),
               ),
               onTap:
                   () => showConsoleStream(
@@ -365,43 +284,26 @@ class NetworkAnalysisPage extends ConsumerWidget {
 
   void _installAllTools(BuildContext context, system) {
     final tools = [
-      'nmap',
-      'wireshark',
-      'tcpdump',
-      'masscan',
-      'netcat-traditional',
-      'hping3',
-      'iptraf-ng',
-      'tcpflow',
-      'dnsutils',
-      'dnsmap',
-      'fierce',
-      'mtr',
-      'traceroute',
-      'arpwatch',
-      'etherape',
-      'netdiscover',
-      'openssh-client',
-      'telnet',
-      'iputils-ping',
-      'net-tools',
-      'proxychains4',
       'aircrack-ng',
-      'tshark',
-      'tcpreplay',
-      'dsniff',
-      'ngrep',
-      'tcpxtract',
-      'ettercap-text-only',
+      'reaver',
+      'pixiewps',
+      'kismet',
+      'hcxdumptool',
+      'mdk3',
+      'macchanger',
+      'bluetop',
+      'hcxtools',
+      'bluez',
+      'wireless-tools',
     ];
 
     showDialog(
       context: context,
       builder:
           (ctx) => AlertDialog(
-            title: const Text('Install All Network Tools'),
+            title: const Text('Install All Wireless Security Tools'),
             content: Text(
-              'This will install ${tools.length} network analysis tools. Continue?',
+              'This will install ${tools.length} wireless security tools. Continue?',
             ),
             actions: [
               TextButton(

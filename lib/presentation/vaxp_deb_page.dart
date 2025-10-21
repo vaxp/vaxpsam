@@ -3,7 +3,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:path/path.dart' as path;
 import 'dart:io';
 import 'home/widgets/section_widgets.dart';
-import 'theme/app_theme.dart';
+import '../core/theme/app_theme.dart';
 
 class VaxpDebPage extends StatefulWidget {
   const VaxpDebPage({super.key});

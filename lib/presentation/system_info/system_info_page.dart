@@ -1,40 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../infrastructure/providers.dart';
-import 'home/widgets/section_widgets.dart';
-import 'theme/app_theme.dart';
-import 'content_creation/graphics_design_page.dart';
-import 'content_creation/video_production_page.dart';
-import 'content_creation/audio_editing_page.dart';
+import '../../infrastructure/providers.dart';
+import '../home/widgets/section_widgets.dart';
+import '../../core/theme/app_theme.dart';
+import 'system_overview/system_overview_page.dart';
+import 'hardware_details/hardware_details_page.dart';
+import 'live_performance/live_performance_page.dart';
 
-class ContentCreationPage extends ConsumerWidget {
-  const ContentCreationPage({super.key});
+class SystemInfoPage extends ConsumerStatefulWidget {
+  const SystemInfoPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() => _SystemInfoPageState();
+}
+
+class _SystemInfoPageState extends ConsumerState<SystemInfoPage> {
+  @override
+  Widget build(BuildContext context) {
     final system = ref.read(systemServiceProvider);
 
     return Container(
       color: macAppStoreDark,
-      child: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            expandedHeight: 200,
-            floating: false,
-            pinned: true,
-            backgroundColor: macAppStoreDark,
-            flexibleSpace: FlexibleSpaceBar(
-              background: _buildHeroSection(context),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildCategoriesGrid(context, system),
-                const SizedBox(height: 20),
-              ],
-            ),
+      child: Stack(
+        children: [
+          CustomScrollView(
+            slivers: [
+              SliverAppBar(
+                expandedHeight: 200,
+                floating: false,
+                pinned: true,
+                backgroundColor: macAppStoreDark,
+                flexibleSpace: FlexibleSpaceBar(
+                  background: _buildHeroSection(context),
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildQuickStats(context, system),
+                    const SizedBox(height: 20),
+                  ],
+                ),
+              ),
+            ],
           ),
         ],
       ),
@@ -49,7 +58,7 @@ class ContentCreationPage extends ConsumerWidget {
         gradient: const LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [Color(0xFFE91E63), Color(0xFFF06292)],
+          colors: [Color(0xFF1976D2), Color(0xFF42A5F5)],
         ),
         borderRadius: BorderRadius.circular(12),
       ),
@@ -62,7 +71,7 @@ class ContentCreationPage extends ConsumerWidget {
                 gradient: const LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
-                  colors: [Color(0xFFE91E63), Color(0xFFF06292)],
+                  colors: [Color(0xFF1976D2), Color(0xFF42A5F5)],
                 ),
               ),
             ),
@@ -74,7 +83,7 @@ class ContentCreationPage extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
-                  'CONTENT CREATION',
+                  'SYSTEM INFORMATION',
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
@@ -84,7 +93,7 @@ class ContentCreationPage extends ConsumerWidget {
                 ),
                 const SizedBox(height: 8),
                 const Text(
-                  'Creative Tools',
+                  'Monitor & Analyze',
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
@@ -93,7 +102,7 @@ class ContentCreationPage extends ConsumerWidget {
                 ),
                 const SizedBox(height: 8),
                 const Text(
-                  'Professional tools for graphics, video production, and audio editing.',
+                  'Comprehensive system monitoring and hardware analysis dashboard.',
                   style: TextStyle(fontSize: 16, color: Colors.white70),
                 ),
               ],
@@ -104,14 +113,14 @@ class ContentCreationPage extends ConsumerWidget {
     );
   }
 
-  Widget _buildCategoriesGrid(BuildContext context, system) {
+  Widget _buildQuickStats(BuildContext context, dynamic system) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: Text(
-            'All Categories',
+            'Quick System Stats',
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
               color: Colors.white,
@@ -122,58 +131,60 @@ class ContentCreationPage extends ConsumerWidget {
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           crossAxisCount: 3,
-          childAspectRatio: 1.2,
+          childAspectRatio: 1.5,
           mainAxisSpacing: 16,
           crossAxisSpacing: 16,
           padding: const EdgeInsets.symmetric(horizontal: 16),
           children: [
             AppGridCard(
-              title: 'Graphics & Design',
-              description: '10 graphics and design tools',
+              title: 'System Overview',
+              description: 'Static system information',
               icon: Container(
                 decoration: BoxDecoration(
                   color: const Color(0xFF4CAF50),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Icon(Icons.palette, color: Colors.white),
+                child: const Icon(Icons.info_outline, color: Colors.white),
               ),
               onTap:
                   () => Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (_) => const GraphicsDesignPage(),
+                      builder: (_) => const SystemOverviewPage(),
                     ),
                   ),
             ),
             AppGridCard(
-              title: 'Video Production',
-              description: '10 video production tools',
+              title: 'Hardware Details',
+              description: 'Component specifications',
               icon: Container(
                 decoration: BoxDecoration(
                   color: const Color(0xFF2196F3),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Icon(Icons.videocam, color: Colors.white),
+                child: const Icon(Icons.memory, color: Colors.white),
               ),
               onTap:
                   () => Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (_) => const VideoProductionPage(),
+                      builder: (_) => const HardwareDetailsPage(),
                     ),
                   ),
             ),
             AppGridCard(
-              title: 'Audio Editing & Podcasting',
-              description: '10 audio editing tools',
+              title: 'Live Performance',
+              description: 'Real-time monitoring',
               icon: Container(
                 decoration: BoxDecoration(
                   color: const Color(0xFFFF9800),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Icon(Icons.music_note, color: Colors.white),
+                child: const Icon(Icons.speed, color: Colors.white),
               ),
               onTap:
                   () => Navigator.of(context).push(
-                    MaterialPageRoute(builder: (_) => const AudioEditingPage()),
+                    MaterialPageRoute(
+                      builder: (_) => const LivePerformancePage(),
+                    ),
                   ),
             ),
           ],

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../infrastructure/providers.dart';
-import 'home/widgets/section_widgets.dart';
-import 'theme/app_theme.dart';
-import 'developer_tools/web_frontend_page.dart';
-import 'developer_tools/web_backend_page.dart';
-import 'developer_tools/devops_sysadmin_page.dart';
-import 'developer_tools/mobile_developer_page.dart';
-import 'developer_tools/desktop_developer_page.dart';
-import 'developer_tools/planning_documentation_page.dart';
+import '../../infrastructure/providers.dart';
+import '../home/widgets/section_widgets.dart';
+import '../../core/theme/app_theme.dart';
+import 'web_frontend/web_frontend_page.dart';
+import 'web_backend/web_backend_page.dart';
+import 'devops_sysadmin/devops_sysadmin_page.dart';
+import 'mobile_developer/mobile_developer_page.dart';
+import 'desktop_developer/desktop_developer_page.dart';
+import 'planning_documentation/planning_documentation_page.dart';
 
 class DeveloperToolsPage extends ConsumerWidget {
   const DeveloperToolsPage({super.key});

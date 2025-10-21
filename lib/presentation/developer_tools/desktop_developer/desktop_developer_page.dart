@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:vaxpsam/presentation/widgets/rotating_background.dart';
-import '../../infrastructure/providers.dart';
-import '../home/widgets/section_widgets.dart';
-import '../console/console_utils.dart';
-import '../theme/app_theme.dart';
+import '../../../infrastructure/providers.dart';
+import '../../home/widgets/section_widgets.dart';
+import '../../console/console_utils.dart';
+import '../../../core/theme/app_theme.dart';
+import '../../../core/widgets/rotating_background.dart';
 
-class MalwareAnalysisPage extends ConsumerWidget {
-  const MalwareAnalysisPage({super.key});
+class DesktopDeveloperPage extends ConsumerWidget {
+  const DesktopDeveloperPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -51,7 +51,7 @@ class MalwareAnalysisPage extends ConsumerWidget {
         gradient: const LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [Color(0xFFD32F2F), Color(0xFFF44336)],
+          colors: [Color(0xFF795548), Color(0xFFA1887F)],
         ),
         borderRadius: BorderRadius.circular(12),
       ),
@@ -64,7 +64,7 @@ class MalwareAnalysisPage extends ConsumerWidget {
                 gradient: const LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
-                  colors: [Color(0xFFD32F2F), Color(0xFFF44336)],
+                  colors: [Color(0xFF795548), Color(0xFFA1887F)],
                 ),
               ),
             ),
@@ -76,7 +76,7 @@ class MalwareAnalysisPage extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
-                  'MALWARE ANALYSIS',
+                  'DESKTOP DEVELOPER',
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
@@ -86,7 +86,7 @@ class MalwareAnalysisPage extends ConsumerWidget {
                 ),
                 const SizedBox(height: 8),
                 const Text(
-                  'Forensic & Analysis Tools',
+                  'Desktop Development Tools',
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
@@ -95,7 +95,7 @@ class MalwareAnalysisPage extends ConsumerWidget {
                 ),
                 const SizedBox(height: 8),
                 const Text(
-                  '25 professional tools for reverse engineering, forensics, and malware detection.',
+                  '30 professional tools for desktop application development including GUI frameworks and build systems.',
                   style: TextStyle(fontSize: 16, color: Colors.white70),
                 ),
               ],
@@ -122,7 +122,7 @@ class MalwareAnalysisPage extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Install All Malware Analysis Tools',
+                        'Install All Desktop Developer Tools',
                         style: Theme.of(
                           context,
                         ).textTheme.titleMedium?.copyWith(
@@ -132,7 +132,7 @@ class MalwareAnalysisPage extends ConsumerWidget {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        'Install all 25 malware analysis tools at once',
+                        'Install all 30 desktop development tools at once',
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: macAppStoreGray,
                         ),
@@ -164,130 +164,150 @@ class MalwareAnalysisPage extends ConsumerWidget {
   Widget _buildToolsGrid(BuildContext context, system) {
     final tools = [
       {
-        'name': 'Radare2 (r2)',
-        'package': 'radare2',
-        'description': 'Powerful reverse engineering framework',
+        'name': 'GCC/G++',
+        'package': 'build-essential',
+        'description':
+            'Necessary package that includes gcc, g++, make, and dpkg-dev (for compiling)',
       },
       {
-        'name': 'GDB',
-        'package': 'gdb',
-        'description': 'Basic debugger for runtime analysis',
+        'name': 'CMake',
+        'package': 'cmake',
+        'description':
+            'Modern and widely used build system (for large projects)',
       },
       {
-        'name': 'Binwalk',
-        'package': 'binwalk',
-        'description': 'Analyzes binary files, especially firmware',
-      },
-      {
-        'name': 'ClamAV',
-        'package': 'clamav',
-        'description': 'Open-source virus scanning engine',
-      },
-      {
-        'name': 'Strace',
-        'package': 'strace',
-        'description': 'Traces system calls',
-      },
-      {
-        'name': 'Ltrace',
-        'package': 'ltrace',
-        'description': 'Traces user library calls',
+        'name': 'Git',
+        'package': 'git',
+        'description': 'Version control system',
       },
       {
         'name': 'Python',
         'package': 'python3',
-        'description': 'Basic programming language for automating analysis',
-      },
-      {
-        'name': 'GCC',
-        'package': 'gcc',
-        'description': 'Compiler for compiling code and tools',
-      },
-      {
-        'name': 'File',
-        'package': 'file',
-        'description': 'Determines file type',
-      },
-      {
-        'name': 'Strings',
-        'package': 'binutils',
-        'description': 'Extracts printable text from binary files',
-      },
-      {
-        'name': 'Objdump',
-        'package': 'binutils',
-        'description': 'Displays information about executable files',
-      },
-      {
-        'name': 'Readelf',
-        'package': 'binutils',
-        'description': 'Displays information about ELF files',
-      },
-      {
-        'name': 'Foremost',
-        'package': 'foremost',
-        'description': 'File recovery tool, useful for analyzing evidence',
-      },
-      {
-        'name': 'Chkrootkit',
-        'package': 'chkrootkit',
-        'description': 'Rootkits detection tool',
-      },
-      {
-        'name': 'Rkhunter',
-        'package': 'rkhunter',
-        'description': 'Rootkits and malware detection tool',
-      },
-      {
-        'name': 'Unzip',
-        'package': 'unzip',
-        'description': 'Unzip tool for decompressing suspicious content',
-      },
-      {
-        'name': 'Tar',
-        'package': 'tar',
-        'description': 'Toolkit for handling file archives',
-      },
-      {
-        'name': 'Sleuth Kit',
-        'package': 'sleuthkit',
-        'description': 'Digital forensics toolkit',
-      },
-      {
-        'name': 'TestDisk',
-        'package': 'testdisk',
-        'description': 'Hard disk partition recovery tool',
-      },
-      {
-        'name': 'Autopsy',
-        'package': 'autopsy',
-        'description': 'Graphical interface for Sleuth Kit',
-      },
-      {
-        'name': 'Xxd',
-        'package': 'xxd',
-        'description': 'Create a hexadecimal (Hex Dump) view of a file',
-      },
-      {
-        'name': 'Hexdump',
-        'package': 'bsdmainutils',
-        'description': 'Display file contents in hexadecimal format',
-      },
-      {
-        'name': 'Gzip/Bzip2',
-        'package': 'gzip',
-        'description': 'Compressing and decompressing files',
-      },
-      {
-        'name': 'Libimobiledevice',
-        'package': 'libimobiledevice',
-        'description': 'Analyzes iOS devices (behavioral analysis)',
-      },
-      {
-        'name': 'Adb',
-        'package': 'android-tools-adb',
         'description':
-            'Android debugging bridge (for analyzing application behavior)',
+            'Basic programming language (for building CLI tools or simple interfaces)',
+      },
+      {
+        'name': 'Python3-tk',
+        'package': 'python3-tk',
+        'description': 'Tcl/Tk library for Python (for building simple GUIs)',
+      },
+      {
+        'name': 'Qt5 Base Dev',
+        'package': 'qtbase5-dev',
+        'description':
+            'Essential Qt5 development libraries (for professional GUIs)',
+      },
+      {
+        'name': 'Qt Tools',
+        'package': 'qttools5-dev',
+        'description': 'Utilities for Qt5 development',
+      },
+      {
+        'name': 'GTK+ 3.0 Dev',
+        'package': 'libgtk-3-dev',
+        'description':
+            'GTK+ 3.0 development libraries (the GNOME native interface library)',
+      },
+      {
+        'name': 'Ctags',
+        'package': 'ctags',
+        'description': 'For creating source code indexes',
+      },
+      {
+        'name': 'Valgrind',
+        'package': 'valgrind',
+        'description': 'Tool for debugging memory and profile errors',
+      },
+      {'name': 'GDB', 'package': 'gdb', 'description': 'GNU Debugger'},
+      {'name': 'Vim', 'package': 'vim', 'description': 'Powerful text editor'},
+      {'name': 'Nano', 'package': 'nano', 'description': 'Simple text editor'},
+      {
+        'name': 'Curl',
+        'package': 'curl',
+        'description': 'For testing connections',
+      },
+      {
+        'name': 'Wget',
+        'package': 'wget',
+        'description': 'For downloading content',
+      },
+      {
+        'name': 'OpenSSL Dev',
+        'package': 'libssl-dev',
+        'description':
+            'OpenSSL development libraries (for encryption and security)',
+      },
+      {
+        'name': 'libsqlite3-dev',
+        'package': 'libsqlite3-dev',
+        'description': 'SQLite 3 libraries (for embedded databases)',
+      },
+      {
+        'name': 'Autoconf',
+        'package': 'autoconf',
+        'description': 'For generating configuration scripts',
+      },
+      {
+        'name': 'Automake',
+        'package': 'automake',
+        'description': 'For automatically generating Makefiles',
+      },
+      {
+        'name': 'Libtool',
+        'package': 'libtool',
+        'description': 'Utility for managing shared libraries',
+      },
+      {
+        'name': 'Doxygen',
+        'package': 'doxygen',
+        'description': 'Source code documentation system',
+      },
+      {
+        'name': 'Java JDK',
+        'package': 'default-jdk',
+        'description':
+            'Java development environment (essential for tools like IntelliJ/Eclipse)',
+      },
+      {
+        'name': 'SWIG',
+        'package': 'swig',
+        'description':
+            'For linking different programming languages (such as C++ and Python)',
+      },
+      {
+        'name': 'libxml2-dev',
+        'package': 'libxml2-dev',
+        'description': 'XML development libraries',
+      },
+      {
+        'name': 'libpcre3-dev',
+        'package': 'libpcre3-dev',
+        'description': 'PCRE libraries for regular expressions',
+      },
+      {
+        'name': 'cmake-curses-gui',
+        'package': 'cmake-curses-gui',
+        'description': 'Graphical text interface for CMake',
+      },
+      {
+        'name': 'Glade',
+        'package': 'glade',
+        'description': 'GUI designer for GTK+',
+      },
+      {
+        'name': 'pkg-config',
+        'package': 'pkg-config',
+        'description': 'Utility for managing compiled library packages',
+      },
+      {
+        'name': 'RapidJson Dev',
+        'package': 'rapidjson-dev',
+        'description': 'Rapid JSON libraries for C++',
+      },
+      {
+        'name': 'Subversion',
+        'package': 'subversion',
+        'description': 'Alternative version control system to Git',
       },
     ];
 
@@ -297,7 +317,7 @@ class MalwareAnalysisPage extends ConsumerWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: Text(
-            'Malware Analysis Tools',
+            'Desktop Development Tools',
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
               color: Colors.white,
@@ -322,10 +342,10 @@ class MalwareAnalysisPage extends ConsumerWidget {
               description: tool['description']!,
               icon: Container(
                 decoration: BoxDecoration(
-                  color: const Color(0xFFD32F2F),
+                  color: const Color(0xFF795548),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Icon(Icons.security, color: Colors.white),
+                child: const Icon(Icons.desktop_windows, color: Colors.white),
               ),
               onTap:
                   () => showConsoleStream(
@@ -341,38 +361,45 @@ class MalwareAnalysisPage extends ConsumerWidget {
 
   void _installAllTools(BuildContext context, system) {
     final tools = [
-      'radare2',
-      'gdb',
-      'binwalk',
-      'clamav',
-      'strace',
-      'ltrace',
+      'build-essential',
+      'cmake',
+      'git',
       'python3',
-      'gcc',
-      'file',
-      'binutils',
-      'foremost',
-      'chkrootkit',
-      'rkhunter',
-      'unzip',
-      'tar',
-      'sleuthkit',
-      'testdisk',
-      'autopsy',
-      'xxd',
-      'bsdmainutils',
-      'gzip',
-      'libimobiledevice',
-      'android-tools-adb',
+      'python3-tk',
+      'qtbase5-dev',
+      'qttools5-dev',
+      'libgtk-3-dev',
+      'ctags',
+      'valgrind',
+      'gdb',
+      'vim',
+      'nano',
+      'curl',
+      'wget',
+      'libssl-dev',
+      'libsqlite3-dev',
+      'autoconf',
+      'automake',
+      'libtool',
+      'doxygen',
+      'default-jdk',
+      'swig',
+      'libxml2-dev',
+      'libpcre3-dev',
+      'cmake-curses-gui',
+      'glade',
+      'pkg-config',
+      'rapidjson-dev',
+      'subversion',
     ];
 
     showDialog(
       context: context,
       builder:
           (ctx) => AlertDialog(
-            title: const Text('Install All Malware Analysis Tools'),
+            title: const Text('Install All Desktop Developer Tools'),
             content: Text(
-              'This will install ${tools.length} malware analysis tools. Continue?',
+              'This will install ${tools.length} desktop development tools. Continue?',
             ),
             actions: [
               TextButton(

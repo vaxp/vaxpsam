@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../domain/command_output_line.dart';
-import '../theme/app_theme.dart';
+import '../../core/theme/app_theme.dart';
 
 class ConsoleModal extends StatefulWidget {
   final Stream<CommandOutputLine> stream;

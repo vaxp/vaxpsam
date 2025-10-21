@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import '../../theme/app_theme.dart';
+import '../../../core/theme/app_theme.dart';
 
 // Responsive grid helper for different screen sizes
 class ResponsiveGrid extends StatelessWidget {

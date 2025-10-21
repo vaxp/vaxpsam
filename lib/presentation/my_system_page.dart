@@ -4,7 +4,7 @@ import '../infrastructure/providers.dart';
 import 'package:file_picker/file_picker.dart';
 import 'home/widgets/section_widgets.dart';
 import 'console/console_utils.dart';
-import 'theme/app_theme.dart';
+import '../core/theme/app_theme.dart';
 
 class MySystemPage extends ConsumerWidget {
   const MySystemPage({super.key});

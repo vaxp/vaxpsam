@@ -6,7 +6,7 @@ import 'package:vaxpsam/data/advanced_editors_data.dart';
 import 'package:vaxpsam/infrastructure/providers.dart';
 import 'package:vaxpsam/presentation/console/console_utils.dart';
 import 'package:vaxpsam/presentation/home/widgets/section_widgets.dart';
-import 'package:vaxpsam/presentation/theme/app_theme.dart';
+import 'package:vaxpsam/core/theme/app_theme.dart';
 
 class InstallAllAdvancedEditorsCard extends ConsumerWidget {
   const InstallAllAdvancedEditorsCard({super.key});

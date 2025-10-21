@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../infrastructure/providers.dart';
-import '../home/widgets/section_widgets.dart';
-import '../console/console_utils.dart';
-import '../theme/app_theme.dart';
-import '../widgets/rotating_background.dart';
+import '../../../infrastructure/providers.dart';
+import '../../home/widgets/section_widgets.dart';
+import '../../console/console_utils.dart';
+import '../../../core/theme/app_theme.dart';
+import '../../../core/widgets/rotating_background.dart';
 
-class AudioEditingPage extends ConsumerWidget {
-  const AudioEditingPage({super.key});
+class WebBackendPage extends ConsumerWidget {
+  const WebBackendPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -22,7 +22,7 @@ class AudioEditingPage extends ConsumerWidget {
               expandedHeight: 200,
               floating: false,
               pinned: true,
-              backgroundColor: Colors.transparent,
+              backgroundColor: macAppStoreDark,
               flexibleSpace: FlexibleSpaceBar(
                 background: _buildHeroSection(context),
               ),
@@ -51,7 +51,7 @@ class AudioEditingPage extends ConsumerWidget {
         gradient: const LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [Color(0xFFFF9800), Color(0xFFFFB74D)],
+          colors: [Color(0xFF2196F3), Color(0xFF64B5F6)],
         ),
         borderRadius: BorderRadius.circular(12),
       ),
@@ -64,7 +64,7 @@ class AudioEditingPage extends ConsumerWidget {
                 gradient: const LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
-                  colors: [Color(0xFFFF9800), Color(0xFFFFB74D)],
+                  colors: [Color(0xFF2196F3), Color(0xFF64B5F6)],
                 ),
               ),
             ),
@@ -76,7 +76,7 @@ class AudioEditingPage extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
-                  'AUDIO EDITING & PODCASTING',
+                  'WEB BACK-END',
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
@@ -86,7 +86,7 @@ class AudioEditingPage extends ConsumerWidget {
                 ),
                 const SizedBox(height: 8),
                 const Text(
-                  'Audio Editing & Podcasting Tools',
+                  'Backend Development Tools',
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
@@ -95,7 +95,7 @@ class AudioEditingPage extends ConsumerWidget {
                 ),
                 const SizedBox(height: 8),
                 const Text(
-                  'Professional audio editing and podcasting tools for content creators.',
+                  '30 professional tools for backend development including Python, databases, and web servers.',
                   style: TextStyle(fontSize: 16, color: Colors.white70),
                 ),
               ],
@@ -122,7 +122,7 @@ class AudioEditingPage extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Install All Audio Editing Tools',
+                        'Install All Backend Tools',
                         style: Theme.of(
                           context,
                         ).textTheme.titleMedium?.copyWith(
@@ -132,7 +132,7 @@ class AudioEditingPage extends ConsumerWidget {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        'Install all 10 audio editing and podcasting tools at once',
+                        'Install all 30 backend development tools at once',
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: macAppStoreGray,
                         ),
@@ -164,70 +164,143 @@ class AudioEditingPage extends ConsumerWidget {
   Widget _buildToolsGrid(BuildContext context, system) {
     final tools = [
       {
-        'name': 'Audacity',
-        'package': 'audacity',
-        'description': 'Multi-track audio editor (essential for podcasting)',
-        'source': 'apt',
-        'iconAsset': 'assets/creation/audacity.png',
+        'name': 'Python 3',
+        'package': 'python3',
+        'description': 'Popular back-end programming language (Django, Flask)',
       },
       {
-        'name': 'Ardour',
-        'package': 'org.ardour.Ardour',
-        'description': 'Professional digital audio workstation (DAW)',
-        'source': 'flatpak',
-        'iconAsset': 'assets/creation/Ardour.png',
+        'name': 'Pip',
+        'package': 'python3-pip',
+        'description': 'Python package manager',
       },
       {
-        'name': 'LMMS',
-        'package': 'lmms',
-        'description': 'Digital audio workstation for music production',
-        'source': 'apt',
+        'name': 'PostgreSQL Client',
+        'package': 'postgresql-client',
+        'description':
+            'Command-line tools for connecting to Postgres databases',
       },
       {
-        'name': 'Hydrogen',
-        'package': 'hydrogen',
-        'description': 'Drum Machine for creating beats',
-        'source': 'apt',
-        'iconAsset': 'assets/creation/hydrogen.png',
+        'name': 'MySQL Client',
+        'package': 'mysql-client',
+        'description':
+            'Command-line tools for connecting to MySQL/MariaDB databases',
       },
       {
-        'name': 'Jack Audio Connection Kit',
-        'package': 'jackd2',
-        'description': 'Professional audio connection server',
-        'source': 'apt',
-        'iconAsset': 'assets/creation/jack-mixer.png',
+        'name': 'PHP CLI',
+        'package': 'php-cli',
+        'description': 'PHP command-line environment (Laravel, Symfony)',
       },
       {
-        'name': 'VLC',
-        'package': 'vlc',
-        'description': 'Versatile media player (for testing)',
-        'source': 'apt',
-        'iconAsset': 'assets/creation/vlc.png',
+        'name': 'Ruby',
+        'package': 'ruby',
+        'description': 'Ruby on Rails: A back-end programming language',
       },
       {
-        'name': 'LAME',
-        'package': 'lame',
-        'description': 'MP3 encoding library',
-        'source': 'apt',
-        'iconAsset': 'assets/creation/lmms.png',
+        'name': 'Rubygems',
+        'package': 'rubygems',
+        'description': 'Ruby package manager',
+      },
+      {'name': 'GCC', 'package': 'gcc', 'description': 'C compiler'},
+      {'name': 'G++', 'package': 'g++', 'description': 'C++ compiler'},
+      {
+        'name': 'OpenSSL',
+        'package': 'openssl',
+        'description': 'For managing TLS/SSL certificates',
       },
       {
-        'name': 'PulseAudio',
-        'package': 'pulseaudio',
-        'description': 'Virtual audio server',
-        'source': 'apt',
+        'name': 'Supervisor',
+        'package': 'supervisor',
+        'description':
+            'Process management system (to ensure applications remain running)',
       },
       {
-        'name': 'Sox',
-        'package': 'sox',
-        'description': 'Command-line audio processing (Sound Exchange)',
-        'source': 'apt',
+        'name': 'Redis Server',
+        'package': 'redis-server',
+        'description': 'In-memory data caching server',
       },
       {
-        'name': 'Atraci',
-        'package': 'atraci',
-        'description': 'Music player and search',
-        'source': 'apt',
+        'name': 'Apache2',
+        'package': 'apache2',
+        'description': 'Widely used web server',
+      },
+      {
+        'name': 'Nginx',
+        'package': 'nginx',
+        'description': 'Lightweight web server and reverse proxy',
+      },
+      {
+        'name': 'Python3-venv',
+        'package': 'python3-venv',
+        'description': 'For creating virtual Python environments',
+      },
+      {
+        'name': 'Uwsgi',
+        'package': 'uwsgi',
+        'description': 'Application Server for Python/Perl/PHP',
+      },
+      {
+        'name': 'Tmux',
+        'package': 'tmux',
+        'description':
+            'Terminal multiplexer for managing sessions on the server',
+      },
+      {
+        'name': 'Screen',
+        'package': 'screen',
+        'description': 'Alternative to Tmux for managing sessions',
+      },
+      {
+        'name': 'Htop',
+        'package': 'htop',
+        'description':
+            'Interactive process monitor (for analyzing server performance)',
+      },
+      {
+        'name': 'Tzdata',
+        'package': 'tzdata',
+        'description': 'Timezone data package (essential for processing times)',
+      },
+      {
+        'name': 'Curl',
+        'package': 'curl',
+        'description': 'For testing server connections',
+      },
+      {'name': 'Git', 'package': 'git', 'description': 'Version control'},
+      {'name': 'Make', 'package': 'make', 'description': 'Build automation'},
+      {
+        'name': 'Valgrind',
+        'package': 'valgrind',
+        'description': 'For debugging memory errors (for C/C++ code)',
+      },
+      {
+        'name': 'Systemd',
+        'package': 'systemd',
+        'description': 'For managing the Service Manager in Ubuntu',
+      },
+      {
+        'name': 'Cron',
+        'package': 'cron',
+        'description': 'For scheduling tasks',
+      },
+      {
+        'name': 'Locales',
+        'package': 'locales',
+        'description': 'Supports regional settings',
+      },
+      {
+        'name': 'Procps',
+        'package': 'procps',
+        'description': 'Process management tools',
+      },
+      {
+        'name': 'Netcat',
+        'package': 'netcat-traditional',
+        'description': 'For testing raw port connections',
+      },
+      {
+        'name': 'SSH',
+        'package': 'openssh-client',
+        'description': 'For secure connection to the server',
       },
     ];
 
@@ -237,7 +310,7 @@ class AudioEditingPage extends ConsumerWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: Text(
-            'Audio Editing & Podcasting Tools',
+            'Backend Development Tools',
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
               color: Colors.white,
@@ -262,18 +335,16 @@ class AudioEditingPage extends ConsumerWidget {
               description: tool['description']!,
               icon: Container(
                 decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 55, 57, 71),
+                  color: const Color(0xFF2196F3),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Image.asset(
-                  tool['iconAsset'] ??
-                      'assets/ides/default.png', // تمرير المسار المخزن في قائمة tools
-                  width: 40,
-                  height: 40,
-                  fit: BoxFit.contain,
-                ),
+                child: const Icon(Icons.storage, color: Colors.white),
               ),
-              onTap: () => _installTool(context, system, tool),
+              onTap:
+                  () => showConsoleStream(
+                    context,
+                    system.installPackageByName(tool['package']!),
+                  ),
             );
           },
         ),
@@ -281,46 +352,47 @@ class AudioEditingPage extends ConsumerWidget {
     );
   }
 
-  void _installTool(BuildContext context, system, tool) {
-    if (tool['source'] == 'flatpak') {
-      showConsoleStream(
-        context,
-        system.runAsRoot(
-          [
-            'flatpak',
-            'install',
-            '-y',
-            'flathub',
-            tool['package']!,
-          ].cast<String>(),
-        ),
-      );
-    } else {
-      showConsoleStream(context, system.installPackageByName(tool['package']!));
-    }
-  }
-
   void _installAllTools(BuildContext context, system) {
-    final aptTools = [
-      'audacity',
-      'lmms',
-      'hydrogen',
-      'jackd2',
-      'vlc',
-      'lame',
-      'pulseaudio',
-      'sox',
-      'atraci',
+    final tools = [
+      'python3',
+      'python3-pip',
+      'postgresql-client',
+      'mysql-client',
+      'php-cli',
+      'ruby',
+      'rubygems',
+      'gcc',
+      'g++',
+      'openssl',
+      'supervisor',
+      'redis-server',
+      'apache2',
+      'nginx',
+      'python3-venv',
+      'uwsgi',
+      'tmux',
+      'screen',
+      'htop',
+      'tzdata',
+      'curl',
+      'git',
+      'make',
+      'valgrind',
+      'systemd',
+      'cron',
+      'locales',
+      'procps',
+      'netcat-traditional',
+      'openssh-client',
     ];
-    final flatpakTools = ['org.ardour.Ardour'];
 
     showDialog(
       context: context,
       builder:
           (ctx) => AlertDialog(
-            title: const Text('Install All Audio Editing Tools'),
+            title: const Text('Install All Backend Tools'),
             content: Text(
-              'This will install ${aptTools.length + flatpakTools.length} audio editing tools. Continue?',
+              'This will install ${tools.length} backend development tools. Continue?',
             ),
             actions: [
               TextButton(
@@ -332,14 +404,15 @@ class AudioEditingPage extends ConsumerWidget {
                   Navigator.of(ctx).pop();
                   showConsoleStream(
                     context,
-                    system.runAsRoot(
-                      [
-                        'bash',
-                        '-c',
-                        'apt update && apt install -y ${aptTools.join(' ')} && '
-                            'for p in ${flatpakTools.join(' ')}; do flatpak install -y flathub "\$p"; done',
-                      ].cast<String>(),
-                    ),
+                    system.runAsRoot([
+                      'apt',
+                      'update',
+                      '&&',
+                      'apt',
+                      'install',
+                      '-y',
+                      ...tools,
+                    ]),
                   );
                 },
                 child: const Text('Install All'),

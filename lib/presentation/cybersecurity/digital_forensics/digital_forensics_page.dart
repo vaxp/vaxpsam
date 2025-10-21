@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../infrastructure/providers.dart';
-import '../home/widgets/section_widgets.dart';
-import '../console/console_utils.dart';
-import '../theme/app_theme.dart';
-import '../widgets/rotating_background.dart';
+import 'package:vaxpsam/core/widgets/rotating_background.dart';
+import '../../../infrastructure/providers.dart';
+import '../../home/widgets/section_widgets.dart';
+import '../../console/console_utils.dart';
+import '../../../core/theme/app_theme.dart';
 
-class MobileDeveloperPage extends ConsumerWidget {
-  const MobileDeveloperPage({super.key});
+class DigitalForensicsPage extends ConsumerWidget {
+  const DigitalForensicsPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -51,7 +51,7 @@ class MobileDeveloperPage extends ConsumerWidget {
         gradient: const LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [Color(0xFF9C27B0), Color(0xFFBA68C8)],
+          colors: [Color(0xFF00695C), Color(0xFF4DB6AC)],
         ),
         borderRadius: BorderRadius.circular(12),
       ),
@@ -64,7 +64,7 @@ class MobileDeveloperPage extends ConsumerWidget {
                 gradient: const LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
-                  colors: [Color(0xFF9C27B0), Color(0xFFBA68C8)],
+                  colors: [Color(0xFF00695C), Color(0xFF4DB6AC)],
                 ),
               ),
             ),
@@ -76,7 +76,7 @@ class MobileDeveloperPage extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
-                  'MOBILE DEVELOPER',
+                  'DIGITAL FORENSICS',
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
@@ -86,7 +86,7 @@ class MobileDeveloperPage extends ConsumerWidget {
                 ),
                 const SizedBox(height: 8),
                 const Text(
-                  'Mobile Development Tools',
+                  'Forensic Investigation Tools',
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
@@ -95,7 +95,7 @@ class MobileDeveloperPage extends ConsumerWidget {
                 ),
                 const SizedBox(height: 8),
                 const Text(
-                  '30 professional tools for Android and mobile app development including Java, ADB, and build systems.',
+                  '13 professional tools for digital forensics, file recovery, and evidence analysis.',
                   style: TextStyle(fontSize: 16, color: Colors.white70),
                 ),
               ],
@@ -122,7 +122,7 @@ class MobileDeveloperPage extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Install All Mobile Developer Tools',
+                        'Install All Digital Forensics Tools',
                         style: Theme.of(
                           context,
                         ).textTheme.titleMedium?.copyWith(
@@ -132,7 +132,7 @@ class MobileDeveloperPage extends ConsumerWidget {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        'Install all 30 mobile development tools at once',
+                        'Install all 13 digital forensics tools at once',
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: macAppStoreGray,
                         ),
@@ -164,139 +164,72 @@ class MobileDeveloperPage extends ConsumerWidget {
   Widget _buildToolsGrid(BuildContext context, system) {
     final tools = [
       {
-        'name': 'Java JDK',
-        'package': 'default-jdk',
+        'name': 'The Sleuth Kit (TSK)',
+        'package': 'sleuthkit',
+        'description': 'Toolkit for forensic investigation of file systems',
+      },
+      {
+        'name': 'Foremost',
+        'package': 'foremost',
+        'description': 'File recovery tool using signature analysis (Carving)',
+      },
+      {
+        'name': 'TestDisk',
+        'package': 'testdisk',
+        'description': 'Tool for recovering lost hard drive partitions',
+      },
+      {
+        'name': 'PhotoRec',
+        'package': 'testdisk',
+        'description': 'File recovery tool (included with TestDisk)',
+      },
+      {
+        'name': 'Autopsy',
+        'package': 'autopsy',
         'description':
-            'Java development environment (essential for native Android applications)',
+            'Graphical interface to Sleuth Kit for comprehensive analysis',
       },
       {
-        'name': 'Java JRE',
-        'package': 'default-jre',
-        'description': 'Java runtime environment',
-      },
-      {'name': 'Git', 'package': 'git', 'description': 'Version control'},
-      {
-        'name': 'Node.js',
-        'package': 'nodejs',
-        'description': 'For React Native/Ionic development',
+        'name': 'Dd/ddrescue',
+        'package': 'coreutils',
+        'description': 'Disk imaging tools',
       },
       {
-        'name': 'NPM',
-        'package': 'npm',
-        'description': 'Node.js package manager',
+        'name': 'Chkrootkit',
+        'package': 'chkrootkit',
+        'description': 'System scanning tool for rootkits',
       },
       {
-        'name': 'Android Tools',
-        'package': 'android-tools-adb',
+        'name': 'Rkhunter',
+        'package': 'rkhunter',
+        'description': 'Tool for detecting rootkits and malware',
+      },
+      {
+        'name': 'Exiftool',
+        'package': 'libimage-exiftool-perl',
         'description':
-            'ADB (Android Debug Bridge) tool for communicating with the device/emulator',
+            'Reads, writes, and modifies metadata for images and files',
       },
       {
-        'name': 'Fastboot',
-        'package': 'android-tools-fastboot',
+        'name': 'Scalpel',
+        'package': 'scalpel',
+        'description': 'Fast file recovery tool based on Carving',
+      },
+      {
+        'name': 'Hashdeep',
+        'package': 'hashdeep',
         'description':
-            'Flashboot tool (for installing system images on Android devices)',
+            'Hash calculator for several types of hashes (useful for verifying evidence)',
       },
       {
-        'name': 'Gradle',
-        'package': 'gradle',
-        'description': 'Java/Android application build system',
+        'name': 'Plaso',
+        'package': 'plaso',
+        'description': 'Tool for timeline analysis',
       },
       {
-        'name': 'Maven',
-        'package': 'maven',
-        'description': 'Java/Kotlin application build system',
-      },
-      {'name': 'Curl', 'package': 'curl', 'description': 'For testing APIs'},
-      {'name': 'Wget', 'package': 'wget', 'description': 'For downloading'},
-      {
-        'name': 'Unzip',
-        'package': 'unzip',
-        'description': 'For unzipping the SDK and packages',
-      },
-      {
-        'name': 'Tar',
-        'package': 'tar',
-        'description': 'For handling file archives',
-      },
-      {
-        'name': 'GCC/G++',
-        'package': 'build-essential',
-        'description':
-            'For compiling any native code within Android applications',
-      },
-      {
-        'name': 'CMake',
-        'package': 'cmake',
-        'description': 'Used by the Android NDK for building native code (JNI)',
-      },
-      {
-        'name': 'Ninja Build',
-        'package': 'ninja-build',
-        'description': 'Rapid build system (used by Android)',
-      },
-      {
-        'name': 'Adb-tools',
-        'package': 'adb-tools',
-        'description': 'Additional tools for ADB',
-      },
-      {
-        'name': 'Valgrind',
-        'package': 'valgrind',
-        'description': 'For memory debugging (for native code)',
-      },
-      {
-        'name': 'Python 3',
-        'package': 'python3',
-        'description': 'For scripting and automation in the build environment',
-      },
-      {
-        'name': 'Pip',
-        'package': 'python3-pip',
-        'description': 'Python package manager',
-      },
-      {
-        'name': 'libxml2-utils',
-        'package': 'libxml2-utils',
-        'description': 'XML tools (for Android Manifest files)',
-      },
-      {'name': 'Vim', 'package': 'vim', 'description': 'Text editor'},
-      {'name': 'Nano', 'package': 'nano', 'description': 'Text editor'},
-      {
-        'name': 'lib32z1',
-        'package': 'lib32z1',
-        'description':
-            '32-bit libraries (necessary for running some emulators)',
-      },
-      {
-        'name': 'libstdc++6',
-        'package': 'libstdc++6',
-        'description': 'Standard C++ library',
-      },
-      {
-        'name': 'libgl1-mesa-glx',
-        'package': 'libgl1-mesa-glx',
-        'description': 'OpenGL libraries (for emulators)',
-      },
-      {
-        'name': 'libtinfo5',
-        'package': 'libtinfo5',
-        'description': 'Terminal control library',
-      },
-      {
-        'name': 'libncurses5',
-        'package': 'libncurses5',
-        'description': 'Terminal interface library',
-      },
-      {
-        'name': 'libcurl4-openssl-dev',
-        'package': 'libcurl4-openssl-dev',
-        'description': 'Curl libraries for encryption',
-      },
-      {
-        'name': 'OpenSSL Dev',
-        'package': 'libssl-dev',
-        'description': 'OpenSSL libraries (for secure server connections)',
+        'name': 'Readstat',
+        'package': 'readstat',
+        'description': 'Tool for reading statistical files (data analysis)',
       },
     ];
 
@@ -306,7 +239,7 @@ class MobileDeveloperPage extends ConsumerWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: Text(
-            'Mobile Development Tools',
+            'Digital Forensics Tools',
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
               color: Colors.white,
@@ -331,10 +264,10 @@ class MobileDeveloperPage extends ConsumerWidget {
               description: tool['description']!,
               icon: Container(
                 decoration: BoxDecoration(
-                  color: const Color(0xFF9C27B0),
+                  color: const Color(0xFF00695C),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Icon(Icons.phone_android, color: Colors.white),
+                child: const Icon(Icons.search, color: Colors.white),
               ),
               onTap:
                   () => showConsoleStream(
@@ -350,45 +283,27 @@ class MobileDeveloperPage extends ConsumerWidget {
 
   void _installAllTools(BuildContext context, system) {
     final tools = [
-      'default-jdk',
-      'default-jre',
-      'git',
-      'nodejs',
-      'npm',
-      'android-tools-adb',
-      'android-tools-fastboot',
-      'gradle',
-      'maven',
-      'curl',
-      'wget',
-      'unzip',
-      'tar',
-      'build-essential',
-      'cmake',
-      'ninja-build',
-      'adb-tools',
-      'valgrind',
-      'python3',
-      'python3-pip',
-      'libxml2-utils',
-      'vim',
-      'nano',
-      'lib32z1',
-      'libstdc++6',
-      'libgl1-mesa-glx',
-      'libtinfo5',
-      'libncurses5',
-      'libcurl4-openssl-dev',
-      'libssl-dev',
+      'sleuthkit',
+      'foremost',
+      'testdisk',
+      'autopsy',
+      'coreutils',
+      'chkrootkit',
+      'rkhunter',
+      'libimage-exiftool-perl',
+      'scalpel',
+      'hashdeep',
+      'plaso',
+      'readstat',
     ];
 
     showDialog(
       context: context,
       builder:
           (ctx) => AlertDialog(
-            title: const Text('Install All Mobile Developer Tools'),
+            title: const Text('Install All Digital Forensics Tools'),
             content: Text(
-              'This will install ${tools.length} mobile development tools. Continue?',
+              'This will install ${tools.length} digital forensics tools. Continue?',
             ),
             actions: [
               TextButton(

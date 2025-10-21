@@ -3,9 +3,9 @@ import 'dart:io';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../home/widgets/section_widgets.dart';
-import '../theme/app_theme.dart';
-import '../widgets/rotating_background.dart';
+import '../../home/widgets/section_widgets.dart';
+import '../../../core/theme/app_theme.dart';
+import '../../../core/widgets/rotating_background.dart';
 
 class LivePerformancePage extends ConsumerStatefulWidget {
   const LivePerformancePage({super.key});
