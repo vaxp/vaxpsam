@@ -16,16 +16,12 @@ class StaticBackground extends StatelessWidget {
 
     return Stack(
       children: [
-        // 1. الصورة (الخلفية) في الأسفل
         Positioned.fill(child: Image.asset(staticImagePath, fit: BoxFit.cover)),
 
-        // 2. طبقة التعتيم الشفافة (Overlay)
-        // **التعديل:** استخدام Colors.black.withOpacity(0.5) أو استخدام اللون مع رمز الشفافية (0xAA000000)
         Positioned.fill(
             child: Container(
-                color: Colors.black.withOpacity(0.5))), // 0.5 تعني 50% شفافية
+                color: Colors.black.withOpacity(0.5))), 
 
-        // 3. المحتوى الفعلي للتطبيق في الأعلى
         Positioned.fill(child: child),
       ],
     );
