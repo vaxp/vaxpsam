@@ -31,6 +31,14 @@ class _VaxpDebPageState extends State<VaxpDebPage>
   String _selectedTerminal = 'false';
   String _autoExecPath = '';
 
+  // DEB control fields (user-editable)
+  final _versionController = TextEditingController(text: '0.1.0');
+  final _sectionController = TextEditingController(text: 'utils');
+  final _priorityController = TextEditingController(text: 'optional');
+  final _architectureController = TextEditingController(text: 'amd64');
+  final _maintainerController = TextEditingController(text: 'VAXP DEB Converter <vaxp@vaxp.org>');
+  final _descriptionController = TextEditingController(text: 'Flutter application converted to DEB package');
+
   @override
   void initState() {
     super.initState();
@@ -43,11 +51,17 @@ class _VaxpDebPageState extends State<VaxpDebPage>
 
   @override
   void dispose() {
-    _animationController.dispose();
-    _nameController.dispose();
-    _commentController.dispose();
-    _categoriesController.dispose();
-    super.dispose();
+  _animationController.dispose();
+  _nameController.dispose();
+  _commentController.dispose();
+  _categoriesController.dispose();
+  _versionController.dispose();
+  _sectionController.dispose();
+  _priorityController.dispose();
+  _architectureController.dispose();
+  _maintainerController.dispose();
+  _descriptionController.dispose();
+  super.dispose();
   }
 
   Future<void> _selectProjectFolder() async {
@@ -253,17 +267,23 @@ Categories=$categories
     await Directory(desktopDir).create(recursive: true);
     await Directory(iconsDir).create(recursive: true);
 
-    // Create control file with proper dependencies
-    final controlFile = File(path.join(debianDir, 'control'));
-    await controlFile.writeAsString('''
+  // Create control file with user-provided values
+  final controlFile = File(path.join(debianDir, 'control'));
+  final version = _versionController.text.isNotEmpty ? _versionController.text : '0.1.0';
+  final section = _sectionController.text.isNotEmpty ? _sectionController.text : 'utils';
+  final priority = _priorityController.text.isNotEmpty ? _priorityController.text : 'optional';
+  final architecture = _architectureController.text.isNotEmpty ? _architectureController.text : 'amd64';
+  final maintainer = _maintainerController.text.isNotEmpty ? _maintainerController.text : 'VAXP DEB Converter <vaxp@vaxp.org>';
+  final description = _descriptionController.text.isNotEmpty ? _descriptionController.text : 'Flutter application converted to DEB package';
+  await controlFile.writeAsString('''
 Package: $debName
-Version: 0.1.0
-Section: utils
-Priority: optional
-Architecture: amd64
+Version: $version
+Section: $section
+Priority: $priority
+Architecture: $architecture
 Depends: libc6, libgcc-s1, libstdc++6, libx11-6, libxcomposite1, libxdamage1, libxext6, libxfixes3, libxrandr2, libxrender1, libxss1, libxtst6, libgl1, libglu1-mesa
-Maintainer: VAXP DEB Converter <vaxp@vaxp.org>
-Description: Flutter application converted to DEB package
+Maintainer: $maintainer
+Description: $description
  A Flutter application packaged as a DEB package using VAXP DEB Converter.
  This package includes all necessary Flutter runtime dependencies.
 ''');
@@ -617,7 +637,7 @@ exec "./$originalExecName" "\$@"
                 const SizedBox(width: 12),
                 Expanded(
                   child: Text(
-                    'Desktop Entry Configuration',
+                    'Desktop Entry & DEB Control Configuration',
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
                       fontWeight: FontWeight.w600,
                       color: Colors.white,
@@ -628,12 +648,13 @@ exec "./$originalExecName" "\$@"
             ),
             const SizedBox(height: 8),
             Text(
-              'Configure the desktop entry for your application',
+              'Configure the desktop entry and DEB control fields for your application',
               style: Theme.of(
                 context,
               ).textTheme.bodyMedium?.copyWith(color: macAppStoreGray),
             ),
             const SizedBox(height: 20),
+            // Desktop entry fields
             TextFormField(
               controller: _nameController,
               decoration: const InputDecoration(
@@ -689,6 +710,71 @@ exec "./$originalExecName" "\$@"
                   },
                 ),
               ],
+            ),
+            const SizedBox(height: 24),
+            // DEB control fields
+            Text(
+              'DEB Control Fields',
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
+              ),
+            ),
+            const SizedBox(height: 12),
+            TextFormField(
+              controller: _versionController,
+              decoration: const InputDecoration(
+                labelText: 'Version',
+                hintText: 'e.g., 1.0.0',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 12),
+            TextFormField(
+              controller: _sectionController,
+              decoration: const InputDecoration(
+                labelText: 'Section',
+                hintText: 'e.g., utils',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 12),
+            TextFormField(
+              controller: _priorityController,
+              decoration: const InputDecoration(
+                labelText: 'Priority',
+                hintText: 'e.g., optional',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 12),
+            TextFormField(
+              controller: _architectureController,
+              decoration: const InputDecoration(
+                labelText: 'Architecture',
+                hintText: 'e.g., amd64',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 12),
+            TextFormField(
+              controller: _maintainerController,
+              decoration: const InputDecoration(
+                labelText: 'Maintainer',
+                hintText: 'e.g., John Doe <john@example.com>',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 12),
+            TextFormField(
+              controller: _descriptionController,
+              decoration: const InputDecoration(
+                labelText: 'Description',
+                hintText: 'Short package description',
+                border: OutlineInputBorder(),
+                alignLabelWithHint: true,
+              ),
+              maxLines: 2,
             ),
             const SizedBox(height: 16),
             Row(
