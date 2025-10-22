@@ -1,6 +1,5 @@
 export 'package:flutter/material.dart';
 export 'package:flutter_riverpod/flutter_riverpod.dart';
-export 'package:vaxpsam/presentation/advanced_debugging/widget/ServiceManagementCard.dart';
 export 'package:vaxpsam/presentation/advanced_debugging/widget/showbootmanagementdialog.dart';
 export 'package:vaxpsam/presentation/advanced_debugging/widget/showlogcleanupdialog.dart';
 export '../../infrastructure/providers.dart';
@@ -8,4 +7,3 @@ export '../../infrastructure/system_service.dart';
 export '../home/widgets/section_widgets.dart';
 export '../console/console_utils.dart';
 export '../../core/theme/app_theme.dart';
-export '../system_monitoring_widget.dart';

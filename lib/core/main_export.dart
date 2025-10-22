@@ -5,8 +5,6 @@ export 'theme/app_theme.dart';
 export '../presentation/splash/splash_screen.dart';
 export 'widgets/rotating_background.dart';
 export '../presentation/home/widgets/glass_navbar.dart';
-export '../presentation/home/search_widgets.dart';
-export '../presentation/home/search_service.dart';
 export '../presentation/console/console_panel.dart';
 export '../presentation/vaxp_deb/vaxp_deb_page.dart';
 export '../presentation/my_system_page.dart';
