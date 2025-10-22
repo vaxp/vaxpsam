@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'advanced_debugging_export.dart';
 
 class AdvancedDebuggingPage extends ConsumerStatefulWidget {
@@ -109,7 +110,7 @@ class _AdvancedDebuggingPageState extends ConsumerState<AdvancedDebuggingPage> {
                 const SizedBox(height: 16),
                 _buildBootManagement(context, system),
                 const SizedBox(height: 16),
-                _buildGraphicsCardMonitoring(context, system),
+                buildGraphicsCardMonitoring( context, system),
                 const SizedBox(height: 20),
               ],
             ),
@@ -310,7 +311,7 @@ class _AdvancedDebuggingPageState extends ConsumerState<AdvancedDebuggingPage> {
                                     'disable',
                                   ),
                               onViewLogs:
-                                  () => _showServiceLogs(context, service.name),
+                                  () => showServiceLogs(context, service.name),
                             );
                           },
                         ),
@@ -529,7 +530,7 @@ class _AdvancedDebuggingPageState extends ConsumerState<AdvancedDebuggingPage> {
     );
   }
 
-  Widget _buildGraphicsCardMonitoring(BuildContext context, system) {
+  Widget buildGraphicsCardMonitoring(BuildContext context, system) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -570,7 +571,7 @@ class _AdvancedDebuggingPageState extends ConsumerState<AdvancedDebuggingPage> {
     Timer(const Duration(seconds: 2), () => _loadServices());
   }
 
-  Future<void> _showServiceLogs(
+  Future<void> showServiceLogs(
     BuildContext context,
     String serviceName,
   ) async {
