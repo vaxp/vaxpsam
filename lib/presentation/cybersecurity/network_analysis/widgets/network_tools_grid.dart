@@ -5,14 +5,13 @@ import 'package:vaxpsam/infrastructure/providers.dart';
 import 'package:vaxpsam/presentation/console/console_utils.dart';
 import 'package:vaxpsam/presentation/home/widgets/section_widgets.dart';
 
-
 class NetworkToolsGrid extends ConsumerWidget {
   const NetworkToolsGrid({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final system = ref.read(systemServiceProvider);
-    final tools = NetworkAnalysisData.kNetworkTools; 
+    final tools = NetworkAnalysisData.kNetworkTools;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,7 +47,7 @@ class NetworkToolsGrid extends ConsumerWidget {
                   color: const Color(0xFF1976D2),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Icon(Icons.network_check, color: Colors.white), 
+                child: const Icon(Icons.network_check, color: Colors.white),
               ),
               onTap:
                   () => showConsoleStream(

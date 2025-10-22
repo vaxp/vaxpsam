@@ -24,15 +24,15 @@ class AdvancedEditorsPage extends ConsumerWidget {
               pinned: true,
               backgroundColor: macAppStoreDark,
               flexibleSpace: FlexibleSpaceBar(
-                background: AdvancedEditorsHeroSection(), 
+                background: AdvancedEditorsHeroSection(),
               ),
             ),
             SliverToBoxAdapter(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  InstallAllAdvancedEditorsCard(), 
-                  AdvancedToolsGrid(), 
+                  InstallAllAdvancedEditorsCard(),
+                  AdvancedToolsGrid(),
                   SizedBox(height: 20),
                 ],
               ),

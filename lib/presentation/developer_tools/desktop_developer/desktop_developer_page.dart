@@ -7,7 +7,6 @@ import 'widget/desktop_hero_section.dart';
 import 'widget/desktop_tools_grid.dart';
 import 'widget/install_all_desktop_card.dart';
 
-
 class DesktopDeveloperPage extends ConsumerWidget {
   const DesktopDeveloperPage({super.key});
 
@@ -23,16 +22,14 @@ class DesktopDeveloperPage extends ConsumerWidget {
               floating: false,
               pinned: true,
               backgroundColor: macAppStoreDark,
-              flexibleSpace: FlexibleSpaceBar(
-                background: DesktopHeroSection(),
-              ),
+              flexibleSpace: FlexibleSpaceBar(background: DesktopHeroSection()),
             ),
             SliverToBoxAdapter(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  InstallAllDesktopCard(), 
-                  DesktopToolsGrid(), 
+                  InstallAllDesktopCard(),
+                  DesktopToolsGrid(),
                   SizedBox(height: 20),
                 ],
               ),

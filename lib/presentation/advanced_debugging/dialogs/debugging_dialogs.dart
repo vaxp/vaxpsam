@@ -35,7 +35,8 @@ void showBootManagementDialog(BuildContext context, system, String action) {
   switch (action) {
     case 'grub':
       title = 'Rebuild GRUB Bootloader';
-      content = 'This will attempt to rebuild the GRUB boot configuration. This is a critical action. Continue?';
+      content =
+          'This will attempt to rebuild the GRUB boot configuration. This is a critical action. Continue?';
       onConfirm = () => showConsoleStream(context, system.rebuildGrub());
       break;
     case 'initramfs':
@@ -45,7 +46,8 @@ void showBootManagementDialog(BuildContext context, system, String action) {
       break;
     case 'repair':
       title = 'Run Boot Repair';
-      content = 'This will run a comprehensive boot repair tool. This is a critical action. Continue?';
+      content =
+          'This will run a comprehensive boot repair tool. This is a critical action. Continue?';
       onConfirm = () => showConsoleStream(context, system.runBootRepair());
       break;
   }

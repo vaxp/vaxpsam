@@ -2,7 +2,7 @@ class NetworkTool {
   final String name;
   final String package;
   final String description;
-  final String? iconAsset; 
+  final String? iconAsset;
 
   const NetworkTool({
     required this.name,

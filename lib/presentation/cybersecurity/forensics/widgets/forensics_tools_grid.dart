@@ -7,7 +7,6 @@ import 'package:vaxpsam/infrastructure/providers.dart';
 import 'package:vaxpsam/presentation/console/console_utils.dart';
 import 'package:vaxpsam/presentation/home/widgets/section_widgets.dart';
 
-
 class ForensicsToolsGrid extends ConsumerWidget {
   const ForensicsToolsGrid({super.key});
 
@@ -50,7 +49,10 @@ class ForensicsToolsGrid extends ConsumerWidget {
                   color: const Color(0xFF00695C),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Icon(Icons.search, color: Colors.white), // أيقونة ثابتة
+                child: const Icon(
+                  Icons.search,
+                  color: Colors.white,
+                ), // أيقونة ثابتة
               ),
               onTap:
                   () => showConsoleStream(

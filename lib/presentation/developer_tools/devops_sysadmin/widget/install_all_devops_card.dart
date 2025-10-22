@@ -5,7 +5,7 @@ import 'package:vaxpsam/data/devops_sysadmin_data.dart';
 import 'package:vaxpsam/infrastructure/providers.dart';
 import 'package:vaxpsam/presentation/console/console_utils.dart';
 import 'package:vaxpsam/presentation/home/widgets/section_widgets.dart';
- 
+
 class InstallAllDevOpsCard extends ConsumerWidget {
   const InstallAllDevOpsCard({super.key});
 
@@ -65,9 +65,7 @@ class InstallAllDevOpsCard extends ConsumerWidget {
                 children: [
                   Text(
                     'Install All DevOps Tools',
-                    style: Theme.of(
-                      context,
-                    ).textTheme.titleMedium?.copyWith(
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.w600,
                       color: Colors.white,
                     ),
@@ -75,9 +73,9 @@ class InstallAllDevOpsCard extends ConsumerWidget {
                   const SizedBox(height: 4),
                   Text(
                     'Install all ${DevOpsSysadminData.kDevOpsTools.length} DevOps and system administration tools at once',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: macAppStoreGray,
-                    ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyMedium?.copyWith(color: macAppStoreGray),
                   ),
                 ],
               ),

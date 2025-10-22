@@ -65,9 +65,7 @@ class InstallAllBackendCard extends ConsumerWidget {
                 children: [
                   Text(
                     'Install All Backend Tools',
-                    style: Theme.of(
-                      context,
-                    ).textTheme.titleMedium?.copyWith(
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.w600,
                       color: Colors.white,
                     ),
@@ -75,9 +73,9 @@ class InstallAllBackendCard extends ConsumerWidget {
                   const SizedBox(height: 4),
                   Text(
                     'Install all ${WebBackendData.kBackendTools.length} backend development tools at once',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: macAppStoreGray,
-                    ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyMedium?.copyWith(color: macAppStoreGray),
                   ),
                 ],
               ),

@@ -6,7 +6,6 @@ import 'package:vaxpsam/presentation/home/widgets/section_widgets.dart';
 import 'package:vaxpsam/core/theme/app_theme.dart';
 import 'package:vaxpsam/core/widgets/rotating_background.dart';
 
-
 class SystemOverviewPage extends ConsumerStatefulWidget {
   const SystemOverviewPage({super.key});
 

@@ -10,7 +10,7 @@ class Buildherosection extends StatefulWidget {
 class _BuildherosectionState extends State<Buildherosection> {
   @override
   Widget build(BuildContext context) {
-    return  Container(
+    return Container(
       height: 200,
       margin: const EdgeInsets.all(16),
       decoration: BoxDecoration(

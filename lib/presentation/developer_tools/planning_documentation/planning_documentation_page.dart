@@ -6,7 +6,6 @@ import 'widget/install_all_planning_card.dart';
 import 'widget/planning_hero_section.dart';
 import 'widget/planning_tools_grid.dart';
 
-
 class PlanningDocumentationPage extends ConsumerWidget {
   const PlanningDocumentationPage({super.key});
 
@@ -23,7 +22,7 @@ class PlanningDocumentationPage extends ConsumerWidget {
               pinned: true,
               backgroundColor: macAppStoreDark,
               flexibleSpace: FlexibleSpaceBar(
-                background: PlanningHeroSection(), 
+                background: PlanningHeroSection(),
               ),
             ),
             SliverToBoxAdapter(

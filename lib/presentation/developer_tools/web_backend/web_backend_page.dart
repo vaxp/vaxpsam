@@ -6,7 +6,6 @@ import 'widget/backend_hero_section.dart';
 import 'widget/backend_tools_grid.dart';
 import 'widget/install_all_backend_card.dart';
 
-
 class WebBackendPage extends ConsumerWidget {
   const WebBackendPage({super.key});
 
@@ -22,16 +21,14 @@ class WebBackendPage extends ConsumerWidget {
               floating: false,
               pinned: true,
               backgroundColor: macAppStoreDark,
-              flexibleSpace: FlexibleSpaceBar(
-                background: BackendHeroSection(), 
-              ),
+              flexibleSpace: FlexibleSpaceBar(background: BackendHeroSection()),
             ),
             SliverToBoxAdapter(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  InstallAllBackendCard(), 
-                  BackendToolsGrid(), 
+                  InstallAllBackendCard(),
+                  BackendToolsGrid(),
                   SizedBox(height: 20),
                 ],
               ),

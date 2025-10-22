@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../infrastructure/providers.dart';
 import '../../../console/console_utils.dart';
-import '../../../home/widgets/section_widgets.dart'; 
-import '../../../../data/web_backend_data.dart'; 
+import '../../../home/widgets/section_widgets.dart';
+import '../../../../data/web_backend_data.dart';
 
 class BackendToolsGrid extends ConsumerWidget {
   const BackendToolsGrid({super.key});
@@ -11,7 +11,7 @@ class BackendToolsGrid extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final system = ref.read(systemServiceProvider);
-    final tools = WebBackendData.kBackendTools; 
+    final tools = WebBackendData.kBackendTools;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,7 +47,7 @@ class BackendToolsGrid extends ConsumerWidget {
                   color: const Color(0xFF2196F3),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Icon(Icons.storage, color: Colors.white), 
+                child: const Icon(Icons.storage, color: Colors.white),
               ),
               onTap:
                   () => showConsoleStream(

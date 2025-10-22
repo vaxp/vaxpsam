@@ -1,6 +1,6 @@
 // lib/data/basic_editors_data.dart
 
-import '../domain/editor_tool.dart'; 
+import '../domain/editor_tool.dart';
 
 class BasicEditorsData {
   // قائمة الحزم الكاملة لتسهيل وظيفة "تثبيت الكل"

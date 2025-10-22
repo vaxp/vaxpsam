@@ -10,7 +10,7 @@ class InstallAllFrontendCard extends ConsumerWidget {
   const InstallAllFrontendCard({super.key});
 
   void _installAllTools(BuildContext context, system) {
-    final tools = WebFrontendData.kAllToolPackages; 
+    final tools = WebFrontendData.kAllToolPackages;
 
     showDialog(
       context: context,
@@ -65,9 +65,7 @@ class InstallAllFrontendCard extends ConsumerWidget {
                 children: [
                   Text(
                     'Install All Front-End Tools',
-                    style: Theme.of(
-                      context,
-                    ).textTheme.titleMedium?.copyWith(
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.w600,
                       color: Colors.white,
                     ),
@@ -75,9 +73,9 @@ class InstallAllFrontendCard extends ConsumerWidget {
                   const SizedBox(height: 4),
                   Text(
                     'Install all ${WebFrontendData.kFrontendTools.length} front-end development tools at once',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: macAppStoreGray,
-                    ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyMedium?.copyWith(color: macAppStoreGray),
                   ),
                 ],
               ),

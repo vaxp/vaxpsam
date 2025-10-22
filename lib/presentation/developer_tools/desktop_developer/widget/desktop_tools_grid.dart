@@ -5,14 +5,15 @@ import 'package:vaxpsam/infrastructure/providers.dart';
 import 'package:vaxpsam/presentation/console/console_utils.dart';
 import 'package:vaxpsam/presentation/home/widgets/section_widgets.dart';
 
-
 class DesktopToolsGrid extends ConsumerWidget {
   const DesktopToolsGrid({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final system = ref.read(systemServiceProvider);
-    final tools = DesktopDeveloperData.kDesktopDeveloperTools; // استخدام البيانات المفصولة
+    final tools =
+        DesktopDeveloperData
+            .kDesktopDeveloperTools; // استخدام البيانات المفصولة
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,7 +49,10 @@ class DesktopToolsGrid extends ConsumerWidget {
                   color: const Color(0xFF795548),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Icon(Icons.desktop_windows, color: Colors.white), // أيقونة ثابتة
+                child: const Icon(
+                  Icons.desktop_windows,
+                  color: Colors.white,
+                ), // أيقونة ثابتة
               ),
               onTap:
                   () => showConsoleStream(

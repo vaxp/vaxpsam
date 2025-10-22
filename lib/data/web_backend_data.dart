@@ -1,4 +1,3 @@
-
 import 'package:vaxpsam/domain/backend_tool.dart';
 
 class WebBackendData {
@@ -49,8 +48,7 @@ class WebBackendData {
     BackendTool(
       name: 'PostgreSQL Client',
       package: 'postgresql-client',
-      description:
-          'Command-line tools for connecting to Postgres databases',
+      description: 'Command-line tools for connecting to Postgres databases',
     ),
     BackendTool(
       name: 'MySQL Client',
@@ -73,16 +71,8 @@ class WebBackendData {
       package: 'rubygems',
       description: 'Ruby package manager',
     ),
-    BackendTool(
-      name: 'GCC',
-      package: 'gcc',
-      description: 'C compiler',
-    ),
-    BackendTool(
-      name: 'G++',
-      package: 'g++',
-      description: 'C++ compiler',
-    ),
+    BackendTool(name: 'GCC', package: 'gcc', description: 'C compiler'),
+    BackendTool(name: 'G++', package: 'g++', description: 'C++ compiler'),
     BackendTool(
       name: 'OpenSSL',
       package: 'openssl',
@@ -122,8 +112,7 @@ class WebBackendData {
     BackendTool(
       name: 'Tmux',
       package: 'tmux',
-      description:
-          'Terminal multiplexer for managing sessions on the server',
+      description: 'Terminal multiplexer for managing sessions on the server',
     ),
     BackendTool(
       name: 'Screen',
@@ -146,16 +135,8 @@ class WebBackendData {
       package: 'curl',
       description: 'For testing server connections',
     ),
-    BackendTool(
-      name: 'Git',
-      package: 'git',
-      description: 'Version control',
-    ),
-    BackendTool(
-      name: 'Make',
-      package: 'make',
-      description: 'Build automation',
-    ),
+    BackendTool(name: 'Git', package: 'git', description: 'Version control'),
+    BackendTool(name: 'Make', package: 'make', description: 'Build automation'),
     BackendTool(
       name: 'Valgrind',
       package: 'valgrind',

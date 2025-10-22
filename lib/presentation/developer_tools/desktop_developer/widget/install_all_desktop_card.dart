@@ -6,12 +6,11 @@ import 'package:vaxpsam/infrastructure/providers.dart';
 import 'package:vaxpsam/presentation/console/console_utils.dart';
 import 'package:vaxpsam/presentation/home/widgets/section_widgets.dart';
 
-
 class InstallAllDesktopCard extends ConsumerWidget {
   const InstallAllDesktopCard({super.key});
 
   void _installAllTools(BuildContext context, system) {
-    final tools = DesktopDeveloperData.kAllToolPackages; 
+    final tools = DesktopDeveloperData.kAllToolPackages;
 
     showDialog(
       context: context,
@@ -66,9 +65,7 @@ class InstallAllDesktopCard extends ConsumerWidget {
                 children: [
                   Text(
                     'Install All Desktop Developer Tools',
-                    style: Theme.of(
-                      context,
-                    ).textTheme.titleMedium?.copyWith(
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.w600,
                       color: Colors.white,
                     ),
@@ -76,9 +73,9 @@ class InstallAllDesktopCard extends ConsumerWidget {
                   const SizedBox(height: 4),
                   Text(
                     'Install all ${DesktopDeveloperData.kDesktopDeveloperTools.length} desktop development tools at once',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: macAppStoreGray,
-                    ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyMedium?.copyWith(color: macAppStoreGray),
                   ),
                 ],
               ),

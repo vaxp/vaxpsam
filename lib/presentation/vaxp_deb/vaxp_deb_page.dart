@@ -36,8 +36,12 @@ class _VaxpDebPageState extends State<VaxpDebPage>
   final _sectionController = TextEditingController(text: 'utils');
   final _priorityController = TextEditingController(text: 'optional');
   final _architectureController = TextEditingController(text: 'amd64');
-  final _maintainerController = TextEditingController(text: 'VAXP DEB Converter <vaxp@vaxp.org>');
-  final _descriptionController = TextEditingController(text: 'Flutter application converted to DEB package');
+  final _maintainerController = TextEditingController(
+    text: 'VAXP DEB Converter <vaxp@vaxp.org>',
+  );
+  final _descriptionController = TextEditingController(
+    text: 'Flutter application converted to DEB package',
+  );
 
   @override
   void initState() {
@@ -51,17 +55,17 @@ class _VaxpDebPageState extends State<VaxpDebPage>
 
   @override
   void dispose() {
-  _animationController.dispose();
-  _nameController.dispose();
-  _commentController.dispose();
-  _categoriesController.dispose();
-  _versionController.dispose();
-  _sectionController.dispose();
-  _priorityController.dispose();
-  _architectureController.dispose();
-  _maintainerController.dispose();
-  _descriptionController.dispose();
-  super.dispose();
+    _animationController.dispose();
+    _nameController.dispose();
+    _commentController.dispose();
+    _categoriesController.dispose();
+    _versionController.dispose();
+    _sectionController.dispose();
+    _priorityController.dispose();
+    _architectureController.dispose();
+    _maintainerController.dispose();
+    _descriptionController.dispose();
+    super.dispose();
   }
 
   Future<void> _selectProjectFolder() async {
@@ -267,15 +271,29 @@ Categories=$categories
     await Directory(desktopDir).create(recursive: true);
     await Directory(iconsDir).create(recursive: true);
 
-  // Create control file with user-provided values
-  final controlFile = File(path.join(debianDir, 'control'));
-  final version = _versionController.text.isNotEmpty ? _versionController.text : '0.1.0';
-  final section = _sectionController.text.isNotEmpty ? _sectionController.text : 'utils';
-  final priority = _priorityController.text.isNotEmpty ? _priorityController.text : 'optional';
-  final architecture = _architectureController.text.isNotEmpty ? _architectureController.text : 'amd64';
-  final maintainer = _maintainerController.text.isNotEmpty ? _maintainerController.text : 'VAXP DEB Converter <vaxp@vaxp.org>';
-  final description = _descriptionController.text.isNotEmpty ? _descriptionController.text : 'Flutter application converted to DEB package';
-  await controlFile.writeAsString('''
+    // Create control file with user-provided values
+    final controlFile = File(path.join(debianDir, 'control'));
+    final version =
+        _versionController.text.isNotEmpty ? _versionController.text : '0.1.0';
+    final section =
+        _sectionController.text.isNotEmpty ? _sectionController.text : 'utils';
+    final priority =
+        _priorityController.text.isNotEmpty
+            ? _priorityController.text
+            : 'optional';
+    final architecture =
+        _architectureController.text.isNotEmpty
+            ? _architectureController.text
+            : 'amd64';
+    final maintainer =
+        _maintainerController.text.isNotEmpty
+            ? _maintainerController.text
+            : 'VAXP DEB Converter <vaxp@vaxp.org>';
+    final description =
+        _descriptionController.text.isNotEmpty
+            ? _descriptionController.text
+            : 'Flutter application converted to DEB package';
+    await controlFile.writeAsString('''
 Package: $debName
 Version: $version
 Section: $section
@@ -456,7 +474,6 @@ exec "./$originalExecName" "\$@"
       ],
     );
   }
-  
 
   Widget _buildProjectSelectionCard(BuildContext context) {
     return MacAppStoreCard(

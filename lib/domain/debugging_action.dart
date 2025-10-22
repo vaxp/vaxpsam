@@ -5,8 +5,8 @@ class DebuggingAction {
   final String description;
   final IconData icon;
   final Color color;
-  final String commandKey; 
-  
+  final String commandKey;
+
   const DebuggingAction({
     required this.title,
     required this.description,

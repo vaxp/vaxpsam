@@ -5,7 +5,8 @@ class AdvancedDebuggingData {
   static const List<DebuggingAction> kFixBrokenPackagesActions = [
     DebuggingAction(
       title: 'Configure Packages',
-      description: 'Run dpkg --configure -a to fix broken package configurations',
+      description:
+          'Run dpkg --configure -a to fix broken package configurations',
       icon: Icons.build,
       color: Color(0xFF4CAF50),
       commandKey: 'configure_packages',

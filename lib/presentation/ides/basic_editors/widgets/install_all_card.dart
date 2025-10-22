@@ -7,7 +7,6 @@ import 'package:vaxpsam/presentation/console/console_utils.dart';
 import 'package:vaxpsam/presentation/home/widgets/section_widgets.dart';
 import 'package:vaxpsam/core/theme/app_theme.dart';
 
-
 class InstallAllEditorsCard extends ConsumerWidget {
   const InstallAllEditorsCard({super.key});
 

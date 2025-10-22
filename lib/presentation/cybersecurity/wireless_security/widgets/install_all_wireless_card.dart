@@ -65,9 +65,7 @@ class InstallAllWirelessCard extends ConsumerWidget {
                 children: [
                   Text(
                     'Install All Wireless Security Tools',
-                    style: Theme.of(
-                      context,
-                    ).textTheme.titleMedium?.copyWith(
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.w600,
                       color: Colors.white,
                     ),
@@ -75,9 +73,9 @@ class InstallAllWirelessCard extends ConsumerWidget {
                   const SizedBox(height: 4),
                   Text(
                     'Install all ${WirelessSecurityData.kWirelessTools.length} wireless security tools at once',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: macAppStoreGray,
-                    ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyMedium?.copyWith(color: macAppStoreGray),
                   ),
                 ],
               ),

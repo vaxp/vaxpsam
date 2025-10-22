@@ -911,7 +911,6 @@ class SystemService {
     return normalized;
   }
 
-
   /// Gets all system services
   Future<List<SystemServiceInfo>> getAllSystemServices() async {
     try {

@@ -1,6 +1,5 @@
 import 'package:vaxpsam/domain/mobile_tool.dart';
 
-
 class MobileDeveloperData {
   static const List<String> kAllToolPackages = [
     'default-jdk',
@@ -47,11 +46,7 @@ class MobileDeveloperData {
       package: 'default-jre',
       description: 'Java runtime environment',
     ),
-    MobileTool(
-      name: 'Git',
-      package: 'git',
-      description: 'Version control',
-    ),
+    MobileTool(name: 'Git', package: 'git', description: 'Version control'),
     MobileTool(
       name: 'Node.js',
       package: 'nodejs',
@@ -84,16 +79,8 @@ class MobileDeveloperData {
       package: 'maven',
       description: 'Java/Kotlin application build system',
     ),
-    MobileTool(
-      name: 'Curl',
-      package: 'curl',
-      description: 'For testing APIs',
-    ),
-    MobileTool(
-      name: 'Wget',
-      package: 'wget',
-      description: 'For downloading',
-    ),
+    MobileTool(name: 'Curl', package: 'curl', description: 'For testing APIs'),
+    MobileTool(name: 'Wget', package: 'wget', description: 'For downloading'),
     MobileTool(
       name: 'Unzip',
       package: 'unzip',
@@ -107,8 +94,7 @@ class MobileDeveloperData {
     MobileTool(
       name: 'GCC/G++',
       package: 'build-essential',
-      description:
-          'For compiling any native code within Android applications',
+      description: 'For compiling any native code within Android applications',
     ),
     MobileTool(
       name: 'CMake',
@@ -145,21 +131,12 @@ class MobileDeveloperData {
       package: 'libxml2-utils',
       description: 'XML tools (for Android Manifest files)',
     ),
-    MobileTool(
-      name: 'Vim',
-      package: 'vim',
-      description: 'Text editor',
-    ),
-    MobileTool(
-      name: 'Nano',
-      package: 'nano',
-      description: 'Text editor',
-    ),
+    MobileTool(name: 'Vim', package: 'vim', description: 'Text editor'),
+    MobileTool(name: 'Nano', package: 'nano', description: 'Text editor'),
     MobileTool(
       name: 'lib32z1',
       package: 'lib32z1',
-      description:
-          '32-bit libraries (necessary for running some emulators)',
+      description: '32-bit libraries (necessary for running some emulators)',
     ),
     MobileTool(
       name: 'libstdc++6',

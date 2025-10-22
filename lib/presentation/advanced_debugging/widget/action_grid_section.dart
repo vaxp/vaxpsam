@@ -7,7 +7,6 @@ import '../../../infrastructure/providers.dart';
 import '../../console/console_utils.dart';
 import '../../home/widgets/section_widgets.dart'; // ResponsiveGrid, AppGridCard
 
-
 class ActionGridSection extends ConsumerWidget {
   final String title;
   final List<DebuggingAction> actions;
@@ -43,16 +42,16 @@ class ActionGridSection extends ConsumerWidget {
         showConsoleStream(context, system.rotateLogs());
         break;
       case 'rebuild_grub':
-        showBootManagementDialog(context, system, 'grub'); 
+        showBootManagementDialog(context, system, 'grub');
         break;
       case 'update_initramfs':
-        showBootManagementDialog(context, system, 'initramfs'); 
+        showBootManagementDialog(context, system, 'initramfs');
         break;
       case 'check_boot_files':
         showConsoleStream(context, system.checkBootFiles());
         break;
       case 'boot_repair':
-        showBootManagementDialog(context, system, 'repair'); 
+        showBootManagementDialog(context, system, 'repair');
         break;
       default:
         // التعامل مع الإجراءات غير المعروفة
@@ -78,20 +77,21 @@ class ActionGridSection extends ConsumerWidget {
           ),
         ),
         ResponsiveGrid(
-          children: actions.map((action) {
-            return AppGridCard(
-              title: action.title,
-              description: action.description,
-              icon: Container(
-                decoration: BoxDecoration(
-                  color: action.color,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Icon(action.icon, color: Colors.white),
-              ),
-              onTap: () => _handleActionTap(context, system, action),
-            );
-          }).toList(),
+          children:
+              actions.map((action) {
+                return AppGridCard(
+                  title: action.title,
+                  description: action.description,
+                  icon: Container(
+                    decoration: BoxDecoration(
+                      color: action.color,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Icon(action.icon, color: Colors.white),
+                  ),
+                  onTap: () => _handleActionTap(context, system, action),
+                );
+              }).toList(),
         ),
       ],
     );

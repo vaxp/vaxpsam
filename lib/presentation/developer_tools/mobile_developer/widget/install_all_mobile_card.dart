@@ -6,7 +6,6 @@ import 'package:vaxpsam/infrastructure/providers.dart';
 import 'package:vaxpsam/presentation/console/console_utils.dart';
 import 'package:vaxpsam/presentation/home/widgets/section_widgets.dart';
 
-
 class InstallAllMobileCard extends ConsumerWidget {
   const InstallAllMobileCard({super.key});
 
@@ -66,9 +65,7 @@ class InstallAllMobileCard extends ConsumerWidget {
                 children: [
                   Text(
                     'Install All Mobile Developer Tools',
-                    style: Theme.of(
-                      context,
-                    ).textTheme.titleMedium?.copyWith(
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.w600,
                       color: Colors.white,
                     ),
@@ -76,9 +73,9 @@ class InstallAllMobileCard extends ConsumerWidget {
                   const SizedBox(height: 4),
                   Text(
                     'Install all ${MobileDeveloperData.kMobileDeveloperTools.length} mobile development tools at once',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: macAppStoreGray,
-                    ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyMedium?.copyWith(color: macAppStoreGray),
                   ),
                 ],
               ),

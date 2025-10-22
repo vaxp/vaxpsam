@@ -6,14 +6,14 @@ import 'package:vaxpsam/infrastructure/providers.dart';
 import 'package:vaxpsam/presentation/console/console_utils.dart';
 import 'package:vaxpsam/presentation/home/widgets/section_widgets.dart';
 
-
 class AdvancedToolsGrid extends ConsumerWidget {
   const AdvancedToolsGrid({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final system = ref.read(systemServiceProvider);
-    final tools = AdvancedEditorsData.kAdvancedEditorsTools; // استخدام البيانات المفصولة
+    final tools =
+        AdvancedEditorsData.kAdvancedEditorsTools; // استخدام البيانات المفصولة
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

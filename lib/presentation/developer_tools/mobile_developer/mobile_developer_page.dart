@@ -21,15 +21,13 @@ class MobileDeveloperPage extends ConsumerWidget {
               floating: false,
               pinned: true,
               backgroundColor: macAppStoreDark,
-              flexibleSpace: FlexibleSpaceBar(
-                background: MobileHeroSection(), 
-              ),
+              flexibleSpace: FlexibleSpaceBar(background: MobileHeroSection()),
             ),
             SliverToBoxAdapter(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  InstallAllMobileCard(), 
+                  InstallAllMobileCard(),
                   MobileToolsGrid(),
                   SizedBox(height: 20),
                 ],
@@ -41,4 +39,3 @@ class MobileDeveloperPage extends ConsumerWidget {
     );
   }
 }
-

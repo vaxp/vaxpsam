@@ -1,7 +1,5 @@
 import 'advanced_debugging_export.dart';
 
-
-
 class AdvancedDebuggingPage extends ConsumerStatefulWidget {
   const AdvancedDebuggingPage({super.key});
 
@@ -11,12 +9,10 @@ class AdvancedDebuggingPage extends ConsumerStatefulWidget {
 }
 
 class _AdvancedDebuggingPageState extends ConsumerState<AdvancedDebuggingPage> {
-
   bool isLoadingLogs = false;
 
   @override
   Widget build(BuildContext context) {
-
     return Container(
       color: macAppStoreDark,
       child: CustomScrollView(

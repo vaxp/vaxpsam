@@ -2,7 +2,6 @@
 
 import 'package:vaxpsam/domain/forensics_tool.dart';
 
-
 class ForensicsData {
   // قائمة الحزم الكاملة لـ APT لتسهيل وظيفة "تثبيت الكل"
   static const List<String> kAllToolPackages = [

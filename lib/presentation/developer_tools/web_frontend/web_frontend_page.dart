@@ -22,15 +22,15 @@ class WebFrontendPage extends ConsumerWidget {
               pinned: true,
               backgroundColor: macAppStoreDark,
               flexibleSpace: FlexibleSpaceBar(
-                background: FrontendHeroSection(), 
+                background: FrontendHeroSection(),
               ),
             ),
             SliverToBoxAdapter(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  InstallAllFrontendCard(), 
-                  FrontendToolsGrid(), 
+                  InstallAllFrontendCard(),
+                  FrontendToolsGrid(),
                   SizedBox(height: 20),
                 ],
               ),

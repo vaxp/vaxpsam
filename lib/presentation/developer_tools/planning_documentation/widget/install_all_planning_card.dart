@@ -10,7 +10,8 @@ class InstallAllPlanningCard extends ConsumerWidget {
   const InstallAllPlanningCard({super.key});
 
   void _installAllTools(BuildContext context, system) {
-    final tools = PlanningDocumentationData.kAllToolPackages; // استخدام قائمة الحزم
+    final tools =
+        PlanningDocumentationData.kAllToolPackages; // استخدام قائمة الحزم
 
     showDialog(
       context: context,
@@ -65,9 +66,7 @@ class InstallAllPlanningCard extends ConsumerWidget {
                 children: [
                   Text(
                     'Install All Documentation Tools',
-                    style: Theme.of(
-                      context,
-                    ).textTheme.titleMedium?.copyWith(
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.w600,
                       color: Colors.white,
                     ),
@@ -75,9 +74,9 @@ class InstallAllPlanningCard extends ConsumerWidget {
                   const SizedBox(height: 4),
                   Text(
                     'Install all ${PlanningDocumentationData.kPlanningTools.length} planning and documentation tools at once',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: macAppStoreGray,
-                    ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyMedium?.copyWith(color: macAppStoreGray),
                   ),
                 ],
               ),

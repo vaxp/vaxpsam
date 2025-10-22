@@ -6,12 +6,11 @@ import 'package:vaxpsam/infrastructure/providers.dart';
 import 'package:vaxpsam/presentation/console/console_utils.dart';
 import 'package:vaxpsam/presentation/home/widgets/section_widgets.dart';
 
-
 class InstallAllNetworkCard extends ConsumerWidget {
   const InstallAllNetworkCard({super.key});
 
   void _installAllTools(BuildContext context, system) {
-    final tools = NetworkAnalysisData.kAllToolPackages; 
+    final tools = NetworkAnalysisData.kAllToolPackages;
 
     showDialog(
       context: context,
@@ -66,9 +65,7 @@ class InstallAllNetworkCard extends ConsumerWidget {
                 children: [
                   Text(
                     'Install All Network Tools',
-                    style: Theme.of(
-                      context,
-                    ).textTheme.titleMedium?.copyWith(
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.w600,
                       color: Colors.white,
                     ),
@@ -76,9 +73,9 @@ class InstallAllNetworkCard extends ConsumerWidget {
                   const SizedBox(height: 4),
                   Text(
                     'Install all ${NetworkAnalysisData.kNetworkTools.length} network analysis tools at once',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: macAppStoreGray,
-                    ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyMedium?.copyWith(color: macAppStoreGray),
                   ),
                 ],
               ),

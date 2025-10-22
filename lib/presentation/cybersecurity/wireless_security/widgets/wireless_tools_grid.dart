@@ -5,7 +5,6 @@ import 'package:vaxpsam/infrastructure/providers.dart';
 import 'package:vaxpsam/presentation/console/console_utils.dart';
 import 'package:vaxpsam/presentation/home/widgets/section_widgets.dart';
 
-
 class WirelessToolsGrid extends ConsumerWidget {
   const WirelessToolsGrid({super.key});
 
@@ -48,7 +47,10 @@ class WirelessToolsGrid extends ConsumerWidget {
                   color: const Color(0xFF7B1FA2),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Icon(Icons.wifi, color: Colors.white), // أيقونة ثابتة
+                child: const Icon(
+                  Icons.wifi,
+                  color: Colors.white,
+                ), // أيقونة ثابتة
               ),
               onTap:
                   () => showConsoleStream(

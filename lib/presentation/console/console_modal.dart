@@ -115,11 +115,7 @@ class _ConsoleModalState extends State<ConsoleModal> {
               borderRadius: const BorderRadius.vertical(
                 top: Radius.circular(12),
               ),
-              border: Border(
-                bottom: BorderSide(
-                  color: macAppStoreLightGray,
-                ),
-              ),
+              border: Border(bottom: BorderSide(color: macAppStoreLightGray)),
             ),
             child: Row(
               children: [
@@ -260,9 +256,7 @@ class _ConsoleModalState extends State<ConsoleModal> {
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: macAppStoreCard,
-              border: Border(
-                top: BorderSide(color: macAppStoreLightGray),
-              ),
+              border: Border(top: BorderSide(color: macAppStoreLightGray)),
             ),
             child: Row(
               children: [

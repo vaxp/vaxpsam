@@ -1,6 +1,5 @@
 import 'package:vaxpsam/domain/frontend_tool.dart';
 
-
 class WebFrontendData {
   static const List<String> kAllToolPackages = [
     'nodejs',
@@ -103,8 +102,7 @@ class WebFrontendData {
     FrontendTool(
       name: 'JQ',
       package: 'jq',
-      description:
-          'For processing and parsing JSON files on the command line',
+      description: 'For processing and parsing JSON files on the command line',
     ),
     FrontendTool(
       name: 'Htop',
@@ -115,14 +113,12 @@ class WebFrontendData {
     FrontendTool(
       name: 'Ctags',
       package: 'ctags',
-      description:
-          'For creating source code indexes (for quick navigation)',
+      description: 'For creating source code indexes (for quick navigation)',
     ),
     FrontendTool(
       name: 'Make',
       package: 'make',
-      description:
-          'For automating basic build tasks (such as CSS compilation)',
+      description: 'For automating basic build tasks (such as CSS compilation)',
     ),
     FrontendTool(
       name: 'Man-db',

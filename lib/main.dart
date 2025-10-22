@@ -7,9 +7,9 @@ void main() async {
 
   await windowManager.ensureInitialized();
   const windowOptions = WindowOptions(
-    size: Size(1200, 800), 
-    minimumSize: Size(768, 600), 
-    maximumSize: Size(1920, 1080), 
+    size: Size(1200, 800),
+    minimumSize: Size(768, 600),
+    maximumSize: Size(1920, 1080),
     center: true,
     title: "VAXP System Manager",
     titleBarStyle: TitleBarStyle.normal,

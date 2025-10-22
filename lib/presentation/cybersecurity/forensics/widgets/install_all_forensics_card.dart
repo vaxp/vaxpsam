@@ -8,7 +8,6 @@ import 'package:vaxpsam/infrastructure/providers.dart';
 import 'package:vaxpsam/presentation/console/console_utils.dart';
 import 'package:vaxpsam/presentation/home/widgets/section_widgets.dart';
 
-
 class InstallAllForensicsCard extends ConsumerWidget {
   const InstallAllForensicsCard({super.key});
 
@@ -68,9 +67,7 @@ class InstallAllForensicsCard extends ConsumerWidget {
                 children: [
                   Text(
                     'Install All Digital Forensics Tools',
-                    style: Theme.of(
-                      context,
-                    ).textTheme.titleMedium?.copyWith(
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.w600,
                       color: Colors.white,
                     ),
@@ -78,9 +75,9 @@ class InstallAllForensicsCard extends ConsumerWidget {
                   const SizedBox(height: 4),
                   Text(
                     'Install all ${ForensicsData.kForensicsTools.length} digital forensics tools at once',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: macAppStoreGray,
-                    ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyMedium?.copyWith(color: macAppStoreGray),
                   ),
                 ],
               ),

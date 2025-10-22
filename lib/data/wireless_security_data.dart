@@ -1,6 +1,5 @@
 import 'package:vaxpsam/domain/wireless_tool.dart';
 
-
 class WirelessSecurityData {
   static const List<String> kAllToolPackages = [
     'aircrack-ng',
@@ -51,14 +50,12 @@ class WirelessSecurityData {
     WirelessTool(
       name: 'Macchanger',
       package: 'macchanger',
-      description:
-          'Tool for changing the MAC address of network interfaces',
+      description: 'Tool for changing the MAC address of network interfaces',
     ),
     WirelessTool(
       name: 'Bluetop',
       package: 'bluetop',
-      description:
-          'Graphical Bluetooth monitor (helps with device discovery)',
+      description: 'Graphical Bluetooth monitor (helps with device discovery)',
     ),
     WirelessTool(
       name: 'Hcxtools',

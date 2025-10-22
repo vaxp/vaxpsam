@@ -1,6 +1,5 @@
 import 'package:vaxpsam/domain/network_tool.dart';
 
-
 class NetworkAnalysisData {
   static const List<String> kAllToolPackages = [
     'nmap',
@@ -11,7 +10,7 @@ class NetworkAnalysisData {
     'hping3',
     'iptraf-ng',
     'tcpflow',
-    'dnsutils', 
+    'dnsutils',
     'dnsmap',
     'fierce',
     'mtr',
@@ -21,8 +20,8 @@ class NetworkAnalysisData {
     'netdiscover',
     'openssh-client',
     'telnet',
-    'iputils-ping', 
-    'net-tools', 
+    'iputils-ping',
+    'net-tools',
     'proxychains4',
     'aircrack-ng',
     'tshark',

@@ -16,9 +16,7 @@ class GamingUtilitiesPage extends ConsumerWidget {
             floating: false,
             pinned: true,
             backgroundColor: macAppStoreDark,
-            flexibleSpace: FlexibleSpaceBar(
-              background: Buildherosection(),
-            ),
+            flexibleSpace: FlexibleSpaceBar(background: Buildherosection()),
           ),
           SliverToBoxAdapter(
             child: Column(

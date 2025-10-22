@@ -6,7 +6,6 @@ import 'widget/devops_hero_section.dart';
 import 'widget/devops_tools_grid.dart';
 import 'widget/install_all_devops_card.dart';
 
-
 class DevOpsSysadminPage extends ConsumerWidget {
   const DevOpsSysadminPage({super.key});
 

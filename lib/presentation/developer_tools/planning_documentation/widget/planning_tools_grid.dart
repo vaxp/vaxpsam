@@ -11,7 +11,8 @@ class PlanningToolsGrid extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final system = ref.read(systemServiceProvider);
-    final tools = PlanningDocumentationData.kPlanningTools; // استخدام البيانات المفصولة
+    final tools =
+        PlanningDocumentationData.kPlanningTools; // استخدام البيانات المفصولة
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,7 +48,10 @@ class PlanningToolsGrid extends ConsumerWidget {
                   color: const Color(0xFF607D8B),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Icon(Icons.description, color: Colors.white), // أيقونة ثابتة
+                child: const Icon(
+                  Icons.description,
+                  color: Colors.white,
+                ), // أيقونة ثابتة
               ),
               onTap:
                   () => showConsoleStream(

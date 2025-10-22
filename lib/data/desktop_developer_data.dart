@@ -1,4 +1,3 @@
-
 import 'package:vaxpsam/domain/developer_tool.dart';
 
 class DesktopDeveloperData {
@@ -45,8 +44,7 @@ class DesktopDeveloperData {
     DeveloperTool(
       name: 'CMake',
       package: 'cmake',
-      description:
-          'Modern and widely used build system (for large projects)',
+      description: 'Modern and widely used build system (for large projects)',
     ),
     DeveloperTool(
       name: 'Git',
@@ -91,11 +89,7 @@ class DesktopDeveloperData {
       package: 'valgrind',
       description: 'Tool for debugging memory and profile errors',
     ),
-    DeveloperTool(
-      name: 'GDB',
-      package: 'gdb',
-      description: 'GNU Debugger',
-    ),
+    DeveloperTool(name: 'GDB', package: 'gdb', description: 'GNU Debugger'),
     DeveloperTool(
       name: 'Vim',
       package: 'vim',

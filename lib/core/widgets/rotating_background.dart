@@ -19,9 +19,11 @@ class StaticBackground extends StatelessWidget {
         Positioned.fill(child: Image.asset(staticImagePath, fit: BoxFit.cover)),
 
         Positioned.fill(
-            child: Container(
-                // ignore: deprecated_member_use
-                color: Colors.black.withOpacity(0.5))), 
+          child: Container(
+            // ignore: deprecated_member_use
+            color: Colors.black.withOpacity(0.5),
+          ),
+        ),
 
         Positioned.fill(child: child),
       ],

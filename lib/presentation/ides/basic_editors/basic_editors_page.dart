@@ -22,16 +22,14 @@ class BasicEditorsPage extends ConsumerWidget {
               floating: false,
               pinned: true,
               backgroundColor: macAppStoreDark,
-              flexibleSpace: FlexibleSpaceBar(
-                background: EditorsHeroSection(), 
-              ),
+              flexibleSpace: FlexibleSpaceBar(background: EditorsHeroSection()),
             ),
             SliverToBoxAdapter(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  InstallAllEditorsCard(), 
-                  BasicEditorsGrid(), 
+                  InstallAllEditorsCard(),
+                  BasicEditorsGrid(),
                   SizedBox(height: 20),
                 ],
               ),

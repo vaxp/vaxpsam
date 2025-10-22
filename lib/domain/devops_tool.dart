@@ -1,6 +1,6 @@
 class DevOpsTool {
   final String name;
-  final String package; 
+  final String package;
   final String description;
   final String? iconAsset;
 

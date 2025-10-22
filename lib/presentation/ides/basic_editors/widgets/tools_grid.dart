@@ -7,7 +7,6 @@ import 'package:vaxpsam/infrastructure/providers.dart';
 import 'package:vaxpsam/presentation/console/console_utils.dart';
 import 'package:vaxpsam/presentation/home/widgets/section_widgets.dart';
 
-
 class BasicEditorsGrid extends ConsumerWidget {
   const BasicEditorsGrid({super.key});
 
@@ -15,7 +14,8 @@ class BasicEditorsGrid extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // قراءة الـ system provider هنا، بدلاً من تمريره
     final system = ref.read(systemServiceProvider);
-    final tools = BasicEditorsData.kBasicEditorsTools; // استخدام البيانات المفصولة
+    final tools =
+        BasicEditorsData.kBasicEditorsTools; // استخدام البيانات المفصولة
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

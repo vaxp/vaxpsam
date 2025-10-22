@@ -11,7 +11,7 @@ class FrontendToolsGrid extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final system = ref.read(systemServiceProvider);
-    final tools = WebFrontendData.kFrontendTools; 
+    final tools = WebFrontendData.kFrontendTools;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,7 +47,7 @@ class FrontendToolsGrid extends ConsumerWidget {
                   color: const Color(0xFF4CAF50),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Icon(Icons.web, color: Colors.white), 
+                child: const Icon(Icons.web, color: Colors.white),
               ),
               onTap:
                   () => showConsoleStream(

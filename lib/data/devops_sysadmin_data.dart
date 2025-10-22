@@ -1,6 +1,5 @@
 import 'package:vaxpsam/domain/devops_tool.dart';
 
-
 class DevOpsSysadminData {
   static const List<String> kAllToolPackages = [
     'docker.io',
@@ -55,8 +54,7 @@ class DevOpsSysadminData {
     DevOpsTool(
       name: 'Vagrant',
       package: 'vagrant',
-      description:
-          'For building and managing portable virtual environments',
+      description: 'For building and managing portable virtual environments',
     ),
     DevOpsTool(
       name: 'Git',
@@ -144,11 +142,7 @@ class DevOpsSysadminData {
       package: 'curl',
       description: 'For testing Endpoints',
     ),
-    DevOpsTool(
-      name: 'Wget',
-      package: 'wget',
-      description: 'For downloading',
-    ),
+    DevOpsTool(name: 'Wget', package: 'wget', description: 'For downloading'),
     DevOpsTool(
       name: 'Bind9-utils',
       package: 'bind9-utils',
@@ -169,11 +163,7 @@ class DevOpsSysadminData {
       package: 'util-linux',
       description: 'For viewing kernel messages',
     ),
-    DevOpsTool(
-      name: 'Tar',
-      package: 'tar',
-      description: 'For backups',
-    ),
+    DevOpsTool(name: 'Tar', package: 'tar', description: 'For backups'),
     DevOpsTool(
       name: 'Unzip',
       package: 'unzip',

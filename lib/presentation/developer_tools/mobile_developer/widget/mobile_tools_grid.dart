@@ -11,7 +11,8 @@ class MobileToolsGrid extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final system = ref.read(systemServiceProvider);
-    final tools = MobileDeveloperData.kMobileDeveloperTools; // استخدام البيانات المفصولة
+    final tools =
+        MobileDeveloperData.kMobileDeveloperTools; // استخدام البيانات المفصولة
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,7 +48,10 @@ class MobileToolsGrid extends ConsumerWidget {
                   color: const Color(0xFF9C27B0),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Icon(Icons.phone_android, color: Colors.white), // أيقونة ثابتة
+                child: const Icon(
+                  Icons.phone_android,
+                  color: Colors.white,
+                ), // أيقونة ثابتة
               ),
               onTap:
                   () => showConsoleStream(
