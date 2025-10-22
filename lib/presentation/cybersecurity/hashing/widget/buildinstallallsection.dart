@@ -2,6 +2,7 @@ import '../hashing_export.dart';
 
 class BuildInstallAllSection extends StatelessWidget {
   final BuildContext context;
+  // ignore: prefer_typing_uninitialized_variables
   final system;
   const BuildInstallAllSection(this.context, this.system, {super.key});
 

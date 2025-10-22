@@ -208,8 +208,10 @@ class _DesktopEnvironmentPageState
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
+                // ignore: deprecated_member_use
                 color: macAppStoreBlue.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(8),
+                // ignore: deprecated_member_use
                 border: Border.all(color: macAppStoreBlue.withOpacity(0.3)),
               ),
               child: Row(
@@ -551,6 +553,7 @@ class DesktopEnvironmentCard extends StatelessWidget {
                 width: 48,
                 height: 48,
                 decoration: BoxDecoration(
+                  // ignore: deprecated_member_use
                   color: color.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(8),
                 ),

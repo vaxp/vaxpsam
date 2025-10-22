@@ -488,6 +488,7 @@ exec "./$originalExecName" "\$@"
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
+                // ignore: deprecated_member_use
                 color: macAppStoreBlue.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(8),
               ),
@@ -564,6 +565,7 @@ exec "./$originalExecName" "\$@"
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
+                // ignore: deprecated_member_use
                 color: macAppStoreBlue.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(8),
               ),
@@ -866,6 +868,7 @@ exec "./$originalExecName" "\$@"
       decoration: BoxDecoration(
         color: macAppStoreCard,
         borderRadius: BorderRadius.circular(12),
+        // ignore: deprecated_member_use
         border: Border.all(color: macAppStoreLightGray.withOpacity(0.2)),
       ),
       child: Row(

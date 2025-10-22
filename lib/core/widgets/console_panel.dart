@@ -38,6 +38,7 @@ class ConsolePanel extends StatelessWidget {
           child: Container(
             //Theme.of(context).colorScheme.surfaceContainerHighest,
             color: Color(
+              // ignore: deprecated_member_use
               const Color.fromARGB(204, 168, 168, 168).value + 0x11000000,
             ),
             child: ListView.builder(

@@ -351,12 +351,14 @@ class MySystemPage extends ConsumerWidget {
       if (aptCandidate) {
         if (!universeEnabled) {
           final ok = await _confirmEnable(
+            // ignore: use_build_context_synchronously
             context,
             'Enable Ubuntu Universe?',
             'Found "$pkg" in Ubuntu repositories. Enable Universe and continue?',
           );
           if (ok) {
             showConsoleStream(
+              // ignore: use_build_context_synchronously
               context,
               Stream.fromIterable([
                 ...await system.enableUbuntuUniverse().toList(),
@@ -375,6 +377,7 @@ class MySystemPage extends ConsumerWidget {
           return;
         }
         showConsoleStream(
+          // ignore: use_build_context_synchronously
           context,
           system.runAsRoot([
             'apt-get',
@@ -393,12 +396,14 @@ class MySystemPage extends ConsumerWidget {
       if (snapHas) {
         if (!snapAvailable) {
           final ok = await _confirmEnable(
+            // ignore: use_build_context_synchronously
             context,
             'Enable Snapd?',
             'Found "$pkg" in Snap. Enable snapd and continue?',
           );
           if (ok) {
             showConsoleStream(
+              // ignore: use_build_context_synchronously
               context,
               Stream.fromIterable([
                 ...await system.enableSnapd().toList(),
@@ -408,6 +413,7 @@ class MySystemPage extends ConsumerWidget {
           }
           return;
         }
+        // ignore: use_build_context_synchronously
         showConsoleStream(context, system.runAsRoot(['snap', 'install', pkg]));
         return;
       }
@@ -416,12 +422,14 @@ class MySystemPage extends ConsumerWidget {
       if (flatpakRef != null && flatpakRef.isNotEmpty) {
         if (!flatpakInstalled || !flathubEnabled) {
           final ok = await _confirmEnable(
+            // ignore: use_build_context_synchronously
             context,
             'Enable Flathub?',
             'Found "$pkg" on Flathub. Enable Flatpak/Flathub and continue?',
           );
           if (ok) {
             showConsoleStream(
+              // ignore: use_build_context_synchronously
               context,
               Stream.fromIterable([
                 if (!flatpakInstalled)
@@ -449,6 +457,7 @@ class MySystemPage extends ConsumerWidget {
           return;
         }
         showConsoleStream(
+          // ignore: use_build_context_synchronously
           context,
           system.runAsRoot(['flatpak', 'install', '-y', 'flathub', flatpakRef]),
         );
@@ -488,6 +497,7 @@ class MySystemPage extends ConsumerWidget {
       final fileName = result.files.single.name;
 
       final confirmed = await showDialog<bool>(
+        // ignore: use_build_context_synchronously
         context: context,
         builder:
             (ctx) => AlertDialog(
@@ -507,6 +517,7 @@ class MySystemPage extends ConsumerWidget {
       );
 
       if (confirmed == true) {
+        // ignore: use_build_context_synchronously
         showConsoleStream(context, system.installDebFromFile(filePath));
       }
     }
@@ -539,6 +550,7 @@ class MySystemPage extends ConsumerWidget {
 
     if (pkg != null && pkg.isNotEmpty) {
       showConsoleStream(
+        // ignore: use_build_context_synchronously
         context,
         system.runAsRoot(['apt', 'remove', '-y', pkg]),
       );

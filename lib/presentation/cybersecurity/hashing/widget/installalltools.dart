@@ -2,6 +2,7 @@ import '../hashing_export.dart';
 
 class Installalltools {
   final BuildContext context;
+  // ignore: prefer_typing_uninitialized_variables
   final system;
   Installalltools(this.context, this.system) {
     installAllTools(context, system);

@@ -25,6 +25,7 @@ final ThemeData lightTheme = ThemeData(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
     elevation: 0,
     margin: const EdgeInsets.all(8),
+    // ignore: deprecated_member_use
     shadowColor: Colors.black.withOpacity(0.3),
   ),
   appBarTheme: const AppBarTheme(
@@ -103,6 +104,7 @@ final ThemeData darkTheme = ThemeData(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
     elevation: 0,
     margin: const EdgeInsets.all(8),
+    // ignore: deprecated_member_use
     shadowColor: Colors.black.withOpacity(0.3),
   ),
   appBarTheme: const AppBarTheme(

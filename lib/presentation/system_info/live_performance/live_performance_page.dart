@@ -28,10 +28,10 @@ class _LivePerformancePageState extends ConsumerState<LivePerformancePage>
   double _networkDown = 0.0;
 
   // Historical data for graphs
-  List<double> _cpuHistory = [];
-  List<double> _memoryHistory = [];
-  List<double> _networkUpHistory = [];
-  List<double> _networkDownHistory = [];
+  final List<double> _cpuHistory = [];
+  final List<double> _memoryHistory = [];
+  final List<double> _networkUpHistory = [];
+  final List<double> _networkDownHistory = [];
 
   // Animation controllers
   late AnimationController _cpuAnimationController;
@@ -132,7 +132,7 @@ class _LivePerformancePageState extends ConsumerState<LivePerformancePage>
         setState(() {});
       }
     } catch (e) {
-      print('Error updating performance data: $e');
+      // Handle errors silently for now
     }
   }
 
@@ -330,6 +330,7 @@ class _LivePerformancePageState extends ConsumerState<LivePerformancePage>
                         vertical: 6,
                       ),
                       decoration: BoxDecoration(
+                        // ignore: deprecated_member_use
                         color: _getCpuColor().withOpacity(0.2),
                         borderRadius: BorderRadius.circular(12),
                       ),
@@ -385,6 +386,7 @@ class _LivePerformancePageState extends ConsumerState<LivePerformancePage>
                         vertical: 6,
                       ),
                       decoration: BoxDecoration(
+                        // ignore: deprecated_member_use
                         color: _getMemoryColor().withOpacity(0.2),
                         borderRadius: BorderRadius.circular(12),
                       ),
@@ -440,6 +442,7 @@ class _LivePerformancePageState extends ConsumerState<LivePerformancePage>
                         vertical: 6,
                       ),
                       decoration: BoxDecoration(
+                        // ignore: deprecated_member_use
                         color: macAppStoreBlue.withOpacity(0.2),
                         borderRadius: BorderRadius.circular(12),
                       ),

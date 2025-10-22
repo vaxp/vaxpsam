@@ -42,6 +42,7 @@ class GlassNavBar extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(
+            // ignore: deprecated_member_use
             color: Colors.black.withOpacity(0.15),
             blurRadius: 8,
             offset: const Offset(0, 2),
@@ -54,9 +55,11 @@ class GlassNavBar extends StatelessWidget {
           filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
           child: Container(
             decoration: BoxDecoration(
+              // ignore: deprecated_member_use
               color: Colors.black.withOpacity(0.3),
               borderRadius: BorderRadius.circular(8),
               border: Border.all(
+                // ignore: deprecated_member_use
                 color: Colors.white.withOpacity(0.2),
                 width: 1,
               ),
@@ -83,6 +86,7 @@ class GlassNavBar extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
+            // ignore: deprecated_member_use
             color: Colors.black.withOpacity(0.15),
             blurRadius: 10,
             offset: const Offset(0, 3),
@@ -95,9 +99,11 @@ class GlassNavBar extends StatelessWidget {
           filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
           child: Container(
             decoration: BoxDecoration(
+              // ignore: deprecated_member_use
               color: Colors.black.withOpacity(0.4),
               borderRadius: BorderRadius.circular(10),
               border: Border.all(
+                // ignore: deprecated_member_use
                 color: Colors.white.withOpacity(0.25),
                 width: 1,
               ),
@@ -129,6 +135,7 @@ class GlassNavBar extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
+            // ignore: deprecated_member_use
             color: Colors.black.withOpacity(0.2),
             blurRadius: 12,
             offset: const Offset(0, 4),
@@ -141,9 +148,11 @@ class GlassNavBar extends StatelessWidget {
           filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
           child: Container(
             decoration: BoxDecoration(
+              // ignore: deprecated_member_use
               color: Colors.black.withOpacity(0.5),
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
+                // ignore: deprecated_member_use
                 color: Colors.white.withOpacity(0.3),
                 width: 1,
               ),
@@ -183,6 +192,7 @@ class GlassNavBar extends StatelessWidget {
             decoration: BoxDecoration(
               color:
                   isConsoleOpen
+                      // ignore: deprecated_member_use
                       ? macAppStoreBlue.withOpacity(0.4)
                       : Colors.transparent,
               borderRadius: BorderRadius.circular(6),
@@ -190,6 +200,7 @@ class GlassNavBar extends StatelessWidget {
             child: Icon(
               isConsoleOpen ? Icons.terminal : Icons.terminal_outlined,
               color:
+                  // ignore: deprecated_member_use
                   isConsoleOpen ? Colors.white : Colors.white.withOpacity(0.8),
               size: isCompact ? 14 : 16,
             ),
@@ -255,6 +266,7 @@ class GlassNavBar extends StatelessWidget {
             decoration: BoxDecoration(
               color:
                   isSelected
+                      // ignore: deprecated_member_use
                       ? macAppStoreBlue.withOpacity(0.4)
                       : Colors.transparent,
               borderRadius: BorderRadius.circular(6),
@@ -265,6 +277,7 @@ class GlassNavBar extends StatelessWidget {
                 Icon(
                   item.icon,
                   color:
+                      // ignore: deprecated_member_use
                       isSelected ? Colors.white : Colors.white.withOpacity(0.8),
                   size: 12,
                 ),
@@ -275,6 +288,7 @@ class GlassNavBar extends StatelessWidget {
                     color:
                         isSelected
                             ? Colors.white
+                            // ignore: deprecated_member_use
                             : Colors.white.withOpacity(0.8),
                     fontSize: 9,
                     fontWeight:
@@ -304,6 +318,7 @@ class GlassNavBar extends StatelessWidget {
             decoration: BoxDecoration(
               color:
                   isSelected
+                      // ignore: deprecated_member_use
                       ? macAppStoreBlue.withOpacity(0.4)
                       : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
@@ -314,6 +329,7 @@ class GlassNavBar extends StatelessWidget {
                 Icon(
                   item.icon,
                   color:
+                      // ignore: deprecated_member_use
                       isSelected ? Colors.white : Colors.white.withOpacity(0.8),
                   size: 14,
                 ),
@@ -324,6 +340,7 @@ class GlassNavBar extends StatelessWidget {
                     color:
                         isSelected
                             ? Colors.white
+                            // ignore: deprecated_member_use
                             : Colors.white.withOpacity(0.8),
                     fontSize: 10,
                     fontWeight:
@@ -353,6 +370,7 @@ class GlassNavBar extends StatelessWidget {
             decoration: BoxDecoration(
               color:
                   isSelected
+                      // ignore: deprecated_member_use
                       ? macAppStoreBlue.withOpacity(0.4)
                       : Colors.transparent,
               borderRadius: BorderRadius.circular(8),
@@ -363,6 +381,7 @@ class GlassNavBar extends StatelessWidget {
                 Icon(
                   item.icon,
                   color:
+                      // ignore: deprecated_member_use
                       isSelected ? Colors.white : Colors.white.withOpacity(0.8),
                   size: 16,
                 ),
@@ -373,6 +392,7 @@ class GlassNavBar extends StatelessWidget {
                     color:
                         isSelected
                             ? Colors.white
+                            // ignore: deprecated_member_use
                             : Colors.white.withOpacity(0.8),
                     fontSize: 11,
                     fontWeight:

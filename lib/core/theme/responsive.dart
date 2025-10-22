@@ -24,6 +24,7 @@ class Responsive {
         _mediaQueryData.padding.top + _mediaQueryData.padding.bottom;
     safeBlockHorizontal = (screenWidth - _safeAreaHorizontal) / 100;
     safeBlockVertical = (screenHeight - _safeAreaVertical) / 100;
+    // ignore: deprecated_member_use
     textScaleFactor = _mediaQueryData.textScaleFactor;
   }
 

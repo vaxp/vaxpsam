@@ -1,9 +1,9 @@
 export 'package:flutter/material.dart';
 export 'package:flutter_riverpod/flutter_riverpod.dart';
-export 'package:vaxpsam/presentation/cybersecurity/hashing/widget/buildHeroSection.dart';
-export 'package:vaxpsam/presentation/cybersecurity/hashing/widget/buildInstallallsection.dart';
+export 'package:vaxpsam/presentation/cybersecurity/hashing/widget/buildherosection.dart';
+export 'package:vaxpsam/presentation/cybersecurity/hashing/widget/buildinstallallsection.dart';
 export 'package:vaxpsam/presentation/cybersecurity/hashing/widget/buildtoolsgrid.dart';
-export 'package:vaxpsam/presentation/cybersecurity/hashing/widget/installAllTools.dart';
+export 'package:vaxpsam/presentation/cybersecurity/hashing/widget/installalltools.dart';
 export '../../../infrastructure/providers.dart';
 export '../../home/widgets/section_widgets.dart';
 export '../../console/console_utils.dart';

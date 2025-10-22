@@ -1,6 +1,6 @@
 export 'package:flutter/material.dart';
 export 'package:flutter_riverpod/flutter_riverpod.dart';
-export 'package:vaxpsam/presentation/gaming_utilities/widget/buildHeroSection.dart';
+export 'package:vaxpsam/presentation/gaming_utilities/widget/buildherosection.dart';
 export '../../infrastructure/providers.dart';
 export '../home/widgets/section_widgets.dart';
 export '../../core/theme/app_theme.dart';

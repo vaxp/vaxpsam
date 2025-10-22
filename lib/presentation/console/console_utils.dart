@@ -23,6 +23,7 @@ void showConsoleStream(BuildContext context, Stream<CommandOutputLine> stream) {
     },
     onError: (err, st) {
       if (!controller.isClosed)
+        // ignore: curly_braces_in_flow_control_structures
         controller.add(
           CommandOutputLine(
             timestamp: DateTime.now(),

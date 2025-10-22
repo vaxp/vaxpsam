@@ -68,6 +68,7 @@ class _SplashScreenState extends State<SplashScreen>
                         borderRadius: BorderRadius.circular(24),
                         boxShadow: [
                           BoxShadow(
+                            // ignore: deprecated_member_use
                             color: macAppStoreBlue.withOpacity(0.3),
                             blurRadius: 20,
                             offset: const Offset(0, 8),

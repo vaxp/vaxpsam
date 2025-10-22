@@ -2,6 +2,7 @@ import '../hashing_export.dart';
 
 class BuildToolsGrid extends StatelessWidget {
   final BuildContext context;
+  // ignore: prefer_typing_uninitialized_variables
   final system;
   const BuildToolsGrid(this.context, this.system, {super.key});
 

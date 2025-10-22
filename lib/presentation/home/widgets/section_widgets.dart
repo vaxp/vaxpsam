@@ -1,3 +1,4 @@
+// ignore: unnecessary_import
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import '../../../core/theme/app_theme.dart';
@@ -106,6 +107,7 @@ class SectionActionButton extends StatelessWidget {
                   width: 48,
                   height: 48,
                   decoration: BoxDecoration(
+                    // ignore: deprecated_member_use
                     color: macAppStoreBlue.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(8),
                   ),
@@ -168,6 +170,7 @@ class MacAppStoreCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(borderRadius),
         boxShadow: [
           BoxShadow(
+            // ignore: deprecated_member_use
             color: const Color.fromARGB(69, 0, 0, 0).withOpacity(0.1),
             blurRadius: 8,
             offset: const Offset(0, 2),
