@@ -7,3 +7,5 @@ export '../../infrastructure/system_service.dart';
 export '../home/widgets/section_widgets.dart';
 export '../console/console_utils.dart';
 export '../../core/theme/app_theme.dart';
+export 'package:vaxpsam/data/advanced_debugging_data.dart';
+export 'widget/action_grid_section.dart';
