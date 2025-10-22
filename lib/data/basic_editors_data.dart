@@ -3,7 +3,6 @@
 import '../domain/editor_tool.dart';
 
 class BasicEditorsData {
-  // قائمة الحزم الكاملة لتسهيل وظيفة "تثبيت الكل"
   static const List<String> kAllPackageNames = [
     'vim',
     'vim-gtk3',
@@ -27,7 +26,6 @@ class BasicEditorsData {
     'diffutils',
   ];
 
-  // قائمة الأدوات مع التفاصيل للعرض في الشبكة (20 أداة)
   static const List<EditorTool> kBasicEditorsTools = [
     EditorTool(
       name: 'Vim',
