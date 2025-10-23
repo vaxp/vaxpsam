@@ -1,7 +1,11 @@
 import 'package:vaxpsam/domain/wireless_tool.dart';
 
 class WirelessSecurityData {
+  // =======================================================================
+  // MASTER LIST OF ALL UNIQUE PACKAGES (103 Packages)
+  // =======================================================================
   static const List<String> kAllToolPackages = [
+    // Original Wireless
     'aircrack-ng',
     'reaver',
     'pixiewps',
@@ -12,9 +16,114 @@ class WirelessSecurityData {
     'bluetop',
     'hcxtools',
     'bluez',
-    'wireless-tools', // Iwevent, Iwconfig, Iwlist
+    'wireless-tools',
+    // New Wireless
+    'mdk4',
+    'wifite',
+    'bully',
+    'hostapd-wpe',
+    // Network Scanners
+    'nmap',
+    'masscan',
+    'netdiscover',
+    'dnsrecon',
+    'enum4linux',
+    'nbtscan-unixodbc',
+    'onesixtyone',
+    'smbclient',
+    'smbmap',
+    'ldap-utils',
+    'whatweb',
+    'sslscan',
+    // Packet Analysis
+    'wireshark',
+    'tshark',
+    'tcpdump',
+    'ettercap-graphical',
+    'dsniff',
+    'ngrep',
+    'driftnet',
+    'httpry',
+    'ssldump',
+    'netsniff-ng',
+    // Vulnerability Scanners
+    'nikto',
+    'lynis',
+    'wpscan',
+    'joomscan',
+    'dirb',
+    'gobuster',
+    'feroxbuster',
+    'skipfish',
+    'wapiti',
+    'dnsutils',
+    // Web App Security
+    'sqlmap',
+    'commix',
+    'wfuzz',
+    'ffuf',
+    'davtest',
+    'cadaver',
+    'xsltproc',
+    'xmlstarlet',
+    'patator',
+    'burpsuite',
+    // Password Attacks
+    'hydra',
+    'medusa',
+    'ncrack',
+    'john',
+    'hashcat',
+    'fcrackzip',
+    'rarcrack',
+    'cewl',
+    'crunch',
+    'crowbar',
+    // Defensive & IDS
+    'snort',
+    'suricata',
+    'ossec-hids-agent',
+    'fail2ban',
+    'ufw',
+    'gufw',
+    'rkhunter',
+    'chkrootkit',
+    'aide',
+    'psad',
+    'arpwatch',
+    'auditd',
+    // Forensics & RE
+    'binwalk',
+    'foremost',
+    'scalpel',
+    'sleuthkit',
+    'autopsy',
+    'volatility3',
+    'gdb',
+    'radare2',
+    'exiftool',
+    'steghide',
+    'strings',
+    // Exploitation & Post-Ex
+    'metasploit-framework',
+    'netcat-traditional',
+    'socat',
+    'ncat-w',
+    'proxychains',
+    'impacket-scripts',
+    'yersinia',
+    'sshuttle',
+    'exploitdb',
+    // Utilities & Crypto
+    'openssl',
+    'gnupg',
+    'hashdeep',
+    'stunnel',
   ];
 
+  // =======================================================================
+  // DATA LAYER 1: Wireless Security (Original list + 4 new tools)
+  // =======================================================================
   static const List<WirelessTool> kWirelessTools = [
     WirelessTool(
       name: 'Aircrack-ng',
@@ -82,6 +191,521 @@ class WirelessSecurityData {
       name: 'Iwlist',
       package: 'wireless-tools',
       description: 'Scans the list of access points',
+    ),
+    // --- New tools added ---
+    WirelessTool(
+      name: 'MDK4',
+      package: 'mdk4',
+      description: 'Updated version of MDK3 for Wi-Fi stress testing',
+    ),
+    WirelessTool(
+      name: 'Wifite',
+      package: 'wifite',
+      description: 'Automated wireless attack tool (WEP/WPA/WPS)',
+    ),
+    WirelessTool(
+      name: 'Bully',
+      package: 'bully',
+      description: 'Advanced WPS brute-force attack tool',
+    ),
+    WirelessTool(
+      name: 'Hostapd-WPE',
+      package: 'hostapd-wpe',
+      description: 'Tool for creating rogue (evil twin) access points',
+    ),
+  ];
+
+  // =======================================================================
+  // DATA LAYER 2: Network Scanners & Enumeration
+  // =======================================================================
+  static const List<WirelessTool> kNetworkScanningTools = [
+    WirelessTool(
+      name: 'Nmap',
+      package: 'nmap',
+      description: 'Network exploration tool and security/port scanner',
+    ),
+    WirelessTool(
+      name: 'Masscan',
+      package: 'masscan',
+      description: 'Extremely fast TCP port scanner for large networks',
+    ),
+    WirelessTool(
+      name: 'Netdiscover',
+      package: 'netdiscover',
+      description: 'Active/passive ARP scanner for host discovery',
+    ),
+    WirelessTool(
+      name: 'Dnsrecon',
+      package: 'dnsrecon',
+      description: 'Advanced DNS enumeration script',
+    ),
+    WirelessTool(
+      name: 'Enum4linux',
+      package: 'enum4linux',
+      description: 'Tool for enumerating information from Windows/Samba systems',
+    ),
+    WirelessTool(
+      name: 'Nbtscan',
+      package: 'nbtscan-unixodbc',
+      description: 'Scanner for NetBIOS name information',
+    ),
+    WirelessTool(
+      name: 'Onesixtyone',
+      package: 'onesixtyone',
+      description: 'Fast SNMP scanner for community string guessing',
+    ),
+    WirelessTool(
+      name: 'Smbclient',
+      package: 'smbclient',
+      description: 'Command-line client for accessing SMB/CIFS shares',
+    ),
+    WirelessTool(
+      name: 'Smbmap',
+      package: 'smbmap',
+      description: 'Handy SMB enumeration tool',
+    ),
+    WirelessTool(
+      name: 'Ldap-utils',
+      package: 'ldap-utils',
+      description: 'Client utilities for querying LDAP servers',
+    ),
+    WirelessTool(
+      name: 'WhatWeb',
+      package: 'whatweb',
+      description: 'Identify technologies used on websites',
+    ),
+    WirelessTool(
+      name: 'Sslscan',
+      package: 'sslscan',
+      description: 'Tests SSL/TLS enabled services for supported ciphers',
+    ),
+  ];
+
+  // =======================================================================
+  // DATA LAYER 3: Packet Capture & Analysis
+  // =======================================================================
+  static const List<WirelessTool> kPacketAnalysisTools = [
+    WirelessTool(
+      name: 'Wireshark',
+      package: 'wireshark',
+      description: 'Graphical network protocol analyzer',
+    ),
+    WirelessTool(
+      name: 'Tshark',
+      package: 'tshark',
+      description: 'Command-line (terminal) version of Wireshark',
+    ),
+    WirelessTool(
+      name: 'Tcpdump',
+      package: 'tcpdump',
+      description: 'Powerful command-line packet analyzer',
+    ),
+    WirelessTool(
+      name: 'Ettercap',
+      package: 'ettercap-graphical',
+      description: 'Comprehensive suite for man-in-the-middle attacks',
+    ),
+    WirelessTool(
+      name: 'Dsniff',
+      package: 'dsniff',
+      description: 'Collection of tools for network auditing and password sniffing',
+    ),
+    WirelessTool(
+      name: 'Ngrep',
+      package: 'ngrep',
+      description: 'Applies the grep logic to network packet content',
+    ),
+    WirelessTool(
+      name: 'Driftnet',
+      package: 'driftnet',
+      description: 'Sniffs and displays images from network traffic',
+    ),
+    WirelessTool(
+      name: 'Httpry',
+      package: 'httpry',
+      description: 'Real-time HTTP packet sniffer and visualizer',
+    ),
+    WirelessTool(
+      name: 'Ssldump',
+      package: 'ssldump',
+      description: 'SSLv3/TLS network protocol analyzer',
+    ),
+    WirelessTool(
+      name: 'Netsniff-ng',
+      package: 'netsniff-ng',
+      description: 'A very fast, zero-copy network sniffer',
+    ),
+  ];
+
+  // =======================================================================
+  // DATA LAYER 4: Vulnerability Scanners
+  // =======================================================================
+  static const List<WirelessTool> kVulnerabilityScanners = [
+    WirelessTool(
+      name: 'Nikto',
+      package: 'nikto',
+      description: 'Web server scanner for vulnerabilities and misconfigurations',
+    ),
+    WirelessTool(
+      name: 'Lynis',
+      package: 'lynis',
+      description: 'Security auditing and hardening tool for Unix-based systems',
+    ),
+    WirelessTool(
+      name: 'Wpscan',
+      package: 'wpscan',
+      description: 'WordPress security scanner (plugins, themes, users)',
+    ),
+    WirelessTool(
+      name: 'Joomscan',
+      package: 'joomscan',
+      description: 'Joomla CMS vulnerability scanner',
+    ),
+    WirelessTool(
+      name: 'Dirb',
+      package: 'dirb',
+      description: 'Web content scanner for hidden directories/files',
+    ),
+    WirelessTool(
+      name: 'Gobuster',
+      package: 'gobuster',
+      description: 'Fast directory/file, DNS, and vhost bruteforcing tool',
+    ),
+    WirelessTool(
+      name: 'Feroxbuster',
+      package: 'feroxbuster',
+      description: 'A fast, simple, recursive content discovery tool (Rust)',
+    ),
+    WirelessTool(
+      name: 'Skipfish',
+      package: 'skipfish',
+      description: 'Active web application security reconnaissance tool (by Google)',
+    ),
+    WirelessTool(
+      name: 'Wapiti',
+      package: 'wapiti',
+      description: 'Web application vulnerability scanner (SQLi, XSS, etc.)',
+    ),
+    WirelessTool(
+      name: 'Dnsutils',
+      package: 'dnsutils',
+      description: 'Contains `dig` and `nslookup` for DNS diagnostics',
+    ),
+  ];
+
+  // =======================================================================
+  // DATA LAYER 5: Web Application Security
+  // =======================================================================
+  static const List<WirelessTool> kWebAppSecurityTools = [
+    WirelessTool(
+      name: 'Sqlmap',
+      package: 'sqlmap',
+      description: 'Automatic SQL injection and database takeover tool',
+    ),
+    WirelessTool(
+      name: 'Commix',
+      package: 'commix',
+      description: 'Automated command injection and exploitation tool',
+    ),
+    WirelessTool(
+      name: 'Wfuzz',
+      package: 'wfuzz',
+      description: 'A flexible web application fuzzer',
+    ),
+    WirelessTool(
+      name: 'Ffuf',
+      package: 'ffuf',
+      description: 'Fast web fuzzer written in Go',
+    ),
+    WirelessTool(
+      name: 'Davtest',
+      package: 'davtest',
+      description: 'Tests WebDAV enabled servers for misconfigurations',
+    ),
+    WirelessTool(
+      name: 'Cadaver',
+      package: 'cadaver',
+      description: 'Command-line WebDAV client',
+    ),
+    WirelessTool(
+      name: 'Xsltproc',
+      package: 'xsltproc',
+      description: 'Utility for applying XSLT stylesheets (useful for XXE)',
+    ),
+    WirelessTool(
+      name: 'Xmlstarlet',
+      package: 'xmlstarlet',
+      description: 'Command-line XML toolkit (useful for XXE)',
+    ),
+    WirelessTool(
+      name: 'Patator',
+      package: 'patator',
+      description: 'Multi-purpose brute-force tool (FTP, SSH, HTTP, etc.)',
+    ),
+    WirelessTool(
+      name: 'Burp Suite',
+      package: 'burpsuite',
+      description: 'The standard GUI tool for web app security testing (Community Ed.)',
+    ),
+  ];
+
+  // =======================================================================
+  // DATA LAYER 6: Password Attacks
+  // =======================================================================
+  static const List<WirelessTool> kPasswordAttackTools = [
+    WirelessTool(
+      name: 'Hydra',
+      package: 'hydra',
+      description: 'Fast network logon cracker (SSH, FTP, Telnet, HTTP, etc.)',
+    ),
+    WirelessTool(
+      name: 'Medusa',
+      package: 'medusa',
+      description: 'Parallel network login brute-forcer (similar to Hydra)',
+    ),
+    WirelessTool(
+      name: 'Ncrack',
+      package: 'ncrack',
+      description: 'High-speed network auth cracking tool (by Nmap)',
+    ),
+    WirelessTool(
+      name: 'John the Ripper',
+      package: 'john',
+      description: 'Offline password cracker for captured hashes',
+    ),
+    WirelessTool(
+      name: 'Hashcat',
+      package: 'hashcat',
+      description: 'Advanced (GPU-based) offline password cracker',
+    ),
+    WirelessTool(
+      name: 'Fcrackzip',
+      package: 'fcrackzip',
+      description: 'Brute-force password cracker for ZIP archives',
+    ),
+    WirelessTool(
+      name: 'Rarcrack',
+      package: 'rarcrack',
+      description: 'Brute-force password cracker for RAR archives',
+    ),
+    WirelessTool(
+      name: 'CeWL',
+      package: 'cewl',
+      description: 'Generates custom wordlists by spidering websites',
+    ),
+    WirelessTool(
+      name: 'Crunch',
+      package: 'crunch',
+      description: 'Standard wordlist generator based on permutations',
+    ),
+    WirelessTool(
+      name: 'Crowbar',
+      package: 'crowbar',
+      description: 'Brute-force tool for RDP, SSH, VNC, OpenVPN',
+    ),
+  ];
+
+  // =======================================================================
+  // DATA LAYER 7: Defensive & IDS/IPS
+  // =======================================================================
+  static const List<WirelessTool> kDefensiveTools = [
+    WirelessTool(
+      name: 'Snort',
+      package: 'snort',
+      description: 'Network Intrusion Detection System (NIDS)',
+    ),
+    WirelessTool(
+      name: 'Suricata',
+      package: 'suricata',
+      description: 'High-performance Network IDS, IPS, and Monitoring engine',
+    ),
+    WirelessTool(
+      name: 'Ossec',
+      package: 'ossec-hids-agent',
+      description: 'Host-based Intrusion Detection System (HIDS) agent',
+    ),
+    WirelessTool(
+      name: 'Fail2ban',
+      package: 'fail2ban',
+      description: 'Scans log files and bans IPs that show malicious signs',
+    ),
+    WirelessTool(
+      name: 'UFW',
+      package: 'ufw',
+      description: 'Uncomplicated Firewall (command-line frontend for iptables)',
+    ),
+    WirelessTool(
+      name: 'Gufw',
+      package: 'gufw',
+      description: 'Graphical user interface for UFW',
+    ),
+    WirelessTool(
+      name: 'Rkhunter',
+      package: 'rkhunter',
+      description: 'Rootkit Hunter scanner',
+    ),
+    WirelessTool(
+      name: 'Chkrootkit',
+      package: 'chkrootkit',
+      description: 'Checks for signs of a rootkit locally',
+    ),
+    WirelessTool(
+      name: 'AIDE',
+      package: 'aide',
+      description: 'Advanced Intrusion Detection Environment (file integrity checker)',
+    ),
+    WirelessTool(
+      name: 'Psad',
+      package: 'psad',
+      description: 'Port Scan Attack Detector',
+    ),
+    WirelessTool(
+      name: 'Arpwatch',
+      package: 'arpwatch',
+      description: 'Monitors Ethernet/IP pairings, detects ARP spoofing',
+    ),
+    WirelessTool(
+      name: 'Auditd',
+      package: 'auditd',
+      description: 'The Linux Audit daemon (logs system calls and file access)',
+    ),
+  ];
+
+  // =======================================================================
+  // DATA LAYER 8: Forensics & Reverse Engineering
+  // =======================================================================
+  static const List<WirelessTool> kForensicsTools = [
+    WirelessTool(
+      name: 'Binwalk',
+      package: 'binwalk',
+      description: 'Tool for analyzing, reverse engineering, and extracting firmware',
+    ),
+    WirelessTool(
+      name: 'Foremost',
+      package: 'foremost',
+      description: 'Recovers deleted files based on headers (file carving)',
+    ),
+    WirelessTool(
+      name: 'Scalpel',
+      package: 'scalpel',
+      description: 'A fast, improved file carver based on foremost',
+    ),
+    WirelessTool(
+      name: 'Sleuthkit',
+      package: 'sleuthkit',
+      description: 'Command-line tools for digital forensics (disk analysis)',
+    ),
+    WirelessTool(
+      name: 'Autopsy',
+      package: 'autopsy',
+      description: 'Graphical interface for The Sleuth Kit',
+    ),
+    WirelessTool(
+      name: 'Volatility3',
+      package: 'volatility3',
+      description: 'Framework for memory dump analysis (RAM forensics)',
+    ),
+    WirelessTool(
+      name: 'GDB',
+      package: 'gdb',
+      description: 'The GNU Debugger (for reverse engineering binaries)',
+    ),
+    WirelessTool(
+      name: 'Radare2',
+      package: 'radare2',
+      description: 'A complete framework for reverse engineering',
+    ),
+    WirelessTool(
+      name: 'Exiftool',
+      package: 'exiftool',
+      description: 'Reads, writes, and edits file metadata (EXIF, IPTC, etc.)',
+    ),
+    WirelessTool(
+      name: 'Steghide',
+      package: 'steghide',
+      description: 'Steganography tool, hides data in image/audio files',
+    ),
+    WirelessTool(
+      name: 'Strings',
+      package: 'strings',
+      description: 'Finds printable strings in binary files',
+    ),
+  ];
+
+  // =======================================================================
+  // DATA LAYER 9: Exploitation & Post-Exploitation
+  // =======================================================================
+  static const List<WirelessTool> kExploitationTools = [
+    WirelessTool(
+      name: 'Metasploit',
+      package: 'metasploit-framework',
+      description: 'The world\'s most used penetration testing framework',
+    ),
+    WirelessTool(
+      name: 'Netcat',
+      package: 'netcat-traditional',
+      description: 'The "Swiss-army knife" for TCP/IP (classic version)',
+    ),
+    WirelessTool(
+      name: 'Socat',
+      package: 'socat',
+      description: 'Advanced Netcat replacement (relay, proxy)',
+    ),
+    WirelessTool(
+      name: 'Ncat',
+      package: 'ncat-w',
+      description: 'Netcat implementation from the Nmap project',
+    ),
+    WirelessTool(
+      name: 'Proxychains',
+      package: 'proxychains',
+      description: 'Forces any application\'s traffic through a proxy (SOCKS/HTTP)',
+    ),
+    WirelessTool(
+      name: 'Impacket Scripts',
+      package: 'impacket-scripts',
+      description: 'Collection of scripts for Windows network protocols (psexec, etc.)',
+    ),
+    WirelessTool(
+      name: 'Yersinia',
+      package: 'yersinia',
+      description: 'Framework for performing L2 (Layer 2) attacks (CDP, STP, DTP)',
+    ),
+    WirelessTool(
+      name: 'Sshuttle',
+      package: 'sshuttle',
+      description: 'Transparent proxy server / VPN over SSH (pivoting)',
+    ),
+    WirelessTool(
+      name: 'ExploitDB',
+      package: 'exploitdb',
+      description: 'Offline copy of the Exploit-DB vulnerability database',
+    ),
+  ];
+
+  // =======================================================================
+  // DATA LAYER 10: Utilities & Crypto
+  // =======================================================================
+  static const List<WirelessTool> kUtilitiesCryptoTools = [
+    WirelessTool(
+      name: 'OpenSSL',
+      package: 'openssl',
+      description: 'Core library and tools for SSL/TLS and cryptography',
+    ),
+    WirelessTool(
+      name: 'GnuPG',
+      package: 'gnupg',
+      description: 'Tool for GPG encryption, signing, and key management',
+    ),
+    WirelessTool(
+      name: 'Hashdeep',
+      package: 'hashdeep',
+      description: 'Advanced hashing tool (MD5, SHA, Tiger, etc.)',
+    ),
+    WirelessTool(
+      name: 'Stunnel',
+      package: 'stunnel',
+      description: 'Creates encrypted SSL/TLS tunnels for non-SSL services',
     ),
   ];
 }
