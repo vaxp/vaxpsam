@@ -827,6 +827,9 @@ class SystemService {
           'xfce4-settings', // إعدادات النظام (الميزة الحصرية التي طلبها المستخدم)
           'lightdm',
           'xfdesktop4', // <-- تمت الإضافة: لإصلاح قائمة الماوس والخلفية
+          'libxfce4ui-utils', 
+          'thunar',           // مدير الملفات (لإصلاح تعيين الخلفية)
+          'xfce4-screenshooter', // <--- تمت الإضافة: أداة التقاط الشاشة
         ];
       case 'mate':
         return [

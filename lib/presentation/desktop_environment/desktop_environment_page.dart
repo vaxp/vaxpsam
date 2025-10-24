@@ -286,7 +286,10 @@ class _DesktopEnvironmentPageState
           'xfce4-panel', 
           'xfce4-settings', 
           'lightdm',
-          'xfdesktop4', // <-- تمت الإضافة: لإصلاح قائمة الماوس والخلفية
+          'xfdesktop4', 
+          'libxfce4ui-utils', 
+          'thunar',        
+          'xfce4-screenshooter',
         ],
       },
       {
