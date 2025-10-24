@@ -13,7 +13,8 @@ class _BuildMainAppState extends State<BuildMainApp> {
 
   // All pages to prevent rebuilding
   final List<Widget> _pages = const [
-    MySystemPage(),
+    MySystemPageRefactored(),
+    // MySystemPage(),
     BrowsersPage(),
     ToolsPage(),
     CybersecurityPage(),
