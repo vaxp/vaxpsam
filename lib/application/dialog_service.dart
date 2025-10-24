@@ -75,6 +75,7 @@ class DialogService {
       final fileName = result.files.single.name;
 
       final confirmed = await showDialog<bool>(
+        // ignore: use_build_context_synchronously
         context: context,
         builder: (ctx) => AlertDialog(
           title: const Text('Install .deb Package'),

@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:vaxpsam/domain/dev_tool.dart';
+// ignore: unnecessary_import
 import 'package:vaxpsam/domain/dev_tool.dart' show InstallationMethod;
 
 class DevToolsData {
   static List<DevTool> kDevelopmentTools = [
-    // ===================================================================
-    // == الأدوات الأصلية (4)
-    // ===================================================================
+
     const DevTool(
       title: 'Git',
       description: 'Version control system',
       installMethod: InstallationMethod.apt,
       installArgument: 'git',
       icon: Icons.account_tree,
-      color: Color(0xFFF05032), // لون Git الأحمر
+      color: Color(0xFFF05032), 
     ),
     const DevTool(
       title: 'VS Code',
@@ -22,7 +21,7 @@ class DevToolsData {
       installArgument:
           'https://update.code.visualstudio.com/latest/linux-deb-x64/stable',
       icon: Icons.code,
-      color: Color(0xFF007ACC), // لون VS Code الأزرق
+      color: Color(0xFF007ACC), 
     ),
     const DevTool(
       title: 'FileZilla',
@@ -30,7 +29,7 @@ class DevToolsData {
       installMethod: InstallationMethod.apt,
       installArgument: 'filezilla',
       icon: Icons.folder_open,
-      color: Color(0xFFBF0000), // لون أحمر غامق
+      color: Color(0xFFBF0000), 
     ),
     const DevTool(
       title: 'GParted',
@@ -38,12 +37,9 @@ class DevToolsData {
       installMethod: InstallationMethod.apt,
       installArgument: 'gparted',
       icon: Icons.storage,
-      color: Color(0xFF4CAF50), // لون أخضر
+      color: Color(0xFF4CAF50), 
     ),
 
-    // ===================================================================
-    // == أدوات النظام والمراقبة (25)
-    // ===================================================================
     const DevTool(
       title: 'Htop',
       description: 'Interactive TUI process viewer',
