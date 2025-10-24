@@ -686,6 +686,7 @@ class SystemService {
       'apt-get',
       'install',
       '-y',
+      '--no-install-recommends',
       ...packages,
     ])) {
       yield line;
@@ -820,14 +821,12 @@ class SystemService {
         ];
       case 'xfce':
         return [
-          // تم استبدال 'xubuntu-desktop' بـ حزم Xfce الأساسية
-          'xfce4',
-          'xfwm4', // مدير النوافذ (Window Manager) - مهم جداً
-          'xfce4-session', // مدير الجلسات (Session Manager) - مهم جداً
-          'thunar',
-          'xfce4-terminal',
+          'xfwm4', // مدير النوافذ (Window Manager) - لا غنى عنه
+          'xfce4-session', // مدير الجلسات (Session Manager) - لا غنى عنه لبدء Xfce
+          'xfce4-panel', // شريط المهام/اللوحة (ضروري للتفاعل الأساسي والإشعارات)
+          'xfce4-settings', // إعدادات النظام (الميزة الحصرية التي طلبها المستخدم)
           'lightdm',
-          'xfce4-settings',
+          'xfdesktop4', // <-- تمت الإضافة: لإصلاح قائمة الماوس والخلفية
         ];
       case 'mate':
         return [

@@ -281,12 +281,12 @@ class _DesktopEnvironmentPageState
         'icon': Icons.speed,
         'color': const Color(0xFF4CAF50),
         'packages': [
-          'xubuntu-desktop',
-          'xfce4',
-          'thunar',
-          'xfce4-terminal',
+          'xfwm4',
+          'xfce4-session', 
+          'xfce4-panel', 
+          'xfce4-settings', 
           'lightdm',
-          'xfce4-settings',
+          'xfdesktop4', // <-- تمت الإضافة: لإصلاح قائمة الماوس والخلفية
         ],
       },
       {
