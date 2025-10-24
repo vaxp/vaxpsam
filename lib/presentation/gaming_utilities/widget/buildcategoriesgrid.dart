@@ -29,7 +29,7 @@ class Buildcategoriesgrid extends StatelessWidget {
           children: [
             AppGridCard(
               title: 'Game Runners & Frontends',
-              description: '10 gaming tools and platforms',
+              description: '32 gaming tools and platforms',
               icon: Container(
                 decoration: BoxDecoration(
                   color: const Color(0xFF171a21),
@@ -44,7 +44,7 @@ class Buildcategoriesgrid extends StatelessWidget {
             ),
             AppGridCard(
               title: 'Media & Entertainment',
-              description: '5 media players and tools',
+              description: '33 media players and tools',
               icon: Container(
                 decoration: BoxDecoration(
                   color: const Color(0xFFE91E63),
@@ -64,7 +64,7 @@ class Buildcategoriesgrid extends StatelessWidget {
             ),
             AppGridCard(
               title: 'System & Performance',
-              description: '9 system utilities and tools',
+              description: '25 system utilities and tools',
               icon: Container(
                 decoration: BoxDecoration(
                   color: const Color(0xFF4CAF50),

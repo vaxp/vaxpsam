@@ -45,6 +45,9 @@ class GameRunnersPage extends ConsumerWidget {
   }
 
   Widget _buildInstallAllSection(BuildContext context, system) {
+    // تم تحديث العدد الإجمالي هنا (10 أصلية + 22 جديدة)
+    const toolCount = 32;
+
     return Container(
       margin: const EdgeInsets.all(16),
       child: MacAppStoreCard(
@@ -66,7 +69,8 @@ class GameRunnersPage extends ConsumerWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              'Install all 10 gaming tools at once for a complete gaming setup.',
+              // تم تحديث النص هنا
+              'Install all $toolCount gaming tools at once for a complete gaming setup.',
               style: Theme.of(
                 context,
               ).textTheme.bodyMedium?.copyWith(color: macAppStoreGray),
@@ -95,7 +99,9 @@ class GameRunnersPage extends ConsumerWidget {
   }
 
   Widget _buildToolsSection(BuildContext context, system) {
+    // تم دمج القائمة (10 أصلية + 22 جديدة = 32 أداة)
     final tools = [
+      // --- أدواتك الأصلية (10) ---
       {
         'name': 'Steam',
         'pkg': 'steam',
@@ -163,6 +169,118 @@ class GameRunnersPage extends ConsumerWidget {
         'desc':
             'A graphical tool for managing and updating Proton versions for Steam',
         'iconAsset': 'assets/game/ProtonUp-Qt.png',
+      },
+
+      // --- الأدوات الجديدة المضافة (22) ---
+      {
+        'name': 'DOSBox',
+        'pkg': 'dosbox',
+        'desc': 'Emulator for running classic DOS-based games'
+      },
+      {
+        'name': 'ScummVM',
+        'pkg': 'scummvm',
+        'desc': 'Runner for classic point-and-click adventure games'
+      },
+      {
+        'name': 'D-Fend Reloaded',
+        'pkg': 'd-fend-reloaded',
+        'desc': 'Graphical (GUI) frontend for managing DOSBox games'
+      },
+      {
+        'name': 'Mednafen',
+        'pkg': 'mednafen',
+        'desc': 'A multi-system command-line emulator (NES, SNES, PSX, etc.)'
+      },
+      {
+        'name': 'Dolphin',
+        'pkg': 'dolphin-emu',
+        'desc': 'High-performance emulator for GameCube and Wii'
+      },
+      {
+        'name': 'PCSX2',
+        'pkg': 'pcsx2',
+        'desc': 'Emulator for PlayStation 2 games'
+      },
+      {
+        'name': 'PPSSPP',
+        'pkg': 'ppsspp',
+        'desc': 'Emulator for PlayStation Portable (PSP) games'
+      },
+      {
+        'name': 'DuckStation',
+        'pkg': 'duckstation',
+        'desc': 'High-performance emulator for PlayStation 1 (PSX)'
+      },
+      {
+        'name': 'Flycast',
+        'pkg': 'flycast',
+        'desc': 'Emulator for Sega Dreamcast and Naomi'
+      },
+      {
+        'name': 'Snes9x',
+        'pkg': 'snes9x-gtk',
+        'desc': 'A popular and accurate emulator for Super Nintendo (SNES)'
+      },
+      {
+        'name': 'FCEUX',
+        'pkg': 'fceux',
+        'desc': 'Emulator for Nintendo Entertainment System (NES)'
+      },
+      {
+        'name': 'Mupen64Plus (Qt)',
+        'pkg': 'mupen64plus-qt',
+        'desc': 'Graphical (GUI) frontend for the Mupen64Plus N64 emulator'
+      },
+      {
+        'name': 'mGBA',
+        'pkg': 'mgba-qt',
+        'desc': 'Modern, high-accuracy emulator for Game Boy Advance'
+      },
+      {
+        'name': 'VBA-M',
+        'pkg': 'visualboyadvance-gtk',
+        'desc': 'Legacy emulator for Game Boy / Color / Advance'
+      },
+      {
+        'name': 'VICE',
+        'pkg': 'vice',
+        'desc': 'Emulator for the Commodore 64 home computer'
+      },
+      {
+        'name': 'Hatari',
+        'pkg': 'hatari',
+        'desc': 'Emulator for the Atari ST/STE/TT/Falcon computers'
+      },
+      {
+        'name': 'GZDoom',
+        'pkg': 'gzdoom',
+        'desc': 'Modern, advanced source port for the Doom engine'
+      },
+      {
+        'name': 'PrBoom+',
+        'pkg': 'prboom-plus',
+        'desc': 'A classic, faithful source port for the Doom engine'
+      },
+      {
+        'name': 'EDuke32',
+        'pkg': 'eduke32',
+        'desc': 'Advanced source port for the Duke Nukem 3D engine'
+      },
+      {
+        'name': 'OpenRCT2',
+        'pkg': 'openrct2',
+        'desc': 'Open-source re-implementation of RollerCoaster Tycoon 2'
+      },
+      {
+        'name': 'OpenTyrian',
+        'pkg': 'opentyrian',
+        'desc': 'Open-source port of the classic shooter Tyrian'
+      },
+      {
+        'name': 'OpenMW',
+        'pkg': 'openmw',
+        'desc': 'Open-source engine for The Elder Scrolls III: Morrowind'
       },
     ];
 
@@ -236,6 +354,7 @@ class GameRunnersPage extends ConsumerWidget {
   }
 
   void _installAllGamingTools(BuildContext context, system) {
+    // تم تحديث قائمة APT (8 أصلية + 22 جديدة = 30)
     final aptPkgs = <String>[
       'steam',
       'lutris',
@@ -245,7 +364,31 @@ class GameRunnersPage extends ConsumerWidget {
       'retroarch',
       'mesa-utils',
       'mangohud',
+      // --- الحزم الجديدة ---
+      'dosbox',
+      'scummvm',
+      'd-fend-reloaded',
+      'mednafen',
+      'dolphin-emu',
+      'pcsx2',
+      'ppsspp',
+      'duckstation',
+      'flycast',
+      'snes9x-gtk',
+      'fceux',
+      'mupen64plus-qt',
+      'mgba-qt',
+      'visualboyadvance-gtk',
+      'vice',
+      'hatari',
+      'gzdoom',
+      'prboom-plus',
+      'eduke3to',
+      'openrct2',
+      'opentyrian',
+      'openmw',
     ];
+    // قائمة Flatpak لم تتغير
     final flatpakRefs = <String>[
       'com.discordapp.Discord',
       'net.davidotek.pupgui2',
@@ -257,6 +400,7 @@ class GameRunnersPage extends ConsumerWidget {
           (ctx) => AlertDialog(
             title: const Text('Install All Gaming Tools'),
             content: Text(
+              // تم تحديث النص ليعكس الأعداد الجديدة
               'This will install ${aptPkgs.length} APT packages and ${flatpakRefs.length} Flatpak applications. Continue?',
             ),
             actions: [
