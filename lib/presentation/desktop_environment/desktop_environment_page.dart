@@ -343,7 +343,7 @@ final desktopEnvironments = [
           ),
         ),
         ResponsiveGrid(
-          crossAxisCount: 5,
+          crossAxisCount: 3,
             childAspectRatio: 1.2,
             mainAxisSpacing: 5,
             crossAxisSpacing: 10,
@@ -558,6 +558,7 @@ class DesktopEnvironmentCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MacAppStoreCard(
+      padding: EdgeInsets.all(6.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

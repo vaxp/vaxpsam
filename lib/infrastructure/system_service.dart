@@ -811,46 +811,46 @@ class SystemService {
     switch (deId.toLowerCase()) {
       case 'kde':
         return [
-          // تم استبدال 'kubuntu-desktop' بـ حزم البلازما الأساسية
-          'plasma-desktop', // سطح المكتب الأساسي
-          'plasma-workspace', // مساحة العمل (الـ Shell)
-          'sddm', // مدير العرض (Display Manager)
-          'dolphin', // مدير الملفات
-          'konsole', // الطرفية
-          'systemsettings', // الإعدادات
+          // 'kubuntu-desktop', // <-- This was the problem
+          'plasma-desktop',     // The desktop data
+          'plasma-workspace',   // The core shell (session)
+          'sddm',               // The display manager
+          'dolphin',            // File manager
+          'konsole',            // Terminal
+          'systemsettings',     // Settings panel
         ];
       case 'xfce':
         return [
-          'xfwm4', // مدير النوافذ (Window Manager) - لا غنى عنه
-          'xfce4-session', // مدير الجلسات (Session Manager) - لا غنى عنه لبدء Xfce
-          'xfce4-panel', // شريط المهام/اللوحة (ضروري للتفاعل الأساسي والإشعارات)
-          'xfce4-settings', // إعدادات النظام (الميزة الحصرية التي طلبها المستخدم)
+          'xfwm4',
+          'xfce4-session',
+          'xfce4-panel',
+          'xfce4-settings',
           'lightdm',
-          'xfdesktop4', // <-- تمت الإضافة: لإصلاح قائمة الماوس والخلفية
-          'libxfce4ui-utils', 
-          'thunar',           // مدير الملفات (لإصلاح تعيين الخلفية)
-          'xfce4-screenshooter', // <--- تمت الإضافة: أداة التقاط الشاشة
+          'xfdesktop4',
+          'libxfce4ui-utils',
+          'thunar',
+          'xfce4-screenshooter',
         ];
       case 'mate':
         return [
-          // تم استبدال 'ubuntu-mate-desktop' بـ حزم MATE الأساسية
-          'mate-core', // الحزمة الأساسية للواجهة
-          'mate-session-manager', // لإدارة الجلسات
-          'caja',
-          'mate-terminal',
-          'lightdm', // يفضل lightdm ليتوافق مع باقي البيئات الخفيفة
-          'mate-control-center',
+          // 'ubuntu-mate-desktop', // <-- This was the problem
+          'mate-session-manager', // The core session
+          'mate-panel',           // The panel
+          'mate-control-center',  // Settings panel
+          'caja',                 // File manager
+          'mate-terminal',        // Terminal
+          'marco',                // Window manager
+          'lightdm',              // Display manager
         ];
       case 'cinnamon':
         return [
-          // تم استبدال 'cinnamon-desktop-environment' بـ حزم Cinnamon الأساسية
-          'cinnamon',
-          'cinnamon-session', // مدير الجلسات
-          'nemo',
-          'gnome-terminal',
-          'lightdm', // استخدام LightDM بدلاً من MDM أو غيره للاتساق
-          'cinnamon-control-center',
-          'muffin', // مدير النوافذ لـ Cinnamon
+          // 'cinnamon-desktop-environment', // <-- This was the problem
+          'cinnamon-session',         // The core session
+          'cinnamon-control-center',  // Settings panel
+          'nemo',                     // File manager
+          'gnome-terminal',           // Terminal (as requested in original)
+          'muffin',                   // Window manager
+          'lightdm',                  // Display manager
         ];
       default:
         return [];
@@ -898,7 +898,7 @@ class SystemService {
       case 'cinnamon':
         return '/usr/bin/cinnamon-session';
       default:
-        return '/usr/bin/startxfce4';
+        return '/usr/bin/startplasma-x11';
     }
   }
 
