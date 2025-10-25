@@ -2,31 +2,20 @@ import 'package:flutter/material.dart';
 
 class StaticBackground extends StatelessWidget {
   final Widget child;
-  final List<String>? images;
 
-  const StaticBackground({super.key, required this.child, this.images});
+  // تم حذف 'images' لأننا لم نعد بحاجة إليها
+  const StaticBackground({super.key, required this.child});
 
-  List<String> get _backgroundImages {
-    return images ?? ['assets/images/background5.jpg'];
-  }
+  // تم حذف Getter الخاص بالصور
 
   @override
   Widget build(BuildContext context) {
-    final String staticImagePath = _backgroundImages.first;
-
-    return Stack(
-      children: [
-        Positioned.fill(child: Image.asset(staticImagePath, fit: BoxFit.cover)),
-
-        Positioned.fill(
-          child: Container(
-            // ignore: deprecated_member_use
-            color: Colors.black.withOpacity(0.5),
-          ),
-        ),
-
-        Positioned.fill(child: child),
-      ],
+    // تم استبدال الـ Stack بالكامل بهذا الـ Container
+    // هذا أكثر كفاءة بكثير
+    return Container(
+      // هذا هو لون "الزجاج الأسود" الذي حددته
+      color: const Color.fromARGB(176, 0, 0, 0),
+      child: child,
     );
   }
 }

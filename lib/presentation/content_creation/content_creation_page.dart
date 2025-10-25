@@ -121,7 +121,7 @@ class ContentCreationPage extends ConsumerWidget {
         GridView.count(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
-          crossAxisCount: 3,
+          crossAxisCount: 5,
           childAspectRatio: 1.2,
           mainAxisSpacing: 16,
           crossAxisSpacing: 16,

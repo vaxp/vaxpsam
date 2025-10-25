@@ -130,7 +130,7 @@ class _SystemInfoPageState extends ConsumerState<SystemInfoPage> {
         GridView.count(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
-          crossAxisCount: 3,
+          crossAxisCount: 5,
           childAspectRatio: 1.5,
           mainAxisSpacing: 16,
           crossAxisSpacing: 16,

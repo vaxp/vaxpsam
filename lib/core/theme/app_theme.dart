@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 // Mac App Store inspired colors
-const Color macAppStoreDark = Color.fromARGB(29, 81, 81, 82);
+const Color macAppStoreDark =  Color.fromARGB(176, 0, 0, 0);
 const Color macAppStoreCard = Color.fromARGB(60, 75, 75, 75);
 const Color macAppStorePurple = Color(0xFF8E44AD);
 const Color macAppStoreBlue = Color(0xFF007AFF);
@@ -19,7 +19,7 @@ final ThemeData lightTheme = ThemeData(
     onSecondary: Colors.white,
   ),
   useMaterial3: true,
-  scaffoldBackgroundColor: const Color.fromARGB(29, 27, 27, 27),
+  scaffoldBackgroundColor: const Color.fromARGB(176, 0, 0, 0),
   cardTheme: CardTheme(
     color: const Color.fromARGB(59, 39, 39, 39),
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -82,7 +82,7 @@ final ThemeData lightTheme = ThemeData(
     ),
   ),
   dialogTheme: DialogThemeData(
-    backgroundColor: const Color.fromARGB(59, 31, 31, 31),
+    backgroundColor: const Color.fromARGB(176, 0, 0, 0),
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
   ),
 );
@@ -161,7 +161,7 @@ final ThemeData darkTheme = ThemeData(
     ),
   ),
   dialogTheme: DialogThemeData(
-    backgroundColor: const Color.fromARGB(59, 39, 39, 39),
+    backgroundColor: const Color.fromARGB(176, 0, 0, 0),
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
   ),
 );

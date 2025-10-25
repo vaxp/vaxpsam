@@ -258,7 +258,7 @@ class _DesktopEnvironmentPageState
   }
 
   Widget _buildDesktopEnvironmentGrid(BuildContext context, system) {
-    final desktopEnvironments = [
+final desktopEnvironments = [
       {
         'id': 'kde',
         'name': 'KDE Plasma',
@@ -266,12 +266,13 @@ class _DesktopEnvironmentPageState
         'icon': Icons.diamond,
         'color': const Color(0xFF2196F3),
         'packages': [
-          'kubuntu-desktop',
-          'plasma-desktop',
-          'sddm',
-          'dolphin',
-          'konsole',
-          'systemsettings',
+          // 'kubuntu-desktop', // <-- This was the problem
+          'plasma-desktop',     // The desktop data
+          'plasma-workspace',   // The core shell (session)
+          'sddm',               // The display manager
+          'dolphin',            // File manager
+          'konsole',            // Terminal
+          'systemsettings',     // Settings panel
         ],
       },
       {
@@ -281,14 +282,15 @@ class _DesktopEnvironmentPageState
         'icon': Icons.speed,
         'color': const Color(0xFF4CAF50),
         'packages': [
+          // This list was already perfect and minimal. No changes needed.
           'xfwm4',
-          'xfce4-session', 
-          'xfce4-panel', 
-          'xfce4-settings', 
+          'xfce4-session',
+          'xfce4-panel',
+          'xfce4-settings',
           'lightdm',
-          'xfdesktop4', 
-          'libxfce4ui-utils', 
-          'thunar',        
+          'xfdesktop4',
+          'libxfce4ui-utils',
+          'thunar',
           'xfce4-screenshooter',
         ],
       },
@@ -299,12 +301,14 @@ class _DesktopEnvironmentPageState
         'icon': Icons.coffee,
         'color': const Color(0xFF8BC34A),
         'packages': [
-          'ubuntu-mate-desktop',
-          'mate-desktop',
-          'caja',
-          'mate-terminal',
-          'mate-control-center',
-          'mate-menu',
+          // 'ubuntu-mate-desktop', // <-- This was the problem
+          'mate-session-manager', // The core session
+          'mate-panel',           // The panel
+          'mate-control-center',  // Settings panel
+          'caja',                 // File manager
+          'mate-terminal',        // Terminal
+          'marco',                // Window manager
+          'lightdm',              // Display manager
         ],
       },
       {
@@ -314,12 +318,13 @@ class _DesktopEnvironmentPageState
         'icon': Icons.home,
         'color': const Color(0xFFFF9800),
         'packages': [
-          'cinnamon-desktop-environment',
-          'cinnamon',
-          'nemo',
-          'gnome-terminal',
-          'cinnamon-control-center',
-          'muffin',
+          // 'cinnamon-desktop-environment', // <-- This was the problem
+          'cinnamon-session',         // The core session
+          'cinnamon-control-center',  // Settings panel
+          'nemo',                     // File manager
+          'gnome-terminal',           // Terminal (as requested in original)
+          'muffin',                   // Window manager
+          'lightdm',                  // Display manager
         ],
       },
     ];
@@ -338,12 +343,18 @@ class _DesktopEnvironmentPageState
           ),
         ),
         ResponsiveGrid(
+          crossAxisCount: 5,
+            childAspectRatio: 1.2,
+            mainAxisSpacing: 5,
+            crossAxisSpacing: 10,
+            padding: const EdgeInsets.symmetric(horizontal: 16),
           children:
               desktopEnvironments.map((de) {
                 final isInstalled = _installedDEs[de['id']] ?? false;
                 final isCurrent = _currentDE == de['id'];
 
                 return DesktopEnvironmentCard(
+
                   name: de['name'] as String,
                   description: de['description'] as String,
                   icon: de['icon'] as IconData,
@@ -553,8 +564,8 @@ class DesktopEnvironmentCard extends StatelessWidget {
           Row(
             children: [
               Container(
-                width: 48,
-                height: 48,
+                width: 58,
+                height: 58,
                 decoration: BoxDecoration(
                   // ignore: deprecated_member_use
                   color: color.withOpacity(0.1),
@@ -587,8 +598,8 @@ class DesktopEnvironmentCard extends StatelessWidget {
               if (isCurrent)
                 Container(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: 8,
-                    vertical: 4,
+                    horizontal: 21,
+                    vertical: 15,
                   ),
                   decoration: BoxDecoration(
                     color: macAppStoreBlue,
@@ -609,6 +620,7 @@ class DesktopEnvironmentCard extends StatelessWidget {
           Row(
             children: [
               Expanded(
+                flex: 2,
                 child: ElevatedButton.icon(
                   onPressed: onInstall,
                   icon: Icon(
@@ -630,6 +642,7 @@ class DesktopEnvironmentCard extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               Expanded(
+                flex: 2,
                 child: OutlinedButton.icon(
                   onPressed: isInstalled ? onSwitch : null,
                   icon: const Icon(Icons.swap_horiz, size: 16),
@@ -646,6 +659,7 @@ class DesktopEnvironmentCard extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               Expanded(
+                flex: 2,
                 child: OutlinedButton.icon(
                   onPressed: isInstalled ? onRemove : null,
                   icon: const Icon(Icons.delete, size: 16),

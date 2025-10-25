@@ -171,7 +171,7 @@ class BuildToolsGrid extends StatelessWidget {
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 4,
+            crossAxisCount: 5,
             childAspectRatio: 1.1,
             mainAxisSpacing: 16,
             crossAxisSpacing: 16,

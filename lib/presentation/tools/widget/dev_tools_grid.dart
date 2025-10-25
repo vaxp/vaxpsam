@@ -43,7 +43,7 @@ class DevToolsGrid extends ConsumerWidget {
         GridView.count(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
-          crossAxisCount: 4,
+          crossAxisCount: 5,
           childAspectRatio: 1.2,
           mainAxisSpacing: 16,
           crossAxisSpacing: 16,

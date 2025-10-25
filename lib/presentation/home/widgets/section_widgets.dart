@@ -10,13 +10,15 @@ class ResponsiveGrid extends StatelessWidget {
   final double mainAxisSpacing;
   final double crossAxisSpacing;
   final EdgeInsetsGeometry padding;
+  final int crossAxisCount;
 
   const ResponsiveGrid({
     super.key,
     required this.children,
+    this. crossAxisCount= 5,
     this.childAspectRatio = 1.2,
-    this.mainAxisSpacing = 16,
-    this.crossAxisSpacing = 16,
+    this.mainAxisSpacing = 12,
+    this.crossAxisSpacing = 12,
     this.padding = const EdgeInsets.symmetric(horizontal: 16),
   });
 
