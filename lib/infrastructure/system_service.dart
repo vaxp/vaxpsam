@@ -823,6 +823,7 @@ class SystemService {
         return [
           'xfwm4',
           'xfce4-session',
+          'xfce4-appfinder',
           'xfce4-panel',
           'xfce4-settings',
           'lightdm',
