@@ -34,8 +34,9 @@ class ConsolePanel extends StatelessWidget {
               color: macAppStoreCard,
               borderRadius: const BorderRadius.vertical(
                 top: Radius.circular(12),
+                
               ),
-              border: Border(bottom: BorderSide(color: macAppStoreLightGray)),
+              border: Border(bottom: BorderSide(color: const Color.fromARGB(255, 255, 255, 255))),
             ),
             child: Row(
               children: [

@@ -173,8 +173,8 @@ class MacAppStoreCard extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             // ignore: deprecated_member_use
-            color: const Color.fromARGB(69, 0, 0, 0).withOpacity(0.1),
-            blurRadius: 8,
+            color: const Color.fromARGB(127, 255, 255, 255).withOpacity(0.3),
+            blurRadius: 10,
             offset: const Offset(0, 2),
           ),
         ],

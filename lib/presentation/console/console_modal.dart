@@ -85,10 +85,14 @@ class _ConsoleModalState extends State<ConsoleModal> {
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
+          elevation: 10,
+
           content: const Text('Console copied to clipboard'),
           backgroundColor: macAppStoreCard,
           behavior: SnackBarBehavior.floating,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          shape: RoundedRectangleBorder(
+            side: BorderSide(color: const Color.fromARGB(255, 255, 255, 255)),
+            borderRadius: BorderRadius.circular(8)),
         ),
       );
     }
@@ -113,9 +117,10 @@ class _ConsoleModalState extends State<ConsoleModal> {
             decoration: BoxDecoration(
               color: macAppStoreCard,
               borderRadius: const BorderRadius.vertical(
+                 
                 top: Radius.circular(12),
               ),
-              border: Border(bottom: BorderSide(color: macAppStoreLightGray)),
+              border: Border(bottom: BorderSide(color: const Color.fromARGB(255, 255, 255, 255))),
             ),
             child: Row(
               children: [
@@ -256,7 +261,7 @@ class _ConsoleModalState extends State<ConsoleModal> {
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: macAppStoreCard,
-              border: Border(top: BorderSide(color: macAppStoreLightGray)),
+              border: Border(top: BorderSide(color: const Color.fromARGB(255, 255, 255, 255))),
             ),
             child: Row(
               children: [
