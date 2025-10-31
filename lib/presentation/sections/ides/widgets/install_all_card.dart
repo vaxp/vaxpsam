@@ -10,7 +10,6 @@ import 'package:vaxpsam/core/theme/app_theme.dart';
 class InstallAllEditorsCard extends ConsumerWidget {
   const InstallAllEditorsCard({super.key});
 
-  // نقل منطق التثبيت ليكون خاص بهذا الويدجيت
   void _installAll(BuildContext context, system) {
     final pkgs = BasicEditorsData.kAllPackageNames; // استخدام القائمة المفصولة
 

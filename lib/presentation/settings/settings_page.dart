@@ -85,7 +85,7 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                 gradient: const LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
-                  colors: [macAppStoreBlue, macAppStorePurple],
+                  colors: [Color.fromARGB(255, 2, 2, 2), Color.fromARGB(255, 26, 26, 26)],
                 ),
                 borderRadius: BorderRadius.circular(12),
               ),

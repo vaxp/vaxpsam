@@ -25,7 +25,7 @@ class DeveloperToolsPage extends ConsumerWidget {
             expandedHeight: 200,
             floating: false,
             pinned: true,
-            backgroundColor: macAppStoreDark,
+            backgroundColor: const Color.fromARGB(0, 0, 0, 0),
             flexibleSpace: FlexibleSpaceBar(
               background: _buildHeroSection(context),
             ),

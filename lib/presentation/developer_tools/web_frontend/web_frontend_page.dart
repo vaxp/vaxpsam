@@ -4,7 +4,6 @@ import 'package:vaxpsam/core/widgets/rotating_background.dart';
 import 'package:vaxpsam/presentation/developer_tools/web_frontend/widget/frontend_hero_section.dart';
 import 'package:vaxpsam/presentation/developer_tools/web_frontend/widget/frontend_tools_grid.dart';
 import 'package:vaxpsam/presentation/developer_tools/web_frontend/widget/install_all_frontend_card.dart';
-import '../../../core/theme/app_theme.dart';
 
 class WebFrontendPage extends ConsumerWidget {
   const WebFrontendPage({super.key});
@@ -20,7 +19,7 @@ class WebFrontendPage extends ConsumerWidget {
               expandedHeight: 200,
               floating: false,
               pinned: true,
-              backgroundColor: macAppStoreDark,
+              backgroundColor: Color.fromARGB(0, 0, 0, 0),
               flexibleSpace: FlexibleSpaceBar(
                 background: FrontendHeroSection(),
               ),

@@ -17,7 +17,7 @@ class _BuildherosectionState extends State<Buildherosection> {
         gradient: const LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [Color(0xFF9C27B0), Color(0xFFBA68C8)],
+          colors: [Color.fromARGB(255, 2, 2, 2), Color.fromARGB(255, 26, 26, 26)],
         ),
         borderRadius: BorderRadius.circular(12),
       ),

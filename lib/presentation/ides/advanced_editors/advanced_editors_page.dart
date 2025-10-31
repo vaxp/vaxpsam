@@ -1,7 +1,6 @@
 // lib/advanced_editors/advanced_editors_page.dart (نظيف ومُنظم)
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:vaxpsam/core/theme/app_theme.dart';
 import 'package:vaxpsam/core/widgets/rotating_background.dart';
 // استيراد الويدجيتات الجديدة
 import 'widgets/advanced_hero_section.dart';
@@ -22,7 +21,7 @@ class AdvancedEditorsPage extends ConsumerWidget {
               expandedHeight: 200,
               floating: false,
               pinned: true,
-              backgroundColor: macAppStoreDark,
+              backgroundColor: Color.fromARGB(0, 0, 0, 0),
               flexibleSpace: FlexibleSpaceBar(
                 background: AdvancedEditorsHeroSection(),
               ),

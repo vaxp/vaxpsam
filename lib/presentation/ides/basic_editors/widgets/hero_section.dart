@@ -14,7 +14,7 @@ class EditorsHeroSection extends StatelessWidget {
         gradient: const LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [Color(0xFF455A64), Color(0xFF78909C)], // الألوان الثابتة
+          colors: [Color.fromARGB(255, 2, 2, 2), Color.fromARGB(255, 26, 26, 26)],
         ),
         borderRadius: BorderRadius.circular(12),
       ),

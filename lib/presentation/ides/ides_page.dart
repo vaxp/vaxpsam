@@ -18,7 +18,7 @@ class IdesPage extends ConsumerWidget {
             expandedHeight: 200,
             floating: false,
             pinned: true,
-            backgroundColor: macAppStoreDark,
+            backgroundColor: const Color.fromARGB(0, 0, 0, 0),
             flexibleSpace: FlexibleSpaceBar(
               background: _buildHeroSection(context),
             ),
@@ -42,7 +42,7 @@ class IdesPage extends ConsumerWidget {
         gradient: const LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [Color(0xFF3F51B5), Color(0xFF5C6BC0)],
+          colors: [Color.fromARGB(255, 2, 2, 2), Color.fromARGB(255, 26, 26, 26)],
         ),
         borderRadius: BorderRadius.circular(12),
       ),
@@ -55,7 +55,7 @@ class IdesPage extends ConsumerWidget {
                 gradient: const LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
-                  colors: [Color(0xFF3F51B5), Color(0xFF5C6BC0)],
+                  colors: [Color.fromARGB(255, 2, 2, 2), Color.fromARGB(255, 26, 26, 26)],
                 ),
               ),
             ),

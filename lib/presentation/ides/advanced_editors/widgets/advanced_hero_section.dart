@@ -14,13 +14,12 @@ class AdvancedEditorsHeroSection extends StatelessWidget {
         gradient: const LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [Color(0xFF3F51B5), Color(0xFF5C6BC0)], // الألوان الثابتة
+          colors: [Color.fromARGB(255, 2, 2, 2), Color.fromARGB(255, 26, 26, 26)],
         ),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Stack(
         children: [
-          // تم تبسيط الكود (إزالة الـ Positioned.fill المكرر)
           Padding(
             padding: const EdgeInsets.all(24),
             child: Column(

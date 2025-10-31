@@ -1,7 +1,6 @@
 // lib/editors/basic_editors_page.dart (نظيف ومُنظم)
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../core/theme/app_theme.dart';
 import '../../../core/widgets/rotating_background.dart';
 import 'widgets/hero_section.dart';
 import 'widgets/install_all_card.dart';
@@ -21,7 +20,7 @@ class BasicEditorsPage extends ConsumerWidget {
               expandedHeight: 200,
               floating: false,
               pinned: true,
-              backgroundColor: macAppStoreDark,
+              backgroundColor: Color.fromARGB(0, 0, 0, 0),
               flexibleSpace: FlexibleSpaceBar(background: EditorsHeroSection()),
             ),
             SliverToBoxAdapter(
