@@ -11,7 +11,7 @@ void main() async {
     minimumSize: Size(768, 600),
     maximumSize: Size(1920, 1080),
     center: true,
-    title: "VAXP System Manager",
+    title: "VAXPSAM",
     windowButtonVisibility: true,
     titleBarStyle: TitleBarStyle.hidden,
   );
@@ -48,15 +48,13 @@ class _VAXPSystemManagerAppState extends State<VAXPSystemManagerApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'VAXP System Manager',
+      title: 'VAXPSAM',
       theme: darkTheme,
       themeMode: ThemeMode.dark,
       debugShowCheckedModeBanner: false,
-      home: StaticBackground(
-        child: AnimatedSwitcher(
-          duration: const Duration(milliseconds: 600),
-          child: _showSplash ? const SplashScreen() : BuildMainApp(),
-        ),
+      home: AnimatedSwitcher(
+        duration: const Duration(milliseconds: 600),
+        child: _showSplash ? const SplashScreen() : const BuildMainApp(),
       ),
     );
   }
