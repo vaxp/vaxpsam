@@ -60,7 +60,7 @@ class Sidebar extends StatelessWidget {
                         ),
                         child: const Icon(
                           Icons.grid_view_rounded,
-                          color: macAppStoreBlue,
+                          color: Color.fromARGB(255, 255, 0, 64),
                           size: 20,
                         ),
                       ),

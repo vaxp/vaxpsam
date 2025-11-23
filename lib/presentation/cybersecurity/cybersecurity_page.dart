@@ -11,15 +11,6 @@ class CybersecurityPage extends ConsumerWidget {
       color: macAppStoreDark,
       child: CustomScrollView(
         slivers: [
-          SliverAppBar(
-            expandedHeight: 200,
-            floating: false,
-            pinned: true,
-            backgroundColor: macAppStoreDark,
-            flexibleSpace: FlexibleSpaceBar(
-              background: _buildHeroSection(context),
-            ),
-          ),
           SliverToBoxAdapter(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,80 +25,7 @@ class CybersecurityPage extends ConsumerWidget {
     );
   }
 
-  Widget _buildHeroSection(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final width = constraints.maxWidth;
-        final subtitleSize = width > 600 ? 12.0 : 10.0;
-        final titleSize = width > 600 ? 28.0 : 20.0;
-        final descSize = width > 600 ? 16.0 : 14.0;
-
-        return Container(
-          height: 200,
-          margin: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            gradient: const LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [Color(0xFF2E7D32), Color(0xFF4CAF50)],
-            ),
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Stack(
-            children: [
-              Positioned.fill(
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    gradient: const LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [Color(0xFF2E7D32), Color(0xFF4CAF50)],
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(24),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'CYBERSECURITY TOOLS',
-                      style: TextStyle(
-                        fontSize: subtitleSize,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white70,
-                        letterSpacing: 1.2,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      'Secure & Analyze',
-                      style: TextStyle(
-                        fontSize: titleSize,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      'Professional cybersecurity tools for network analysis, malware detection, and penetration testing.',
-                      style: TextStyle(
-                        fontSize: descSize,
-                        color: Colors.white70,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
+  
 
   Widget _buildCategoriesGrid(BuildContext context, system) {
     return Column(
