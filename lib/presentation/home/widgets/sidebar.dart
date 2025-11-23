@@ -53,15 +53,21 @@ class Sidebar extends StatelessWidget {
                   child: Row(
                     children: [
                       Container(
-                        padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          color: macAppStoreBlue.withOpacity(0.2),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: const Icon(
-                          Icons.grid_view_rounded,
-                          color: Color.fromARGB(255, 255, 0, 64),
-                          size: 20,
+                        // padding: const EdgeInsets.all(2),
+                        // decoration: BoxDecoration(
+                        //   color: const Color.fromARGB(
+                        //     66,
+                        //     0,
+                        //     0,
+                        //     0,
+                        //   ).withOpacity(0.2),
+                        //   borderRadius: BorderRadius.circular(8),
+                        // ),
+                        child: Image.asset(
+                          'assets/logo.png',
+                          width: 40,
+                          height: 40,
+                          fit: BoxFit.contain,
                         ),
                       ),
                       const SizedBox(width: 12),

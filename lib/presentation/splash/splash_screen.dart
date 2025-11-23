@@ -75,10 +75,11 @@ class _SplashScreenState extends State<SplashScreen>
                           ),
                         ],
                       ),
-                      child: const Icon(
-                        Icons.settings,
-                        size: 64,
-                        color: Colors.white,
+                      child: Image.asset(
+                        'assets/logo.png',
+                        width: 80,
+                        height: 80,
+                        fit: BoxFit.contain,
                       ),
                     ),
                     const SizedBox(height: 32),
