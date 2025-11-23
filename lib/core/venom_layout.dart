@@ -10,7 +10,7 @@ class VenomScaffold extends StatefulWidget {
   const VenomScaffold({
     super.key,
     required this.body,
-    this.title = "Settings",
+    this.title = "",
   });
 
   @override
@@ -32,7 +32,7 @@ class _VenomScaffoldState extends State<VenomScaffold> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent, // مهم لشفافية النافذة
+      backgroundColor: const Color.fromARGB(100, 0, 0, 0),// مهم لشفافية النافذة
       body: Stack(
         children: [
           // --- الطبقة 1: محتوى التطبيق ---
@@ -103,7 +103,7 @@ class VenomAppbar extends StatelessWidget {
         height: 40,
         alignment: Alignment.centerRight,
         // خلفية نصف شفافة للشريط نفسه
-        color: const Color.fromARGB(100, 0, 0, 0),
+        // color: const Color.fromARGB(100, 0, 0, 0),
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
         child: Row(
           children: [
