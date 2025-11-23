@@ -8,7 +8,7 @@ void main() async {
   await windowManager.ensureInitialized();
   const windowOptions = WindowOptions(
     size: Size(1200, 800),
-    minimumSize: Size(768, 600),
+    minimumSize: Size(868, 700),
     maximumSize: Size(1920, 1080),
     center: true,
     title: "VAXPSAM",
