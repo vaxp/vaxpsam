@@ -4,7 +4,7 @@ export 'package:window_manager/window_manager.dart';
 export 'theme/app_theme.dart';
 export '../presentation/splash/splash_screen.dart';
 export 'widgets/rotating_background.dart';
-export '../presentation/home/widgets/glass_navbar.dart';
+export '../presentation/home/widgets/sidebar.dart';
 export '../presentation/console/console_panel.dart';
 export '../presentation/vaxp_deb/vaxp_deb_page.dart';
 export '../presentation/my_system/my_system_page_refactored.dart';

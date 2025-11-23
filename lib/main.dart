@@ -12,8 +12,8 @@ void main() async {
     maximumSize: Size(1920, 1080),
     center: true,
     title: "VAXP System Manager",
-    titleBarStyle: TitleBarStyle.normal,
     windowButtonVisibility: true,
+    titleBarStyle: TitleBarStyle.hidden,
   );
 
   windowManager.waitUntilReadyToShow(windowOptions, () async {

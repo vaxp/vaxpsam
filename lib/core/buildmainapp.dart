@@ -1,4 +1,7 @@
+import 'package:vaxpsam/core/venom_layout.dart';
+
 import 'main_export.dart';
+import '../presentation/home/widgets/sidebar.dart';
 
 class BuildMainApp extends StatefulWidget {
   const BuildMainApp({super.key});
@@ -14,7 +17,6 @@ class _BuildMainAppState extends State<BuildMainApp> {
   // All pages to prevent rebuilding
   final List<Widget> _pages = const [
     MySystemPageRefactored(),
-    // MySystemPage(),
     BrowsersPage(),
     ToolsPage(),
     CybersecurityPage(),
@@ -33,39 +35,50 @@ class _BuildMainAppState extends State<BuildMainApp> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color.fromARGB(31, 8, 8, 8),
+    return VenomScaffold(
+      title: "VAXPSAM",
       body: Stack(
         children: [
-          // Main content with navigation
-          Column(
+          // Main content with sidebar
+          Row(
             children: [
-              GlassNavBar(
+              // Sidebar
+              Sidebar(
                 selectedIndex: _selectedIndex,
                 onItemSelected:
                     (index) => setState(() => _selectedIndex = index),
                 onConsoleToggle: _toggleConsole,
                 isConsoleOpen: _consoleOpen,
               ),
-              // Main content area with IndexedStack to prevent rebuilding
+
+              // Main content area
               Expanded(
-                child: AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 300),
-                  child: IndexedStack(index: _selectedIndex, children: _pages),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 300),
+                        child: IndexedStack(
+                          index: _selectedIndex,
+                          children: _pages,
+                        ),
+                      ),
+                    ),
+                    // Console panel (now at the bottom of the content area)
+                    AnimatedCrossFade(
+                      firstChild: const SizedBox.shrink(),
+                      secondChild: SizedBox(
+                        height: 220,
+                        child: ConsolePanel(lines: const [], isPaused: false),
+                      ),
+                      crossFadeState:
+                          _consoleOpen
+                              ? CrossFadeState.showSecond
+                              : CrossFadeState.showFirst,
+                      duration: const Duration(milliseconds: 250),
+                    ),
+                  ],
                 ),
-              ),
-              // Console panel
-              AnimatedCrossFade(
-                firstChild: const SizedBox.shrink(),
-                secondChild: SizedBox(
-                  height: 220,
-                  child: ConsolePanel(lines: const [], isPaused: false),
-                ),
-                crossFadeState:
-                    _consoleOpen
-                        ? CrossFadeState.showSecond
-                        : CrossFadeState.showFirst,
-                duration: const Duration(milliseconds: 250),
               ),
             ],
           ),

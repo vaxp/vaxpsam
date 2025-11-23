@@ -20,7 +20,7 @@ final ThemeData lightTheme = ThemeData(
   ),
   useMaterial3: true,
   scaffoldBackgroundColor: const Color.fromARGB(176, 0, 0, 0),
-  cardTheme: CardTheme(
+  cardTheme: CardThemeData(
     color: const Color.fromARGB(59, 39, 39, 39),
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
     elevation: 0,
@@ -99,7 +99,7 @@ final ThemeData darkTheme = ThemeData(
   ),
   useMaterial3: true,
   scaffoldBackgroundColor: macAppStoreDark,
-  cardTheme: CardTheme(
+  cardTheme: CardThemeData(
     color: const Color.fromARGB(59, 27, 27, 27),
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
     elevation: 0,
