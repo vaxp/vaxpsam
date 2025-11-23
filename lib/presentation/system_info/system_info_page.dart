@@ -5,7 +5,6 @@ import '../home/widgets/section_widgets.dart';
 import '../../core/theme/app_theme.dart';
 import 'system_overview/system_overview_page.dart';
 import 'hardware_details/hardware_details_page.dart';
-import 'live_performance/live_performance_page.dart';
 
 class SystemInfoPage extends ConsumerStatefulWidget {
   const SystemInfoPage({super.key});
@@ -167,23 +166,6 @@ class _SystemInfoPageState extends ConsumerState<SystemInfoPage> {
                   () => Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (_) => const HardwareDetailsPage(),
-                    ),
-                  ),
-            ),
-            AppGridCard(
-              title: 'Live Performance',
-              description: 'Real-time monitoring',
-              icon: Container(
-                decoration: BoxDecoration(
-                  color: const Color(0xFFFF9800),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: const Icon(Icons.speed, color: Colors.white),
-              ),
-              onTap:
-                  () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (_) => const LivePerformancePage(),
                     ),
                   ),
             ),

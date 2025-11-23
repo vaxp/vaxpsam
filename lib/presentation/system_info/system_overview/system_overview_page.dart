@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:vaxpsam/core/venom_layout.dart';
 import 'package:vaxpsam/presentation/home/widgets/section_widgets.dart';
 import 'package:vaxpsam/core/theme/app_theme.dart';
 import 'package:vaxpsam/core/widgets/rotating_background.dart';
@@ -114,25 +115,24 @@ class _SystemOverviewPageState extends ConsumerState<SystemOverviewPage> {
   @override
   Widget build(BuildContext context) {
     return StaticBackground(
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          title: const Text('System Overview'),
-          backgroundColor: macAppStoreDark,
-          foregroundColor: Colors.white,
-          elevation: 0,
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.refresh),
-              onPressed: _loadSystemInfo,
-              tooltip: 'Refresh Information',
-            ),
-          ],
-        ),
+      child: VenomScaffold(
+        // appBar: AppBar(
+        //   title: const Text('System Overview'),
+        //   backgroundColor: macAppStoreDark,
+        //   foregroundColor: Colors.white,
+        //   elevation: 0,
+        //   leading: IconButton(
+        //     icon: const Icon(Icons.arrow_back),
+        //     onPressed: () => Navigator.of(context).pop(),
+        //   ),
+        //   actions: [
+        //     IconButton(
+        //       icon: const Icon(Icons.refresh),
+        //       onPressed: _loadSystemInfo,
+        //       tooltip: 'Refresh Information',
+        //     ),
+        //   ],
+        // ),
         body:
             _isLoading
                 ? const Center(

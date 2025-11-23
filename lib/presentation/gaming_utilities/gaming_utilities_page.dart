@@ -11,13 +11,6 @@ class GamingUtilitiesPage extends ConsumerWidget {
       color: macAppStoreDark,
       child: CustomScrollView(
         slivers: [
-          SliverAppBar(
-            expandedHeight: 200,
-            floating: false,
-            pinned: true,
-            backgroundColor: macAppStoreDark,
-            flexibleSpace: FlexibleSpaceBar(background: Buildherosection()),
-          ),
           SliverToBoxAdapter(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

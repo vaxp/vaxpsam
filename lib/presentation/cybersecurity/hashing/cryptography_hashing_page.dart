@@ -1,3 +1,5 @@
+import 'package:vaxpsam/core/venom_layout.dart';
+
 import 'hashing_export.dart';
 
 class CryptographyHashingPage extends ConsumerWidget {
@@ -7,19 +9,9 @@ class CryptographyHashingPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final system = ref.read(systemServiceProvider);
 
-    return Scaffold(
-      backgroundColor: macAppStoreDark,
+    return VenomScaffold(
       body: CustomScrollView(
         slivers: [
-          SliverAppBar(
-            expandedHeight: 200,
-            floating: false,
-            pinned: true,
-            backgroundColor: macAppStoreDark,
-            flexibleSpace: FlexibleSpaceBar(
-              background: BuildHeroSection(context),
-            ),
-          ),
           SliverToBoxAdapter(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

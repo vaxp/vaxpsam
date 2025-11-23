@@ -7,11 +7,7 @@ class VenomScaffold extends StatefulWidget {
   final Widget body; // محتوى الصفحة (الإعدادات)
   final String title;
 
-  const VenomScaffold({
-    super.key,
-    required this.body,
-    this.title = "",
-  });
+  const VenomScaffold({super.key, required this.body, this.title = "",});
 
   @override
   State<VenomScaffold> createState() => _VenomScaffoldState();
@@ -32,7 +28,12 @@ class _VenomScaffoldState extends State<VenomScaffold> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(100, 0, 0, 0),// مهم لشفافية النافذة
+      backgroundColor: const Color.fromARGB(
+        100,
+        0,
+        0,
+        0,
+      ), // مهم لشفافية النافذة
       body: Stack(
         children: [
           // --- الطبقة 1: محتوى التطبيق ---
@@ -40,9 +41,10 @@ class _VenomScaffoldState extends State<VenomScaffold> {
           TweenAnimationBuilder<double>(
             tween: Tween<double>(
               begin: 0.0,
-              end: _isCinematicBlurActive
-                  ? 10.0
-                  : 0.0, // قوة البلور (10 قوية وجميلة)
+              end:
+                  _isCinematicBlurActive
+                      ? 10.0
+                      : 0.0, // قوة البلور (10 قوية وجميلة)
             ),
             duration: const Duration(milliseconds: 300), // سرعة الأنيميشن
             curve: Curves.easeOutCubic, // منحنى حركة ناعم
@@ -94,6 +96,8 @@ class VenomAppbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final canPop = Navigator.canPop(context);
+
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onPanStart: (_) async {
@@ -102,13 +106,33 @@ class VenomAppbar extends StatelessWidget {
       child: Container(
         height: 40,
         alignment: Alignment.centerRight,
-        // خلفية نصف شفافة للشريط نفسه
-        // color: const Color.fromARGB(100, 0, 0, 0),
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
         child: Row(
           children: [
+            if (canPop)
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0, right: 4.0),
+                child: MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  child: GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: Container(
+                      padding: const EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.1),
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(
+                        Icons.arrow_back_rounded,
+                        size: 14,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             Padding(
-              padding: const EdgeInsets.only(left: 15.0),
+              padding: EdgeInsets.only(left: canPop ? 8.0 : 15.0),
               child: Text(
                 title,
                 style: const TextStyle(
@@ -122,8 +146,6 @@ class VenomAppbar extends StatelessWidget {
             const Spacer(),
 
             // مجموعة الأزرار
-            // نستخدم MouseRegion واحد كبير حول الأزرار الثلاثة
-            // لضمان استمرار البلور عند التنقل بين زر وآخر
             MouseRegion(
               onEnter: (_) => onHoverEnter(),
               onExit: (_) => onHoverExit(),
@@ -201,15 +223,16 @@ class _VenomWindowButtonState extends State<VenomWindowButton> {
           decoration: BoxDecoration(
             color: widget.color,
             shape: BoxShape.circle,
-            boxShadow: _isHovered
-                ? [
-                    BoxShadow(
-                      color: widget.color.withOpacity(0.8),
-                      blurRadius: 10, // زيادة التوهج قليلاً
-                      spreadRadius: 2,
-                    ),
-                  ]
-                : [],
+            boxShadow:
+                _isHovered
+                    ? [
+                      BoxShadow(
+                        color: widget.color.withOpacity(0.8),
+                        blurRadius: 10, // زيادة التوهج قليلاً
+                        spreadRadius: 2,
+                      ),
+                    ]
+                    : [],
           ),
           child: Center(
             child: AnimatedOpacity(

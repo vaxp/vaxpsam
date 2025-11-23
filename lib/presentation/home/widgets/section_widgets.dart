@@ -15,7 +15,7 @@ class ResponsiveGrid extends StatelessWidget {
   const ResponsiveGrid({
     super.key,
     required this.children,
-    this. crossAxisCount= 5,
+    this.crossAxisCount = 5,
     this.childAspectRatio = 1.2,
     this.mainAxisSpacing = 12,
     this.crossAxisSpacing = 12,
@@ -184,12 +184,12 @@ class MacAppStoreCard extends StatelessWidget {
   }
 }
 
-class SectionScaffold extends StatelessWidget {
+class SectionVenomScaffold extends StatelessWidget {
   final String title;
   final List<Widget> children;
   final Widget? header;
 
-  const SectionScaffold({
+  const SectionVenomScaffold({
     super.key,
     required this.title,
     required this.children,

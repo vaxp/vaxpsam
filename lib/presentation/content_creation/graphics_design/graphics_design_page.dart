@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:vaxpsam/core/venom_layout.dart';
 import '../../../infrastructure/providers.dart';
 import '../../home/widgets/section_widgets.dart';
 import '../../console/console_utils.dart';
@@ -14,19 +15,9 @@ class GraphicsDesignPage extends ConsumerWidget {
     final system = ref.read(systemServiceProvider);
 
     return StaticBackground(
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
+      child: VenomScaffold(
         body: CustomScrollView(
           slivers: [
-            SliverAppBar(
-              expandedHeight: 200,
-              floating: false,
-              pinned: true,
-              backgroundColor: Colors.transparent,
-              flexibleSpace: FlexibleSpaceBar(
-                background: _buildHeroSection(context),
-              ),
-            ),
             SliverToBoxAdapter(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,69 +34,7 @@ class GraphicsDesignPage extends ConsumerWidget {
     );
   }
 
-  Widget _buildHeroSection(BuildContext context) {
-    return Container(
-      height: 200,
-      margin: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [Color(0xFF4CAF50), Color(0xFF66BB6A)],
-        ),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Stack(
-        children: [
-          Positioned.fill(
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                gradient: const LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [Color(0xFF4CAF50), Color(0xFF66BB6A)],
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  'GRAPHICS & DESIGN',
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white70,
-                    letterSpacing: 1.2,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                const Text(
-                  'Graphics & Design Tools',
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                const Text(
-                  'Professional graphics and design tools for image editing, vector graphics, and 3D modeling.',
-                  style: TextStyle(fontSize: 16, color: Colors.white70),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
+ 
   Widget _buildInstallAllSection(BuildContext context, system) {
     return Container(
       margin: const EdgeInsets.all(16),

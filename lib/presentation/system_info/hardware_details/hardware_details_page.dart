@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:vaxpsam/core/venom_layout.dart';
 import '../../home/widgets/section_widgets.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/widgets/rotating_background.dart';
@@ -281,25 +282,24 @@ class _HardwareDetailsPageState extends ConsumerState<HardwareDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return StaticBackground(
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          title: const Text('Hardware Details'),
-          backgroundColor: macAppStoreDark,
-          foregroundColor: Colors.white,
-          elevation: 0,
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.refresh),
-              onPressed: _loadHardwareInfo,
-              tooltip: 'Refresh Information',
-            ),
-          ],
-        ),
+      child: VenomScaffold(
+        // appBar: AppBar(
+        //   title: const Text('Hardware Details'),
+        //   backgroundColor: macAppStoreDark,
+        //   foregroundColor: Colors.white,
+        //   elevation: 0,
+        //   leading: IconButton(
+        //     icon: const Icon(Icons.arrow_back),
+        //     onPressed: () => Navigator.of(context).pop(),
+        //   ),
+        //   actions: [
+        //     IconButton(
+        //       icon: const Icon(Icons.refresh),
+        //       onPressed: _loadHardwareInfo,
+        //       tooltip: 'Refresh Information',
+        //     ),
+        //   ],
+        // ),
         body:
             _isLoading
                 ? const Center(

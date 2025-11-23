@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:vaxpsam/core/venom_layout.dart';
 import '../../../infrastructure/providers.dart';
 import '../../home/widgets/section_widgets.dart';
 import '../../console/console_utils.dart';
@@ -14,18 +15,7 @@ class MediaEntertainmentPage extends ConsumerWidget {
     final system = ref.read(systemServiceProvider);
 
     return StaticBackground(
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          title: const Text('Media & Entertainment'),
-          backgroundColor: macAppStoreDark,
-          foregroundColor: Colors.white,
-          elevation: 0,
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-        ),
+      child: VenomScaffold(
         body: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(
@@ -137,142 +127,145 @@ class MediaEntertainmentPage extends ConsumerWidget {
       {
         'name': 'Celluloid',
         'pkg': 'celluloid',
-        'desc': 'A simple GTK (GNOME) frontend for MPV'
+        'desc': 'A simple GTK (GNOME) frontend for MPV',
       },
       {
         'name': 'SMPlayer',
         'pkg': 'smplayer',
-        'desc': 'A feature-rich Qt frontend for MPV/MPlayer'
+        'desc': 'A feature-rich Qt frontend for MPV/MPlayer',
       },
       {
         'name': 'Kdenlive',
         'pkg': 'kdenlive',
-        'desc': 'A powerful, multi-track non-linear video editor (KDE)'
+        'desc': 'A powerful, multi-track non-linear video editor (KDE)',
       },
       {
         'name': 'OpenShot',
         'pkg': 'openshot-qt',
-        'desc': 'An easy-to-use, non-linear video editor'
+        'desc': 'An easy-to-use, non-linear video editor',
       },
       {
         'name': 'Pitivi',
         'pkg': 'pitivi',
-        'desc': 'A simple, intuitive non-linear video editor (GNOME)'
+        'desc': 'A simple, intuitive non-linear video editor (GNOME)',
       },
       {
         'name': 'OBS Studio',
         'pkg': 'obs-studio',
-        'desc': 'The standard for screen recording and live streaming'
+        'desc': 'The standard for screen recording and live streaming',
       },
       {
         'name': 'HandBrake',
         'pkg': 'handbrake',
-        'desc': 'A tool for converting video from nearly any format'
+        'desc': 'A tool for converting video from nearly any format',
       },
       {
         'name': 'MKVToolNix GUI',
         'pkg': 'mkvtoolnix-gui',
-        'desc': 'Tools for creating, altering, and inspecting Matroska (MKV) files'
+        'desc':
+            'Tools for creating, altering, and inspecting Matroska (MKV) files',
       },
       {
         'name': 'Clementine',
         'pkg': 'clementine',
-        'desc': 'A modern music player and library organizer'
+        'desc': 'A modern music player and library organizer',
       },
       {
         'name': 'Lollypop',
         'pkg': 'lollypop',
-        'desc': 'A modern, visually appealing GNOME music player'
+        'desc': 'A modern, visually appealing GNOME music player',
       },
       {
         'name': 'Audacity',
         'pkg': 'audacity',
-        'desc': 'The most popular multi-track audio editor and recorder'
+        'desc': 'The most popular multi-track audio editor and recorder',
       },
       {
         'name': 'Ardour',
         'pkg': 'ardour',
-        'desc': 'A professional Digital Audio Workstation (DAW)'
+        'desc': 'A professional Digital Audio Workstation (DAW)',
       },
       {
         'name': 'LMMS',
         'pkg': 'lmms',
-        'desc': 'Linux MultiMedia Studio (DAW for music production)'
+        'desc': 'Linux MultiMedia Studio (DAW for music production)',
       },
       {
         'name': 'Mixxx',
         'pkg': 'mixxx',
-        'desc': 'Free, open-source DJ mixing software'
+        'desc': 'Free, open-source DJ mixing software',
       },
       {
         'name': 'GIMP',
         'pkg': 'gimp',
-        'desc': 'GNU Image Manipulation Program (Photoshop alternative)'
+        'desc': 'GNU Image Manipulation Program (Photoshop alternative)',
       },
       {
         'name': 'Krita',
         'pkg': 'krita',
-        'desc': 'A professional-grade digital painting and sketching program'
+        'desc': 'A professional-grade digital painting and sketching program',
       },
       {
         'name': 'Pinta',
         'pkg': 'pinta',
-        'desc': 'A simple, lightweight drawing and editing program (Paint.NET alternative)'
+        'desc':
+            'A simple, lightweight drawing and editing program (Paint.NET alternative)',
       },
       {
         'name': 'MyPaint',
         'pkg': 'mypaint',
-        'desc': 'A fast and easy digital painting tool for artists'
+        'desc': 'A fast and easy digital painting tool for artists',
       },
       {
         'name': 'Inkscape',
         'pkg': 'inkscape',
-        'desc': 'A professional vector graphics editor (Illustrator alternative)'
+        'desc':
+            'A professional vector graphics editor (Illustrator alternative)',
       },
       {
         'name': 'Blender',
         'pkg': 'blender',
-        'desc': 'The complete suite for 3D modeling, animation, and rendering'
+        'desc': 'The complete suite for 3D modeling, animation, and rendering',
       },
       {
         'name': 'FreeCAD',
         'pkg': 'freecad',
-        'desc': 'A parametric 3D modeler for CAD and engineering'
+        'desc': 'A parametric 3D modeler for CAD and engineering',
       },
       {
         'name': 'Scribus',
         'pkg': 'scribus',
-        'desc': 'Professional-grade desktop publishing (InDesign alternative)'
+        'desc': 'Professional-grade desktop publishing (InDesign alternative)',
       },
       {
         'name': 'Shotwell',
         'pkg': 'shotwell',
-        'desc': 'The default GNOME photo manager and organizer'
+        'desc': 'The default GNOME photo manager and organizer',
       },
       {
         'name': 'gThumb',
         'pkg': 'gthumb',
-        'desc': 'An advanced image viewer and browser for GNOME'
+        'desc': 'An advanced image viewer and browser for GNOME',
       },
       {
         'name': 'digiKam',
         'pkg': 'digikam',
-        'desc': 'An advanced, professional photo management application (KDE)'
+        'desc': 'An advanced, professional photo management application (KDE)',
       },
       {
         'name': 'RawTherapee',
         'pkg': 'rawtherapee',
-        'desc': 'A powerful, cross-platform raw image processing program'
+        'desc': 'A powerful, cross-platform raw image processing program',
       },
       {
         'name': 'darktable',
         'pkg': 'darktable',
-        'desc': 'A virtual light-table and darkroom for photographers'
+        'desc': 'A virtual light-table and darkroom for photographers',
       },
       {
         'name': 'Eye of GNOME',
         'pkg': 'eog',
-        'desc': 'The default, simple image viewer for the GNOME desktop'
+        'desc': 'The default, simple image viewer for the GNOME desktop',
       },
     ];
 

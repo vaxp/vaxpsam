@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:vaxpsam/core/venom_layout.dart';
 import '../../../infrastructure/providers.dart';
 import '../../home/widgets/section_widgets.dart';
 import '../../console/console_utils.dart';
@@ -14,19 +15,10 @@ class VideoProductionPage extends ConsumerWidget {
     final system = ref.read(systemServiceProvider);
 
     return StaticBackground(
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
+      child: VenomScaffold(
         body: CustomScrollView(
           slivers: [
-            SliverAppBar(
-              expandedHeight: 200,
-              floating: false,
-              pinned: true,
-              backgroundColor: Colors.transparent,
-              flexibleSpace: FlexibleSpaceBar(
-                background: _buildHeroSection(context),
-              ),
-            ),
+
             SliverToBoxAdapter(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,68 +35,7 @@ class VideoProductionPage extends ConsumerWidget {
     );
   }
 
-  Widget _buildHeroSection(BuildContext context) {
-    return Container(
-      height: 200,
-      margin: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [Color(0xFF2196F3), Color(0xFF64B5F6)],
-        ),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Stack(
-        children: [
-          Positioned.fill(
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                gradient: const LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [Color(0xFF2196F3), Color(0xFF64B5F6)],
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  'VIDEO PRODUCTION',
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white70,
-                    letterSpacing: 1.2,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                const Text(
-                  'Video Production Tools',
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                const Text(
-                  'Professional video editing and production tools for content creators.',
-                  style: TextStyle(fontSize: 16, color: Colors.white70),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+
 
   Widget _buildInstallAllSection(BuildContext context, system) {
     return Container(

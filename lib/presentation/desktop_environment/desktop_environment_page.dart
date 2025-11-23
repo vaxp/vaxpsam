@@ -78,15 +78,6 @@ class _DesktopEnvironmentPageState
       color: macAppStoreDark,
       child: CustomScrollView(
         slivers: [
-          SliverAppBar(
-            expandedHeight: 200,
-            floating: false,
-            pinned: true,
-            backgroundColor: macAppStoreDark,
-            flexibleSpace: FlexibleSpaceBar(
-              background: _buildHeroSection(context),
-            ),
-          ),
           SliverToBoxAdapter(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -115,68 +106,7 @@ class _DesktopEnvironmentPageState
     );
   }
 
-  Widget _buildHeroSection(BuildContext context) {
-    return Container(
-      height: 200,
-      margin: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [Color(0xFF9C27B0), Color(0xFF673AB7)],
-        ),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Stack(
-        children: [
-          Positioned.fill(
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                gradient: const LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [Color(0xFF9C27B0), Color(0xFF673AB7)],
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  'DESKTOP ENVIRONMENTS',
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white70,
-                    letterSpacing: 1.2,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                const Text(
-                  'Manage Desktop Environments',
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                const Text(
-                  'Install, switch, and manage different desktop environments on your system.',
-                  style: TextStyle(fontSize: 16, color: Colors.white70),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+
 
   Widget _buildCurrentEnvironmentSection(BuildContext context) {
     return Container(
@@ -258,7 +188,7 @@ class _DesktopEnvironmentPageState
   }
 
   Widget _buildDesktopEnvironmentGrid(BuildContext context, system) {
-final desktopEnvironments = [
+    final desktopEnvironments = [
       {
         'id': 'kde',
         'name': 'KDE Plasma',
@@ -267,12 +197,12 @@ final desktopEnvironments = [
         'color': const Color(0xFF2196F3),
         'packages': [
           // 'kubuntu-desktop', // <-- This was the problem
-          'plasma-desktop',     // The desktop data
-          'plasma-workspace',   // The core shell (session)
-          'sddm',               // The display manager
-          'dolphin',            // File manager
-          'konsole',            // Terminal
-          'systemsettings',     // Settings panel
+          'plasma-desktop', // The desktop data
+          'plasma-workspace', // The core shell (session)
+          'sddm', // The display manager
+          'dolphin', // File manager
+          'konsole', // Terminal
+          'systemsettings', // Settings panel
         ],
       },
       {
@@ -303,12 +233,12 @@ final desktopEnvironments = [
         'packages': [
           // 'ubuntu-mate-desktop', // <-- This was the problem
           'mate-session-manager', // The core session
-          'mate-panel',           // The panel
-          'mate-control-center',  // Settings panel
-          'caja',                 // File manager
-          'mate-terminal',        // Terminal
-          'marco',                // Window manager
-          'lightdm',              // Display manager
+          'mate-panel', // The panel
+          'mate-control-center', // Settings panel
+          'caja', // File manager
+          'mate-terminal', // Terminal
+          'marco', // Window manager
+          'lightdm', // Display manager
         ],
       },
       {
@@ -319,12 +249,12 @@ final desktopEnvironments = [
         'color': const Color(0xFFFF9800),
         'packages': [
           // 'cinnamon-desktop-environment', // <-- This was the problem
-          'cinnamon-session',         // The core session
-          'cinnamon-control-center',  // Settings panel
-          'nemo',                     // File manager
-          'gnome-terminal',           // Terminal (as requested in original)
-          'muffin',                   // Window manager
-          'lightdm',                  // Display manager
+          'cinnamon-session', // The core session
+          'cinnamon-control-center', // Settings panel
+          'nemo', // File manager
+          'gnome-terminal', // Terminal (as requested in original)
+          'muffin', // Window manager
+          'lightdm', // Display manager
         ],
       },
     ];
@@ -344,17 +274,16 @@ final desktopEnvironments = [
         ),
         ResponsiveGrid(
           crossAxisCount: 3,
-            childAspectRatio: 1.2,
-            mainAxisSpacing: 5,
-            crossAxisSpacing: 10,
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+          childAspectRatio: 1.2,
+          mainAxisSpacing: 5,
+          crossAxisSpacing: 10,
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           children:
               desktopEnvironments.map((de) {
                 final isInstalled = _installedDEs[de['id']] ?? false;
                 final isCurrent = _currentDE == de['id'];
 
                 return DesktopEnvironmentCard(
-
                   name: de['name'] as String,
                   description: de['description'] as String,
                   icon: de['icon'] as IconData,

@@ -31,12 +31,28 @@ class _BuildMainAppState extends State<BuildMainApp> {
     SettingsPage(),
   ];
 
+  final List<String> _pageTitles = const [
+    "My System",
+    "Browsers",
+    "Tools",
+    "Cybersecurity",
+    "Developer Tools",
+    "IDEs",
+    "Content Creation",
+    "System Info",
+    "Gaming Utilities",
+    "Desktop Environment",
+    "Advanced Debugging",
+    "Vaxp Deb",
+    "Settings",
+  ];
+
   void _toggleConsole() => setState(() => _consoleOpen = !_consoleOpen);
 
   @override
   Widget build(BuildContext context) {
     return VenomScaffold(
-      title: "VAXPSAM",
+      title: _pageTitles[_selectedIndex],
       body: Stack(
         children: [
           // Main content with sidebar

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:vaxpsam/core/venom_layout.dart';
 import '../../../infrastructure/providers.dart';
 import '../../home/widgets/section_widgets.dart';
 import '../../console/console_utils.dart';
@@ -14,18 +15,8 @@ class SystemPerformancePage extends ConsumerWidget {
     final system = ref.read(systemServiceProvider);
 
     return StaticBackground(
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          title: const Text('System & Performance Utilities'),
-          backgroundColor: macAppStoreDark,
-          foregroundColor: Colors.white,
-          elevation: 0,
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-        ),
+      child: VenomScaffold(
+
         body: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(
@@ -163,82 +154,83 @@ class SystemPerformancePage extends ConsumerWidget {
       {
         'name': 'GameMode',
         'pkg': 'gamemode',
-        'desc': 'System optimization daemon for gaming (by Feral Interactive)'
+        'desc': 'System optimization daemon for gaming (by Feral Interactive)',
       },
       {
         'name': 'MangoHud',
         'pkg': 'mangohud',
-        'desc': 'Vulkan/OpenGL overlay for monitoring FPS, temps, and loads'
+        'desc': 'Vulkan/OpenGL overlay for monitoring FPS, temps, and loads',
       },
       {
         'name': 'GOverlay',
         'pkg': 'goverlay',
-        'desc': 'Graphical (GUI) tool for managing MangoHud settings'
+        'desc': 'Graphical (GUI) tool for managing MangoHud settings',
       },
       {
         'name': 'NVtop',
         'pkg': 'nvtop',
-        'desc': 'Terminal (TUI) monitor for NVIDIA, AMD, and Intel GPUs'
+        'desc': 'Terminal (TUI) monitor for NVIDIA, AMD, and Intel GPUs',
       },
       {
         'name': 'RadeonTop',
         'pkg': 'radeontop',
-        'desc': 'Terminal (TUI) monitor for older AMD GPUs'
+        'desc': 'Terminal (TUI) monitor for older AMD GPUs',
       },
       {
         'name': 'Intel GPU Tools',
         'pkg': 'intel-gpu-tools',
-        'desc': 'Debugging and monitoring tools for Intel GPUs'
+        'desc': 'Debugging and monitoring tools for Intel GPUs',
       },
       {
         'name': 'Btop',
         'pkg': 'btop',
-        'desc': 'Modern resource monitor (CPU, Mem, Disk, Net) (TUI)'
+        'desc': 'Modern resource monitor (CPU, Mem, Disk, Net) (TUI)',
       },
       {
         'name': 'LM-Sensors',
         'pkg': 'lm-sensors',
-        'desc': 'Provides the `sensors` command to read hardware temperatures'
+        'desc': 'Provides the `sensors` command to read hardware temperatures',
       },
       {
         'name': 'CPUFreq Indicator',
         'pkg': 'indicator-cpufreq',
-        'desc': 'GUI applet for changing the CPU governor (performance/ondemand)'
+        'desc':
+            'GUI applet for changing the CPU governor (performance/ondemand)',
       },
       {
         'name': 'Phoronix Test Suite',
         'pkg': 'phoronix-test-suite',
-        'desc': 'The most comprehensive benchmarking platform for Linux'
+        'desc': 'The most comprehensive benchmarking platform for Linux',
       },
       {
         'name': 'GLMark2',
         'pkg': 'glmark2',
-        'desc': 'A standard benchmark for OpenGL 2.0 performance'
+        'desc': 'A standard benchmark for OpenGL 2.0 performance',
       },
       {
         'name': 'S-TUI',
         'pkg': 's-tui',
-        'desc': 'Terminal UI for monitoring and stressing the CPU'
+        'desc': 'Terminal UI for monitoring and stressing the CPU',
       },
       {
         'name': 'Stress-NG',
         'pkg': 'stress-ng',
-        'desc': 'Advanced stress testing tool for CPU, Memory, and I/O'
+        'desc': 'Advanced stress testing tool for CPU, Memory, and I/O',
       },
       {
         'name': 'System Monitor',
         'pkg': 'gnome-system-monitor',
-        'desc': 'The default GNOME graphical process and resource monitor'
+        'desc': 'The default GNOME graphical process and resource monitor',
       },
       {
         'name': 'PowerTOP',
         'pkg': 'powertop',
-        'desc': 'Diagnoses power consumption and helps optimize battery life'
+        'desc': 'Diagnoses power consumption and helps optimize battery life',
       },
       {
         'name': 'CPU Power',
         'pkg': 'cpupower',
-        'desc': 'Modern tool for CPU frequency and power management'
+        'desc': 'Modern tool for CPU frequency and power management',
       },
     ];
 

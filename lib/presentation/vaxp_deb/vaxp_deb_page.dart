@@ -462,7 +462,7 @@ exec "./$originalExecName" "\$@"
 
   @override
   Widget build(BuildContext context) {
-    return SectionScaffold(
+    return SectionVenomScaffold(
       title: 'VAXP DEB Converter',
 
       children: [

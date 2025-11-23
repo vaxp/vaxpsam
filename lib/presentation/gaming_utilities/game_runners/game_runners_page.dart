@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:vaxpsam/core/venom_layout.dart';
 import '../../../infrastructure/providers.dart';
 import '../../home/widgets/section_widgets.dart';
 import '../../console/console_utils.dart';
@@ -14,18 +15,7 @@ class GameRunnersPage extends ConsumerWidget {
     final system = ref.read(systemServiceProvider);
 
     return StaticBackground(
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          title: const Text('Game Runners & Frontends'),
-          backgroundColor: macAppStoreDark,
-          foregroundColor: Colors.white,
-          elevation: 0,
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-        ),
+      child: VenomScaffold(
         body: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(
@@ -175,112 +165,112 @@ class GameRunnersPage extends ConsumerWidget {
       {
         'name': 'DOSBox',
         'pkg': 'dosbox',
-        'desc': 'Emulator for running classic DOS-based games'
+        'desc': 'Emulator for running classic DOS-based games',
       },
       {
         'name': 'ScummVM',
         'pkg': 'scummvm',
-        'desc': 'Runner for classic point-and-click adventure games'
+        'desc': 'Runner for classic point-and-click adventure games',
       },
       {
         'name': 'D-Fend Reloaded',
         'pkg': 'd-fend-reloaded',
-        'desc': 'Graphical (GUI) frontend for managing DOSBox games'
+        'desc': 'Graphical (GUI) frontend for managing DOSBox games',
       },
       {
         'name': 'Mednafen',
         'pkg': 'mednafen',
-        'desc': 'A multi-system command-line emulator (NES, SNES, PSX, etc.)'
+        'desc': 'A multi-system command-line emulator (NES, SNES, PSX, etc.)',
       },
       {
         'name': 'Dolphin',
         'pkg': 'dolphin-emu',
-        'desc': 'High-performance emulator for GameCube and Wii'
+        'desc': 'High-performance emulator for GameCube and Wii',
       },
       {
         'name': 'PCSX2',
         'pkg': 'pcsx2',
-        'desc': 'Emulator for PlayStation 2 games'
+        'desc': 'Emulator for PlayStation 2 games',
       },
       {
         'name': 'PPSSPP',
         'pkg': 'ppsspp',
-        'desc': 'Emulator for PlayStation Portable (PSP) games'
+        'desc': 'Emulator for PlayStation Portable (PSP) games',
       },
       {
         'name': 'DuckStation',
         'pkg': 'duckstation',
-        'desc': 'High-performance emulator for PlayStation 1 (PSX)'
+        'desc': 'High-performance emulator for PlayStation 1 (PSX)',
       },
       {
         'name': 'Flycast',
         'pkg': 'flycast',
-        'desc': 'Emulator for Sega Dreamcast and Naomi'
+        'desc': 'Emulator for Sega Dreamcast and Naomi',
       },
       {
         'name': 'Snes9x',
         'pkg': 'snes9x-gtk',
-        'desc': 'A popular and accurate emulator for Super Nintendo (SNES)'
+        'desc': 'A popular and accurate emulator for Super Nintendo (SNES)',
       },
       {
         'name': 'FCEUX',
         'pkg': 'fceux',
-        'desc': 'Emulator for Nintendo Entertainment System (NES)'
+        'desc': 'Emulator for Nintendo Entertainment System (NES)',
       },
       {
         'name': 'Mupen64Plus (Qt)',
         'pkg': 'mupen64plus-qt',
-        'desc': 'Graphical (GUI) frontend for the Mupen64Plus N64 emulator'
+        'desc': 'Graphical (GUI) frontend for the Mupen64Plus N64 emulator',
       },
       {
         'name': 'mGBA',
         'pkg': 'mgba-qt',
-        'desc': 'Modern, high-accuracy emulator for Game Boy Advance'
+        'desc': 'Modern, high-accuracy emulator for Game Boy Advance',
       },
       {
         'name': 'VBA-M',
         'pkg': 'visualboyadvance-gtk',
-        'desc': 'Legacy emulator for Game Boy / Color / Advance'
+        'desc': 'Legacy emulator for Game Boy / Color / Advance',
       },
       {
         'name': 'VICE',
         'pkg': 'vice',
-        'desc': 'Emulator for the Commodore 64 home computer'
+        'desc': 'Emulator for the Commodore 64 home computer',
       },
       {
         'name': 'Hatari',
         'pkg': 'hatari',
-        'desc': 'Emulator for the Atari ST/STE/TT/Falcon computers'
+        'desc': 'Emulator for the Atari ST/STE/TT/Falcon computers',
       },
       {
         'name': 'GZDoom',
         'pkg': 'gzdoom',
-        'desc': 'Modern, advanced source port for the Doom engine'
+        'desc': 'Modern, advanced source port for the Doom engine',
       },
       {
         'name': 'PrBoom+',
         'pkg': 'prboom-plus',
-        'desc': 'A classic, faithful source port for the Doom engine'
+        'desc': 'A classic, faithful source port for the Doom engine',
       },
       {
         'name': 'EDuke32',
         'pkg': 'eduke32',
-        'desc': 'Advanced source port for the Duke Nukem 3D engine'
+        'desc': 'Advanced source port for the Duke Nukem 3D engine',
       },
       {
         'name': 'OpenRCT2',
         'pkg': 'openrct2',
-        'desc': 'Open-source re-implementation of RollerCoaster Tycoon 2'
+        'desc': 'Open-source re-implementation of RollerCoaster Tycoon 2',
       },
       {
         'name': 'OpenTyrian',
         'pkg': 'opentyrian',
-        'desc': 'Open-source port of the classic shooter Tyrian'
+        'desc': 'Open-source port of the classic shooter Tyrian',
       },
       {
         'name': 'OpenMW',
         'pkg': 'openmw',
-        'desc': 'Open-source engine for The Elder Scrolls III: Morrowind'
+        'desc': 'Open-source engine for The Elder Scrolls III: Morrowind',
       },
     ];
 

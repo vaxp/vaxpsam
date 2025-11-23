@@ -66,58 +66,12 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
     final system = ref.read(systemServiceProvider);
 
     return Scaffold(
-      backgroundColor: const Color.fromARGB(38, 34, 34, 34),
-      appBar: AppBar(
-        title: const Text('Settings'),
-        backgroundColor: macAppStoreDark,
-        foregroundColor: Colors.white,
-        elevation: 0,
-      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Header
-            Container(
-              padding: const EdgeInsets.all(24),
-              decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [macAppStoreBlue, macAppStorePurple],
-                ),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'SYSTEM SETTINGS',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white70,
-                      letterSpacing: 1.2,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  const Text(
-                    'Repository Management',
-                    style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  const Text(
-                    'Configure package repositories and system services.',
-                    style: TextStyle(fontSize: 16, color: Colors.white70),
-                  ),
-                ],
-              ),
-            ),
             const SizedBox(height: 24),
 
             // Snapd Section

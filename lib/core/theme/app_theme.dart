@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 // Mac App Store inspired colors
-const Color macAppStoreDark =  Color.fromARGB(0, 0, 0, 0);
+const Color macAppStoreDark = Color.fromARGB(0, 0, 0, 0);
 const Color macAppStoreCard = Color.fromARGB(60, 75, 75, 75);
 const Color macAppStorePurple = Color(0xFF8E44AD);
 const Color macAppStoreBlue = Color(0xFF007AFF);
