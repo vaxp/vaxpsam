@@ -16,7 +16,6 @@ class SystemPerformancePage extends ConsumerWidget {
 
     return StaticBackground(
       child: VenomScaffold(
-
         body: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(
@@ -54,6 +53,8 @@ class SystemPerformancePage extends ConsumerWidget {
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
+                    fontSize:
+                        MediaQuery.of(context).size.width > 600 ? null : 18,
                   ),
                 ),
               ],
@@ -247,41 +248,58 @@ class SystemPerformancePage extends ConsumerWidget {
             ),
           ),
         ),
-        GridView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 5,
-            childAspectRatio: 1.1,
-            mainAxisSpacing: 16,
-            crossAxisSpacing: 16,
-          ),
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          itemCount: tools.length,
-          itemBuilder: (context, i) {
-            final t = tools[i];
-            return AppGridCard(
-              title: t['name']!,
-              description: t['desc']!,
-              icon: Container(
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 61, 173, 139),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Image.asset(
-                  // استخدام الأداة Image.asset
-                  t['iconAsset'] ??
-                      'assets/ides/default.png', // تمرير المسار المخزن في قائمة tools
-                  width: 40,
-                  height: 40,
-                  fit: BoxFit.contain,
-                ),
+        LayoutBuilder(
+          builder: (context, constraints) {
+            int crossAxisCount;
+            if (constraints.maxWidth > 1200) {
+              crossAxisCount = 5;
+            } else if (constraints.maxWidth > 900) {
+              crossAxisCount = 4;
+            } else if (constraints.maxWidth > 600) {
+              crossAxisCount = 3;
+            } else if (constraints.maxWidth > 400) {
+              crossAxisCount = 2;
+            } else {
+              crossAxisCount = 1;
+            }
+
+            return GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: crossAxisCount,
+                childAspectRatio: 1.1,
+                mainAxisSpacing: 16,
+                crossAxisSpacing: 16,
               ),
-              onTap:
-                  () => showConsoleStream(
-                    context,
-                    system.installPackageByName(t['pkg']!),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              itemCount: tools.length,
+              itemBuilder: (context, i) {
+                final t = tools[i];
+                return AppGridCard(
+                  title: t['name']!,
+                  description: t['desc']!,
+                  icon: Container(
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 61, 173, 139),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Image.asset(
+                      // استخدام الأداة Image.asset
+                      t['iconAsset'] ??
+                          'assets/ides/default.png', // تمرير المسار المخزن في قائمة tools
+                      width: 40,
+                      height: 40,
+                      fit: BoxFit.contain,
+                    ),
                   ),
+                  onTap:
+                      () => showConsoleStream(
+                        context,
+                        system.installPackageByName(t['pkg']!),
+                      ),
+                );
+              },
             );
           },
         ),

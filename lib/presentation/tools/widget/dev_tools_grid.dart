@@ -57,7 +57,6 @@ class DevToolsGrid extends ConsumerWidget {
             } else {
               crossAxisCount = 1;
             }
-
             return GridView.count(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),

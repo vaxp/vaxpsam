@@ -34,8 +34,6 @@ class AudioEditingPage extends ConsumerWidget {
     );
   }
 
- 
-
   Widget _buildInstallAllSection(BuildContext context, system) {
     return Container(
       margin: const EdgeInsets.all(16),
@@ -174,36 +172,53 @@ class AudioEditingPage extends ConsumerWidget {
             ),
           ),
         ),
-        GridView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 5,
-            childAspectRatio: 1.1,
-            mainAxisSpacing: 16,
-            crossAxisSpacing: 16,
-          ),
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          itemCount: tools.length,
-          itemBuilder: (context, index) {
-            final tool = tools[index];
-            return AppGridCard(
-              title: tool['name']!,
-              description: tool['description']!,
-              icon: Container(
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 55, 57, 71),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Image.asset(
-                  tool['iconAsset'] ??
-                      'assets/ides/default.png', // تمرير المسار المخزن في قائمة tools
-                  width: 40,
-                  height: 40,
-                  fit: BoxFit.contain,
-                ),
+        LayoutBuilder(
+          builder: (context, constraints) {
+            int crossAxisCount;
+            if (constraints.maxWidth > 1200) {
+              crossAxisCount = 5;
+            } else if (constraints.maxWidth > 900) {
+              crossAxisCount = 4;
+            } else if (constraints.maxWidth > 600) {
+              crossAxisCount = 3;
+            } else if (constraints.maxWidth > 400) {
+              crossAxisCount = 2;
+            } else {
+              crossAxisCount = 1;
+            }
+
+            return GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: crossAxisCount,
+                childAspectRatio: 1.1,
+                mainAxisSpacing: 16,
+                crossAxisSpacing: 16,
               ),
-              onTap: () => _installTool(context, system, tool),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              itemCount: tools.length,
+              itemBuilder: (context, index) {
+                final tool = tools[index];
+                return AppGridCard(
+                  title: tool['name']!,
+                  description: tool['description']!,
+                  icon: Container(
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 55, 57, 71),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Image.asset(
+                      tool['iconAsset'] ??
+                          'assets/ides/default.png', // تمرير المسار المخزن في قائمة tools
+                      width: 40,
+                      height: 40,
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                  onTap: () => _installTool(context, system, tool),
+                );
+              },
             );
           },
         ),

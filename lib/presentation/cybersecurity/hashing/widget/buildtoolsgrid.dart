@@ -85,7 +85,8 @@ class BuildToolsGrid extends StatelessWidget {
       {
         'name': 'Hashdeep',
         'package': 'hashdeep',
-        'description': 'Recursively computes and audits hashes (MD5, SHA, etc.)',
+        'description':
+            'Recursively computes and audits hashes (MD5, SHA, etc.)',
       },
       {
         'name': 'GtkHash',
@@ -100,7 +101,8 @@ class BuildToolsGrid extends StatelessWidget {
       {
         'name': 'Sslscan',
         'package': 'sslscan',
-        'description': 'Scans servers for supported SSL/TLS ciphers and protocols',
+        'description':
+            'Scans servers for supported SSL/TLS ciphers and protocols',
       },
       {
         'name': 'Ssldump',
@@ -162,38 +164,56 @@ class BuildToolsGrid extends StatelessWidget {
           child: Text(
             'Cryptography & Hashing Tools',
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
           ),
         ),
-        GridView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 5,
-            childAspectRatio: 1.1,
-            mainAxisSpacing: 16,
-            crossAxisSpacing: 16,
-          ),
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          itemCount: tools.length,
-          itemBuilder: (context, index) {
-            final tool = tools[index];
-            return AppGridCard(
-              title: tool['name']!,
-              description: tool['description']!,
-              icon: Container(
-                decoration: BoxDecoration(
-                  color: const Color(0xFFE65100),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: const Icon(Icons.lock, color: Colors.white),
+        LayoutBuilder(
+          builder: (context, constraints) {
+            int crossAxisCount;
+            if (constraints.maxWidth > 1200) {
+              crossAxisCount = 5;
+            } else if (constraints.maxWidth > 900) {
+              crossAxisCount = 4;
+            } else if (constraints.maxWidth > 600) {
+              crossAxisCount = 3;
+            } else if (constraints.maxWidth > 400) {
+              crossAxisCount = 2;
+            } else {
+              crossAxisCount = 1;
+            }
+
+            return GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: crossAxisCount,
+                childAspectRatio: 1.1,
+                mainAxisSpacing: 16,
+                crossAxisSpacing: 16,
               ),
-              onTap: () => showConsoleStream(
-                context,
-                system.installPackageByName(tool['package']!),
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              itemCount: tools.length,
+              itemBuilder: (context, index) {
+                final tool = tools[index];
+                return AppGridCard(
+                  title: tool['name']!,
+                  description: tool['description']!,
+                  icon: Container(
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFE65100),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: const Icon(Icons.lock, color: Colors.white),
+                  ),
+                  onTap:
+                      () => showConsoleStream(
+                        context,
+                        system.installPackageByName(tool['package']!),
+                      ),
+                );
+              },
             );
           },
         ),

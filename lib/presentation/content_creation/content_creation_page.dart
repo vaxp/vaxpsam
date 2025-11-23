@@ -118,65 +118,84 @@ class ContentCreationPage extends ConsumerWidget {
             ),
           ),
         ),
-        GridView.count(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          crossAxisCount: 5,
-          childAspectRatio: 1.2,
-          mainAxisSpacing: 16,
-          crossAxisSpacing: 16,
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          children: [
-            AppGridCard(
-              title: 'Graphics & Design',
-              description: '10 graphics and design tools',
-              icon: Container(
-                decoration: BoxDecoration(
-                  color: const Color(0xFF4CAF50),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: const Icon(Icons.palette, color: Colors.white),
-              ),
-              onTap:
-                  () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (_) => const GraphicsDesignPage(),
+        LayoutBuilder(
+          builder: (context, constraints) {
+            int crossAxisCount;
+            if (constraints.maxWidth > 1200) {
+              crossAxisCount = 5;
+            } else if (constraints.maxWidth > 900) {
+              crossAxisCount = 4;
+            } else if (constraints.maxWidth > 600) {
+              crossAxisCount = 3;
+            } else if (constraints.maxWidth > 400) {
+              crossAxisCount = 2;
+            } else {
+              crossAxisCount = 1;
+            }
+
+            return GridView.count(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              crossAxisCount: crossAxisCount,
+              childAspectRatio: 1.2,
+              mainAxisSpacing: 16,
+              crossAxisSpacing: 16,
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              children: [
+                AppGridCard(
+                  title: 'Graphics & Design',
+                  description: '10 graphics and design tools',
+                  icon: Container(
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF4CAF50),
+                      borderRadius: BorderRadius.circular(8),
                     ),
+                    child: const Icon(Icons.palette, color: Colors.white),
                   ),
-            ),
-            AppGridCard(
-              title: 'Video Production',
-              description: '10 video production tools',
-              icon: Container(
-                decoration: BoxDecoration(
-                  color: const Color(0xFF2196F3),
-                  borderRadius: BorderRadius.circular(8),
+                  onTap:
+                      () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => const GraphicsDesignPage(),
+                        ),
+                      ),
                 ),
-                child: const Icon(Icons.videocam, color: Colors.white),
-              ),
-              onTap:
-                  () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (_) => const VideoProductionPage(),
+                AppGridCard(
+                  title: 'Video Production',
+                  description: '10 video production tools',
+                  icon: Container(
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF2196F3),
+                      borderRadius: BorderRadius.circular(8),
                     ),
+                    child: const Icon(Icons.videocam, color: Colors.white),
                   ),
-            ),
-            AppGridCard(
-              title: 'Audio Editing & Podcasting',
-              description: '10 audio editing tools',
-              icon: Container(
-                decoration: BoxDecoration(
-                  color: const Color(0xFFFF9800),
-                  borderRadius: BorderRadius.circular(8),
+                  onTap:
+                      () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => const VideoProductionPage(),
+                        ),
+                      ),
                 ),
-                child: const Icon(Icons.music_note, color: Colors.white),
-              ),
-              onTap:
-                  () => Navigator.of(context).push(
-                    MaterialPageRoute(builder: (_) => const AudioEditingPage()),
+                AppGridCard(
+                  title: 'Audio Editing & Podcasting',
+                  description: '10 audio editing tools',
+                  icon: Container(
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFFF9800),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: const Icon(Icons.music_note, color: Colors.white),
                   ),
-            ),
-          ],
+                  onTap:
+                      () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => const AudioEditingPage(),
+                        ),
+                      ),
+                ),
+              ],
+            );
+          },
         ),
       ],
     );
