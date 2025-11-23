@@ -14,82 +14,10 @@ class IdesPage extends ConsumerWidget {
       color: macAppStoreDark,
       child: CustomScrollView(
         slivers: [
-          SliverAppBar(
-            expandedHeight: 200,
-            floating: false,
-            pinned: true,
-            backgroundColor: macAppStoreDark,
-            flexibleSpace: FlexibleSpaceBar(
-              background: _buildHeroSection(context),
-            ),
-          ),
           SliverToBoxAdapter(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [_buildGrid(context), const SizedBox(height: 20)],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildHeroSection(BuildContext context) {
-    return Container(
-      height: 200,
-      margin: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [Color(0xFF3F51B5), Color(0xFF5C6BC0)],
-        ),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Stack(
-        children: [
-          Positioned.fill(
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                gradient: const LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [Color(0xFF3F51B5), Color(0xFF5C6BC0)],
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  'IDES',
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white70,
-                    letterSpacing: 1.2,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                const Text(
-                  'Editors & IDEs',
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                const Text(
-                  'Advanced editors via Flathub and basic editors via APT.',
-                  style: TextStyle(fontSize: 16, color: Colors.white70),
-                ),
-              ],
             ),
           ),
         ],
@@ -111,48 +39,67 @@ class IdesPage extends ConsumerWidget {
             ),
           ),
         ),
-        GridView.count(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          crossAxisCount: 5,
-          childAspectRatio: 1.2,
-          mainAxisSpacing: 16,
-          crossAxisSpacing: 16,
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          children: [
-            AppGridCard(
-              title: 'Advanced Editors',
-              description: 'Popular IDEs via Flathub',
-              icon: Container(
-                decoration: BoxDecoration(
-                  color: const Color(0xFF3F51B5),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: const Icon(Icons.code, color: Colors.white),
-              ),
-              onTap:
-                  () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (_) => const AdvancedEditorsPage(),
+        LayoutBuilder(
+          builder: (context, constraints) {
+            int crossAxisCount;
+            if (constraints.maxWidth > 1200) {
+              crossAxisCount = 5;
+            } else if (constraints.maxWidth > 900) {
+              crossAxisCount = 4;
+            } else if (constraints.maxWidth > 600) {
+              crossAxisCount = 3;
+            } else if (constraints.maxWidth > 400) {
+              crossAxisCount = 2;
+            } else {
+              crossAxisCount = 1;
+            }
+
+            return GridView.count(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              crossAxisCount: crossAxisCount,
+              childAspectRatio: 1.2,
+              mainAxisSpacing: 16,
+              crossAxisSpacing: 16,
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              children: [
+                AppGridCard(
+                  title: 'Advanced Editors',
+                  description: 'Popular IDEs via Flathub',
+                  icon: Container(
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF3F51B5),
+                      borderRadius: BorderRadius.circular(8),
                     ),
+                    child: const Icon(Icons.code, color: Colors.white),
                   ),
-            ),
-            AppGridCard(
-              title: 'Basic Editors',
-              description: 'CLI/GUI editors via APT',
-              icon: Container(
-                decoration: BoxDecoration(
-                  color: const Color(0xFF455A64),
-                  borderRadius: BorderRadius.circular(8),
+                  onTap:
+                      () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => const AdvancedEditorsPage(),
+                        ),
+                      ),
                 ),
-                child: const Icon(Icons.edit, color: Colors.white),
-              ),
-              onTap:
-                  () => Navigator.of(context).push(
-                    MaterialPageRoute(builder: (_) => const BasicEditorsPage()),
+                AppGridCard(
+                  title: 'Basic Editors',
+                  description: 'CLI/GUI editors via APT',
+                  icon: Container(
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF455A64),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: const Icon(Icons.edit, color: Colors.white),
                   ),
-            ),
-          ],
+                  onTap:
+                      () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => const BasicEditorsPage(),
+                        ),
+                      ),
+                ),
+              ],
+            );
+          },
         ),
       ],
     );

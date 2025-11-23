@@ -30,40 +30,57 @@ class BasicEditorsGrid extends ConsumerWidget {
             ),
           ),
         ),
-        GridView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 5,
-            childAspectRatio: 1.1,
-            mainAxisSpacing: 16,
-            crossAxisSpacing: 16,
-          ),
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          itemCount: tools.length,
-          itemBuilder: (context, i) {
-            final tool = tools[i]; // استخدام كائن ToolItem
+        LayoutBuilder(
+          builder: (context, constraints) {
+            int crossAxisCount;
+            if (constraints.maxWidth > 1200) {
+              crossAxisCount = 5;
+            } else if (constraints.maxWidth > 900) {
+              crossAxisCount = 4;
+            } else if (constraints.maxWidth > 600) {
+              crossAxisCount = 3;
+            } else if (constraints.maxWidth > 400) {
+              crossAxisCount = 2;
+            } else {
+              crossAxisCount = 1;
+            }
 
-            return AppGridCard(
-              title: tool.name, // الوصول المباشر
-              description: tool.desc, // الوصول المباشر
-              icon: Container(
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 55, 57, 71),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Image.asset(
-                  tool.iconAsset, // استخدام الحقل مباشرة
-                  width: 40,
-                  height: 40,
-                  fit: BoxFit.contain,
-                ),
+            return GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: crossAxisCount,
+                childAspectRatio: 1.1,
+                mainAxisSpacing: 16,
+                crossAxisSpacing: 16,
               ),
-              onTap:
-                  () => showConsoleStream(
-                    context,
-                    system.installPackageByName(tool.pkg), // الوصول المباشر
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              itemCount: tools.length,
+              itemBuilder: (context, i) {
+                final tool = tools[i]; // استخدام كائن ToolItem
+
+                return AppGridCard(
+                  title: tool.name, // الوصول المباشر
+                  description: tool.desc, // الوصول المباشر
+                  icon: Container(
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 55, 57, 71),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Image.asset(
+                      tool.iconAsset, // استخدام الحقل مباشرة
+                      width: 40,
+                      height: 40,
+                      fit: BoxFit.contain,
+                    ),
                   ),
+                  onTap:
+                      () => showConsoleStream(
+                        context,
+                        system.installPackageByName(tool.pkg), // الوصول المباشر
+                      ),
+                );
+              },
             );
           },
         ),

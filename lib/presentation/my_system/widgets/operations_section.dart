@@ -35,21 +35,55 @@ class OperationsSection extends ConsumerWidget {
           ),
         ),
         if (isGridLayout)
-          ResponsiveGrid(
-            children: operations.map((operation) {
-              return AppGridCard(
-                title: operation.title,
-                description: operation.description,
-                icon: Container(
-                  decoration: BoxDecoration(
-                    color: operation.color,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Icon(operation.icon, color: Colors.white),
+          LayoutBuilder(
+            builder: (context, constraints) {
+              int crossAxisCount;
+              if (constraints.maxWidth > 1200) {
+                crossAxisCount = 5;
+              } else if (constraints.maxWidth > 900) {
+                crossAxisCount = 4;
+              } else if (constraints.maxWidth > 600) {
+                crossAxisCount = 3;
+              } else if (constraints.maxWidth > 400) {
+                crossAxisCount = 2;
+              } else {
+                crossAxisCount = 1;
+              }
+
+              return GridView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: crossAxisCount,
+                  childAspectRatio: 1.2,
+                  mainAxisSpacing: 16,
+                  crossAxisSpacing: 16,
                 ),
-                onTap: () => _handleOperationTap(context, ref, operation, controller),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                itemCount: operations.length,
+                itemBuilder: (context, index) {
+                  final operation = operations[index];
+                  return AppGridCard(
+                    title: operation.title,
+                    description: operation.description,
+                    icon: Container(
+                      decoration: BoxDecoration(
+                        color: operation.color,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Icon(operation.icon, color: Colors.white),
+                    ),
+                    onTap:
+                        () => _handleOperationTap(
+                          context,
+                          ref,
+                          operation,
+                          controller,
+                        ),
+                  );
+                },
               );
-            }).toList(),
+            },
           )
         else
           ...operations.map((operation) {
@@ -57,7 +91,9 @@ class OperationsSection extends ConsumerWidget {
               icon: operation.icon,
               title: operation.title,
               description: operation.description,
-              onPressed: () => _handleOperationTap(context, ref, operation, controller),
+              onPressed:
+                  () =>
+                      _handleOperationTap(context, ref, operation, controller),
             );
           }),
       ],

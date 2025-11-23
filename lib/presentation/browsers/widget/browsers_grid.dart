@@ -26,24 +26,53 @@ class BrowsersGrid extends ConsumerWidget {
             ),
           ),
         ),
-        ResponsiveGrid(
-          children: tools.map((tool) {
-            return AppGridCard(
-              title: tool.title,
-              description: tool.description,
-              icon: Container(
-                decoration: BoxDecoration(
-                  color: tool.color,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Icon(tool.icon, color: Colors.white),
+        LayoutBuilder(
+          builder: (context, constraints) {
+            int crossAxisCount;
+            if (constraints.maxWidth > 1200) {
+              crossAxisCount = 5;
+            } else if (constraints.maxWidth > 900) {
+              crossAxisCount = 4;
+            } else if (constraints.maxWidth > 600) {
+              crossAxisCount = 3;
+            } else if (constraints.maxWidth > 400) {
+              crossAxisCount = 2;
+            } else {
+              crossAxisCount = 1;
+            }
+
+            return GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: crossAxisCount,
+                childAspectRatio: 1.2,
+                mainAxisSpacing: 16,
+                crossAxisSpacing: 16,
               ),
-              onTap: () => showConsoleStream(
-                context,
-                system.installPackageByName(tool.packageName),
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              itemCount: tools.length,
+              itemBuilder: (context, index) {
+                final tool = tools[index];
+                return AppGridCard(
+                  title: tool.title,
+                  description: tool.description,
+                  icon: Container(
+                    decoration: BoxDecoration(
+                      color: tool.color,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Icon(tool.icon, color: Colors.white),
+                  ),
+                  onTap:
+                      () => showConsoleStream(
+                        context,
+                        system.installPackageByName(tool.packageName),
+                      ),
+                );
+              },
             );
-          }).toList(),
+          },
         ),
       ],
     );

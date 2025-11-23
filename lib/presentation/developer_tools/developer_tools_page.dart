@@ -49,117 +49,141 @@ class DeveloperToolsPage extends ConsumerWidget {
             ),
           ),
         ),
-        GridView.count(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          crossAxisCount: 5,
-          childAspectRatio: 1.2,
-          mainAxisSpacing: 16,
-          crossAxisSpacing: 16,
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          children: [
-            AppGridCard(
-              title: 'Web Front-End',
-              description: '30 front-end development tools',
-              icon: Container(
-                decoration: BoxDecoration(
-                  color: const Color(0xFF4CAF50),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: const Icon(Icons.web, color: Colors.white),
-              ),
-              onTap:
-                  () => Navigator.of(context).push(
-                    MaterialPageRoute(builder: (_) => const WebFrontendPage()),
+        LayoutBuilder(
+          builder: (context, constraints) {
+            int crossAxisCount;
+            if (constraints.maxWidth > 1200) {
+              crossAxisCount = 5;
+            } else if (constraints.maxWidth > 900) {
+              crossAxisCount = 4;
+            } else if (constraints.maxWidth > 600) {
+              crossAxisCount = 3;
+            } else if (constraints.maxWidth > 400) {
+              crossAxisCount = 2;
+            } else {
+              crossAxisCount = 1;
+            }
+
+            return GridView.count(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              crossAxisCount: crossAxisCount,
+              childAspectRatio: 1.2,
+              mainAxisSpacing: 16,
+              crossAxisSpacing: 16,
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              children: [
+                AppGridCard(
+                  title: 'Web Front-End',
+                  description: '30 front-end development tools',
+                  icon: Container(
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF4CAF50),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: const Icon(Icons.web, color: Colors.white),
                   ),
-            ),
-            AppGridCard(
-              title: 'Web Back-End',
-              description: '30 backend development tools',
-              icon: Container(
-                decoration: BoxDecoration(
-                  color: const Color(0xFF2196F3),
-                  borderRadius: BorderRadius.circular(8),
+                  onTap:
+                      () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => const WebFrontendPage(),
+                        ),
+                      ),
                 ),
-                child: const Icon(Icons.storage, color: Colors.white),
-              ),
-              onTap:
-                  () => Navigator.of(context).push(
-                    MaterialPageRoute(builder: (_) => const WebBackendPage()),
+                AppGridCard(
+                  title: 'Web Back-End',
+                  description: '30 backend development tools',
+                  icon: Container(
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF2196F3),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: const Icon(Icons.storage, color: Colors.white),
                   ),
-            ),
-            AppGridCard(
-              title: 'DevOps / SysAdmin',
-              description: '30 DevOps and system admin tools',
-              icon: Container(
-                decoration: BoxDecoration(
-                  color: const Color(0xFFFF9800),
-                  borderRadius: BorderRadius.circular(8),
+                  onTap:
+                      () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => const WebBackendPage(),
+                        ),
+                      ),
                 ),
-                child: const Icon(
-                  Icons.settings_applications,
-                  color: Colors.white,
-                ),
-              ),
-              onTap:
-                  () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (_) => const DevOpsSysadminPage(),
+                AppGridCard(
+                  title: 'DevOps / SysAdmin',
+                  description: '30 DevOps and system admin tools',
+                  icon: Container(
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFFF9800),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: const Icon(
+                      Icons.settings_applications,
+                      color: Colors.white,
                     ),
                   ),
-            ),
-            AppGridCard(
-              title: 'Mobile Developer',
-              description: '30 Android development tools',
-              icon: Container(
-                decoration: BoxDecoration(
-                  color: const Color(0xFF9C27B0),
-                  borderRadius: BorderRadius.circular(8),
+                  onTap:
+                      () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => const DevOpsSysadminPage(),
+                        ),
+                      ),
                 ),
-                child: const Icon(Icons.phone_android, color: Colors.white),
-              ),
-              onTap:
-                  () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (_) => const MobileDeveloperPage(),
+                AppGridCard(
+                  title: 'Mobile Developer',
+                  description: '30 Android development tools',
+                  icon: Container(
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF9C27B0),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: const Icon(Icons.phone_android, color: Colors.white),
+                  ),
+                  onTap:
+                      () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => const MobileDeveloperPage(),
+                        ),
+                      ),
+                ),
+                AppGridCard(
+                  title: 'Desktop Developer',
+                  description: '30 desktop development tools',
+                  icon: Container(
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF795548),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: const Icon(
+                      Icons.desktop_windows,
+                      color: Colors.white,
                     ),
                   ),
-            ),
-            AppGridCard(
-              title: 'Desktop Developer',
-              description: '30 desktop development tools',
-              icon: Container(
-                decoration: BoxDecoration(
-                  color: const Color(0xFF795548),
-                  borderRadius: BorderRadius.circular(8),
+                  onTap:
+                      () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => const DesktopDeveloperPage(),
+                        ),
+                      ),
                 ),
-                child: const Icon(Icons.desktop_windows, color: Colors.white),
-              ),
-              onTap:
-                  () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (_) => const DesktopDeveloperPage(),
+                AppGridCard(
+                  title: 'Planning & Documentation',
+                  description: '30 documentation tools',
+                  icon: Container(
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF607D8B),
+                      borderRadius: BorderRadius.circular(8),
                     ),
+                    child: const Icon(Icons.description, color: Colors.white),
                   ),
-            ),
-            AppGridCard(
-              title: 'Planning & Documentation',
-              description: '30 documentation tools',
-              icon: Container(
-                decoration: BoxDecoration(
-                  color: const Color(0xFF607D8B),
-                  borderRadius: BorderRadius.circular(8),
+                  onTap:
+                      () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => const PlanningDocumentationPage(),
+                        ),
+                      ),
                 ),
-                child: const Icon(Icons.description, color: Colors.white),
-              ),
-              onTap:
-                  () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (_) => const PlanningDocumentationPage(),
-                    ),
-                  ),
-            ),
-          ],
+              ],
+            );
+          },
         ),
       ],
     );
