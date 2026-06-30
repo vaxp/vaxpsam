@@ -16,7 +16,6 @@ export '../presentation/ides/ides_page.dart';
 export '../presentation/content_creation/content_creation_page.dart';
 export '../presentation/system_info/system_info_page.dart';
 export '../presentation/gaming_utilities/gaming_utilities_page.dart';
-export '../presentation/desktop_environment/desktop_environment_page.dart';
 export '../presentation/advanced_debugging/advanced_debugging_page.dart';
 export '../presentation/settings/settings_page.dart';
 export 'package:vaxpsam/core/buildmainapp.dart';

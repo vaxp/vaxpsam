@@ -255,10 +255,9 @@ class Sidebar extends StatelessWidget {
       NavItem(Icons.brush_rounded, 'Content Creation', 6),
       NavItem(Icons.info_outline_rounded, 'System Info', 7),
       NavItem(Icons.videogame_asset_rounded, 'Gaming', 8),
-      NavItem(Icons.desktop_windows_rounded, 'Desktop Env', 9),
-      NavItem(Icons.bug_report_rounded, 'Debugging', 10),
-      NavItem(Icons.conveyor_belt, 'Vaxp-deb', 11),
-      NavItem(Icons.settings_rounded, 'Settings', 12),
+      NavItem(Icons.bug_report_rounded, 'Debugging', 9),
+      NavItem(Icons.conveyor_belt, 'Vaxp-deb', 10),
+      NavItem(Icons.settings_rounded, 'Settings', 11),
     ];
   }
 }
